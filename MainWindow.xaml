@@ -7,6 +7,23 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="768" Width="1024" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid x:Name="WindowGrid">
-        
+        <Image x:Name="Background" HorizontalAlignment="Left" Height="768" VerticalAlignment="Top" Width="1024" Source="Images/background.jpg" d:IsLocked="True"/>
+        <Grid x:Name="LanguageGrid" HorizontalAlignment="Left" Height="140" VerticalAlignment="Top" Width="85" d:IsLocked="True">
+            <Button x:Name="English" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Width="65" Margin="10,10,0,0" Height="40">
+                <Button.Background>
+                    <ImageBrush ImageSource="Images/UK.png"/>
+                </Button.Background>
+            </Button>
+            <Button x:Name="Swedish" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Width="65" Margin="10,10,0,0" Height="40">
+                <Button.Background>
+                    <ImageBrush ImageSource="Images/Swedish.png"/>
+                </Button.Background>
+            </Button>
+            <Button x:Name="Finnish" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Width="65" Margin="10,10,0,0" Height="40">
+                <Button.Background>
+                    <ImageBrush ImageSource="Images/Finnish.png"/>
+                </Button.Background>
+            </Button>
+        </Grid>
     </Grid>
 </Window>

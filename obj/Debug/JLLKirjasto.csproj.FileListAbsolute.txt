@@ -12,3 +12,7 @@ C:\Users\User\Documents\Visual Studio 2015\JLLKirjasto\obj\Debug\JLLKirjasto.Pro
 C:\Users\User\Documents\Visual Studio 2015\JLLKirjasto\obj\Debug\JLLKirjasto.csproj.GenerateResource.Cache
 C:\Users\User\Documents\Visual Studio 2015\JLLKirjasto\obj\Debug\JLLKirjasto.exe
 C:\Users\User\Documents\Visual Studio 2015\JLLKirjasto\obj\Debug\JLLKirjasto.pdb
+C:\Users\User\Documents\Visual Studio 2015\JLLKirjasto\bin\Debug\Images\UK.png
+C:\Users\User\Documents\Visual Studio 2015\JLLKirjasto\bin\Debug\Images\Finnish.png
+C:\Users\User\Documents\Visual Studio 2015\JLLKirjasto\bin\Debug\Images\Swedish.png
+C:\Users\User\Documents\Visual Studio 2015\JLLKirjasto\obj\Debug\JLLKirjasto_Content.g.cs
