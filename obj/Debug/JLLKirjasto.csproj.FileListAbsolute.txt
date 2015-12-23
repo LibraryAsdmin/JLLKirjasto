@@ -1,0 +1,14 @@
+C:\Users\User\Documents\Visual Studio 2015\JLLKirjasto\bin\Debug\JLLKirjasto.exe.config
+C:\Users\User\Documents\Visual Studio 2015\JLLKirjasto\bin\Debug\JLLKirjasto.exe
+C:\Users\User\Documents\Visual Studio 2015\JLLKirjasto\bin\Debug\JLLKirjasto.pdb
+C:\Users\User\Documents\Visual Studio 2015\JLLKirjasto\obj\Debug\JLLKirjasto.csprojResolveAssemblyReference.cache
+C:\Users\User\Documents\Visual Studio 2015\JLLKirjasto\obj\Debug\MainWindow.g.cs
+C:\Users\User\Documents\Visual Studio 2015\JLLKirjasto\obj\Debug\App.g.cs
+C:\Users\User\Documents\Visual Studio 2015\JLLKirjasto\obj\Debug\JLLKirjasto_MarkupCompile.cache
+C:\Users\User\Documents\Visual Studio 2015\JLLKirjasto\obj\Debug\JLLKirjasto_MarkupCompile.lref
+C:\Users\User\Documents\Visual Studio 2015\JLLKirjasto\obj\Debug\MainWindow.baml
+C:\Users\User\Documents\Visual Studio 2015\JLLKirjasto\obj\Debug\JLLKirjasto.g.resources
+C:\Users\User\Documents\Visual Studio 2015\JLLKirjasto\obj\Debug\JLLKirjasto.Properties.Resources.resources
+C:\Users\User\Documents\Visual Studio 2015\JLLKirjasto\obj\Debug\JLLKirjasto.csproj.GenerateResource.Cache
+C:\Users\User\Documents\Visual Studio 2015\JLLKirjasto\obj\Debug\JLLKirjasto.exe
+C:\Users\User\Documents\Visual Studio 2015\JLLKirjasto\obj\Debug\JLLKirjasto.pdb
