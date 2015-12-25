@@ -31,5 +31,13 @@
                 </Button.Template>
             </Button>
         </Grid>
+        <Grid HorizontalAlignment="Left" Height="88" VerticalAlignment="Top" Width="340" Margin="342,10,0,0">
+            <Rectangle HorizontalAlignment="Left" Height="88" Stroke="Black" VerticalAlignment="Top" Width="340" Fill="Black" Opacity="0.501">
+                <Rectangle.Effect>
+                    <BlurEffect/>
+                </Rectangle.Effect>
+            </Rectangle>
+            <TextBlock x:Name="Greeting" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Päivää!" VerticalAlignment="Top" Height="88" Width="340" Foreground="White" FontSize="64" TextAlignment="Center"/>
+        </Grid>
     </Grid>
 </Window>

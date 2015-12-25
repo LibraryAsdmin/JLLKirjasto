@@ -41,6 +41,7 @@ namespace JLLKirjasto
         private void setEnglish()
         {
             // Change messages to English
+            Greeting.Text = "Greetings!";
         }
 
         // Change language to Swedish
@@ -57,6 +58,7 @@ namespace JLLKirjasto
         private void setSwedish()
         {
             // Change messages to Swedish
+            Greeting.Text = "Hejsan!";
         }
 
         // Change language to Finnish (default)
@@ -73,6 +75,7 @@ namespace JLLKirjasto
         private void setFinnish()
         {
             // Change messages to Finnish
+            Greeting.Text = "Päivää!";
         }
 
         private void LanguageGrid_MouseEnter(object sender, MouseEventArgs e)
@@ -83,7 +86,6 @@ namespace JLLKirjasto
 
         private void LanguageGrid_MouseLeave(object sender, MouseEventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine("Mouse left LanguageGrid");
             hideLanguages();
         }
 
