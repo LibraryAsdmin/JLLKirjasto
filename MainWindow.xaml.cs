@@ -21,10 +21,13 @@ namespace JLLKirjasto
     /// </summary>
     public partial class MainWindow : Window
     {
+        private TranslateTransform middleFlagTransform;
+        private TranslateTransform bottomFlagTransform;
 
         public MainWindow()
         {
             InitializeComponent();
+
         }
 
         // Change language to English
@@ -86,32 +89,33 @@ namespace JLLKirjasto
 
         private void LanguageGrid_MouseLeave(object sender, MouseEventArgs e)
         {
-            hideLanguages();
+            hideLanguages(middleFlagTransform.Y, bottomFlagTransform.Y);
         }
 
         private void showLanguages()
         {
-            var T = new TranslateTransform(0, 0);
             Duration duration = new Duration(new TimeSpan(0, 0, 0, 0, 250));
-            DoubleAnimation anim = new DoubleAnimation(40, duration);
-            T.BeginAnimation(TranslateTransform.YProperty, anim);
-            Swedish.RenderTransform = T;
 
-            var T2 = new TranslateTransform(0, 0);
+            middleFlagTransform = new TranslateTransform(0, 0);
+            DoubleAnimation anim = new DoubleAnimation(40, duration);
+            middleFlagTransform.BeginAnimation(TranslateTransform.YProperty, anim);
+            Swedish.RenderTransform = middleFlagTransform;
+
+            bottomFlagTransform = new TranslateTransform(0, 0);
             DoubleAnimation anim2 = new DoubleAnimation(80, duration);
-            T2.BeginAnimation(TranslateTransform.YProperty, anim2);
-            English.RenderTransform = T2;
+            bottomFlagTransform.BeginAnimation(TranslateTransform.YProperty, anim2);
+            English.RenderTransform = bottomFlagTransform;
         }
 
-        private void hideLanguages()
+        private void hideLanguages(double middleY, double bottomY)
         {
-            var T = new TranslateTransform(0, 40);
+            var T = new TranslateTransform(0,middleY);
             Duration duration = new Duration(new TimeSpan(0, 0, 0, 0, 250));
             DoubleAnimation anim = new DoubleAnimation(0, duration);
             T.BeginAnimation(TranslateTransform.YProperty, anim);
             Swedish.RenderTransform = T;
 
-            var T2 = new TranslateTransform(0, 80);
+            var T2 = new TranslateTransform(0,bottomY);
             DoubleAnimation anim2 = new DoubleAnimation(0, duration);
             T2.BeginAnimation(TranslateTransform.YProperty, anim2);
             English.RenderTransform = T2;
