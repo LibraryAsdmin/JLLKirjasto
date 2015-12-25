@@ -21,10 +21,16 @@ namespace JLLKirjasto
     /// </summary>
     public partial class MainWindow : Window
     {
+        private TranslateTransform middleFlagTransform;
+        private TranslateTransform bottomFlagTransform;
 
         public MainWindow()
         {
             InitializeComponent();
+
+            // Initializes flag transformations
+            middleFlagTransform = new TranslateTransform(0, 0);
+            bottomFlagTransform = new TranslateTransform(0, 0);
         }
 
         // Change language to English
@@ -81,40 +87,48 @@ namespace JLLKirjasto
         private void LanguageGrid_MouseEnter(object sender, MouseEventArgs e)
         {
             // Show languages when mouse enters the LanguageGrid
-            showLanguages();         
+            showLanguages(middleFlagTransform.Y, bottomFlagTransform.Y);         
         }
 
         private void LanguageGrid_MouseLeave(object sender, MouseEventArgs e)
         {
-            hideLanguages();
+            hideLanguages(middleFlagTransform.Y, bottomFlagTransform.Y);
         }
 
-        private void showLanguages()
+        // Extends the list of languages
+        private void showLanguages(double middleY, double bottomÝ)
         {
-            var T = new TranslateTransform(0, 0);
             Duration duration = new Duration(new TimeSpan(0, 0, 0, 0, 250));
+
+            // transform the middle flag from current position to middle
+            middleFlagTransform = new TranslateTransform(0, middleY);
             DoubleAnimation anim = new DoubleAnimation(40, duration);
-            T.BeginAnimation(TranslateTransform.YProperty, anim);
-            Swedish.RenderTransform = T;
+            middleFlagTransform.BeginAnimation(TranslateTransform.YProperty, anim);
+            Swedish.RenderTransform = middleFlagTransform;
 
-            var T2 = new TranslateTransform(0, 0);
+            // transform the bottom flag from current position to bottom
+            bottomFlagTransform = new TranslateTransform(0, bottomÝ);
             DoubleAnimation anim2 = new DoubleAnimation(80, duration);
-            T2.BeginAnimation(TranslateTransform.YProperty, anim2);
-            English.RenderTransform = T2;
+            bottomFlagTransform.BeginAnimation(TranslateTransform.YProperty, anim2);
+            English.RenderTransform = bottomFlagTransform;
         }
 
-        private void hideLanguages()
+        // Hides the list of languages
+        private void hideLanguages(double middleY, double bottomY)
         {
-            var T = new TranslateTransform(0, 40);
             Duration duration = new Duration(new TimeSpan(0, 0, 0, 0, 250));
-            DoubleAnimation anim = new DoubleAnimation(0, duration);
-            T.BeginAnimation(TranslateTransform.YProperty, anim);
-            Swedish.RenderTransform = T;
 
-            var T2 = new TranslateTransform(0, 80);
+            // transform  the middle flag from its current positions to the default position
+            middleFlagTransform = new TranslateTransform(0,middleY);
+            DoubleAnimation anim = new DoubleAnimation(0, duration);
+            middleFlagTransform.BeginAnimation(TranslateTransform.YProperty, anim);
+            Swedish.RenderTransform = middleFlagTransform;
+
+            // transform the bottom flag from its current positions to the default position
+            bottomFlagTransform = new TranslateTransform(0,bottomY);
             DoubleAnimation anim2 = new DoubleAnimation(0, duration);
-            T2.BeginAnimation(TranslateTransform.YProperty, anim2);
-            English.RenderTransform = T2;
+            bottomFlagTransform.BeginAnimation(TranslateTransform.YProperty, anim2);
+            English.RenderTransform = bottomFlagTransform;
         }
     }
 }
