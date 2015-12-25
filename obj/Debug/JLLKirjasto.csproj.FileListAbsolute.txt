@@ -16,3 +16,21 @@ C:\Users\User\Documents\Visual Studio 2015\JLLKirjasto\bin\Debug\Images\UK.png
 C:\Users\User\Documents\Visual Studio 2015\JLLKirjasto\bin\Debug\Images\Finnish.png
 C:\Users\User\Documents\Visual Studio 2015\JLLKirjasto\bin\Debug\Images\Swedish.png
 C:\Users\User\Documents\Visual Studio 2015\JLLKirjasto\obj\Debug\JLLKirjasto_Content.g.cs
+C:\Users\Käyttäjä\Documents\GitHub\JLLKirjasto\bin\Debug\JLLKirjasto.exe.config
+C:\Users\Käyttäjä\Documents\GitHub\JLLKirjasto\obj\Debug\JLLKirjasto.exe
+C:\Users\Käyttäjä\Documents\GitHub\JLLKirjasto\obj\Debug\JLLKirjasto.pdb
+C:\Users\Käyttäjä\Documents\GitHub\JLLKirjasto\bin\Debug\Images\UK.png
+C:\Users\Käyttäjä\Documents\GitHub\JLLKirjasto\bin\Debug\Images\Finnish.png
+C:\Users\Käyttäjä\Documents\GitHub\JLLKirjasto\bin\Debug\Images\Swedish.png
+C:\Users\Käyttäjä\Documents\GitHub\JLLKirjasto\bin\Debug\JLLKirjasto.exe
+C:\Users\Käyttäjä\Documents\GitHub\JLLKirjasto\bin\Debug\JLLKirjasto.pdb
+C:\Users\Käyttäjä\Documents\GitHub\JLLKirjasto\obj\Debug\JLLKirjasto.csprojResolveAssemblyReference.cache
+C:\Users\Käyttäjä\Documents\GitHub\JLLKirjasto\obj\Debug\MainWindow.g.cs
+C:\Users\Käyttäjä\Documents\GitHub\JLLKirjasto\obj\Debug\App.g.cs
+C:\Users\Käyttäjä\Documents\GitHub\JLLKirjasto\obj\Debug\JLLKirjasto_Content.g.cs
+C:\Users\Käyttäjä\Documents\GitHub\JLLKirjasto\obj\Debug\JLLKirjasto_MarkupCompile.cache
+C:\Users\Käyttäjä\Documents\GitHub\JLLKirjasto\obj\Debug\JLLKirjasto_MarkupCompile.lref
+C:\Users\Käyttäjä\Documents\GitHub\JLLKirjasto\obj\Debug\MainWindow.baml
+C:\Users\Käyttäjä\Documents\GitHub\JLLKirjasto\obj\Debug\JLLKirjasto.g.resources
+C:\Users\Käyttäjä\Documents\GitHub\JLLKirjasto\obj\Debug\JLLKirjasto.Properties.Resources.resources
+C:\Users\Käyttäjä\Documents\GitHub\JLLKirjasto\obj\Debug\JLLKirjasto.csproj.GenerateResource.Cache
