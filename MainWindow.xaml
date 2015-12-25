@@ -1,28 +1,34 @@
-﻿<Window x:Class="JLLKirjasto.MainWindow"
+﻿<Window x:Name="MainWindow1" x:Class="JLLKirjasto.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:JLLKirjasto"
-        mc:Ignorable="d"
+        mc:Ignorable="d" 
         Title="MainWindow" Height="768" Width="1024" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid x:Name="WindowGrid">
         <Image x:Name="Background" HorizontalAlignment="Left" Height="768" VerticalAlignment="Top" Width="1024" Source="Images/background.jpg" d:IsLocked="True"/>
-        <Grid x:Name="LanguageGrid" HorizontalAlignment="Left" Height="140" VerticalAlignment="Top" Width="85" d:IsLocked="True">
-            <Button x:Name="English" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Width="65" Margin="10,10,0,0" Height="40">
-                <Button.Background>
-                    <ImageBrush ImageSource="Images/UK.png"/>
-                </Button.Background>
+        <Grid x:Name="LanguageGrid" HorizontalAlignment="Left" Height="140" VerticalAlignment="Top" Width="85" MouseEnter="LanguageGrid_MouseEnter" MouseLeave="LanguageGrid_MouseLeave">
+            <Button x:Name="English" HorizontalAlignment="Left" VerticalAlignment="Top" Width="65" Margin="10,10,0,0" Height="40" Cursor="Hand" Click="English_Click" d:IsLocked="True">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Image Source="/Images/UK.png"/>
+                    </ControlTemplate>
+                </Button.Template>
             </Button>
-            <Button x:Name="Swedish" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Width="65" Margin="10,10,0,0" Height="40">
-                <Button.Background>
-                    <ImageBrush ImageSource="Images/Swedish.png"/>
-                </Button.Background>
+            <Button x:Name="Swedish" HorizontalAlignment="Left" VerticalAlignment="Top" Width="65" Margin="10,10,0,0" Height="40" Cursor="Hand" Click="Swedish_Click" RenderTransformOrigin="0.5,0.5">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Image Source="/Images/Swedish.png"/>
+                    </ControlTemplate>
+                </Button.Template>
             </Button>
-            <Button x:Name="Finnish" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Width="65" Margin="10,10,0,0" Height="40">
-                <Button.Background>
-                    <ImageBrush ImageSource="Images/Finnish.png"/>
-                </Button.Background>
+            <Button x:Name="Finnish" HorizontalAlignment="Left" VerticalAlignment="Top" Width="65" Margin="10,10,0,0" Height="40" Cursor="Hand" Click="Finnish_Click" d:IsLocked="True">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Image Source="/Images/Finnish.png"/>
+                    </ControlTemplate>
+                </Button.Template>
             </Button>
         </Grid>
     </Grid>
