@@ -39,5 +39,6 @@
             </Rectangle>
             <TextBlock x:Name="Greeting" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Päivää!" VerticalAlignment="Top" Height="88" Width="340" Foreground="White" FontSize="64" TextAlignment="Center"/>
         </Grid>
+        <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="105" Margin="342,225,0,0" Stroke="Black" VerticalAlignment="Top" Width="100" RadiusX="50" RadiusY="50"/>
     </Grid>
 </Window>
