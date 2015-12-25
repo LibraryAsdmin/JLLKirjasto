@@ -27,6 +27,8 @@ namespace JLLKirjasto
         public MainWindow()
         {
             InitializeComponent();
+
+            // Initializes flag transformations
             middleFlagTransform = new TranslateTransform(0, 0);
             bottomFlagTransform = new TranslateTransform(0, 0);
         }
@@ -93,30 +95,36 @@ namespace JLLKirjasto
             hideLanguages(middleFlagTransform.Y, bottomFlagTransform.Y);
         }
 
+        // Extends the list of languages
         private void showLanguages(double middleY, double bottomÝ)
         {
             Duration duration = new Duration(new TimeSpan(0, 0, 0, 0, 250));
 
+            // transform the middle flag from current position to middle
             middleFlagTransform = new TranslateTransform(0, middleY);
             DoubleAnimation anim = new DoubleAnimation(40, duration);
             middleFlagTransform.BeginAnimation(TranslateTransform.YProperty, anim);
             Swedish.RenderTransform = middleFlagTransform;
 
+            // transform the bottom flag from current position to bottom
             bottomFlagTransform = new TranslateTransform(0, bottomÝ);
             DoubleAnimation anim2 = new DoubleAnimation(80, duration);
             bottomFlagTransform.BeginAnimation(TranslateTransform.YProperty, anim2);
             English.RenderTransform = bottomFlagTransform;
         }
 
+        // Hides the list of languages
         private void hideLanguages(double middleY, double bottomY)
         {
             Duration duration = new Duration(new TimeSpan(0, 0, 0, 0, 250));
 
+            // transform  the middle flag from its current positions to the default position
             middleFlagTransform = new TranslateTransform(0,middleY);
             DoubleAnimation anim = new DoubleAnimation(0, duration);
             middleFlagTransform.BeginAnimation(TranslateTransform.YProperty, anim);
             Swedish.RenderTransform = middleFlagTransform;
 
+            // transform the bottom flag from its current positions to the default position
             bottomFlagTransform = new TranslateTransform(0,bottomY);
             DoubleAnimation anim2 = new DoubleAnimation(0, duration);
             bottomFlagTransform.BeginAnimation(TranslateTransform.YProperty, anim2);
