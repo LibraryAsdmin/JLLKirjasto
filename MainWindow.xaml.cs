@@ -13,9 +13,63 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
+using System.ComponentModel;
+using System.Globalization;
+using System.Resources;
 
 namespace JLLKirjasto
 {
+    public class TranslationSource : INotifyPropertyChanged
+    {
+        private static readonly TranslationSource instance = new TranslationSource();
+
+        public static TranslationSource Instance
+        {
+            get { return instance; }
+        }
+
+        private readonly ResourceManager resManager = Properties.Resources.ResourceManager;
+        private CultureInfo currentCulture = null;
+
+        public string this [string key]
+        {
+            get { return this.resManager.GetString(key, this.currentCulture); }
+        }
+
+        public CultureInfo CurrentCulture
+        {
+            get { return this.currentCulture; }
+            set
+            {
+                if (this.currentCulture != value)
+                {
+                    this.currentCulture = value;
+                    var @event = this.PropertyChanged;
+                    if (@event != null)
+                    {
+                        @event.Invoke(this, new PropertyChangedEventArgs(string.Empty));
+                    }
+                }
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+    }
+
+    public class LocExtension
+        : Binding
+    {
+        public LocExtension(string name)
+            : base("[" + name + "]")
+        {
+            this.Mode = BindingMode.OneWay;
+            this.Source = TranslationSource.Instance;
+        }
+    }
+
+
+
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
@@ -23,14 +77,26 @@ namespace JLLKirjasto
     {
         private TranslateTransform middleFlagTransform;
         private TranslateTransform bottomFlagTransform;
+        private Storyboard myStoryboard;
 
         public MainWindow()
         {
             InitializeComponent();
 
+            //TODO: Here, the culture settings of the system could be read and the language of the application set accordingly
+
             // Initializes flag transformations
             middleFlagTransform = new TranslateTransform(0, 0);
             bottomFlagTransform = new TranslateTransform(0, 0);
+            myStoryboard = new Storyboard();
+            DoubleAnimation searchButtonRectangulation = new DoubleAnimation(0,TimeSpan.FromSeconds(0.2));
+            myStoryboard.Children.Add(searchButtonRectangulation);
+            myStoryboard.AutoReverse = true;
+            searchButtonRectangulation.DecelerationRatio = 0.7;
+            Storyboard.SetTargetName(searchButtonRectangulation,searchButton.Name);
+            Storyboard.SetTargetProperty(searchButtonRectangulation, new PropertyPath(Rectangle.RadiusXProperty));
+            
+
         }
 
         // Change language to English
@@ -40,14 +106,8 @@ namespace JLLKirjasto
             Canvas.SetZIndex(Swedish, 0);
             Canvas.SetZIndex(Finnish, 1);
             Canvas.SetZIndex(English, 2);
-            // Change language
-            setEnglish();
-        }
-
-        private void setEnglish()
-        {
-            // Change messages to English
-            Greeting.Text = "Greetings!";
+            // Change language 
+            TranslationSource.Instance.CurrentCulture = new System.Globalization.CultureInfo("en-GB");
         }
 
         // Change language to Swedish
@@ -58,13 +118,7 @@ namespace JLLKirjasto
             Canvas.SetZIndex(Finnish, 1);
             Canvas.SetZIndex(English, 0);
             // Change language
-            setSwedish();
-        }
-
-        private void setSwedish()
-        {
-            // Change messages to Swedish
-            Greeting.Text = "Hejsan!";
+            TranslationSource.Instance.CurrentCulture = new System.Globalization.CultureInfo("sv-SE");
         }
 
         // Change language to Finnish (default)
@@ -75,13 +129,7 @@ namespace JLLKirjasto
             Canvas.SetZIndex(Finnish, 2);
             Canvas.SetZIndex(English, 0);
             // Change language
-            setFinnish();
-        }
-
-        private void setFinnish()
-        {
-            // Change messages to Finnish
-            Greeting.Text = "Päivää!";
+            TranslationSource.Instance.CurrentCulture = new System.Globalization.CultureInfo("fi-FI");
         }
 
         private void LanguageGrid_MouseEnter(object sender, MouseEventArgs e)
@@ -130,5 +178,11 @@ namespace JLLKirjasto
             bottomFlagTransform.BeginAnimation(TranslateTransform.YProperty, anim2);
             English.RenderTransform = bottomFlagTransform;
         }
+
+        private void searchButton_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            myStoryboard.Begin(this);   
+        }
     }
+
 }

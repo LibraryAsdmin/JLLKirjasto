@@ -5,41 +5,74 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:JLLKirjasto"
         mc:Ignorable="d" 
-        Title="MainWindow" Height="768" Width="1024" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+        
+        Title="{local:Loc WindowTitle}"  Height="768" Width="1024" WindowStartupLocation="CenterScreen">
     <Grid x:Name="WindowGrid">
-        <Image x:Name="Background" HorizontalAlignment="Left" Height="768" VerticalAlignment="Top" Width="1024" Source="Images/background.jpg" d:IsLocked="True"/>
+        <Image x:Name="BackgroundImage" HorizontalAlignment="Center" Height="763" VerticalAlignment="Center" Width="1024" Source="Images/background.jpg" Stretch="UniformToFill"/>
+        <Grid x:Name="StartPageGrid" Margin="10" RenderTransformOrigin="0,0">
+            <Grid x:Name="GreetingBackground" HorizontalAlignment="Center" Height="88" VerticalAlignment="Top" Width="340" Margin="0,10,0,0">
+                <Rectangle HorizontalAlignment="Left" Height="88" Stroke="Black" VerticalAlignment="Top" Width="340" Fill="Black" Opacity="0.500">
+                    <Rectangle.Effect>
+                        <BlurEffect/>
+                    </Rectangle.Effect>
+                </Rectangle>
+                <TextBlock x:Name="Greeting" TextWrapping="Wrap" Text="{local:Loc Greeting}" Foreground="White" FontSize="64" TextAlignment="Center"/>
+            </Grid>
+            <Grid x:Name="StartPageContentGrid" Margin="10,110,10,10" RenderTransformOrigin="0.5,0.5" Background="#66FFFFFF">
+                <Grid.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Grid.RenderTransform>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <TextBox x:Name="textBox" Margin="40,50,5,0" TextWrapping="Wrap" Grid.Column="0" VerticalAlignment="Top" Background="#7FFFFFFF" Text="Hae!" FontSize="24" FontFamily="Sylfaen"/>
+                <Rectangle x:Name="searchButton" Fill="#FFF4F4F5" HorizontalAlignment="Center" Height="34" Margin="0,50,10,0" Stroke="Black" VerticalAlignment="Top" Width="34" RadiusX="16.5" RadiusY="16.5" MouseUp="searchButton_MouseUp" RenderTransformOrigin="0,0" Grid.Column="1">
+                    <Rectangle.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+                <Button x:Name="loginButton" Content="Kirjaudu" Grid.Column="2" VerticalAlignment="Top" Margin="10,30,10,0" Height="100" FontSize="29.333" FontFamily="Harlow Solid Italic"/>
+                <Button x:Name="signInButton" Content="Rekisteröidy" Grid.Column="3" Margin="10,30,10,0" VerticalAlignment="Top" Height="100" FontFamily="Elephant" FontSize="29.333"/>
+                <TextBlock x:Name="logInText" Grid.ColumnSpan="2" Grid.Column="2" Margin="10,148,10,10" TextWrapping="Wrap" FontSize="48" FontFamily="Old English Text MT" Text="Jos tahdot lainata tai palauttaa kirjoja, kirjaudu sisään. Jos sinulla ei ole vielä tunnusta, voit luoda sen tästä."/>
+                <TextBlock x:Name="searchText" Margin="40,90,5,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="46.667" FontFamily="Modern No. 20" Text="{local:Loc TextUnderSearchBox}"/>
+            </Grid>
+        </Grid>
         <Grid x:Name="LanguageGrid" HorizontalAlignment="Left" Height="140" VerticalAlignment="Top" Width="85" MouseEnter="LanguageGrid_MouseEnter" MouseLeave="LanguageGrid_MouseLeave">
             <Button x:Name="English" HorizontalAlignment="Left" VerticalAlignment="Top" Width="65" Margin="10,10,0,0" Height="40" Cursor="Hand" Click="English_Click" d:IsLocked="True">
                 <Button.Template>
-                    <ControlTemplate TargetType="Button">
+                    <ControlTemplate TargetType="{x:Type Button}">
                         <Image Source="/Images/UK.png"/>
                     </ControlTemplate>
                 </Button.Template>
             </Button>
             <Button x:Name="Swedish" HorizontalAlignment="Left" VerticalAlignment="Top" Width="65" Margin="10,10,0,0" Height="40" Cursor="Hand" Click="Swedish_Click" RenderTransformOrigin="0.5,0.5">
                 <Button.Template>
-                    <ControlTemplate TargetType="Button">
+                    <ControlTemplate TargetType="{x:Type Button}">
                         <Image Source="/Images/Swedish.png"/>
                     </ControlTemplate>
                 </Button.Template>
             </Button>
             <Button x:Name="Finnish" HorizontalAlignment="Left" VerticalAlignment="Top" Width="65" Margin="10,10,0,0" Height="40" Cursor="Hand" Click="Finnish_Click" d:IsLocked="True">
                 <Button.Template>
-                    <ControlTemplate TargetType="Button">
+                    <ControlTemplate TargetType="{x:Type Button}">
                         <Image Source="/Images/Finnish.png"/>
                     </ControlTemplate>
                 </Button.Template>
             </Button>
         </Grid>
-        <Grid HorizontalAlignment="Left" Height="88" VerticalAlignment="Top" Width="340" Margin="342,10,0,0">
-            <Rectangle HorizontalAlignment="Left" Height="88" Stroke="Black" VerticalAlignment="Top" Width="340" Fill="Black" Opacity="0.501">
-                <Rectangle.Effect>
-                    <BlurEffect/>
-                </Rectangle.Effect>
-            </Rectangle>
-            <TextBlock x:Name="Greeting" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Päivää!" VerticalAlignment="Top" Height="88" Width="340" Foreground="White" FontSize="64" TextAlignment="Center"/>
-        </Grid>
-		<Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="105" Margin="342,225,0,0" Stroke="Black" VerticalAlignment="Top" Width="100" RadiusX="50" RadiusY="50"/>
     </Grid>
 </Window>
 

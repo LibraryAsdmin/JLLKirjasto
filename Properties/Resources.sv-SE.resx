@@ -118,12 +118,12 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Greeting" xml:space="preserve">
-    <value>Päivää!</value>
+    <value>Hejsan!</value>
   </data>
   <data name="TextUnderSearchBox" xml:space="preserve">
-    <value>Hae kirjoja tai kirjailijoita kirjastosta kirjoittamalla yläpuolella olevaan laatikkoon.</value>
+    <value>Söka böcker eller författare genom att skriva i lådan ovan.</value>
   </data>
   <data name="WindowTitle" xml:space="preserve">
-    <value>Joensuun lyseon lukion kirjasto</value>
+    <value>Joensuun lyseon lukios bibliotek</value>
   </data>
 </root>
