@@ -39,7 +39,7 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <TextBox x:Name="textBox" Margin="20,50,30,0" TextWrapping="Wrap" Grid.Column="0" VerticalAlignment="Top" Background="#7FFFFFFF" Text="Hae!" FontSize="24" FontFamily="Sylfaen" Visibility="Hidden" Grid.ColumnSpan="2"/>
-                <Rectangle x:Name="searchButton" Fill="#7F000000" HorizontalAlignment="Center" Height="250" Margin="22,50,53,0" VerticalAlignment="Top" Width="250" RadiusX="125" RadiusY="125" MouseUp="searchButton_MouseUp" RenderTransformOrigin="0,0" Grid.Column="0" Stroke="Black" StrokeThickness="7" Grid.ColumnSpan="1">
+                <Rectangle x:Name="searchButton" Fill="#7F000000" HorizontalAlignment="Center" Height="250" Margin="0,50,0,0" VerticalAlignment="Top" Width="250" RadiusX="125" RadiusY="125" MouseUp="searchButton_MouseUp" RenderTransformOrigin="0,0" Grid.Column="0" Stroke="Black" StrokeThickness="7" Grid.ColumnSpan="1">
                     <Rectangle.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -51,8 +51,8 @@
                 </Rectangle>
                 <TextBlock x:Name="logInText" Grid.ColumnSpan="1" Grid.Column="1" Margin="10,310,10,0" TextWrapping="Wrap" FontSize="32" Text="{local:Loc TextUnderLogin}"/>
                 <TextBlock x:Name="searchText" Margin="10,310,10,0" TextWrapping="Wrap"  FontSize="32" Text="{local:Loc TextUnderSearchBox}" Grid.ColumnSpan="1"/>
-                <Rectangle x:Name="loginButton" Grid.Column="2" Fill="#7F000000" HorizontalAlignment="Center" Height="250" Margin="38,50,38,0" RadiusY="125" RadiusX="125" Stroke="Black" VerticalAlignment="Top" Width="250" StrokeThickness="7"/>
-                <Rectangle Grid.Column="1" Fill="#7F000000" HorizontalAlignment="Center" Height="250" Margin="37,50,38,0" RadiusY="125" RadiusX="125" Stroke="Black" VerticalAlignment="Top" Width="250" StrokeThickness="7"/>
+                <Rectangle x:Name="loginButton" Grid.Column="2" Fill="#7F000000" HorizontalAlignment="Center" Height="250" Margin="0,50,0,0" RadiusY="125" RadiusX="125" Stroke="Black" VerticalAlignment="Top" Width="250" StrokeThickness="7"/>
+                <Rectangle Grid.Column="1" Fill="#7F000000" HorizontalAlignment="Center" Height="250" Margin="0,50,0,0" RadiusY="125" RadiusX="125" Stroke="Black" VerticalAlignment="Top" Width="250" StrokeThickness="7"/>
                 <TextBlock x:Name="makeAnAccountText" Grid.ColumnSpan="1" Grid.Column="2" Margin="10,310,10,0" TextWrapping="Wrap" FontSize="32" Text="{local:Loc TextUnderAccountCreation}"/>
             </Grid>
         </Grid>
