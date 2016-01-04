@@ -120,6 +120,12 @@
   <data name="Greeting" xml:space="preserve">
     <value>Päivää!</value>
   </data>
+  <data name="TextUnderAccountCreation" xml:space="preserve">
+    <value>Tässä teksti tunnuksenluontinappulan alla.</value>
+  </data>
+  <data name="TextUnderLogin" xml:space="preserve">
+    <value>Tässä teksti kirjautumisnappulan alla.</value>
+  </data>
   <data name="TextUnderSearchBox" xml:space="preserve">
     <value>Hae kirjoja tai kirjailijoita kirjastosta kirjoittamalla yläpuolella olevaan laatikkoon.</value>
   </data>

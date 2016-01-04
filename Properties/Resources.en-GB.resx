@@ -120,6 +120,12 @@
   <data name="Greeting" xml:space="preserve">
     <value>Greetings!</value>
   </data>
+  <data name="TextUnderAccountCreation" xml:space="preserve">
+    <value>Here's the text under accout creation button.</value>
+  </data>
+  <data name="TextUnderLogin" xml:space="preserve">
+    <value>Here's the text under login button.</value>
+  </data>
   <data name="TextUnderSearchBox" xml:space="preserve">
     <value>Search for books or authors by typing into the box above.</value>
   </data>

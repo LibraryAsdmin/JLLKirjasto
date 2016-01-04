@@ -8,9 +8,19 @@
         
         Title="{local:Loc WindowTitle}"  Height="768" Width="1024" WindowStartupLocation="CenterScreen">
     <Grid x:Name="WindowGrid">
-        <Image x:Name="BackgroundImage" HorizontalAlignment="Center" Height="763" VerticalAlignment="Center" Width="1024" Source="Images/background.jpg" Stretch="UniformToFill"/>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                <GradientStop Color="#FF80FF00" Offset="0.197"/>
+                <GradientStop Color="#FFF96912" Offset="0.937"/>
+            </LinearGradientBrush>
+        </Grid.Background>
         <Grid x:Name="StartPageGrid" Margin="10" RenderTransformOrigin="0,0">
-            <Grid x:Name="GreetingBackground" HorizontalAlignment="Center" Height="88" VerticalAlignment="Top" Width="340" Margin="0,10,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="123*"/>
+                <ColumnDefinition Width="29*"/>
+                <ColumnDefinition Width="845*"/>
+            </Grid.ColumnDefinitions>
+            <Grid x:Name="GreetingBackground" HorizontalAlignment="Center" Height="88" VerticalAlignment="Top" Width="340" Margin="177,10,328,0" Grid.Column="2">
                 <Rectangle HorizontalAlignment="Left" Height="88" Stroke="Black" VerticalAlignment="Top" Width="340" Fill="Black" Opacity="0.500">
                     <Rectangle.Effect>
                         <BlurEffect/>
@@ -18,7 +28,7 @@
                 </Rectangle>
                 <TextBlock x:Name="Greeting" TextWrapping="Wrap" Text="{local:Loc Greeting}" Foreground="White" FontSize="64" TextAlignment="Center"/>
             </Grid>
-            <Grid x:Name="StartPageContentGrid" Margin="10,110,10,10" RenderTransformOrigin="0.5,0.5" Background="#66FFFFFF">
+            <Grid x:Name="StartPageContentGrid" Margin="10,110,10,10" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="3">
                 <Grid.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -28,13 +38,13 @@
                     </TransformGroup>
                 </Grid.RenderTransform>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="2*" />
-                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <TextBox x:Name="textBox" Margin="40,50,5,0" TextWrapping="Wrap" Grid.Column="0" VerticalAlignment="Top" Background="#7FFFFFFF" Text="Hae!" FontSize="24" FontFamily="Sylfaen"/>
-                <Rectangle x:Name="searchButton" Fill="#FFF4F4F5" HorizontalAlignment="Center" Height="34" Margin="0,50,10,0" Stroke="Black" VerticalAlignment="Top" Width="34" RadiusX="16.5" RadiusY="16.5" MouseUp="searchButton_MouseUp" RenderTransformOrigin="0,0" Grid.Column="1">
+                <TextBox x:Name="textBox" Margin="20,50,30,0" TextWrapping="Wrap" Grid.Column="0" VerticalAlignment="Top" Background="#7FFFFFFF" Text="Hae!" FontSize="24" FontFamily="Sylfaen" Visibility="Hidden"/>
+                <Rectangle x:Name="searchButton" Fill="#7F000000" HorizontalAlignment="Center" Height="250" Margin="0,50,30,0" VerticalAlignment="Top" Width="250" RadiusX="125" RadiusY="125" MouseUp="searchButton_MouseUp" RenderTransformOrigin="0,0" Grid.Column="0
+                           " Stroke="Black" StrokeThickness="7">
                     <Rectangle.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -44,10 +54,11 @@
                         </TransformGroup>
                     </Rectangle.RenderTransform>
                 </Rectangle>
-                <Button x:Name="loginButton" Content="Kirjaudu" Grid.Column="2" VerticalAlignment="Top" Margin="10,30,10,0" Height="100" FontSize="29.333" FontFamily="Harlow Solid Italic"/>
-                <Button x:Name="signInButton" Content="Rekisteröidy" Grid.Column="3" Margin="10,30,10,0" VerticalAlignment="Top" Height="100" FontFamily="Elephant" FontSize="29.333"/>
-                <TextBlock x:Name="logInText" Grid.ColumnSpan="2" Grid.Column="2" Margin="10,148,10,10" TextWrapping="Wrap" FontSize="48" FontFamily="Old English Text MT" Text="Jos tahdot lainata tai palauttaa kirjoja, kirjaudu sisään. Jos sinulla ei ole vielä tunnusta, voit luoda sen tästä."/>
-                <TextBlock x:Name="searchText" Margin="40,90,5,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="46.667" FontFamily="Modern No. 20" Text="{local:Loc TextUnderSearchBox}"/>
+                <TextBlock x:Name="logInText" Grid.ColumnSpan="1" Grid.Column="1" Margin="10,310,10,0" TextWrapping="Wrap" FontSize="32" Text="{local:Loc TextUnderLogin}"/>
+                <TextBlock x:Name="searchText" Margin="10,310,10,0" TextWrapping="Wrap"  FontSize="32" Text="{local:Loc TextUnderSearchBox}"/>
+                <Rectangle x:Name="loginButton" Grid.Column="1" Fill="#7F000000" HorizontalAlignment="Center" Height="250" Margin="0,50,0,0" RadiusY="125" RadiusX="125" Stroke="Black" VerticalAlignment="Top" Width="250" StrokeThickness="7"/>
+                <Rectangle Grid.Column="2" Fill="#7F000000" HorizontalAlignment="Center" Height="250" Margin="0,50,0,0" RadiusY="125" RadiusX="125" Stroke="Black" VerticalAlignment="Top" Width="250" StrokeThickness="7"/>
+                <TextBlock x:Name="makeAnAccountText" Grid.ColumnSpan="1" Grid.Column="2" Margin="10,310,10,0" TextWrapping="Wrap" FontSize="32" Text="{local:Loc TextUnderAccountCreation}"/>
             </Grid>
         </Grid>
         <Grid x:Name="LanguageGrid" HorizontalAlignment="Left" Height="140" VerticalAlignment="Top" Width="85" MouseEnter="LanguageGrid_MouseEnter" MouseLeave="LanguageGrid_MouseLeave">

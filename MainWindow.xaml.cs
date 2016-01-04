@@ -78,6 +78,7 @@ namespace JLLKirjasto
         private TranslateTransform middleFlagTransform;
         private TranslateTransform bottomFlagTransform;
         private Storyboard myStoryboard;
+        Storyboard gradientStoryboard;
 
         public MainWindow()
         {
@@ -89,13 +90,22 @@ namespace JLLKirjasto
             middleFlagTransform = new TranslateTransform(0, 0);
             bottomFlagTransform = new TranslateTransform(0, 0);
             myStoryboard = new Storyboard();
+            gradientStoryboard = new Storyboard();
             DoubleAnimation searchButtonRectangulation = new DoubleAnimation(0,TimeSpan.FromSeconds(0.2));
+            PointAnimation gradientTurn = new PointAnimation(new Point(0.2, 1),new Point(0.8, 1),TimeSpan.FromSeconds(10));
             myStoryboard.Children.Add(searchButtonRectangulation);
+            gradientStoryboard.Children.Add(gradientTurn);
             myStoryboard.AutoReverse = true;
-            searchButtonRectangulation.DecelerationRatio = 0.7;
-            Storyboard.SetTargetName(searchButtonRectangulation,searchButton.Name);
+            gradientStoryboard.RepeatBehavior = RepeatBehavior.Forever;
+            gradientStoryboard.AutoReverse = true;
+            myStoryboard.DecelerationRatio = 0.7;
+            gradientStoryboard.DecelerationRatio = 0.1;
+            gradientStoryboard.AccelerationRatio = 0.1;
+            Storyboard.SetTarget(searchButtonRectangulation,searchButton);
             Storyboard.SetTargetProperty(searchButtonRectangulation, new PropertyPath(Rectangle.RadiusXProperty));
-            
+            Storyboard.SetTarget(gradientTurn, WindowGrid);
+            Storyboard.SetTargetProperty(gradientTurn, new PropertyPath ("Background.EndPoint"));
+            gradientStoryboard.Begin();
 
         }
 

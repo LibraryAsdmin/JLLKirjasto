@@ -70,6 +70,24 @@ namespace JLLKirjasto.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Tässä teksti tunnuksenluontinappulan alla..
+        /// </summary>
+        public static string TextUnderAccountCreation {
+            get {
+                return ResourceManager.GetString("TextUnderAccountCreation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tässä teksti kirjautumisnappulan alla..
+        /// </summary>
+        public static string TextUnderLogin {
+            get {
+                return ResourceManager.GetString("TextUnderLogin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Hae kirjoja tai kirjailijoita kirjastosta kirjoittamalla yläpuolella olevaan laatikkoon..
         /// </summary>
         public static string TextUnderSearchBox {

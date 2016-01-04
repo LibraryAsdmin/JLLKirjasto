@@ -120,6 +120,12 @@
   <data name="Greeting" xml:space="preserve">
     <value>Hejsan!</value>
   </data>
+  <data name="TextUnderAccountCreation" xml:space="preserve">
+    <value>Svenska här</value>
+  </data>
+  <data name="TextUnderLogin" xml:space="preserve">
+    <value>Svenska här</value>
+  </data>
   <data name="TextUnderSearchBox" xml:space="preserve">
     <value>Söka böcker eller författare genom att skriva i lådan ovan.</value>
   </data>
