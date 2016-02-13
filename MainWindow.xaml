@@ -34,7 +34,7 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <TextBox x:Name="searchBox" Margin="44,59,44,0" Grid.Column="0" VerticalAlignment="Top" Background="#00000000" Text="Hae!" FontSize="24" FontFamily="Sylfaen" Visibility="Hidden" BorderThickness="0" Foreground="Black" Height="40" IsUndoEnabled="False"/>
+                <TextBox x:Name="searchBox" Margin="44,59,44,0" Grid.Column="0" VerticalAlignment="Top" Background="#00000000" Text="Hae!" FontSize="24" FontFamily="Sylfaen" Visibility="Hidden" BorderThickness="0" Foreground="Black" Height="40" IsUndoEnabled="False" Opacity="0"/>
                 <Rectangle x:Name="searchButton" Fill="#33FFFFFF" HorizontalAlignment="Center" Height="250" Margin="0,50,0,0" VerticalAlignment="Top" Width="250" RadiusX="125" RadiusY="125" MouseUp="searchButton_MouseUp" RenderTransformOrigin="0,0" Grid.Column="0" Stroke="Black" StrokeThickness="7" Grid.ColumnSpan="1">
                     <Rectangle.RenderTransform>
                         <TransformGroup>

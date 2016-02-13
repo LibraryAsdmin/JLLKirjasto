@@ -84,8 +84,9 @@ namespace JLLKirjasto
         {
             InitializeComponent();
 
-            //TODO: Here, the culture settings of the system could be read and the language of the application set accordingly
-            //UPDATE: Culture settings are read automatically, only thing that doesn't change is the flag.
+            //changes the flag to correspond with the system culture
+            string culture = CultureInfo.CurrentUICulture.ToString();
+            changeUILanguage(culture);
 
             // Initializes flag transformations
             middleFlagTransform = new TranslateTransform(0, 0);
@@ -104,7 +105,7 @@ namespace JLLKirjasto
             searchStoryboard.DecelerationRatio = 0.7;
             gradientStoryboard.DecelerationRatio = 0.1;
             gradientStoryboard.AccelerationRatio = 0.1;
-            Storyboard.SetTarget(searchButtonRectangulation,searchButton);
+            Storyboard.SetTarget(searchButtonRectangulation, searchButton);
             Storyboard.SetTarget(searchButtonHeightDecrease, searchButton);
             Storyboard.SetTargetProperty(searchButtonRectangulation, new PropertyPath(Rectangle.RadiusXProperty));
             Storyboard.SetTargetProperty(searchButtonHeightDecrease, new PropertyPath(Rectangle.HeightProperty));
@@ -117,44 +118,69 @@ namespace JLLKirjasto
         void searchButtonAnimationCompleted (object sender, EventArgs e)
         {
             this.searchBox.Visibility = Visibility.Visible;
-            DoubleAnimation searchBoxOpacity = new DoubleAnimation(1.0, TimeSpan.FromSeconds(0.5));
+            DoubleAnimation searchBoxOpacity = new DoubleAnimation(1.0, TimeSpan.FromSeconds(0.3));
+            Storyboard searchFadeIn = new Storyboard();
+            searchFadeIn.Children.Add(searchBoxOpacity);
+            Storyboard.SetTarget(searchFadeIn, searchBox);
+            Storyboard.SetTargetProperty(searchFadeIn, new PropertyPath(TextBox.OpacityProperty));
+            searchFadeIn.DecelerationRatio = 0.7;
+            searchFadeIn.Begin();
             Canvas.SetZIndex(searchBox, 1);
             Canvas.SetZIndex(searchButton, 0);
-            this.searchBox.SelectAll();
+            searchBox.SelectAll();
         }
            
+        void changeUILanguage(string language)
+        {
+            switch (language)
+            {
+                case "en-GB":
+                case "en-US":
+                    // Move English flag to front
+                    Canvas.SetZIndex(Swedish, 0);
+                    Canvas.SetZIndex(Finnish, 1);
+                    Canvas.SetZIndex(English, 2);
+                    // Change language 
+                    TranslationSource.Instance.CurrentCulture = new System.Globalization.CultureInfo("en-GB");
+                    break;
+
+                case "fi-FI":
+                    // Move Finnish to front
+                    Canvas.SetZIndex(Swedish, 1);
+                    Canvas.SetZIndex(Finnish, 2);
+                    Canvas.SetZIndex(English, 0);
+                    // Change language
+                    TranslationSource.Instance.CurrentCulture = new System.Globalization.CultureInfo("fi-FI");
+                    break;
+
+                case "sv-SE":
+                    // Move Swedish to front
+                    Canvas.SetZIndex(Swedish, 2);
+                    Canvas.SetZIndex(Finnish, 1);
+                    Canvas.SetZIndex(English, 0);
+                    // Change language
+                    TranslationSource.Instance.CurrentCulture = new System.Globalization.CultureInfo("sv-SE");
+                    break;
+           }
+        }
+
 
         // Change language to English
         private void English_Click(object sender, RoutedEventArgs e)
         {
-            // Move English flag to front
-            Canvas.SetZIndex(Swedish, 0);
-            Canvas.SetZIndex(Finnish, 1);
-            Canvas.SetZIndex(English, 2);
-            // Change language 
-            TranslationSource.Instance.CurrentCulture = new System.Globalization.CultureInfo("en-GB");
+            changeUILanguage("en-GB");
         }
 
         // Change language to Swedish
         private void Swedish_Click(object sender, RoutedEventArgs e)
         {
-            // Move Swedish to front
-            Canvas.SetZIndex(Swedish, 2);
-            Canvas.SetZIndex(Finnish, 1);
-            Canvas.SetZIndex(English, 0);
-            // Change language
-            TranslationSource.Instance.CurrentCulture = new System.Globalization.CultureInfo("sv-SE");
+            changeUILanguage("sv-SE");
         }
 
         // Change language to Finnish (default)
         private void Finnish_Click(object sender, RoutedEventArgs e)
         {
-            // Move Swedish to front
-            Canvas.SetZIndex(Swedish, 1);
-            Canvas.SetZIndex(Finnish, 2);
-            Canvas.SetZIndex(English, 0);
-            // Change language
-            TranslationSource.Instance.CurrentCulture = new System.Globalization.CultureInfo("fi-FI");
+            changeUILanguage("fi-FI");
         }
 
         private void LanguageGrid_MouseEnter(object sender, MouseEventArgs e)
