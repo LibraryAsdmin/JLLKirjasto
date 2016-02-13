@@ -32,7 +32,7 @@ namespace JLLKirjasto
         private readonly ResourceManager resManager = Properties.Resources.ResourceManager;
         private CultureInfo currentCulture = null;
 
-        public string this [string key]
+        public string this[string key]
         {
             get { return this.resManager.GetString(key, this.currentCulture); }
         }
@@ -80,6 +80,8 @@ namespace JLLKirjasto
         private Storyboard searchStoryboard;
         private Storyboard gradientStoryboard;
 
+        bool atHome = true; //are we currently in home view?
+
         public MainWindow()
         {
             InitializeComponent();
@@ -93,10 +95,10 @@ namespace JLLKirjasto
             bottomFlagTransform = new TranslateTransform(0, 0);
             searchStoryboard = new Storyboard();
             gradientStoryboard = new Storyboard();
-            DoubleAnimation searchButtonRectangulation = new DoubleAnimation(0,TimeSpan.FromSeconds(0.5));
+            DoubleAnimation searchButtonRectangulation = new DoubleAnimation(0, TimeSpan.FromSeconds(0.5));
             DoubleAnimation searchButtonHeightDecrease = new DoubleAnimation(50, TimeSpan.FromSeconds(1));
-            
-            PointAnimation gradientTurn = new PointAnimation(new Point(0.2, 1),new Point(0.8, 1),TimeSpan.FromSeconds(10));
+
+            PointAnimation gradientTurn = new PointAnimation(new Point(0.2, 1), new Point(0.8, 1), TimeSpan.FromSeconds(10));
             searchStoryboard.Children.Add(searchButtonRectangulation);
             searchStoryboard.Children.Add(searchButtonHeightDecrease);
             gradientStoryboard.Children.Add(gradientTurn);
@@ -110,12 +112,12 @@ namespace JLLKirjasto
             Storyboard.SetTargetProperty(searchButtonRectangulation, new PropertyPath(Rectangle.RadiusXProperty));
             Storyboard.SetTargetProperty(searchButtonHeightDecrease, new PropertyPath(Rectangle.HeightProperty));
             Storyboard.SetTarget(gradientTurn, WindowGrid);
-            Storyboard.SetTargetProperty(gradientTurn, new PropertyPath ("Background.EndPoint"));
+            Storyboard.SetTargetProperty(gradientTurn, new PropertyPath("Background.EndPoint"));
             gradientStoryboard.Begin();
             searchStoryboard.Completed += new EventHandler(searchButtonAnimationCompleted);
         }
 
-        void searchButtonAnimationCompleted (object sender, EventArgs e)
+        void searchButtonAnimationCompleted(object sender, EventArgs e)
         {
             this.searchBox.Visibility = Visibility.Visible;
             DoubleAnimation searchBoxOpacity = new DoubleAnimation(1.0, TimeSpan.FromSeconds(0.3));
@@ -129,7 +131,7 @@ namespace JLLKirjasto
             Canvas.SetZIndex(searchButton, 0);
             searchBox.SelectAll();
         }
-           
+
         void changeUILanguage(string language)
         {
             switch (language)
@@ -161,7 +163,7 @@ namespace JLLKirjasto
                     // Change language
                     TranslationSource.Instance.CurrentCulture = new System.Globalization.CultureInfo("sv-SE");
                     break;
-           }
+            }
         }
 
 
@@ -186,7 +188,7 @@ namespace JLLKirjasto
         private void LanguageGrid_MouseEnter(object sender, MouseEventArgs e)
         {
             // Show languages when mouse enters the LanguageGrid
-            showLanguages(middleFlagTransform.Y, bottomFlagTransform.Y);         
+            showLanguages(middleFlagTransform.Y, bottomFlagTransform.Y);
         }
 
         private void LanguageGrid_MouseLeave(object sender, MouseEventArgs e)
@@ -218,51 +220,62 @@ namespace JLLKirjasto
             Duration duration = new Duration(new TimeSpan(0, 0, 0, 0, 250));
 
             // transform  the middle flag from its current positions to the default position
-            middleFlagTransform = new TranslateTransform(0,middleY);
+            middleFlagTransform = new TranslateTransform(0, middleY);
             DoubleAnimation anim = new DoubleAnimation(0, duration);
             middleFlagTransform.BeginAnimation(TranslateTransform.YProperty, anim);
             Swedish.RenderTransform = middleFlagTransform;
 
             // transform the bottom flag from its current positions to the default position
-            bottomFlagTransform = new TranslateTransform(0,bottomY);
+            bottomFlagTransform = new TranslateTransform(0, bottomY);
             DoubleAnimation anim2 = new DoubleAnimation(0, duration);
             bottomFlagTransform.BeginAnimation(TranslateTransform.YProperty, anim2);
             English.RenderTransform = bottomFlagTransform;
         }
 
-        bool firstTime = true;
+        bool firstTime = true; //Is this the first time to move from home to search? This is needed
+                               // for making sure that searchBox and searchButton are moved to the windowGrid only once.
 
         private void searchButton_MouseUp(object sender, MouseButtonEventArgs e)
         {
-  
-            if(firstTime)
-            {
-                firstTime = false;
-                GeneralTransform transformButton = searchButton.TransformToAncestor(this);
-                GeneralTransform transformBox = searchBox.TransformToAncestor(this);
-                StartPageContentGrid.Children.Remove(searchButton);
-                StartPageContentGrid.Children.Remove(searchBox);
-                WindowGrid.Children.Add(searchButton);
-                WindowGrid.Children.Add(searchBox);
-                Point whereToTransformButton = transformButton.Transform(new Point(0, 0));
-                TranslateTransform tt1 = new TranslateTransform(whereToTransformButton.X, whereToTransformButton.Y);
-                searchButton.RenderTransform = tt1;
-                searchButton.VerticalAlignment = VerticalAlignment.Top;
-                searchButton.HorizontalAlignment = HorizontalAlignment.Left;
-                searchButton.Margin = new Thickness(0);
-                Point whereToTransformBox = transformBox.Transform(new Point(0, 0));
-                TranslateTransform tt2 = new TranslateTransform(whereToTransformBox.X, whereToTransformBox.Y);
-                searchBox.RenderTransform = tt2;
-                searchBox.VerticalAlignment = VerticalAlignment.Top;
-                searchBox.HorizontalAlignment = HorizontalAlignment.Left;
-                searchBox.Margin = new Thickness(0);
 
-           }
+            if (atHome) //only works if we're in the home view
+            {
+                atHome = false;
+                //fire up the animation by finding it from the xaml resources
+                Storyboard BringUpSearchResults = this.FindResource("BringUpSearchResults") as Storyboard;
+                BringUpSearchResults.Begin();
+
+                if (firstTime)
+                {
+                    firstTime = false;
+                    //searchBox and searchButton are moved from the parenthood of StartPageContentGrid to that of windowGrid.
+                    //To make their coordinates stay constant, we fetch them relative to the window and then position them again.
+                    GeneralTransform transformButton = searchButton.TransformToAncestor(this);
+                    GeneralTransform transformBox = searchBox.TransformToAncestor(this);
+                    StartPageContentGrid.Children.Remove(searchButton);
+                    StartPageContentGrid.Children.Remove(searchBox);
+                    WindowGrid.Children.Add(searchButton);
+                    WindowGrid.Children.Add(searchBox);
+                    Point whereToTransformButton = transformButton.Transform(new Point(0, 0));
+                    TranslateTransform tt1 = new TranslateTransform(whereToTransformButton.X, whereToTransformButton.Y);
+                    searchButton.RenderTransform = tt1;
+                    searchButton.VerticalAlignment = VerticalAlignment.Top;
+                    searchButton.HorizontalAlignment = HorizontalAlignment.Left;
+                    searchButton.Margin = new Thickness(0);
+                    Point whereToTransformBox = transformBox.Transform(new Point(0, 0));
+                    TranslateTransform tt2 = new TranslateTransform(whereToTransformBox.X, whereToTransformBox.Y);
+                    searchBox.RenderTransform = tt2;
+                    searchBox.VerticalAlignment = VerticalAlignment.Top;
+                    searchBox.HorizontalAlignment = HorizontalAlignment.Left;
+                    searchBox.Margin = new Thickness(0);
+                }
+
+            }
         }
 
         private void searchBox_GotFocus(object sender, RoutedEventArgs e)
         {
-            if(searchBox.Text==Properties.Resources.ResourceManager.GetString("DefaultSearchBoxContent",TranslationSource.Instance.CurrentCulture))
+            if (searchBox.Text == Properties.Resources.ResourceManager.GetString("DefaultSearchBoxContent", TranslationSource.Instance.CurrentCulture))
             {
                 searchBox.Text = "";
             }
@@ -283,10 +296,20 @@ namespace JLLKirjasto
 
         private void searchBox_LostFocus(object sender, RoutedEventArgs e)
         {
-            if(searchBox.Text == "")
+            if (searchBox.Text == "")
             {
-                searchBox.Text = Properties.Resources.ResourceManager.GetString("DefaultSearchBoxContent",TranslationSource.Instance.CurrentCulture);
+                searchBox.Text = Properties.Resources.ResourceManager.GetString("DefaultSearchBoxContent", TranslationSource.Instance.CurrentCulture);
             }
+        }
+
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+            //if we're now at search results screen
+            Storyboard GoBackHome = this.FindResource("GoBackHome") as Storyboard;
+            GoBackHome.Begin();
+            atHome = true;
+
+            //this can be used to go back from other views
         }
     }
 
