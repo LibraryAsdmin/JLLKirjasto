@@ -346,5 +346,41 @@ namespace JLLKirjasto
 
             atHome = true; //we're home, so the searchButton can now trigger another animation if the user so desires
         }
+
+        private void searchButton_MouseEnter(object sender, MouseEventArgs e)
+        {
+            Storyboard HighlightSearchButton = this.FindResource("HighlightSearchButton") as Storyboard;
+            HighlightSearchButton.Begin();
+        }
+
+        private void searchButton_MouseLeave(object sender, MouseEventArgs e)
+        {
+            Storyboard LeaveSearchButton = this.FindResource("LeaveSearchButton") as Storyboard;
+            LeaveSearchButton.Begin();
+        }
+
+        private void signupButton_MouseEnter(object sender, MouseEventArgs e)
+        {
+            Storyboard HighlightSignUpButton = this.FindResource("HighlightSignUpButton") as Storyboard;
+            HighlightSignUpButton.Begin();
+        }
+
+        private void signupButton_MouseLeave(object sender, MouseEventArgs e)
+        {
+            Storyboard LeaveSignUpButton = this.FindResource("LeaveSignUpButton") as Storyboard;
+            LeaveSignUpButton.Begin();
+        }
+
+        private void loginButton_MouseEnter(object sender, MouseEventArgs e)
+        {
+            Storyboard HighlightLoginButton = this.FindResource("HighlightLoginButton") as Storyboard;
+            HighlightLoginButton.Begin();
+        }
+
+        private void loginButton_MouseLeave(object sender, MouseEventArgs e)
+        {
+            Storyboard LeaveLoginButton = this.FindResource("LeaveLoginButton") as Storyboard;
+            LeaveLoginButton.Begin();
+        }
     }
 }
