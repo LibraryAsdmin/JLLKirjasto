@@ -173,7 +173,7 @@
             </ColorAnimationUsingKeyFrames>
             <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[0].(GradientStop.Color)" Storyboard.TargetName="WindowGrid">
                 <SplineColorKeyFrame KeyTime="0" Value="Red"/>
-                <SplineColorKeyFrame KeyTime="0:0:0.5" Value="#FF80FF00"/>
+                <SplineColorKeyFrame KeyTime="0:0:0.5" Value="#FF0080FF"/>
             </ColorAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="button">
                 <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
