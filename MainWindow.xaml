@@ -1,13 +1,16 @@
-<Window x:Name="RootWindow" x:Class="JLLKirjasto.MainWindow"
+<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:JLLKirjasto"
+        xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2" x:Name="RootWindow" x:Class="JLLKirjasto.MainWindow"
         mc:Ignorable="d" 
         
         Title="{local:Loc WindowTitle}"  Height="768" Width="1024" WindowStartupLocation="CenterScreen">
+ 
     <Window.Resources>
+ 
         <Storyboard x:Key="BringUpSearchResults">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="SearchResultsGrid">
                 <EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="0">
@@ -99,6 +102,9 @@
                     </EasingDoubleKeyFrame.EasingFunction>
                 </EasingDoubleKeyFrame>
             </DoubleAnimationUsingKeyFrames>
+            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="button">
+                <DiscreteBooleanKeyFrame KeyTime="0:0:0.7" Value="True"/>
+            </BooleanAnimationUsingKeyFrames>
         </Storyboard>
         <Storyboard x:Key="GoBackHome" Completed="GoHomeStoryboardCompleted">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="SearchResultsGrid">
@@ -183,9 +189,15 @@
                 <SplineDoubleKeyFrame KeyTime="0" Value="0.065"/>
                 <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="0.197"/>
             </DoubleAnimationUsingKeyFrames>
+            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="button">
+                <DiscreteBooleanKeyFrame KeyTime="0" Value="True"/>
+                <DiscreteBooleanKeyFrame KeyTime="0:0:0.6" Value="False"/>
+            </BooleanAnimationUsingKeyFrames>
         </Storyboard>
     </Window.Resources>
+    
     <Grid x:Name="WindowGrid">
+        
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                 <GradientStop Color="#FF80FF00" Offset="0.197"/>
@@ -201,6 +213,13 @@
                     <TranslateTransform X="-2000"/>
                 </TransformGroup>
             </Grid.RenderTransform>
+            <ListBox x:Name="listBox" HorizontalAlignment="Left" Margin="47.143,268.857,0,31.715" Width="356.571" BorderBrush="#00ABADB3" Background="Transparent" BorderThickness="0" FontSize="26.667">
+                <ListBoxItem Background="Transparent" Content="Book #1 by Author X" FontSize="24"/>
+                <Separator Background="Black"/>
+                <ListBoxItem Content="Book #2 by Author Y" FontSize="24"/>
+                <Separator Background="Black"/>
+                <ListBoxItem Content="Book #3 by Author Z" FontSize="24"/>
+            </ListBox>
         </Grid>
         <Grid x:Name="StartPageGrid" Margin="10" RenderTransformOrigin="0.5,0.5">
             <Grid.RenderTransform>
@@ -271,7 +290,7 @@
                 </Button.Template>
             </Button>
         </Grid>
-        <Button x:Name="button" Content="Go Back" HorizontalAlignment="Left" Height="40" Margin="80,10,10,10" VerticalAlignment="Top" Width="67.857" RenderTransformOrigin="0.5,0.5" Click="button_Click">
+        <Button x:Name="button" Content="Go Back" HorizontalAlignment="Left" Height="40" Margin="80,10,10,10" VerticalAlignment="Top" Width="67.857" RenderTransformOrigin="0.5,0.5" Click="button_Click" IsEnabled="False">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
