@@ -230,35 +230,63 @@ namespace JLLKirjasto
             English.RenderTransform = bottomFlagTransform;
         }
 
+        bool firstTime = true;
+
         private void searchButton_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            searchStoryboard.Begin(this);   
+  
+            if(firstTime)
+            {
+                firstTime = false;
+                GeneralTransform transformButton = searchButton.TransformToAncestor(this);
+                GeneralTransform transformBox = searchBox.TransformToAncestor(this);
+                StartPageContentGrid.Children.Remove(searchButton);
+                StartPageContentGrid.Children.Remove(searchBox);
+                WindowGrid.Children.Add(searchButton);
+                WindowGrid.Children.Add(searchBox);
+                Point whereToTransformButton = transformButton.Transform(new Point(0, 0));
+                TranslateTransform tt1 = new TranslateTransform(whereToTransformButton.X, whereToTransformButton.Y);
+                searchButton.RenderTransform = tt1;
+                searchButton.VerticalAlignment = VerticalAlignment.Top;
+                searchButton.HorizontalAlignment = HorizontalAlignment.Left;
+                searchButton.Margin = new Thickness(0);
+                Point whereToTransformBox = transformBox.Transform(new Point(0, 0));
+                TranslateTransform tt2 = new TranslateTransform(whereToTransformBox.X, whereToTransformBox.Y);
+                searchBox.RenderTransform = tt2;
+                searchBox.VerticalAlignment = VerticalAlignment.Top;
+                searchBox.HorizontalAlignment = HorizontalAlignment.Left;
+                searchBox.Margin = new Thickness(0);
+
+           }
         }
 
-        private void searchBox_KeyUp(object sender, KeyEventArgs e)
+        private void searchBox_GotFocus(object sender, RoutedEventArgs e)
         {
-            //if(firstTime)
-            GeneralTransform transformButton = searchButton.TransformToAncestor(this);
-            GeneralTransform transformBox = searchBox.TransformToAncestor(this);
-            StartPageContentGrid.Children.Remove(searchButton);
-            StartPageContentGrid.Children.Remove(searchBox);
-            WindowGrid.Children.Add(searchButton);
-            WindowGrid.Children.Add(searchBox);
-            Point whereToTransformButton = transformButton.Transform(new Point(0, 0));
-            TranslateTransform tt1 = new TranslateTransform(whereToTransformButton.X, whereToTransformButton.Y);
-            searchButton.RenderTransform = tt1;
-            searchButton.VerticalAlignment = VerticalAlignment.Top;
-            searchButton.HorizontalAlignment = HorizontalAlignment.Left;
-            searchButton.Margin = new Thickness(0);
-            Point whereToTransformBox = transformBox.Transform(new Point(0, 0));
-            TranslateTransform tt2 = new TranslateTransform(whereToTransformBox.X, whereToTransformBox.Y);
-            searchBox.RenderTransform = tt2;
-            searchBox.VerticalAlignment = VerticalAlignment.Top;
-            searchBox.HorizontalAlignment = HorizontalAlignment.Left;
-            searchBox.Margin = new Thickness(0);
+            if(searchBox.Text==Properties.Resources.ResourceManager.GetString("DefaultSearchBoxContent",TranslationSource.Instance.CurrentCulture))
+            {
+                searchBox.Text = "";
+            }
+        }
 
+        private void searchBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (searchBox.Text == Properties.Resources.ResourceManager.GetString("DefaultSearchBoxContent", TranslationSource.Instance.CurrentCulture))
+            {
+                searchBox.Foreground = new SolidColorBrush(Colors.DarkSlateGray);
 
+            }
+            else
+            {
+                searchBox.Foreground = new SolidColorBrush(Colors.Black);
+            }
+        }
 
+        private void searchBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if(searchBox.Text == "")
+            {
+                searchBox.Text = Properties.Resources.ResourceManager.GetString("DefaultSearchBoxContent",TranslationSource.Instance.CurrentCulture);
+            }
         }
     }
 
