@@ -81,6 +81,13 @@ namespace JLLKirjasto
 
         bool atHome = true; //are we currently in home view?
 
+        // Changes the behaviour of GoHome
+        // 0 = StartPageGrid
+        // 1 = Search
+        // 2 = LoginGrid
+        // 3 = SignUpGrid
+        short currentView = 0;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -222,10 +229,10 @@ namespace JLLKirjasto
 
         private void searchButton_MouseUp(object sender, MouseButtonEventArgs e)
         {
-
             if (atHome) //only works if we're in the home view
             {
                 atHome = false;
+                currentView = 1;
                 //fire up the animation by finding it from the xaml resources
                 Storyboard BringUpSearchResults = this.FindResource("BringUpSearchResults") as Storyboard;
                 BringUpSearchResults.Begin();
@@ -283,11 +290,42 @@ namespace JLLKirjasto
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
-            //if we're now at search results screen
-            Storyboard GoBackHome = this.FindResource("GoBackHome") as Storyboard;
-            GoBackHome.Begin();
+            // At home screen
+            if (0==currentView)
+            {
+                 System.Windows.MessageBox.Show("Home button should not be visible in home screen... Go fix the program!");
+            }
+            // At search screen
+            else if (1 == currentView)
+            {
+                Storyboard GoBackHome = this.FindResource("GoBackHome") as Storyboard;
+                GoBackHome.Begin();
+            }
+            else if (2 == currentView)
+            {
+                Storyboard HideLoginGrid = this.FindResource("HideLoginGrid") as Storyboard;
+                HideLoginGrid.Begin();
+            }
+            else if (3 == currentView)
+            {
+                Storyboard HideSignUpGrid = this.FindResource("HideSignUpGrid") as Storyboard;
+                HideSignUpGrid.Begin();
+            }
+            currentView = 0;
+        }
 
-            //this can be used to go back from other views
+        private void signupButton_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            currentView = 3;
+            Storyboard ShowSignUpGrid = this.FindResource("ShowSignUpGrid") as Storyboard;
+            ShowSignUpGrid.Begin();
+        }
+
+        private void loginButton_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            currentView = 2;
+            Storyboard ShowLoginGrid = this.FindResource("ShowLoginGrid") as Storyboard;
+            ShowLoginGrid.Begin();
         }
 
         private void GoHomeStoryboardCompleted(object sender, EventArgs e)
@@ -309,5 +347,4 @@ namespace JLLKirjasto
             atHome = true; //we're home, so the searchButton can now trigger another animation if the user so desires
         }
     }
-
 }
