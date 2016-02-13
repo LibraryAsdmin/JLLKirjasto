@@ -291,9 +291,9 @@ namespace JLLKirjasto
         private void button_Click(object sender, RoutedEventArgs e)
         {
             // At home screen
-            if (0==currentView)
+            if (0 == currentView)
             {
-                 System.Windows.MessageBox.Show("Home button should not be visible in home screen... Go fix the program!");
+                System.Windows.MessageBox.Show("Home button should not be visible in home screen... Go fix the program!");
             }
             // At search screen
             else if (1 == currentView)
@@ -349,14 +349,18 @@ namespace JLLKirjasto
 
         private void searchButton_MouseEnter(object sender, MouseEventArgs e)
         {
-            Storyboard HighlightSearchButton = this.FindResource("HighlightSearchButton") as Storyboard;
-            HighlightSearchButton.Begin();
+            if (0 == currentView) {
+                Storyboard HighlightSearchButton = this.FindResource("HighlightSearchButton") as Storyboard;
+                HighlightSearchButton.Begin();
+            }    
         }
 
         private void searchButton_MouseLeave(object sender, MouseEventArgs e)
         {
-            Storyboard LeaveSearchButton = this.FindResource("LeaveSearchButton") as Storyboard;
-            LeaveSearchButton.Begin();
+            if (0==currentView) {
+                Storyboard LeaveSearchButton = this.FindResource("LeaveSearchButton") as Storyboard;
+                LeaveSearchButton.Begin();
+            }
         }
 
         private void signupButton_MouseEnter(object sender, MouseEventArgs e)
