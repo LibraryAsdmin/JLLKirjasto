@@ -78,7 +78,7 @@ namespace JLLKirjasto
         private TranslateTransform middleFlagTransform;
         private TranslateTransform bottomFlagTransform;
         private Storyboard searchStoryboard;
-        Storyboard gradientStoryboard;
+        private Storyboard gradientStoryboard;
 
         public MainWindow()
         {
@@ -197,7 +197,7 @@ namespace JLLKirjasto
         // Extends the list of languages
         private void showLanguages(double middleY, double bottomÝ)
         {
-            Duration duration = new Duration(new TimeSpan(0, 0, 0, 0, 250));
+            Duration duration = new Duration(TimeSpan.FromMilliseconds(250));
 
             // transform the middle flag from current position to middle
             middleFlagTransform = new TranslateTransform(0, middleY);
@@ -233,6 +233,32 @@ namespace JLLKirjasto
         private void searchButton_MouseUp(object sender, MouseButtonEventArgs e)
         {
             searchStoryboard.Begin(this);   
+        }
+
+        private void searchBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            //if(firstTime)
+            GeneralTransform transformButton = searchButton.TransformToAncestor(this);
+            GeneralTransform transformBox = searchBox.TransformToAncestor(this);
+            StartPageContentGrid.Children.Remove(searchButton);
+            StartPageContentGrid.Children.Remove(searchBox);
+            WindowGrid.Children.Add(searchButton);
+            WindowGrid.Children.Add(searchBox);
+            Point whereToTransformButton = transformButton.Transform(new Point(0, 0));
+            TranslateTransform tt1 = new TranslateTransform(whereToTransformButton.X, whereToTransformButton.Y);
+            searchButton.RenderTransform = tt1;
+            searchButton.VerticalAlignment = VerticalAlignment.Top;
+            searchButton.HorizontalAlignment = HorizontalAlignment.Left;
+            searchButton.Margin = new Thickness(0);
+            Point whereToTransformBox = transformBox.Transform(new Point(0, 0));
+            TranslateTransform tt2 = new TranslateTransform(whereToTransformBox.X, whereToTransformBox.Y);
+            searchBox.RenderTransform = tt2;
+            searchBox.VerticalAlignment = VerticalAlignment.Top;
+            searchBox.HorizontalAlignment = HorizontalAlignment.Left;
+            searchBox.Margin = new Thickness(0);
+
+
+
         }
     }
 
