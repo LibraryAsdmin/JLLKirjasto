@@ -19,7 +19,7 @@
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="StartPageGrid">
                 <EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="1200">
                     <EasingDoubleKeyFrame.EasingFunction>
-                        <CircleEase EasingMode="EaseOut"/>
+                        <CircleEase EasingMode="EaseIn"/>
                     </EasingDoubleKeyFrame.EasingFunction>
                 </EasingDoubleKeyFrame>
             </DoubleAnimationUsingKeyFrames>
