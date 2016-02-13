@@ -311,6 +311,17 @@ namespace JLLKirjasto
 
             //this can be used to go back from other views
         }
-    }
 
+        private void signupButton_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            Storyboard ShowSignUpGrid = this.FindResource("ShowSignUpGrid") as Storyboard;
+            ShowSignUpGrid.Begin();
+        }
+
+        private void loginButton_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            Storyboard ShowLoginGrid = this.FindResource("ShowLoginGrid") as Storyboard;
+            ShowLoginGrid.Begin();
+        }
+    }
 }

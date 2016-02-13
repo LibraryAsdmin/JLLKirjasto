@@ -155,7 +155,65 @@
                 <SplineDoubleKeyFrame KeyTime="0:0:1" Value="0.197"/>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
+        <Storyboard x:Key="ShowLoginGrid">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="LoginGrid">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="-846.563">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="StartPageGrid">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="-752">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseIn"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[0].(GradientStop.Color)" Storyboard.TargetName="WindowGrid">
+                <EasingColorKeyFrame KeyTime="0:0:0.5" Value="#FFF96912"/>
+            </ColorAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="button">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="ShowSignUpGrid">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="SignUpGrid">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="-1129.482">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="StartPageGrid">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="-1044">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseIn"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[1].(GradientStop.Color)" Storyboard.TargetName="WindowGrid">
+                <EasingColorKeyFrame KeyTime="0:0:0.5" Value="#FF4285F4"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[0].(GradientStop.Color)" Storyboard.TargetName="WindowGrid">
+                <EasingColorKeyFrame KeyTime="0:0:0.5" Value="#FF4285F4"/>
+            </ColorAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="button">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
     </Window.Resources>
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded"/>
+    </Window.Triggers>
     <Grid x:Name="WindowGrid">
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
@@ -201,7 +259,7 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <TextBox x:Name="searchBox" Margin="44,59,44,0" Grid.Column="0" VerticalAlignment="Top" Background="#00000000" Text="{local:Loc DefaultSearchBoxContent}" FontSize="24" FontFamily="Sylfaen" Visibility="Hidden" BorderThickness="0" Foreground="Black" Height="40" IsUndoEnabled="False" Opacity="0" GotFocus="searchBox_GotFocus" TextChanged="searchBox_TextChanged" LostFocus="searchBox_LostFocus" Width="238"/>
-                <Rectangle x:Name="searchButton" Fill="#33FFFFFF" HorizontalAlignment="Center" Height="250" Margin="0,50,0,0" VerticalAlignment="Top" Width="250" RadiusX="125" RadiusY="125" MouseUp="searchButton_MouseUp" RenderTransformOrigin="0,0" Grid.Column="0" Stroke="Black" StrokeThickness="7" Grid.ColumnSpan="1">
+                <Rectangle x:Name="searchButton" Fill="#33FFFFFF" HorizontalAlignment="Center" Height="250" Margin="0,50,0,0" VerticalAlignment="Top" Width="250" RadiusX="125" RadiusY="125" MouseUp="searchButton_MouseUp" RenderTransformOrigin="0,0" Grid.Column="0" Stroke="Black" StrokeThickness="7" Grid.ColumnSpan="1" Cursor="Hand">
                     <Rectangle.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -213,14 +271,14 @@
                 </Rectangle>
                 <TextBlock x:Name="logInText" Grid.ColumnSpan="1" Grid.Column="1" Margin="10,310,10,0" TextWrapping="Wrap" FontSize="32" Text="{local:Loc TextUnderLogin}"/>
                 <TextBlock x:Name="searchText" Margin="10,310,10,0" TextWrapping="Wrap"  FontSize="32" Text="{local:Loc TextUnderSearchBox}" Grid.ColumnSpan="1"/>
-                <Rectangle x:Name="loginButton" Grid.Column="2" Fill="#33FFFFFF" HorizontalAlignment="Center" Height="250" Margin="0,50,0,0" RadiusY="125" RadiusX="125" Stroke="Black" VerticalAlignment="Top" Width="250" StrokeThickness="7"/>
-                <Rectangle x:Name="rectangle" Grid.Column="1" Fill="#33FFFFFF" HorizontalAlignment="Center" Height="250" Margin="0,50,0,0" RadiusY="125" RadiusX="125" Stroke="Black" VerticalAlignment="Top" Width="250" StrokeThickness="7"/>
+                <Rectangle x:Name="signupButton" Grid.Column="2" Fill="#33FFFFFF" HorizontalAlignment="Center" Height="250" Margin="0,50,0,0" RadiusY="125" RadiusX="125" Stroke="Black" VerticalAlignment="Top" Width="250" StrokeThickness="7" Cursor="Hand" MouseUp="signupButton_MouseUp"/>
+                <Rectangle x:Name="loginButton" Grid.Column="1" Fill="#33FFFFFF" HorizontalAlignment="Center" Height="250" Margin="0,50,0,0" RadiusY="125" RadiusX="125" Stroke="Black" VerticalAlignment="Top" Width="250" StrokeThickness="7" Cursor="Hand" MouseUp="loginButton_MouseUp"/>
                 <TextBlock x:Name="makeAnAccountText" Grid.ColumnSpan="1" Grid.Column="2" Margin="10,310,10,0" TextWrapping="Wrap" FontSize="32" Text="{local:Loc TextUnderAccountCreation}"/>
             </Grid>
 
         </Grid>
         <Grid x:Name="LanguageGrid" HorizontalAlignment="Left" Height="140" VerticalAlignment="Top" Width="85" MouseEnter="LanguageGrid_MouseEnter" MouseLeave="LanguageGrid_MouseLeave">
-            <Button x:Name="English" HorizontalAlignment="Left" VerticalAlignment="Top" Width="65" Margin="10,10,0,0" Height="40" Cursor="Hand" Click="English_Click" d:IsLocked="True">
+            <Button x:Name="English" HorizontalAlignment="Left" VerticalAlignment="Top" Width="65" Margin="10,10,0,0" Height="40" Cursor="Hand" Click="English_Click">
                 <Button.Template>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Image Source="/Images/UK.png"/>
@@ -234,7 +292,7 @@
                     </ControlTemplate>
                 </Button.Template>
             </Button>
-            <Button x:Name="Finnish" HorizontalAlignment="Left" VerticalAlignment="Top" Width="65" Margin="10,10,0,0" Height="40" Cursor="Hand" Click="Finnish_Click" d:IsLocked="True">
+            <Button x:Name="Finnish" HorizontalAlignment="Left" VerticalAlignment="Top" Width="65" Margin="10,10,0,0" Height="40" Cursor="Hand" Click="Finnish_Click">
                 <Button.Template>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Image Source="/Images/Finnish.png"/>
@@ -242,7 +300,29 @@
                 </Button.Template>
             </Button>
         </Grid>
-        <Button x:Name="button" Content="Go Back" HorizontalAlignment="Left" Height="40" Margin="80,10,10,10" VerticalAlignment="Top" Width="67.857" RenderTransformOrigin="0.5,0.5" Click="button_Click">
+        <Grid x:Name="LoginGrid" Height="740.5" Margin="0,0,0,-846.545" VerticalAlignment="Bottom" RenderTransformOrigin="0.5,0.5">
+            <Grid.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Grid.RenderTransform>
+            <TextBox x:Name="username" Height="31" Margin="315.5,302.455,408.5,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" ToolTip="Username"/>
+            <TextBox x:Name="password" Height="31" Margin="315.5,338.455,408.5,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" ToolTip="Password"/>
+        </Grid>
+        <Grid x:Name="SignUpGrid" Margin="0,0,-1129.5,0" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right" Width="1019">
+            <Grid.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Grid.RenderTransform>
+        </Grid>
+        <Button x:Name="button" Content="Go Back" HorizontalAlignment="Left" Height="40" Margin="80,10,10,10" VerticalAlignment="Top" Width="67.857" RenderTransformOrigin="0.5,0.5" Click="button_Click" Cursor="Hand">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
