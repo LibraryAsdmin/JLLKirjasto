@@ -526,8 +526,11 @@
                     <TranslateTransform/>
                 </TransformGroup>
             </Grid.RenderTransform>
-            <TextBox x:Name="username" Height="31" Margin="315.5,302.455,408.5,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" ToolTip="Username"/>
-            <TextBox x:Name="password" Height="31" Margin="315.5,338.455,408.5,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" ToolTip="Password"/>
+            <Grid x:Name="LoginFieldsGrid" Margin="300,326">
+                <PasswordBox x:Name="password" Height="31" Margin="10,45,100,0" VerticalAlignment="Top"/>
+                <TextBox x:Name="username" Height="32" Margin="10,10,100,0" Text="Wilma osoite(muilla kielilla)" VerticalAlignment="Top" MaxLength="100" TextWrapping="Wrap"/>
+                <Button x:Name="loginButton1" Content="Login&#xA;" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Width="85" Height="66" FontSize="18.667"/>
+            </Grid>
         </Grid>
         <Grid x:Name="SignUpGrid" Margin="0,0,-1129.5,0" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right" Width="1019">
             <Grid.RenderTransform>
