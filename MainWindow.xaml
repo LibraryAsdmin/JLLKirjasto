@@ -340,7 +340,7 @@
             </BooleanAnimationUsingKeyFrames>
         </Storyboard>
         <Storyboard x:Key="HighlightLoginButton">
-            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="loginButton">
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="loginButton" KeyboardNavigation.TabIndex="2">
                 <EasingColorKeyFrame KeyTime="0:0:0.2" Value="#72FFFFFF"/>
             </ColorAnimationUsingKeyFrames>
         </Storyboard>
@@ -495,7 +495,7 @@
 
         </Grid>
         <Grid x:Name="LanguageGrid" HorizontalAlignment="Left" Height="140" VerticalAlignment="Top" Width="85" MouseEnter="LanguageGrid_MouseEnter" MouseLeave="LanguageGrid_MouseLeave">
-            <Button x:Name="English" HorizontalAlignment="Left" VerticalAlignment="Top" Width="65" Margin="10,10,0,0" Height="40" Cursor="Hand" Click="English_Click">
+            <Button x:Name="English" HorizontalAlignment="Left" VerticalAlignment="Top" Width="65" Margin="10,10,0,0" Height="40" Cursor="Hand" Click="English_Click" KeyboardNavigation.IsTabStop="False">
                 <Button.Template>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Image Source="/Images/UK.png"/>
@@ -527,9 +527,9 @@
                 </TransformGroup>
             </Grid.RenderTransform>
             <Grid x:Name="LoginFieldsGrid" Margin="300,326">
-                <PasswordBox x:Name="password" Height="31" Margin="10,45,100,0" VerticalAlignment="Top"/>
                 <TextBox x:Name="username" Height="32" Margin="10,10,100,0" Text="Wilma osoite(muilla kielilla)" VerticalAlignment="Top" MaxLength="100" TextWrapping="Wrap"/>
-                <Button x:Name="loginButton1" Content="Login&#xA;" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Width="85" Height="66" FontSize="18.667"/>
+                <PasswordBox x:Name="password" Height="31" Margin="10,45,100,0" VerticalAlignment="Top"/>
+                <Button x:Name="loginButton1" Content="Login&#xA;" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Width="85" Height="66" FontSize="18.667" Padding="1,17,1,1"/>
             </Grid>
         </Grid>
         <Grid x:Name="SignUpGrid" Margin="0,0,-1129.5,0" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right" Width="1019">
