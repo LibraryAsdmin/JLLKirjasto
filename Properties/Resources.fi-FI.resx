@@ -117,11 +117,20 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="DefaultLoginButtonContent" xml:space="preserve">
+    <value>Kirjaudu</value>
+  </data>
+  <data name="DefaultLoginUsernameBoxContent" xml:space="preserve">
+    <value>Wilma tunnus</value>
+  </data>
   <data name="DefaultSearchBoxContent" xml:space="preserve">
     <value>Hae!</value>
   </data>
   <data name="Greeting" xml:space="preserve">
     <value>Päivää!</value>
+  </data>
+  <data name="HomeButtonContent" xml:space="preserve">
+    <value>Alkusivu</value>
   </data>
   <data name="TextUnderAccountCreation" xml:space="preserve">
     <value>Tässä teksti tunnuksenluontinappulan alla.</value>
