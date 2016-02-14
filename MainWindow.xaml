@@ -20,9 +20,9 @@
                 </EasingDoubleKeyFrame>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="StartPageGrid">
-                <EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="1200">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="4000">
                     <EasingDoubleKeyFrame.EasingFunction>
-                        <CircleEase EasingMode="EaseOut"/>
+                        <CircleEase EasingMode="EaseIn"/>
                     </EasingDoubleKeyFrame.EasingFunction>
                 </EasingDoubleKeyFrame>
             </DoubleAnimationUsingKeyFrames>
@@ -195,6 +195,9 @@
                 <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
                 <DiscreteBooleanKeyFrame KeyTime="0:0:0.6" Value="True"/>
             </BooleanAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="searchButton">
+                <EasingColorKeyFrame KeyTime="0:0:0.5" Value="#33FFFFFF"/>
+            </ColorAnimationUsingKeyFrames>
         </Storyboard>
         <Storyboard x:Key="ShowLoginGrid">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="LoginGrid">
@@ -215,7 +218,7 @@
                         <CircleEase EasingMode="EaseIn"/>
                     </EasingDoubleKeyFrame.EasingFunction>
                 </EasingDoubleKeyFrame>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="752">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="3000">
                     <EasingDoubleKeyFrame.EasingFunction>
                         <CircleEase EasingMode="EaseIn"/>
                     </EasingDoubleKeyFrame.EasingFunction>
@@ -258,7 +261,7 @@
                 </EasingDoubleKeyFrame>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="StartPageGrid">
-                <EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="-1044">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="-4000">
                     <EasingDoubleKeyFrame.EasingFunction>
                         <CircleEase EasingMode="EaseIn"/>
                     </EasingDoubleKeyFrame.EasingFunction>
@@ -290,7 +293,6 @@
                 <EasingColorKeyFrame KeyTime="0:0:0.5" Value="#FF0080FF"/>
             </ColorAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="StartPageGrid">
-                <EasingDoubleKeyFrame KeyTime="0" Value="752"/>
                 <EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="0">
                     <EasingDoubleKeyFrame.EasingFunction>
                         <CircleEase EasingMode="EaseOut"/>
@@ -298,7 +300,6 @@
                 </EasingDoubleKeyFrame>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="LoginGrid">
-                <EasingDoubleKeyFrame KeyTime="0" Value="846.563"/>
                 <EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="0">
                     <EasingDoubleKeyFrame.EasingFunction>
                         <CircleEase EasingMode="EaseOut"/>
@@ -482,7 +483,10 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <TextBox x:Name="searchBox" Margin="44,59,44,0" Grid.Column="0" VerticalAlignment="Top" Background="#00000000" Text="{local:Loc DefaultSearchBoxContent}" FontSize="24" FontFamily="Sylfaen" Visibility="Hidden" BorderThickness="0" Foreground="Black" Height="40" IsUndoEnabled="False" Opacity="0" GotFocus="searchBox_GotFocus" TextChanged="searchBox_TextChanged" LostFocus="searchBox_LostFocus" Width="238"/>
-                <Rectangle x:Name="searchButton" HorizontalAlignment="Center" Height="250" Margin="0,50,0,0" VerticalAlignment="Top" Width="250" RadiusX="125" RadiusY="125" MouseUp="searchButton_MouseUp" RenderTransformOrigin="0.497,0.494" Grid.Column="0" Stroke="Black" StrokeThickness="7" Grid.ColumnSpan="1" Cursor="Hand" MouseEnter="searchButton_MouseEnter" MouseLeave="searchButton_MouseLeave" Fill="#33FFFFFF">
+                <Rectangle x:Name="searchButton" HorizontalAlignment="Center" Height="250" Margin="0,50,0,0" VerticalAlignment="Top" Width="250" RadiusX="125" RadiusY="125" MouseUp="searchButton_MouseUp" RenderTransformOrigin="0.497,0.494" Grid.Column="0" Stroke="Black" Grid.ColumnSpan="1" Cursor="Hand" MouseEnter="searchButton_MouseEnter" MouseLeave="searchButton_MouseLeave" Fill="#33FFFFFF" StrokeThickness="0">
+                    <Rectangle.Effect>
+                        <DropShadowEffect Direction="300" Opacity="0.8" ShadowDepth="3"/>
+                    </Rectangle.Effect>
                     <Rectangle.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -494,7 +498,10 @@
                 </Rectangle>
                 <TextBlock x:Name="logInText" Grid.ColumnSpan="1" Grid.Column="1" Margin="10,310,10,0" TextWrapping="Wrap" FontSize="32" Text="{local:Loc TextUnderLogin}"/>
                 <TextBlock x:Name="searchText" Margin="10,310,10,0" TextWrapping="Wrap"  FontSize="32" Text="{local:Loc TextUnderSearchBox}" Grid.ColumnSpan="1"/>
-                <Rectangle x:Name="signupButton" Grid.Column="2" Fill="#33FFFFFF" HorizontalAlignment="Center" Height="250" Margin="0,50,0,0" RadiusY="125" RadiusX="125" Stroke="Black" VerticalAlignment="Top" Width="250" StrokeThickness="7" Cursor="Hand" MouseUp="signupButton_MouseUp" MouseEnter="signupButton_MouseEnter" MouseLeave="signupButton_MouseLeave" RenderTransformOrigin="0.5,0.5">
+                <Rectangle x:Name="signupButton" Grid.Column="2" Fill="#33FFFFFF" HorizontalAlignment="Center" Height="250" Margin="0,50,0,0" RadiusY="125" RadiusX="125" Stroke="Black" VerticalAlignment="Top" Width="250" StrokeThickness="0" Cursor="Hand" MouseUp="signupButton_MouseUp" MouseEnter="signupButton_MouseEnter" MouseLeave="signupButton_MouseLeave" RenderTransformOrigin="0.5,0.5">
+                    <Rectangle.Effect>
+                        <DropShadowEffect Direction="300" Opacity="0.8" ShadowDepth="3" BlurRadius="6"/>
+                    </Rectangle.Effect>
                     <Rectangle.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -504,7 +511,10 @@
                         </TransformGroup>
                     </Rectangle.RenderTransform>
                 </Rectangle>
-                <Rectangle x:Name="loginButton" Grid.Column="1" Fill="#33FFFFFF" HorizontalAlignment="Center" Height="250" Margin="0,50,0,0" RadiusY="125" RadiusX="125" Stroke="Black" VerticalAlignment="Top" Width="250" StrokeThickness="7" Cursor="Hand" MouseUp="loginButton_MouseUp" MouseEnter="loginButton_MouseEnter" MouseLeave="loginButton_MouseLeave" RenderTransformOrigin="0.498,0.504">
+                <Rectangle x:Name="loginButton" Grid.Column="1" Fill="#33FFFFFF" HorizontalAlignment="Center" Height="250" Margin="0,50,0,0" RadiusY="125" RadiusX="125" Stroke="Black" VerticalAlignment="Top" Width="250" StrokeThickness="0" Cursor="Hand" MouseUp="loginButton_MouseUp" MouseEnter="loginButton_MouseEnter" MouseLeave="loginButton_MouseLeave" RenderTransformOrigin="0.498,0.504">
+                    <Rectangle.Effect>
+                        <DropShadowEffect Direction="300" Opacity="0.8" ShadowDepth="3"/>
+                    </Rectangle.Effect>
                     <Rectangle.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
