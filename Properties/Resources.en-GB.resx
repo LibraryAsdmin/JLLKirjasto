@@ -117,11 +117,20 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="DefaultLoginButtonContent" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="DefaultLoginUsernameBoxContent" xml:space="preserve">
+    <value>Wilma username</value>
+  </data>
   <data name="DefaultSearchBoxContent" xml:space="preserve">
     <value>Search!</value>
   </data>
   <data name="Greeting" xml:space="preserve">
     <value>Greetings!</value>
+  </data>
+  <data name="HomeButtonContent" xml:space="preserve">
+    <value>Go Home</value>
   </data>
   <data name="TextUnderAccountCreation" xml:space="preserve">
     <value>Here's the text under accout creation button.</value>
