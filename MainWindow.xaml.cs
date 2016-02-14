@@ -81,7 +81,7 @@ namespace JLLKirjasto
 
 
 
-       
+
 
 
         bool atHome = true; //are we currently in home view?
@@ -351,7 +351,7 @@ namespace JLLKirjasto
 
             atHome = true; //we're home, so the searchButton can now trigger another animation if the user so desires
         }
-        
+
 
         // Home screen button visual appearance handling
         private void searchButton_MouseEnter(object sender, MouseEventArgs e)
@@ -369,7 +369,7 @@ namespace JLLKirjasto
             {
                 Storyboard LeaveSearchButton = this.FindResource("LeaveSearchButton") as Storyboard;
                 LeaveSearchButton.Begin();
-                
+
             }
         }
 
@@ -407,9 +407,28 @@ namespace JLLKirjasto
             }
         }
 
-        private void password_GotFocus(object sender, RoutedEventArgs e)
+        private void signupField_GotFocus(object sender, RoutedEventArgs e)
         {
+            if (signupField.Text == Properties.Resources.ResourceManager.GetString("DefaultLoginUsernameBoxContent", TranslationSource.Instance.CurrentCulture))
+            {
+                signupField.Text = "";
+            }
+        }
 
+        private void username_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (username.Text == "")
+            {
+                username.Text = Properties.Resources.ResourceManager.GetString("DefaultLoginUsernameBoxContent", TranslationSource.Instance.CurrentCulture);
+            }
+        }
+
+        private void signupField_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (signupField.Text == "")
+            {
+                signupField.Text = Properties.Resources.ResourceManager.GetString("DefaultLoginUsernameBoxContent", TranslationSource.Instance.CurrentCulture);
+            }
         }
     }
 }
