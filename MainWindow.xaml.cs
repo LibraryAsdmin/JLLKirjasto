@@ -468,13 +468,13 @@ namespace JLLKirjasto
 
         private void signupField_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (signupField.Text == Properties.Resources.ResourceManager.GetString("DefaultSignupUsernameBoxContent",TranslationSource.Instance.CurrentCulture))
+            if (signupField.Text == Properties.Resources.ResourceManager.GetString("DefaultSignUpUsernameBoxContent",TranslationSource.Instance.CurrentCulture))
             {
-                username.Foreground = new SolidColorBrush(Colors.DarkSlateGray);
+                signupField.Foreground = new SolidColorBrush(Colors.DarkSlateGray);
             }
             else
             {
-                username.Foreground = new SolidColorBrush(Colors.Black);
+                signupField.Foreground = new SolidColorBrush(Colors.Black);
             }
         }
     }
