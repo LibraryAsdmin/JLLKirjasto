@@ -440,8 +440,12 @@
                 </TransformGroup>
             </Grid.RenderTransform>
             <Grid x:Name="GreetingBackground" HorizontalAlignment="Center" Height="88" VerticalAlignment="Top" Width="340" Margin="0,10,0,0" Grid.Column="2">
-                <Rectangle HorizontalAlignment="Left" Height="88"  VerticalAlignment="Top" Width="340"/>
-                <TextBlock x:Name="Greeting" TextWrapping="Wrap" Text="{local:Loc Greeting}" Foreground="Black" FontSize="64" TextAlignment="Center"/>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="7*"/>
+                    <RowDefinition Height="4*"/>
+                </Grid.RowDefinitions>
+                <Rectangle HorizontalAlignment="Left" Height="88"  VerticalAlignment="Top" Width="340" Grid.RowSpan="2"/>
+                <TextBlock x:Name="Greeting" TextWrapping="Wrap" Foreground="Black" FontSize="64" TextAlignment="Center" FontFamily="Segoe UI Black" Grid.RowSpan="2" Text="{local:Loc Greeting}"/>
             </Grid>
             <Grid x:Name="StartPageContentGrid" Margin="10,110,10,10" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="3">
                 <Grid.RenderTransform>
@@ -468,8 +472,8 @@
                         </TransformGroup>
                     </Rectangle.RenderTransform>
                 </Rectangle>
-                <TextBlock x:Name="logInText" Grid.ColumnSpan="1" Grid.Column="1" Margin="10,310,10,0" TextWrapping="Wrap" FontSize="32" Text="{local:Loc TextUnderLogin}"/>
-                <TextBlock x:Name="searchText" Margin="10,310,10,0" TextWrapping="Wrap"  FontSize="32" Text="{local:Loc TextUnderSearchBox}" Grid.ColumnSpan="1"/>
+                <TextBlock x:Name="logInText" Grid.ColumnSpan="1" Grid.Column="1" Margin="10,310,10,0" TextWrapping="Wrap" FontSize="32" Text="{local:Loc TextUnderLogin}" FontFamily="Quicksand" FontWeight="Bold"/>
+                <TextBlock x:Name="searchText" Margin="10,310,10,0" TextWrapping="Wrap"  FontSize="32" Text="{local:Loc TextUnderSearchBox}" Grid.ColumnSpan="1" FontFamily="Quicksand" TextDecorations="{x:Null}" FontWeight="Bold"/>
                 <Rectangle x:Name="signupButton" Grid.Column="2" Fill="#33FFFFFF" HorizontalAlignment="Center" Height="250" Margin="0,50,0,0" RadiusY="125" RadiusX="125" Stroke="Black" VerticalAlignment="Top" Width="250" StrokeThickness="7" Cursor="Hand" MouseUp="signupButton_MouseUp" MouseEnter="signupButton_MouseEnter" MouseLeave="signupButton_MouseLeave" RenderTransformOrigin="0.5,0.5">
                     <Rectangle.RenderTransform>
                         <TransformGroup>
@@ -490,7 +494,7 @@
                         </TransformGroup>
                     </Rectangle.RenderTransform>
                 </Rectangle>
-                <TextBlock x:Name="makeAnAccountText" Grid.ColumnSpan="1" Grid.Column="2" Margin="10,310,10,0" TextWrapping="Wrap" FontSize="32" Text="{local:Loc TextUnderAccountCreation}"/>
+                <TextBlock x:Name="makeAnAccountText" Grid.ColumnSpan="1" Grid.Column="2" Margin="10,310,10,0" TextWrapping="Wrap" FontSize="32" Text="{local:Loc TextUnderAccountCreation}" FontFamily="Quicksand"/>
             </Grid>
 
         </Grid>
