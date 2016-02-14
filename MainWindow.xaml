@@ -236,6 +236,18 @@
                 <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
                 <DiscreteBooleanKeyFrame KeyTime="0:0:0.7" Value="True"/>
             </BooleanAnimationUsingKeyFrames>
+            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="username">
+                <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                <DiscreteBooleanKeyFrame KeyTime="0:0:0.1" Value="True"/>
+            </BooleanAnimationUsingKeyFrames>
+            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="password">
+                <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                <DiscreteBooleanKeyFrame KeyTime="0:0:0.1" Value="True"/>
+            </BooleanAnimationUsingKeyFrames>
+            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="loginButton1">
+                <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
+                <DiscreteBooleanKeyFrame KeyTime="0:0:0.1" Value="True"/>
+            </BooleanAnimationUsingKeyFrames>
         </Storyboard>
         <Storyboard x:Key="ShowSignUpGrid">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="SignUpGrid">
@@ -304,6 +316,18 @@
             <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="button">
                 <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
                 <DiscreteBooleanKeyFrame KeyTime="0:0:0.7" Value="True"/>
+            </BooleanAnimationUsingKeyFrames>
+            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="username">
+                <DiscreteBooleanKeyFrame KeyTime="0" Value="True"/>
+                <DiscreteBooleanKeyFrame KeyTime="0:0:0.2" Value="False"/>
+            </BooleanAnimationUsingKeyFrames>
+            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="password">
+                <DiscreteBooleanKeyFrame KeyTime="0" Value="True"/>
+                <DiscreteBooleanKeyFrame KeyTime="0:0:0.2" Value="False"/>
+            </BooleanAnimationUsingKeyFrames>
+            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="loginButton1">
+                <DiscreteBooleanKeyFrame KeyTime="0" Value="True"/>
+                <DiscreteBooleanKeyFrame KeyTime="0:0:0.2" Value="False"/>
             </BooleanAnimationUsingKeyFrames>
         </Storyboard>
         <Storyboard x:Key="HideSignUpGrid">
@@ -495,7 +519,7 @@
 
         </Grid>
         <Grid x:Name="LanguageGrid" HorizontalAlignment="Left" Height="140" VerticalAlignment="Top" Width="85" MouseEnter="LanguageGrid_MouseEnter" MouseLeave="LanguageGrid_MouseLeave">
-            <Button x:Name="English" HorizontalAlignment="Left" VerticalAlignment="Top" Width="65" Margin="10,10,0,0" Height="40" Cursor="Hand" Click="English_Click" KeyboardNavigation.IsTabStop="False">
+            <Button x:Name="English" HorizontalAlignment="Left" VerticalAlignment="Top" Width="65" Margin="10,10,0,0" Height="40" Cursor="Hand" Click="English_Click" >
                 <Button.Template>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Image Source="/Images/UK.png"/>
@@ -527,9 +551,9 @@
                 </TransformGroup>
             </Grid.RenderTransform>
             <Grid x:Name="LoginFieldsGrid" Margin="300,326">
-                <TextBox x:Name="username" Height="32" Margin="10,10,100,0" Text="Wilma osoite(muilla kielilla)" VerticalAlignment="Top" MaxLength="100" TextWrapping="Wrap"/>
-                <PasswordBox x:Name="password" Height="31" Margin="10,45,100,0" VerticalAlignment="Top"/>
-                <Button x:Name="loginButton1" Content="Login&#xA;" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Width="85" Height="66" FontSize="18.667" Padding="1,17,1,1"/>
+                <TextBox x:Name="username" Height="32" Margin="10,10,100,0" Text="{local:Loc DefaultLoginUsernameBoxContent}" VerticalAlignment="Top" MaxLength="100" TextWrapping="Wrap" GotFocus="username_GotFocus" FontSize="16"/>
+                <PasswordBox x:Name="password" Height="31" Margin="10,45,100,0" VerticalAlignment="Top" GotFocus="password_GotFocus" FontSize="16"/>
+                <Button x:Name="loginButton1" Content="{local:Loc DefaultLoginButtonContent}" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Width="85" Height="66" FontSize="18.667" Padding="1,0,1,1"/>
             </Grid>
         </Grid>
         <Grid x:Name="SignUpGrid" Margin="0,0,-1129.5,0" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right" Width="1019">
@@ -542,7 +566,7 @@
                 </TransformGroup>
             </Grid.RenderTransform>
         </Grid>
-        <Button x:Name="button" Content="Go Back" HorizontalAlignment="Left" Height="40" Margin="80,10,10,10" VerticalAlignment="Top" Width="67.857" RenderTransformOrigin="0.5,0.5" Click="button_Click" Cursor="Hand">
+        <Button x:Name="button" Content="{local:Loc HomeButtonContent}" HorizontalAlignment="Left" Height="40" Margin="80,10,10,10" VerticalAlignment="Top" Width="67.857" RenderTransformOrigin="0.5,0.5" Click="button_Click" Cursor="Hand" KeyboardNavigation.IsTabStop="False">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
