@@ -79,6 +79,11 @@ namespace JLLKirjasto
         private TranslateTransform bottomFlagTransform;
         private Storyboard gradientStoryboard;
 
+
+
+       
+
+
         bool atHome = true; //are we currently in home view?
 
         // Changes the behaviour of GoHome
@@ -364,6 +369,7 @@ namespace JLLKirjasto
             {
                 Storyboard LeaveSearchButton = this.FindResource("LeaveSearchButton") as Storyboard;
                 LeaveSearchButton.Begin();
+                
             }
         }
 

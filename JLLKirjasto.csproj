@@ -123,6 +123,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Telescope.gif" />
     <Resource Include="Images\background.jpg" />
     <Resource Include="Images\Image Sources.txt" />
     <Content Include="Images\UK.png">
