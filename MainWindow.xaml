@@ -108,9 +108,6 @@
                 <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
                 <DiscreteBooleanKeyFrame KeyTime="0:0:0.7" Value="True"/>
             </BooleanAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="searchImage">
-                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="0"/>
-            </DoubleAnimationUsingKeyFrames>
         </Storyboard>
         <Storyboard x:Key="GoBackHome" Completed="GoHomeStoryboardCompleted">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="SearchResultsGrid">
@@ -202,10 +199,6 @@
             <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="searchButton">
                 <EasingColorKeyFrame KeyTime="0:0:0.5" Value="#33FFFFFF"/>
             </ColorAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="searchImage">
-                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="1"/>
-            </DoubleAnimationUsingKeyFrames>
         </Storyboard>
         <Storyboard x:Key="ShowLoginGrid">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="LoginGrid">
@@ -490,7 +483,6 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <Image x:Name="searchImage" gif:ImageBehavior.AnimatedSource="Telescope.gif" gif:ImageBehavior.AutoStart="False" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="60,70,40,50" />
                 <TextBox x:Name="searchBox" Margin="44,59,44,0" Grid.Column="0" VerticalAlignment="Top" Background="#00000000" Text="{local:Loc DefaultSearchBoxContent}" FontSize="24" FontFamily="Sylfaen" Visibility="Hidden" BorderThickness="0" Foreground="Black" Height="40" IsUndoEnabled="False" Opacity="0" GotFocus="searchBox_GotFocus" TextChanged="searchBox_TextChanged" LostFocus="searchBox_LostFocus" Width="238"/>
                 <Rectangle x:Name="searchButton" HorizontalAlignment="Center" Height="250" Margin="0,50,0,0" VerticalAlignment="Top" Width="250" RadiusX="125" RadiusY="125" MouseUp="searchButton_MouseUp" RenderTransformOrigin="0.497,0.494" Grid.Column="0" Stroke="Black" Grid.ColumnSpan="1" Cursor="Hand" MouseEnter="searchButton_MouseEnter" MouseLeave="searchButton_MouseLeave" Fill="#33FFFFFF" StrokeThickness="0">
                     <Rectangle.Effect>
