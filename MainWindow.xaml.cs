@@ -121,10 +121,22 @@ namespace JLLKirjasto
         {
             bool updateSearchBoxText = false; //do we have to update searchBox's text 
                                               //(has to be done manyally because we assign it string values elsewhere, which replaces the automatic switching)
+            bool updateLogInUserNameBoxText = false;
+            bool updateSignupField = false;
+
+            if (username.Text == Properties.Resources.ResourceManager.GetString("DefaultLoginUsernameBoxContent", TranslationSource.Instance.CurrentCulture))
+            {
+                updateLogInUserNameBoxText = true;
+            }
 
             if (searchBox.Text == Properties.Resources.ResourceManager.GetString("DefaultSearchBoxContent", TranslationSource.Instance.CurrentCulture))
             {
                 updateSearchBoxText = true;
+            }
+
+            if (signupField.Text == Properties.Resources.ResourceManager.GetString("DefaultSignUpUsernameBoxContent", TranslationSource.Instance.CurrentCulture))
+            {
+                updateSignupField = true;
             }
 
             switch (language)
@@ -161,6 +173,16 @@ namespace JLLKirjasto
             if (updateSearchBoxText)
             {
                 searchBox.Text = Properties.Resources.ResourceManager.GetString("DefaultSearchBoxContent", TranslationSource.Instance.CurrentCulture);
+            }
+
+            if (updateLogInUserNameBoxText)
+            {
+                username.Text = Properties.Resources.ResourceManager.GetString("DefaultLoginUsernameBoxContent", TranslationSource.Instance.CurrentCulture);
+            }
+
+            if (updateSignupField)
+            {
+                signupField.Text = Properties.Resources.ResourceManager.GetString("DefaultSignUpUsernameBoxContent", TranslationSource.Instance.CurrentCulture);
             }
         }
 
@@ -231,7 +253,6 @@ namespace JLLKirjasto
         }
 
 
-
         private void searchButton_MouseUp(object sender, MouseButtonEventArgs e)
         {
             if (atHome) //only works if we're in the home view
@@ -293,30 +314,33 @@ namespace JLLKirjasto
             }
         }
 
+        //Go home-button
         private void button_Click(object sender, RoutedEventArgs e)
         {
-            // At home screen
+            //In home view
             if (0 == currentView)
             {
                 System.Windows.MessageBox.Show("Home button should not be accessible in home screen... Go fix the program!");
             }
-            // At search screen
+            //In search view
             else if (1 == currentView)
             {
                 Storyboard GoBackHome = this.FindResource("GoBackHome") as Storyboard;
                 GoBackHome.Begin();
             }
+            //In login view
             else if (2 == currentView)
             {
                 Storyboard HideLoginGrid = this.FindResource("HideLoginGrid") as Storyboard;
                 HideLoginGrid.Begin();
             }
+            //In sign up view
             else if (3 == currentView)
             {
                 Storyboard HideSignUpGrid = this.FindResource("HideSignUpGrid") as Storyboard;
                 HideSignUpGrid.Begin();
             }
-            currentView = 0;
+            currentView = 0; //we're home now
         }
 
         private void signupButton_MouseUp(object sender, MouseButtonEventArgs e)
@@ -369,7 +393,6 @@ namespace JLLKirjasto
             {
                 Storyboard LeaveSearchButton = this.FindResource("LeaveSearchButton") as Storyboard;
                 LeaveSearchButton.Begin();
-
             }
         }
 
@@ -397,21 +420,12 @@ namespace JLLKirjasto
             LeaveLoginButton.Begin();
         }
 
-
         // Login username input field behaviour
         private void username_GotFocus(object sender, RoutedEventArgs e)
         {
             if (username.Text == Properties.Resources.ResourceManager.GetString("DefaultLoginUsernameBoxContent", TranslationSource.Instance.CurrentCulture))
             {
                 username.Text = "";
-            }
-        }
-
-        private void signupField_GotFocus(object sender, RoutedEventArgs e)
-        {
-            if (signupField.Text == Properties.Resources.ResourceManager.GetString("DefaultLoginUsernameBoxContent", TranslationSource.Instance.CurrentCulture))
-            {
-                signupField.Text = "";
             }
         }
 
@@ -423,11 +437,44 @@ namespace JLLKirjasto
             }
         }
 
+        private void username_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (username.Text == Properties.Resources.ResourceManager.GetString("DefaultLoginUsernameBoxContent", TranslationSource.Instance.CurrentCulture))
+            {
+                username.Foreground = new SolidColorBrush(Colors.DarkSlateGray);
+
+            }
+            else
+            {
+                username.Foreground = new SolidColorBrush(Colors.Black);
+            }
+        }
+
         private void signupField_LostFocus(object sender, RoutedEventArgs e)
         {
             if (signupField.Text == "")
             {
-                signupField.Text = Properties.Resources.ResourceManager.GetString("DefaultLoginUsernameBoxContent", TranslationSource.Instance.CurrentCulture);
+                signupField.Text = Properties.Resources.ResourceManager.GetString("DefaultSignUpUsernameBoxContent", TranslationSource.Instance.CurrentCulture);
+            }
+        }
+
+        private void signupField_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (signupField.Text == Properties.Resources.ResourceManager.GetString("DefaultSignUpUsernameBoxContent", TranslationSource.Instance.CurrentCulture))
+            {
+                signupField.Text = "";
+            }
+        }
+
+        private void signupField_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (signupField.Text == Properties.Resources.ResourceManager.GetString("DefaultSignupUsernameBoxContent",TranslationSource.Instance.CurrentCulture))
+            {
+                username.Foreground = new SolidColorBrush(Colors.DarkSlateGray);
+            }
+            else
+            {
+                username.Foreground = new SolidColorBrush(Colors.Black);
             }
         }
     }

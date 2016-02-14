@@ -580,7 +580,7 @@
                 </TransformGroup>
             </Grid.RenderTransform>
             <Grid x:Name="LoginFieldsGrid" Margin="300,326">
-                <TextBox x:Name="username" Height="32" Margin="10,10,100,0" Text="{local:Loc DefaultLoginUsernameBoxContent}" VerticalAlignment="Top" MaxLength="100" TextWrapping="Wrap" GotFocus="username_GotFocus" LostFocus="username_LostFocus" FontSize="16"/>
+                <TextBox x:Name="username" Height="32" Margin="10,10,100,0" Text="{local:Loc DefaultLoginUsernameBoxContent}" VerticalAlignment="Top" MaxLength="100" TextWrapping="Wrap" GotFocus="username_GotFocus" LostFocus="username_LostFocus" FontSize="16" TextChanged="username_TextChanged"/>
                 <PasswordBox x:Name="password" Height="31" Margin="10,45,100,0" VerticalAlignment="Top" FontSize="16"/>
                 <Button x:Name="loginButton1" Content="{local:Loc DefaultLoginButtonContent}" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Width="85" Height="66" FontSize="18.667" Padding="1,0,1,1"/>
             </Grid>
@@ -596,7 +596,7 @@
             </Grid.RenderTransform>
             <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="361,222,0,0" TextWrapping="Wrap" Text="Instructions for signing up" VerticalAlignment="Top" Height="42" Width="318" FontSize="26.667" Foreground="White"/>
             <Grid x:Name="LoginFieldsGrid_Copy" Margin="230,326,230,342">
-                <TextBox x:Name="signupField" Margin="10,10,130,8" Text="{local:Loc DefaultLoginUsernameBoxContent}" MaxLength="100" TextWrapping="Wrap" GotFocus="signupField_GotFocus"  LostFocus="signupField_LostFocus" FontSize="16"/>
+                <TextBox x:Name="signupField" Margin="10,10,130,8" Text="{local:Loc DefaultSignUpUsernameBoxContent}" MaxLength="100" TextWrapping="Wrap" GotFocus="signupField_GotFocus"  LostFocus="signupField_LostFocus" FontSize="16" TextChanged="signupField_TextChanged"/>
                 <Button x:Name="signupButton1" Content="{local:Loc SignUpButtonContent}" HorizontalAlignment="Right" Margin="0,10,10,8" Width="115" FontSize="18.667" Padding="1,0,1,1"/>
             </Grid>
         </Grid>

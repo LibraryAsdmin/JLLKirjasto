@@ -121,10 +121,13 @@
     <value>Kirjaudu</value>
   </data>
   <data name="DefaultLoginUsernameBoxContent" xml:space="preserve">
-    <value>Wilma tunnus</value>
+    <value>Wilma-tunnus</value>
   </data>
   <data name="DefaultSearchBoxContent" xml:space="preserve">
     <value>Hae!</value>
+  </data>
+  <data name="DefaultSignUpUsernameBoxContent" xml:space="preserve">
+    <value>Kirjoita tähän Wilma-tunnuksesi</value>
   </data>
   <data name="Greeting" xml:space="preserve">
     <value>Päivää!</value>

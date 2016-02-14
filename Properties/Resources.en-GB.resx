@@ -126,6 +126,9 @@
   <data name="DefaultSearchBoxContent" xml:space="preserve">
     <value>Search!</value>
   </data>
+  <data name="DefaultSignUpUsernameBoxContent" xml:space="preserve">
+    <value>Type your wilma account here</value>
+  </data>
   <data name="Greeting" xml:space="preserve">
     <value>Greetings!</value>
   </data>
