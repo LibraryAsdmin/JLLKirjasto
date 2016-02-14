@@ -132,6 +132,9 @@
   <data name="HomeButtonContent" xml:space="preserve">
     <value>Go Home</value>
   </data>
+  <data name="SignUpButtonContent" xml:space="preserve">
+    <value>Sign Up</value>
+  </data>
   <data name="TextUnderAccountCreation" xml:space="preserve">
     <value>Here's the text under accout creation button.</value>
   </data>
