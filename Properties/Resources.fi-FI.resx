@@ -132,6 +132,9 @@
   <data name="HomeButtonContent" xml:space="preserve">
     <value>Alkusivu</value>
   </data>
+  <data name="SignUpButtonContent" xml:space="preserve">
+    <value>Rekisteröidy</value>
+  </data>
   <data name="TextUnderAccountCreation" xml:space="preserve">
     <value>Tässä teksti tunnuksenluontinappulan alla.</value>
   </data>
