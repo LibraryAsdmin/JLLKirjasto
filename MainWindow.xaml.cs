@@ -17,6 +17,7 @@ using System.Windows.Threading;
 using System.ComponentModel;
 using System.Globalization;
 using System.Resources;
+using WpfAnimatedGif;
 
 namespace JLLKirjasto
 {
@@ -78,6 +79,11 @@ namespace JLLKirjasto
         private TranslateTransform middleFlagTransform;
         private TranslateTransform bottomFlagTransform;
         private Storyboard gradientStoryboard;
+
+
+
+       
+
 
         bool atHome = true; //are we currently in home view?
 
@@ -344,6 +350,9 @@ namespace JLLKirjasto
             searchBox.Margin = new Thickness(44, 59, 44, 0);
             searchBox.RenderTransform = new TranslateTransform(0, 0);
 
+            var controller = ImageBehavior.GetAnimationController(searchImage); //we make sure search animation is paused
+            controller.Pause();
+
             atHome = true; //we're home, so the searchButton can now trigger another animation if the user so desires
         }
         
@@ -353,6 +362,8 @@ namespace JLLKirjasto
         {
             if (0 == currentView)
             {
+                var controller = ImageBehavior.GetAnimationController(searchImage);
+                controller.Play();
                 Storyboard HighlightSearchButton = this.FindResource("HighlightSearchButton") as Storyboard;
                 HighlightSearchButton.Begin();
             }
@@ -362,8 +373,11 @@ namespace JLLKirjasto
         {
             if (0 == currentView)
             {
+                var controller = ImageBehavior.GetAnimationController(searchImage);
+                controller.Pause();
                 Storyboard LeaveSearchButton = this.FindResource("LeaveSearchButton") as Storyboard;
                 LeaveSearchButton.Begin();
+                
             }
         }
 
