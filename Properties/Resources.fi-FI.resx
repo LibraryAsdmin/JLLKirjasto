@@ -138,6 +138,9 @@
   <data name="SignUpButtonContent" xml:space="preserve">
     <value>Rekisteröidy</value>
   </data>
+  <data name="SignUpErrorMessage" xml:space="preserve">
+    <value>Hupsista! Jotakin meni vikaan ohjelman luodessa uutta tunnusta. Varmista, että kirjoitit tunnuksesi oikein.</value>
+  </data>
   <data name="TextUnderAccountCreation" xml:space="preserve">
     <value>Tässä teksti tunnuksenluontinappulan alla.</value>
   </data>

@@ -92,6 +92,8 @@ namespace JLLKirjasto
         // 3 = SignUpGrid
         short currentView = 0;
 
+        SQLiteConnection dbconnection = new SQLiteConnection("Data Source=database.db");
+
         public MainWindow()
         {
             InitializeComponent();
@@ -100,6 +102,7 @@ namespace JLLKirjasto
             Resources["screenWidth"] = SystemParameters.FullPrimaryScreenWidth;
             Resources["negativeScreenHeight"] = -(SystemParameters.FullPrimaryScreenHeight);
             Resources["screenHeight"] = SystemParameters.FullPrimaryScreenHeight;
+
 
             //changes the flag to correspond with the system culture
             string culture = CultureInfo.CurrentUICulture.ToString();
@@ -488,7 +491,52 @@ namespace JLLKirjasto
 
         private void RootWindow_Closing(object sender, CancelEventArgs e)
         {
-            adminwindow.Close();
+            try {
+                adminwindow.Close();
+            }
+            catch
+            {
+                // nothing wrong here.
+            }
+        }
+
+        private void signupButton1_Click(object sender, RoutedEventArgs e)
+        {
+            if (signupField.Text.Contains("@edu.jns.fi"))
+            {
+                try
+                {
+                    dbconnection.Open();
+
+                    // calculate userid
+                    SQLiteCommand countUserIDs = new SQLiteCommand("SELECT COUNT(UserID) FROM users;", dbconnection);
+                    SQLiteDataReader readCount = countUserIDs.ExecuteReader();
+
+                    int count = 0;
+                    while (readCount.Read())
+                    {
+                        count = readCount.GetInt32(0);
+                    }
+
+                    // parse sql command
+                    String sql = "INSERT INTO users VALUES ("+count+", \"" + signupField.Text + "\");";
+
+                    // execute command and close conection
+                    SQLiteCommand command = new SQLiteCommand(sql, dbconnection);
+                    command.ExecuteNonQuery();
+                    dbconnection.Close();
+                }
+                catch
+                {
+                    dbconnection.Close();
+                    System.Windows.MessageBox.Show(Properties.Resources.ResourceManager.GetString("SignUpErrorMessage", TranslationSource.Instance.CurrentCulture));
+                }               
+            }
+            else
+            {
+                System.Windows.MessageBox.Show(Properties.Resources.ResourceManager.GetString("SignUpErrorMessage", TranslationSource.Instance.CurrentCulture));
+            }
+
         }
     }
 }

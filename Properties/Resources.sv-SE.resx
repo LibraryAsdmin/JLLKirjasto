@@ -138,6 +138,9 @@
   <data name="SignUpButtonContent" xml:space="preserve">
     <value>Svenska här</value>
   </data>
+  <data name="SignUpErrorMessage" xml:space="preserve">
+    <value>Svenska här</value>
+  </data>
   <data name="TextUnderAccountCreation" xml:space="preserve">
     <value>Svenska här</value>
   </data>

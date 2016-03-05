@@ -138,6 +138,9 @@
   <data name="SignUpButtonContent" xml:space="preserve">
     <value>Sign Up</value>
   </data>
+  <data name="SignUpErrorMessage" xml:space="preserve">
+    <value>Whoopsie! Something went wrong while creating a new user account. Please make sure that you typed correctly.</value>
+  </data>
   <data name="TextUnderAccountCreation" xml:space="preserve">
     <value>Here's the text under accout creation button.</value>
   </data>
