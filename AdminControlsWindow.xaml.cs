@@ -23,5 +23,15 @@ namespace JLLKirjasto
         {
             InitializeComponent();
         }
+
+        private void BooksSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            // Update Books listbox
+        }
+
+        private void UsersSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            // Update users listbox
+        }
     }
 }

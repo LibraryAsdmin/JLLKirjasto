@@ -5,8 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:JLLKirjasto"
         mc:Ignorable="d"
-        Title="AdminControlsWindow" Height="600" Width="800" Topmost="True">
+        Title="AdminControlsWindow" Height="600" Width="800" Topmost="True" MinWidth="800" MinHeight="600">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="5"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid x:Name="BooksGrid" Grid.Column="0" >
+            <TextBlock x:Name="BooksGridTitle" Margin="10,10,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="31" FontWeight="Bold" TextAlignment="Center" FontSize="20"><Run Text="Kirjat"/><Run Text="ietokannan hallinta"/></TextBlock>
+            <TextBox x:Name="BooksSearch" Height="31" Margin="10,46,10,0" TextWrapping="Wrap" Text="Haku" VerticalAlignment="Top" TextAlignment="Center" FontSize="20" TextChanged="BooksSearch_TextChanged"/>
+        </Grid>
+        <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch" />
+        <Grid x:Name="UsersGrid" Grid.Column="2" >
+            <TextBlock x:Name="UsersGridTitle" Margin="10,10,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="31" FontWeight="Bold" TextAlignment="Center" FontSize="20"><Run Text="Käyttäjäti"/><Run Text="etokannan hallinta"/></TextBlock>
+            <TextBox x:Name="UsersSearch" Height="31" Margin="10,46,10,0" TextWrapping="Wrap" Text="Haku" VerticalAlignment="Top" TextAlignment="Center" FontSize="20" TextChanged="UsersSearch_TextChanged"/>
+        </Grid>
+
     </Grid>
 </Window>
