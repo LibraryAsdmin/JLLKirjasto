@@ -1,17 +1,17 @@
 <Window 
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:gif="http://wpfanimatedgif.codeplex.com"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:JLLKirjasto"
         xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2" 
+        xmlns:core="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
     
         x:Name="RootWindow" x:Class="JLLKirjasto.MainWindow" Title="{local:Loc WindowTitle}"  Height="768" Width="1024" WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
-
+        
         <Storyboard x:Key="BringUpSearchResults">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="SearchResultsGrid">
                 <EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="0">
@@ -21,7 +21,7 @@
                 </EasingDoubleKeyFrame>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="StartPageGrid">
-                <EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="4000">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="{DynamicResource screenWidth}">
                     <EasingDoubleKeyFrame.EasingFunction>
                         <CircleEase EasingMode="EaseIn"/>
                     </EasingDoubleKeyFrame.EasingFunction>
@@ -111,7 +111,7 @@
         </Storyboard>
         <Storyboard x:Key="GoBackHome" Completed="GoHomeStoryboardCompleted">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="SearchResultsGrid">
-                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="-1200"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="{DynamicResource negativeScreenWidth}"/>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="StartPageGrid">
                 <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0">
@@ -202,24 +202,14 @@
         </Storyboard>
         <Storyboard x:Key="ShowLoginGrid">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="LoginGrid">
-                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="0">
-                    <EasingDoubleKeyFrame.EasingFunction>
-                        <CircleEase EasingMode="EaseIn"/>
-                    </EasingDoubleKeyFrame.EasingFunction>
-                </EasingDoubleKeyFrame>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.9" Value="825.304">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.8" Value="0">
                     <EasingDoubleKeyFrame.EasingFunction>
                         <CircleEase EasingMode="EaseOut"/>
                     </EasingDoubleKeyFrame.EasingFunction>
                 </EasingDoubleKeyFrame>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="StartPageGrid">
-                <EasingDoubleKeyFrame KeyTime="0" Value="0">
-                    <EasingDoubleKeyFrame.EasingFunction>
-                        <CircleEase EasingMode="EaseIn"/>
-                    </EasingDoubleKeyFrame.EasingFunction>
-                </EasingDoubleKeyFrame>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="3000">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="{DynamicResource screenHeight}">
                     <EasingDoubleKeyFrame.EasingFunction>
                         <CircleEase EasingMode="EaseIn"/>
                     </EasingDoubleKeyFrame.EasingFunction>
@@ -255,19 +245,14 @@
         </Storyboard>
         <Storyboard x:Key="ShowSignUpGrid">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="SignUpGrid">
-                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="0">
-                    <EasingDoubleKeyFrame.EasingFunction>
-                        <CircleEase EasingMode="EaseIn"/>
-                    </EasingDoubleKeyFrame.EasingFunction>
-                </EasingDoubleKeyFrame>
-                <EasingDoubleKeyFrame KeyTime="0:0:1.1" Value="-1129.482">
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0">
                     <EasingDoubleKeyFrame.EasingFunction>
                         <CircleEase EasingMode="EaseOut"/>
                     </EasingDoubleKeyFrame.EasingFunction>
                 </EasingDoubleKeyFrame>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="StartPageGrid">
-                <EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="-4000">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="{DynamicResource negativeScreenWidth}">
                     <EasingDoubleKeyFrame.EasingFunction>
                         <CircleEase EasingMode="EaseIn"/>
                     </EasingDoubleKeyFrame.EasingFunction>
@@ -306,7 +291,7 @@
                 </EasingDoubleKeyFrame>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="LoginGrid">
-                <EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="0">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="{DynamicResource negativeScreenHeight}">
                     <EasingDoubleKeyFrame.EasingFunction>
                         <CircleEase EasingMode="EaseOut"/>
                     </EasingDoubleKeyFrame.EasingFunction>
@@ -354,11 +339,6 @@
                 <EasingColorKeyFrame KeyTime="0:0:0.5" Value="#FF0080FF"/>
             </ColorAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="StartPageGrid">
-                <EasingDoubleKeyFrame KeyTime="0" Value="-1044">
-                    <EasingDoubleKeyFrame.EasingFunction>
-                        <CircleEase EasingMode="EaseIn"/>
-                    </EasingDoubleKeyFrame.EasingFunction>
-                </EasingDoubleKeyFrame>
                 <EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="0">
                     <EasingDoubleKeyFrame.EasingFunction>
                         <CircleEase EasingMode="EaseOut"/>
@@ -370,12 +350,7 @@
                 <DiscreteBooleanKeyFrame KeyTime="0:0:0.7" Value="True"/>
             </BooleanAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="SignUpGrid">
-                <EasingDoubleKeyFrame KeyTime="0" Value="-1129.5">
-                    <EasingDoubleKeyFrame.EasingFunction>
-                        <CircleEase EasingMode="EaseOut"/>
-                    </EasingDoubleKeyFrame.EasingFunction>
-                </EasingDoubleKeyFrame>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="0">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="{DynamicResource screenWidth}">
                     <EasingDoubleKeyFrame.EasingFunction>
                         <CircleEase EasingMode="EaseOut"/>
                     </EasingDoubleKeyFrame.EasingFunction>
@@ -449,20 +424,19 @@
     </Window.Triggers>
 
     <Grid x:Name="WindowGrid">
-
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                 <GradientStop Color="#FF0080FF" Offset="0.197"/>
                 <GradientStop Color="#FFF96912" Offset="0.937"/>
             </LinearGradientBrush>
         </Grid.Background>
-        <Grid x:Name="SearchResultsGrid" Margin="0" Background="#00FF0000" RenderTransformOrigin="0,0">
+        <Grid x:Name="SearchResultsGrid" Margin="0" Background="#00000000" RenderTransformOrigin="0,0">
             <Grid.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
                     <SkewTransform/>
                     <RotateTransform/>
-                    <TranslateTransform X="-2000"/>
+                    <TranslateTransform X="{DynamicResource negativeScreenWidth}"/>
                 </TransformGroup>
             </Grid.RenderTransform>
             <ListBox x:Name="listBox" HorizontalAlignment="Left" Margin="47.143,268.857,0,31.715" Width="356.571" BorderBrush="#00ABADB3" Background="Transparent" BorderThickness="0" FontSize="26.667">
@@ -473,7 +447,7 @@
                 <ListBoxItem Content="Book #3 by Author Z" FontSize="24"/>
             </ListBox>
         </Grid>
-        <Grid x:Name="StartPageGrid" Margin="10" RenderTransformOrigin="0.5,0.5">
+        <Grid x:Name="StartPageGrid" Margin="0" RenderTransformOrigin="0,0">
             <Grid.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -570,13 +544,13 @@
                 </Button.Template>
             </Button>
         </Grid>
-        <Grid x:Name="LoginGrid" Height="740.5" Margin="0,-825.455,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
+        <Grid x:Name="LoginGrid" Margin="0" RenderTransformOrigin="0,0">
             <Grid.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
                     <SkewTransform/>
                     <RotateTransform/>
-                    <TranslateTransform/>
+                    <TranslateTransform Y="{DynamicResource negativeScreenHeight}"/>
                 </TransformGroup>
             </Grid.RenderTransform>
             <Grid x:Name="LoginFieldsGrid" Margin="300,326">
@@ -585,20 +559,18 @@
                 <Button x:Name="loginButton1" Content="{local:Loc DefaultLoginButtonContent}" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Width="85" Height="66" FontSize="18.667" Padding="1,0,1,1" Style="{DynamicResource ModernButtonStyle}"/>
             </Grid>
         </Grid>
-        <Grid x:Name="SignUpGrid" Margin="0,0,-1129.5,0" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right" Width="1019">
+        <Grid x:Name="SignUpGrid" Margin="0" RenderTransformOrigin="0,0">
             <Grid.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
                     <SkewTransform/>
                     <RotateTransform/>
-                    <TranslateTransform/>
+                    <TranslateTransform X="{DynamicResource screenWidth}"/>
                 </TransformGroup>
             </Grid.RenderTransform>
             <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="361,222,0,0" TextWrapping="Wrap" Text="Instructions for signing up" VerticalAlignment="Top" Height="42" Width="318" FontSize="26.667" Foreground="White"/>
-            <Grid x:Name="LoginFieldsGrid_Copy" Margin="230,326,230,342">
-                <TextBox x:Name="signupField" Margin="10,10,130,8" Text="{local:Loc DefaultSignUpUsernameBoxContent}" MaxLength="100" TextWrapping="Wrap" GotFocus="signupField_GotFocus"  LostFocus="signupField_LostFocus" FontSize="18.667" TextChanged="signupField_TextChanged"/>
-                <Button x:Name="signupButton1" Content="{local:Loc SignUpButtonContent}" HorizontalAlignment="Right" Margin="0,10,10,8" Width="115" FontSize="18.667" Padding="1,0,1,1" Style="{DynamicResource ModernButtonStyle}"/>
-            </Grid>
+            <TextBox x:Name="signupField" Margin="200,10" Text="{local:Loc DefaultSignUpUsernameBoxContent}" MaxLength="100" TextWrapping="Wrap" GotFocus="signupField_GotFocus"  LostFocus="signupField_LostFocus" FontSize="18.667" TextChanged="signupField_TextChanged" VerticalAlignment="Center" Height="40"/>
+            <Button x:Name="signupButton1" Content="{local:Loc SignUpButtonContent}" HorizontalAlignment="Right" Margin="0,10,60,8" Width="115" FontSize="18.667" Padding="1,0,1,1" Style="{DynamicResource ModernButtonStyle}" Height="40"/>
         </Grid>
         <Button x:Name="button" Content="{local:Loc HomeButtonContent}" HorizontalAlignment="Left" Height="40" Margin="80,10,10,10" VerticalAlignment="Top" Width="67.857" RenderTransformOrigin="0.5,0.5" Click="button_Click" Cursor="Hand" KeyboardNavigation.IsTabStop="False" Style="{DynamicResource ModernButtonStyle}">
             <Button.RenderTransform>

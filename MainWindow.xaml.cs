@@ -80,10 +80,6 @@ namespace JLLKirjasto
         private Storyboard gradientStoryboard;
 
 
-
-
-
-
         bool atHome = true; //are we currently in home view?
 
         // Changes the behaviour of GoHome
@@ -96,6 +92,14 @@ namespace JLLKirjasto
         public MainWindow()
         {
             InitializeComponent();
+
+            Resources["negativeScreenWidth"] = -(SystemParameters.FullPrimaryScreenWidth);
+            Resources["screenWidth"] = SystemParameters.FullPrimaryScreenWidth;
+            Resources["negativeScreenHeight"] = -(SystemParameters.FullPrimaryScreenHeight);
+            Resources["screenHeight"] = SystemParameters.FullPrimaryScreenHeight;
+
+            
+
 
             //changes the flag to correspond with the system culture
             string culture = CultureInfo.CurrentUICulture.ToString();
@@ -117,6 +121,8 @@ namespace JLLKirjasto
             gradientStoryboard.Begin();
         }
 
+
+
         void changeUILanguage(string language)
         {
             bool updateSearchBoxText = false; //do we have to update searchBox's text 
@@ -125,19 +131,13 @@ namespace JLLKirjasto
             bool updateSignupField = false;
 
             if (username.Text == Properties.Resources.ResourceManager.GetString("DefaultLoginUsernameBoxContent", TranslationSource.Instance.CurrentCulture))
-            {
-                updateLogInUserNameBoxText = true;
-            }
+            { updateLogInUserNameBoxText = true; }
 
             if (searchBox.Text == Properties.Resources.ResourceManager.GetString("DefaultSearchBoxContent", TranslationSource.Instance.CurrentCulture))
-            {
-                updateSearchBoxText = true;
-            }
+            { updateSearchBoxText = true; }
 
             if (signupField.Text == Properties.Resources.ResourceManager.GetString("DefaultSignUpUsernameBoxContent", TranslationSource.Instance.CurrentCulture))
-            {
-                updateSignupField = true;
-            }
+            { updateSignupField = true; }
 
             switch (language)
             {
@@ -185,7 +185,6 @@ namespace JLLKirjasto
                 signupField.Text = Properties.Resources.ResourceManager.GetString("DefaultSignUpUsernameBoxContent", TranslationSource.Instance.CurrentCulture);
             }
         }
-
 
         // Change language to English
         private void English_Click(object sender, RoutedEventArgs e)
@@ -251,7 +250,6 @@ namespace JLLKirjasto
             bottomFlagTransform.BeginAnimation(TranslateTransform.YProperty, anim2);
             English.RenderTransform = bottomFlagTransform;
         }
-
 
         private void searchButton_MouseUp(object sender, MouseButtonEventArgs e)
         {
@@ -355,11 +353,11 @@ namespace JLLKirjasto
             currentView = 2;
             Storyboard ShowLoginGrid = this.FindResource("ShowLoginGrid") as Storyboard;
             ShowLoginGrid.Begin();
+
         }
 
         private void GoHomeStoryboardCompleted(object sender, EventArgs e)
         {
-
             //searchBox and searchButton are returned to be children of StartPageContentGrid
             WindowGrid.Children.Remove(searchButton);
             WindowGrid.Children.Remove(searchBox);
@@ -477,5 +475,6 @@ namespace JLLKirjasto
                 signupField.Foreground = new SolidColorBrush(Colors.Black);
             }
         }
+
     }
 }
