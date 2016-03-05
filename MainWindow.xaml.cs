@@ -17,6 +17,7 @@ using System.Windows.Threading;
 using System.ComponentModel;
 using System.Globalization;
 using System.Resources;
+using System.Data.SQLite;
 
 namespace JLLKirjasto
 {
@@ -79,7 +80,8 @@ namespace JLLKirjasto
         private TranslateTransform bottomFlagTransform;
         private Storyboard gradientStoryboard;
 
-        AdminControlsWindow adminwindow = new AdminControlsWindow();
+        AdminControlsWindow adminwindow;
+
 
         bool atHome = true; //are we currently in home view?
 
@@ -98,9 +100,6 @@ namespace JLLKirjasto
             Resources["screenWidth"] = SystemParameters.FullPrimaryScreenWidth;
             Resources["negativeScreenHeight"] = -(SystemParameters.FullPrimaryScreenHeight);
             Resources["screenHeight"] = SystemParameters.FullPrimaryScreenHeight;
-
-            
-
 
             //changes the flag to correspond with the system culture
             string culture = CultureInfo.CurrentUICulture.ToString();
@@ -482,6 +481,7 @@ namespace JLLKirjasto
         {
             if (username.Text == "admin" && password.Password == "kuulkala")
             {
+                adminwindow = new AdminControlsWindow();
                 adminwindow.Show();
             }
         }
