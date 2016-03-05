@@ -476,5 +476,14 @@ namespace JLLKirjasto
             }
         }
 
+        // User login handling here
+        private void loginButton1_Click(object sender, RoutedEventArgs e)
+        {
+            if (username.Text == "admin" && password.Password == "kuulkala")
+            {
+                AdminControlsWindow adminwindow = new AdminControlsWindow();
+                adminwindow.Show();
+            }
+        }
     }
 }
