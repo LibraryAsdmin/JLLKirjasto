@@ -79,6 +79,7 @@ namespace JLLKirjasto
         private TranslateTransform bottomFlagTransform;
         private Storyboard gradientStoryboard;
 
+        AdminControlsWindow adminwindow = new AdminControlsWindow();
 
         bool atHome = true; //are we currently in home view?
 
@@ -481,9 +482,13 @@ namespace JLLKirjasto
         {
             if (username.Text == "admin" && password.Password == "kuulkala")
             {
-                AdminControlsWindow adminwindow = new AdminControlsWindow();
                 adminwindow.Show();
             }
+        }
+
+        private void RootWindow_Closing(object sender, CancelEventArgs e)
+        {
+            adminwindow.Close();
         }
     }
 }
