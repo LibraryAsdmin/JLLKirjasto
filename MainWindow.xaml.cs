@@ -58,11 +58,9 @@ namespace JLLKirjasto
         public event PropertyChangedEventHandler PropertyChanged;
     }
 
-    public class LocExtension
-        : Binding
+    public class LocExtension : Binding
     {
-        public LocExtension(string name)
-            : base("[" + name + "]")
+        public LocExtension(string name) : base("[" + name + "]")
         {
             this.Mode = BindingMode.OneWay;
             this.Source = TranslationSource.Instance;
@@ -73,7 +71,7 @@ namespace JLLKirjasto
     {
         public string BookName { get; set; }
         public string AuthorName { get; set; }
-        public int bookID { get; set; }
+        public int bookID { get; set; }   
     }
 
     /// <summary>
@@ -97,8 +95,10 @@ namespace JLLKirjasto
         // 3 = SignUpGrid
         short currentView = 0;
 
-        // Search related variables
-        // TODO: Add search related variables
+        // Search variables
+        List<String> searchResultTitles;
+        List<String> searchResultAuthors;
+        List<Int32> searchResultIDs;
 
         SQLiteConnection dbconnection = new SQLiteConnection("Data Source=database.db");
         #endregion
@@ -133,7 +133,8 @@ namespace JLLKirjasto
             gradientStoryboard.Begin();
 
             // Show all books in the beginning
-            updateSearchResults(search(""));
+            search("");
+            updateSearchResults();
 
         }
 
@@ -203,7 +204,8 @@ namespace JLLKirjasto
                 searchBox.Foreground = new SolidColorBrush(Colors.Black);
 
                 // Search for books             
-                updateSearchResults(search(searchBox.Text));
+                search(searchBox.Text);
+                updateSearchResults();
 
             }
 
@@ -601,18 +603,22 @@ namespace JLLKirjasto
         #endregion
 
         #region Search
-        // search for books in book datbase
-        private List<String> search(String searchString)
+        // Search Titles in the book database. Hard coded to use searchBox as search bar
+        private void search(String term)
         {
-            List<String> searchResults = new List<String>();
+
+            searchResultTitles = new List<String>();
+            searchResultAuthors = new List<String>();
+            searchResultIDs = new List<Int32>();
+            
             try
             {
                 dbconnection.Open();
 
-                String searchTerm = '%' + searchString + '%';
+                String searchTerm = '%' + term + '%';
 
                 // Search the database for a specific title
-                String sql = "SELECT Title FROM books WHERE Title LIKE @SearchTerm;";
+                String sql = "SELECT BookID, Title, Author FROM books WHERE Title LIKE @SearchTerm AND Available=1 OR Author LIKE @SearchTerm AND Available=1 OR BookID LIKE @SearchTerm AND Available=1;";
                 SQLiteCommand command = new SQLiteCommand(sql, dbconnection);
                 command.Parameters.AddWithValue("SearchTerm", searchTerm);
 
@@ -621,13 +627,15 @@ namespace JLLKirjasto
                 // Read search results
                 while (reader.Read())
                 {
-                    searchResults.Add(reader.GetString(0));
+                    searchResultIDs.Add(reader.GetInt32(0));
+                    searchResultTitles.Add(reader.GetString(1));
+                    searchResultAuthors.Add(reader.GetString(2));
                 }
                 reader.Close();
                 dbconnection.Close();
 
                 // Write matching books to console (for debugging)
-                foreach (String result in searchResults)
+                foreach (String result in searchResultTitles)
                 {
                     Console.WriteLine(result);
                 }
@@ -637,24 +645,22 @@ namespace JLLKirjasto
             catch (Exception ex)
             {
                 MessageBox.Show("Something happened! " + ex.Message);
-            }
-            return searchResults;
+            }              
         }
 
-        private void updateSearchResults(List<String> searchResults)
+        // hard coded for searchBox
+        private void updateSearchResults()
         {
             //Example: items.Add(new bookListItem() { BookName = "The Name of The Book 1", AuthorName = "The Name of The Author 1", bookID = 314159 });
             List<bookListItem> items = new List<bookListItem>();
 
-            foreach (String result in searchResults)
+            for (int i = 0; i < searchResultTitles.Count; i++)
             {
-                items.Add(new bookListItem() { BookName = result, AuthorName = "Not yet implemented", bookID = 404 });
+                items.Add(new bookListItem() { BookName = searchResultTitles[i], AuthorName = searchResultAuthors[i], bookID = searchResultIDs[i] });
             }
             listBox.ItemsSource = items;
         }
 
         #endregion  
-
-
     }
 }

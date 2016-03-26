@@ -4,14 +4,14 @@
              xmlns:local="clr-namespace:JLLKirjasto"
              xmlns:core="clr-namespace:System;assembly=mscorlib"
              StartupUri="MainWindow.xaml">
-    
+
     <Application.Resources>
 
         <core:Double x:Key="screenWidth">4000</core:Double>
         <core:Double x:Key="negativeScreenWidth">-4000</core:Double>
         <core:Double x:Key="screenHeight">3000</core:Double>
         <core:Double x:Key="negativeScreenHeight">-3000</core:Double>
-        
+
         <Style x:Key="FocusVisual">
             <Setter Property="Control.Template">
                 <Setter.Value>
@@ -33,7 +33,7 @@
         <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFA2A2A2"/>
         <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFA2A2A2"/>
         <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF515151"/>
-        
+
         <Style x:Key="ModernButtonStyle" TargetType="{x:Type Button}">
             <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
             <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
@@ -99,5 +99,75 @@
             </Setter>
         </Style>
 
+
+        <Color x:Key="SelectedBackgroundColor">#33000000</Color>
+        <Color x:Key="SelectedUnfocusedColor">#33000000</Color>
+        <Color x:Key="MouseOverUnfocusedColor">#40FFFFFF</Color>
+        <Color x:Key="MouseOverFocusedColor">#40FFFFFF</Color>
+        <Color x:Key="NormalColor">#00000000</Color>
+
+        <Style TargetType="{x:Type ListBoxItem}" x:Key="ModernListBoxItemStyle">
+            <Setter Property="SnapsToDevicePixels" Value="True" />
+            <Setter Property="OverridesDefaultStyle" Value="True" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <Border x:Name="Border" Padding="2" SnapsToDevicePixels="true" Background="Transparent">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="SelectionStates">
+                                    <VisualState x:Name="Unselected" />
+                                    <VisualState x:Name="Selected">
+                                        <Storyboard>
+                                            <ColorAnimation Storyboard.TargetName="Border"
+                                                            Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)"
+                                                            To="{StaticResource SelectedBackgroundColor}"
+                                                            Duration="0:0:0:0.2"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="SelectedUnfocused">
+                                        <Storyboard>
+                                            <ColorAnimation Storyboard.TargetName="Border"
+                                                            Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)"
+                                                            To="{StaticResource SelectedUnfocusedColor}"
+                                                            Duration="0:0:0:0.2"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            
+                            <ContentPresenter />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsMouseOver" Value="True"/>
+                                </MultiTrigger.Conditions>
+                                <MultiTrigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ColorAnimation Storyboard.TargetName="Border"
+                                                            Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)"
+                                                            To="{StaticResource MouseOverFocusedColor}"
+                                                            Duration="0:0:0:0.2"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </MultiTrigger.EnterActions>
+                                <MultiTrigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ColorAnimation Storyboard.TargetName="Border"
+                                                            Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)"
+                                                            To="{StaticResource NormalColor}"
+                                                            Duration="0:0:0:0.2"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </MultiTrigger.ExitActions>
+                            </MultiTrigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
     </Application.Resources>
 </Application>
