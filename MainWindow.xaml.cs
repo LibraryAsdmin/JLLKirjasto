@@ -69,7 +69,6 @@ namespace JLLKirjasto
         }
     }
 
-
     public class bookListItem
     {
         public string BookName { get; set; }
@@ -82,12 +81,12 @@ namespace JLLKirjasto
     /// </summary>
     public partial class MainWindow : Window
     {
+        #region Variables
         private TranslateTransform middleFlagTransform;
         private TranslateTransform bottomFlagTransform;
         private Storyboard gradientStoryboard;
 
         AdminControlsWindow adminwindow;
-
 
         bool atHome = true; //are we currently in home view?
 
@@ -98,7 +97,11 @@ namespace JLLKirjasto
         // 3 = SignUpGrid
         short currentView = 0;
 
+        // Search related variables
+        // TODO: Add search related variables
+
         SQLiteConnection dbconnection = new SQLiteConnection("Data Source=database.db");
+        #endregion
 
         public MainWindow()
         {
@@ -129,96 +132,13 @@ namespace JLLKirjasto
             Storyboard.SetTargetProperty(gradientTurn, new PropertyPath("Background.EndPoint"));
             gradientStoryboard.Begin();
 
-            List<bookListItem> items = new List<bookListItem>();
-            items.Add(new bookListItem() { BookName = "The Name of The Book 1", AuthorName = "The Name of The Author 1", bookID = 314159 });
-            items.Add(new bookListItem() { BookName = "The Name of The Book 2", AuthorName = "The Name of The Author 2", bookID = 31415 });
-            items.Add(new bookListItem() { BookName = "The Name of The Book 3", AuthorName = "The Name of The Author 3", bookID = 3141 });
-            listBox.ItemsSource = items;
+            // Show all books in the beginning
+            updateSearchResults(search(""));
 
         }
 
-
-
-        void changeUILanguage(string language)
-        {
-            bool updateSearchBoxText = false; //do we have to update searchBox's text 
-                                              //(has to be done manyally because we assign it string values elsewhere, which replaces the automatic switching)
-            bool updateLogInUserNameBoxText = false;
-            bool updateSignupField = false;
-
-            if (username.Text == Properties.Resources.ResourceManager.GetString("DefaultLoginUsernameBoxContent", TranslationSource.Instance.CurrentCulture))
-            { updateLogInUserNameBoxText = true; }
-
-            if (searchBox.Text == Properties.Resources.ResourceManager.GetString("DefaultSearchBoxContent", TranslationSource.Instance.CurrentCulture))
-            { updateSearchBoxText = true; }
-
-            if (signupField.Text == Properties.Resources.ResourceManager.GetString("DefaultSignUpUsernameBoxContent", TranslationSource.Instance.CurrentCulture))
-            { updateSignupField = true; }
-
-            switch (language)
-            {
-                case "en-GB":
-                case "en-US":
-                    // Move English flag to front
-                    Canvas.SetZIndex(Swedish, 0);
-                    Canvas.SetZIndex(Finnish, 1);
-                    Canvas.SetZIndex(English, 2);
-                    // Change language 
-                    TranslationSource.Instance.CurrentCulture = new System.Globalization.CultureInfo("en-GB");
-                    break;
-
-                case "fi-FI":
-                    // Move Finnish to front
-                    Canvas.SetZIndex(Swedish, 1);
-                    Canvas.SetZIndex(Finnish, 2);
-                    Canvas.SetZIndex(English, 0);
-                    // Change language
-                    TranslationSource.Instance.CurrentCulture = new System.Globalization.CultureInfo("fi-FI");
-                    break;
-
-                case "sv-SE":
-                    // Move Swedish to front
-                    Canvas.SetZIndex(Swedish, 2);
-                    Canvas.SetZIndex(Finnish, 1);
-                    Canvas.SetZIndex(English, 0);
-                    // Change language
-                    TranslationSource.Instance.CurrentCulture = new System.Globalization.CultureInfo("sv-SE");
-                    break;
-            }
-
-            if (updateSearchBoxText)
-            {
-                searchBox.Text = Properties.Resources.ResourceManager.GetString("DefaultSearchBoxContent", TranslationSource.Instance.CurrentCulture);
-            }
-
-            if (updateLogInUserNameBoxText)
-            {
-                username.Text = Properties.Resources.ResourceManager.GetString("DefaultLoginUsernameBoxContent", TranslationSource.Instance.CurrentCulture);
-            }
-
-            if (updateSignupField)
-            {
-                signupField.Text = Properties.Resources.ResourceManager.GetString("DefaultSignUpUsernameBoxContent", TranslationSource.Instance.CurrentCulture);
-            }
-        }
-
-        // Change language to English
-        private void English_Click(object sender, RoutedEventArgs e)
-        {
-            changeUILanguage("en-GB");
-        }
-
-        // Change language to Swedish
-        private void Swedish_Click(object sender, RoutedEventArgs e)
-        {
-            changeUILanguage("sv-SE");
-        }
-
-        // Change language to Finnish (default)
-        private void Finnish_Click(object sender, RoutedEventArgs e)
-        {
-            changeUILanguage("fi-FI");
-        }
+        #region UI Handling
+        
 
         private void LanguageGrid_MouseEnter(object sender, MouseEventArgs e)
         {
@@ -229,42 +149,6 @@ namespace JLLKirjasto
         private void LanguageGrid_MouseLeave(object sender, MouseEventArgs e)
         {
             hideLanguages(middleFlagTransform.Y, bottomFlagTransform.Y);
-        }
-
-        // Extends the list of languages
-        private void showLanguages(double middleY, double bottomÝ)
-        {
-            Duration duration = new Duration(TimeSpan.FromMilliseconds(250));
-
-            // transform the middle flag from current position to middle
-            middleFlagTransform = new TranslateTransform(0, middleY);
-            DoubleAnimation anim = new DoubleAnimation(40, duration);
-            middleFlagTransform.BeginAnimation(TranslateTransform.YProperty, anim);
-            Swedish.RenderTransform = middleFlagTransform;
-
-            // transform the bottom flag from current position to bottom
-            bottomFlagTransform = new TranslateTransform(0, bottomÝ);
-            DoubleAnimation anim2 = new DoubleAnimation(80, duration);
-            bottomFlagTransform.BeginAnimation(TranslateTransform.YProperty, anim2);
-            English.RenderTransform = bottomFlagTransform;
-        }
-
-        // Hides the list of languages
-        private void hideLanguages(double middleY, double bottomY)
-        {
-            Duration duration = new Duration(new TimeSpan(0, 0, 0, 0, 250));
-
-            // transform  the middle flag from its current positions to the default position
-            middleFlagTransform = new TranslateTransform(0, middleY);
-            DoubleAnimation anim = new DoubleAnimation(0, duration);
-            middleFlagTransform.BeginAnimation(TranslateTransform.YProperty, anim);
-            Swedish.RenderTransform = middleFlagTransform;
-
-            // transform the bottom flag from its current positions to the default position
-            bottomFlagTransform = new TranslateTransform(0, bottomY);
-            DoubleAnimation anim2 = new DoubleAnimation(0, duration);
-            bottomFlagTransform.BeginAnimation(TranslateTransform.YProperty, anim2);
-            English.RenderTransform = bottomFlagTransform;
         }
 
         private void searchButton_MouseUp(object sender, MouseButtonEventArgs e)
@@ -312,84 +196,20 @@ namespace JLLKirjasto
             if (searchBox.Text == Properties.Resources.ResourceManager.GetString("DefaultSearchBoxContent", TranslationSource.Instance.CurrentCulture))
             {
                 searchBox.Foreground = new SolidColorBrush(Colors.DarkSlateGray);
-
             }
             else
             {
+                // Console.Beep(); // just for fun. EDIT: not really fun since it makes the search laggy
                 searchBox.Foreground = new SolidColorBrush(Colors.Black);
-            }
-        }
 
-        private void searchBox_LostFocus(object sender, RoutedEventArgs e)
-        {
-            if (searchBox.Text == "")
-            {
-                searchBox.Text = Properties.Resources.ResourceManager.GetString("DefaultSearchBoxContent", TranslationSource.Instance.CurrentCulture);
-            }
-        }
+                // Search for books             
+                updateSearchResults(search(searchBox.Text));
 
-        //Go home-button
-        private void button_Click(object sender, RoutedEventArgs e)
-        {
-            //In home view
-            if (0 == currentView)
-            {
-                System.Windows.MessageBox.Show("Home button should not be accessible in home screen... Go fix the program!");
             }
-            //In search view
-            else if (1 == currentView)
-            {
-                Storyboard GoBackHome = this.FindResource("GoBackHome") as Storyboard;
-                GoBackHome.Begin();
-            }
-            //In login view
-            else if (2 == currentView)
-            {
-                Storyboard HideLoginGrid = this.FindResource("HideLoginGrid") as Storyboard;
-                HideLoginGrid.Begin();
-            }
-            //In sign up view
-            else if (3 == currentView)
-            {
-                Storyboard HideSignUpGrid = this.FindResource("HideSignUpGrid") as Storyboard;
-                HideSignUpGrid.Begin();
-            }
-            currentView = 0; //we're home now
-        }
 
-        private void signupButton_MouseUp(object sender, MouseButtonEventArgs e)
-        {
-            currentView = 3;
-            Storyboard ShowSignUpGrid = this.FindResource("ShowSignUpGrid") as Storyboard;
-            ShowSignUpGrid.Begin();
-        }
 
-        private void loginButton_MouseUp(object sender, MouseButtonEventArgs e)
-        {
-            currentView = 2;
-            Storyboard ShowLoginGrid = this.FindResource("ShowLoginGrid") as Storyboard;
-            ShowLoginGrid.Begin();
 
         }
-
-        private void GoHomeStoryboardCompleted(object sender, EventArgs e)
-        {
-            //searchBox and searchButton are returned to be children of StartPageContentGrid
-            WindowGrid.Children.Remove(searchButton);
-            WindowGrid.Children.Remove(searchBox);
-            StartPageContentGrid.Children.Add(searchButton);
-            StartPageContentGrid.Children.Add(searchBox);
-            searchButton.RenderTransform = new TranslateTransform(0, 0);
-            searchButton.VerticalAlignment = VerticalAlignment.Top;
-            searchButton.HorizontalAlignment = HorizontalAlignment.Center;
-            searchButton.Margin = new Thickness(0, 50, 0, 0);
-            searchBox.HorizontalAlignment = HorizontalAlignment.Stretch;
-            searchBox.Margin = new Thickness(44, 59, 44, 0);
-            searchBox.RenderTransform = new TranslateTransform(0, 0);
-
-            atHome = true; //we're home, so the searchButton can now trigger another animation if the user so desires
-        }
-
 
         // Home screen button visual appearance handling
         private void searchButton_MouseEnter(object sender, MouseEventArgs e)
@@ -482,7 +302,7 @@ namespace JLLKirjasto
 
         private void signupField_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (signupField.Text == Properties.Resources.ResourceManager.GetString("DefaultSignUpUsernameBoxContent",TranslationSource.Instance.CurrentCulture))
+            if (signupField.Text == Properties.Resources.ResourceManager.GetString("DefaultSignUpUsernameBoxContent", TranslationSource.Instance.CurrentCulture))
             {
                 signupField.Foreground = new SolidColorBrush(Colors.DarkSlateGray);
             }
@@ -504,7 +324,8 @@ namespace JLLKirjasto
 
         private void RootWindow_Closing(object sender, CancelEventArgs e)
         {
-            try {
+            try
+            {
                 adminwindow.Close();
             }
             catch
@@ -521,21 +342,23 @@ namespace JLLKirjasto
                 {
                     dbconnection.Open();
 
-                    // calculate userid
+                    // Calculate UserID
                     SQLiteCommand countUserIDs = new SQLiteCommand("SELECT COUNT(UserID) FROM users;", dbconnection);
                     SQLiteDataReader readCount = countUserIDs.ExecuteReader();
 
-                    int count = 0;
+                    int userCount = 0;
                     while (readCount.Read())
                     {
-                        count = readCount.GetInt32(0);
+                        userCount = readCount.GetInt32(0);
                     }
 
-                    // parse sql command
-                    String sql = "INSERT INTO users VALUES ("+count+", \"" + signupField.Text + "\");";
+                    // SQL command.
+                    String sql = "INSERT INTO users VALUES (@UserID, @Username);";
 
                     // execute command and close conection
                     SQLiteCommand command = new SQLiteCommand(sql, dbconnection);
+                    command.Parameters.AddWithValue("UserID", userCount);
+                    command.Parameters.AddWithValue("Username", signupField.Text);
                     command.ExecuteNonQuery();
                     dbconnection.Close();
                 }
@@ -543,7 +366,7 @@ namespace JLLKirjasto
                 {
                     dbconnection.Close();
                     System.Windows.MessageBox.Show(Properties.Resources.ResourceManager.GetString("SignUpErrorMessage", TranslationSource.Instance.CurrentCulture));
-                }               
+                }
             }
             else
             {
@@ -554,12 +377,82 @@ namespace JLLKirjasto
 
         private void listBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (listBox.SelectedItem!= null)
+            if (listBox.SelectedItem != null)
             {
                 bookListItem book = (bookListItem)listBox.SelectedItem;
                 int id = book.bookID;
                 //TODO: do something with the id
             }
+        }
+
+        private void searchBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (searchBox.Text == "")
+            {
+                searchBox.Text = Properties.Resources.ResourceManager.GetString("DefaultSearchBoxContent", TranslationSource.Instance.CurrentCulture);
+            }
+        }
+
+        //Go home-button
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+            //In home view
+            if (0 == currentView)
+            {
+                System.Windows.MessageBox.Show("Home button should not be accessible in home screen... Go fix the program!");
+            }
+            //In search view
+            else if (1 == currentView)
+            {
+                Storyboard GoBackHome = this.FindResource("GoBackHome") as Storyboard;
+                GoBackHome.Begin();
+            }
+            //In login view
+            else if (2 == currentView)
+            {
+                Storyboard HideLoginGrid = this.FindResource("HideLoginGrid") as Storyboard;
+                HideLoginGrid.Begin();
+            }
+            //In sign up view
+            else if (3 == currentView)
+            {
+                Storyboard HideSignUpGrid = this.FindResource("HideSignUpGrid") as Storyboard;
+                HideSignUpGrid.Begin();
+            }
+            currentView = 0; //we're home now
+        }
+
+        private void signupButton_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            currentView = 3;
+            Storyboard ShowSignUpGrid = this.FindResource("ShowSignUpGrid") as Storyboard;
+            ShowSignUpGrid.Begin();
+        }
+
+        private void loginButton_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            currentView = 2;
+            Storyboard ShowLoginGrid = this.FindResource("ShowLoginGrid") as Storyboard;
+            ShowLoginGrid.Begin();
+
+        }
+
+        private void GoHomeStoryboardCompleted(object sender, EventArgs e)
+        {
+            //searchBox and searchButton are returned to be children of StartPageContentGrid
+            WindowGrid.Children.Remove(searchButton);
+            WindowGrid.Children.Remove(searchBox);
+            StartPageContentGrid.Children.Add(searchButton);
+            StartPageContentGrid.Children.Add(searchBox);
+            searchButton.RenderTransform = new TranslateTransform(0, 0);
+            searchButton.VerticalAlignment = VerticalAlignment.Top;
+            searchButton.HorizontalAlignment = HorizontalAlignment.Center;
+            searchButton.Margin = new Thickness(0, 50, 0, 0);
+            searchBox.HorizontalAlignment = HorizontalAlignment.Stretch;
+            searchBox.Margin = new Thickness(44, 59, 44, 0);
+            searchBox.RenderTransform = new TranslateTransform(0, 0);
+
+            atHome = true; //we're home, so the searchButton can now trigger another animation if the user so desires
         }
 
         public static IEnumerable<T> FindVisualChildren<T>(DependencyObject depObj) where T : DependencyObject
@@ -581,5 +474,187 @@ namespace JLLKirjasto
                 }
             }
         }
+
+
+        #endregion
+
+        #region Language
+        // Change language to English
+        private void English_Click(object sender, RoutedEventArgs e)
+        {
+            changeUILanguage("en-GB");
+        }
+
+        // Change language to Swedish
+        private void Swedish_Click(object sender, RoutedEventArgs e)
+        {
+            changeUILanguage("sv-SE");
+        }
+
+        // Change language to Finnish (default)
+        private void Finnish_Click(object sender, RoutedEventArgs e)
+        {
+            changeUILanguage("fi-FI");
+        }
+        void changeUILanguage(string language)
+        {
+            bool updateSearchBoxText = false; //do we have to update searchBox's text 
+                                              //(has to be done manyally because we assign it string values elsewhere, which replaces the automatic switching)
+            bool updateLogInUserNameBoxText = false;
+            bool updateSignupField = false;
+
+            if (username.Text == Properties.Resources.ResourceManager.GetString("DefaultLoginUsernameBoxContent", TranslationSource.Instance.CurrentCulture))
+            { updateLogInUserNameBoxText = true; }
+
+            if (searchBox.Text == Properties.Resources.ResourceManager.GetString("DefaultSearchBoxContent", TranslationSource.Instance.CurrentCulture))
+            { updateSearchBoxText = true; }
+
+            if (signupField.Text == Properties.Resources.ResourceManager.GetString("DefaultSignUpUsernameBoxContent", TranslationSource.Instance.CurrentCulture))
+            { updateSignupField = true; }
+
+            switch (language)
+            {
+                case "en-GB":
+                case "en-US":
+                    // Move English flag to front
+                    Canvas.SetZIndex(Swedish, 0);
+                    Canvas.SetZIndex(Finnish, 1);
+                    Canvas.SetZIndex(English, 2);
+                    // Change language 
+                    TranslationSource.Instance.CurrentCulture = new System.Globalization.CultureInfo("en-GB");
+                    break;
+
+                case "fi-FI":
+                    // Move Finnish to front
+                    Canvas.SetZIndex(Swedish, 1);
+                    Canvas.SetZIndex(Finnish, 2);
+                    Canvas.SetZIndex(English, 0);
+                    // Change language
+                    TranslationSource.Instance.CurrentCulture = new System.Globalization.CultureInfo("fi-FI");
+                    break;
+
+                case "sv-SE":
+                    // Move Swedish to front
+                    Canvas.SetZIndex(Swedish, 2);
+                    Canvas.SetZIndex(Finnish, 1);
+                    Canvas.SetZIndex(English, 0);
+                    // Change language
+                    TranslationSource.Instance.CurrentCulture = new System.Globalization.CultureInfo("sv-SE");
+                    break;
+            }
+
+            if (updateSearchBoxText)
+            {
+                searchBox.Text = Properties.Resources.ResourceManager.GetString("DefaultSearchBoxContent", TranslationSource.Instance.CurrentCulture);
+            }
+
+            if (updateLogInUserNameBoxText)
+            {
+                username.Text = Properties.Resources.ResourceManager.GetString("DefaultLoginUsernameBoxContent", TranslationSource.Instance.CurrentCulture);
+            }
+
+            if (updateSignupField)
+            {
+                signupField.Text = Properties.Resources.ResourceManager.GetString("DefaultSignUpUsernameBoxContent", TranslationSource.Instance.CurrentCulture);
+            }
+        }
+
+        // Extends the list of languages
+        private void showLanguages(double middleY, double bottomÝ)
+        {
+            Duration duration = new Duration(TimeSpan.FromMilliseconds(250));
+
+            // transform the middle flag from current position to middle
+            middleFlagTransform = new TranslateTransform(0, middleY);
+            DoubleAnimation anim = new DoubleAnimation(40, duration);
+            middleFlagTransform.BeginAnimation(TranslateTransform.YProperty, anim);
+            Swedish.RenderTransform = middleFlagTransform;
+
+            // transform the bottom flag from current position to bottom
+            bottomFlagTransform = new TranslateTransform(0, bottomÝ);
+            DoubleAnimation anim2 = new DoubleAnimation(80, duration);
+            bottomFlagTransform.BeginAnimation(TranslateTransform.YProperty, anim2);
+            English.RenderTransform = bottomFlagTransform;
+        }
+
+        // Hides the list of languages
+        private void hideLanguages(double middleY, double bottomY)
+        {
+            Duration duration = new Duration(new TimeSpan(0, 0, 0, 0, 250));
+
+            // transform  the middle flag from its current positions to the default position
+            middleFlagTransform = new TranslateTransform(0, middleY);
+            DoubleAnimation anim = new DoubleAnimation(0, duration);
+            middleFlagTransform.BeginAnimation(TranslateTransform.YProperty, anim);
+            Swedish.RenderTransform = middleFlagTransform;
+
+            // transform the bottom flag from its current positions to the default position
+            bottomFlagTransform = new TranslateTransform(0, bottomY);
+            DoubleAnimation anim2 = new DoubleAnimation(0, duration);
+            bottomFlagTransform.BeginAnimation(TranslateTransform.YProperty, anim2);
+            English.RenderTransform = bottomFlagTransform;
+        }
+
+
+
+
+        #endregion
+
+        #region Search
+        // search for books in book datbase
+        private List<String> search(String searchString)
+        {
+            List<String> searchResults = new List<String>();
+            try
+            {
+                dbconnection.Open();
+
+                String searchTerm = '%' + searchString + '%';
+
+                // Search the database for a specific title
+                String sql = "SELECT Title FROM books WHERE Title LIKE @SearchTerm;";
+                SQLiteCommand command = new SQLiteCommand(sql, dbconnection);
+                command.Parameters.AddWithValue("SearchTerm", searchTerm);
+
+                SQLiteDataReader reader = command.ExecuteReader();
+
+                // Read search results
+                while (reader.Read())
+                {
+                    searchResults.Add(reader.GetString(0));
+                }
+                reader.Close();
+                dbconnection.Close();
+
+                // Write matching books to console (for debugging)
+                foreach (String result in searchResults)
+                {
+                    Console.WriteLine(result);
+                }
+                Console.WriteLine();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Something happened! " + ex.Message);
+            }
+            return searchResults;
+        }
+
+        private void updateSearchResults(List<String> searchResults)
+        {
+            //Example: items.Add(new bookListItem() { BookName = "The Name of The Book 1", AuthorName = "The Name of The Author 1", bookID = 314159 });
+            List<bookListItem> items = new List<bookListItem>();
+
+            foreach (String result in searchResults)
+            {
+                items.Add(new bookListItem() { BookName = result, AuthorName = "Not yet implemented", bookID = 404 });
+            }
+            listBox.ItemsSource = items;
+        }
+
+        #endregion  
+
+
     }
 }
