@@ -58,11 +58,9 @@ namespace JLLKirjasto
         public event PropertyChangedEventHandler PropertyChanged;
     }
 
-    public class LocExtension
-        : Binding
+    public class LocExtension : Binding
     {
-        public LocExtension(string name)
-            : base("[" + name + "]")
+        public LocExtension(string name) : base("[" + name + "]")
         {
             this.Mode = BindingMode.OneWay;
             this.Source = TranslationSource.Instance;
@@ -74,7 +72,7 @@ namespace JLLKirjasto
     {
         public string BookName { get; set; }
         public string AuthorName { get; set; }
-        public int bookID { get; set; }
+        public int bookID { get; set; }   
     }
 
     /// <summary>
@@ -130,9 +128,14 @@ namespace JLLKirjasto
             gradientStoryboard.Begin();
 
             List<bookListItem> items = new List<bookListItem>();
-            items.Add(new bookListItem() { BookName = "The Name of The Book 1", AuthorName = "The Name of The Author 1", bookID = 314159 });
-            items.Add(new bookListItem() { BookName = "The Name of The Book 2", AuthorName = "The Name of The Author 2", bookID = 31415 });
-            items.Add(new bookListItem() { BookName = "The Name of The Book 3", AuthorName = "The Name of The Author 3", bookID = 3141 });
+            items.Add(new bookListItem() { BookName = "The Name of The Book 1", AuthorName = "The Name of The Author 1", bookID = 1 });
+            items.Add(new bookListItem() { BookName = "The Name of The Book 2", AuthorName = "The Name of The Author 2", bookID = 2 });
+            items.Add(new bookListItem() { BookName = "The Name of The Book 3", AuthorName = "The Name of The Author 3", bookID = 3 });
+            items.Add(new bookListItem() { BookName = "The Name of The Book 4", AuthorName = "The Name of The Author 4", bookID = 4 });
+            items.Add(new bookListItem() { BookName = "The Name of The Book 5", AuthorName = "The Name of The Author 5", bookID = 5 });
+            items.Add(new bookListItem() { BookName = "The Name of The Book 6", AuthorName = "The Name of The Author 6", bookID = 6 });
+            items.Add(new bookListItem() { BookName = "The Name of The Book 7", AuthorName = "The Name of The Author 7", bookID = 7 });
+            items.Add(new bookListItem() { BookName = "The Name of The Book 8", AuthorName = "The Name of The Author 8", bookID = 8 });
             listBox.ItemsSource = items;
 
         }
@@ -559,26 +562,6 @@ namespace JLLKirjasto
                 bookListItem book = (bookListItem)listBox.SelectedItem;
                 int id = book.bookID;
                 //TODO: do something with the id
-            }
-        }
-
-        public static IEnumerable<T> FindVisualChildren<T>(DependencyObject depObj) where T : DependencyObject
-        {
-            if (depObj != null)
-            {
-                for (int i = 0; i < VisualTreeHelper.GetChildrenCount(depObj); i++)
-                {
-                    DependencyObject child = VisualTreeHelper.GetChild(depObj, i);
-                    if (child != null && child is T)
-                    {
-                        yield return (T)child;
-                    }
-
-                    foreach (T childOfChild in FindVisualChildren<T>(child))
-                    {
-                        yield return childOfChild;
-                    }
-                }
             }
         }
     }

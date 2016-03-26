@@ -439,7 +439,7 @@
                     <TranslateTransform X="{DynamicResource negativeScreenWidth}"/>
                 </TransformGroup>
             </Grid.RenderTransform>
-            <ListBox x:Name="listBox" HorizontalAlignment="Left" HorizontalContentAlignment="Stretch" Margin="47.143,268.857,0,31.715" Width="356.571" BorderBrush="Transparent" Background="Transparent" BorderThickness="0" FontSize="24" SelectionChanged="listBox_SelectionChanged">
+            <ListBox x:Name="listBox" HorizontalAlignment="Left" HorizontalContentAlignment="Stretch" Margin="47.143,268.857,0,31.715" Width="356.571" BorderBrush="Transparent" Background="Transparent" BorderThickness="0" FontSize="24" SelectionChanged="listBox_SelectionChanged" ItemContainerStyle="{DynamicResource ModernListBoxItemStyle}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Vertical">
