@@ -70,6 +70,12 @@ namespace JLLKirjasto
     }
 
 
+    public class bookListItem
+    {
+        public string BookName { get; set; }
+        public string AuthorName { get; set; }
+        public int bookID { get; set; }
+    }
 
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -122,6 +128,13 @@ namespace JLLKirjasto
             Storyboard.SetTarget(gradientTurn, WindowGrid);
             Storyboard.SetTargetProperty(gradientTurn, new PropertyPath("Background.EndPoint"));
             gradientStoryboard.Begin();
+
+            List<bookListItem> items = new List<bookListItem>();
+            items.Add(new bookListItem() { BookName = "The Name of The Book 1", AuthorName = "The Name of The Author 1", bookID = 314159 });
+            items.Add(new bookListItem() { BookName = "The Name of The Book 2", AuthorName = "The Name of The Author 2", bookID = 31415 });
+            items.Add(new bookListItem() { BookName = "The Name of The Book 3", AuthorName = "The Name of The Author 3", bookID = 3141 });
+            listBox.ItemsSource = items;
+
         }
 
 
@@ -537,6 +550,36 @@ namespace JLLKirjasto
                 System.Windows.MessageBox.Show(Properties.Resources.ResourceManager.GetString("SignUpErrorMessage", TranslationSource.Instance.CurrentCulture));
             }
 
+        }
+
+        private void listBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (listBox.SelectedItem!= null)
+            {
+                bookListItem book = (bookListItem)listBox.SelectedItem;
+                int id = book.bookID;
+                //TODO: do something with the id
+            }
+        }
+
+        public static IEnumerable<T> FindVisualChildren<T>(DependencyObject depObj) where T : DependencyObject
+        {
+            if (depObj != null)
+            {
+                for (int i = 0; i < VisualTreeHelper.GetChildrenCount(depObj); i++)
+                {
+                    DependencyObject child = VisualTreeHelper.GetChild(depObj, i);
+                    if (child != null && child is T)
+                    {
+                        yield return (T)child;
+                    }
+
+                    foreach (T childOfChild in FindVisualChildren<T>(child))
+                    {
+                        yield return childOfChild;
+                    }
+                }
+            }
         }
     }
 }

@@ -11,7 +11,7 @@
         x:Name="RootWindow" x:Class="JLLKirjasto.MainWindow" Title="{local:Loc WindowTitle}"  Height="768" Width="1024" WindowStartupLocation="CenterScreen" Closing="RootWindow_Closing">
 
     <Window.Resources>
-        
+
         <Storyboard x:Key="BringUpSearchResults">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="SearchResultsGrid">
                 <EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="0">
@@ -162,7 +162,7 @@
             </ObjectAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="searchBox">
                 <SplineDoubleKeyFrame KeyTime="0" Value="1"/>
-                <SplineDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.1" Value="0"/>
             </DoubleAnimationUsingKeyFrames>
             <Int32AnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.ZIndex)" Storyboard.TargetName="searchBox">
                 <SplineInt32KeyFrame KeyTime="0" Value="2"/>
@@ -439,12 +439,16 @@
                     <TranslateTransform X="{DynamicResource negativeScreenWidth}"/>
                 </TransformGroup>
             </Grid.RenderTransform>
-            <ListBox x:Name="listBox" HorizontalAlignment="Left" Margin="47.143,268.857,0,31.715" Width="356.571" BorderBrush="#00ABADB3" Background="Transparent" BorderThickness="0" FontSize="26.667">
-                <ListBoxItem Background="Transparent" Content="Book #1 by Author X" FontSize="24"/>
-                <Separator Background="Black"/>
-                <ListBoxItem Content="Book #2 by Author Y" FontSize="24"/>
-                <Separator Background="Black"/>
-                <ListBoxItem Content="Book #3 by Author Z" FontSize="24"/>
+            <ListBox x:Name="listBox" HorizontalAlignment="Left" HorizontalContentAlignment="Stretch" Margin="47.143,268.857,0,31.715" Width="356.571" BorderBrush="Transparent" Background="Transparent" BorderThickness="0" FontSize="24" SelectionChanged="listBox_SelectionChanged">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Text="{Binding BookName}"/>
+                            <TextBlock Text="{Binding AuthorName}" FontSize="16"/>
+                            <Separator Background="Black"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
             </ListBox>
         </Grid>
         <Grid x:Name="StartPageGrid" Margin="0" RenderTransformOrigin="0,0">
@@ -476,9 +480,6 @@
                 </Grid.ColumnDefinitions>
                 <TextBox x:Name="searchBox" Margin="44,59,44,0" Grid.Column="0" VerticalAlignment="Top" Background="#00000000" Text="{local:Loc DefaultSearchBoxContent}" FontSize="24" FontFamily="Sylfaen" Visibility="Hidden" BorderThickness="0" Foreground="Black" Height="40" IsUndoEnabled="False" Opacity="0" GotFocus="searchBox_GotFocus" TextChanged="searchBox_TextChanged" LostFocus="searchBox_LostFocus" Width="238"/>
                 <Rectangle x:Name="searchButton" HorizontalAlignment="Center" Height="250" Margin="0,50,0,0" VerticalAlignment="Top" Width="250" RadiusX="125" RadiusY="125" MouseUp="searchButton_MouseUp" RenderTransformOrigin="0.497,0.494" Grid.Column="0" Stroke="Black" Grid.ColumnSpan="1" Cursor="Hand" MouseEnter="searchButton_MouseEnter" MouseLeave="searchButton_MouseLeave" Fill="#33FFFFFF" StrokeThickness="0">
-                    <Rectangle.Effect>
-                        <DropShadowEffect Direction="300" Opacity="0.8" ShadowDepth="3"/>
-                    </Rectangle.Effect>
                     <Rectangle.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -488,13 +489,10 @@
                         </TransformGroup>
                     </Rectangle.RenderTransform>
                 </Rectangle>
-                
+
                 <TextBlock x:Name="logInText" Grid.ColumnSpan="1" Grid.Column="1" Margin="10,310,10,0" TextWrapping="Wrap" FontSize="32" Text="{local:Loc TextUnderLogin}"/>
                 <TextBlock x:Name="searchText" Margin="10,310,10,0" TextWrapping="Wrap"  FontSize="32" Text="{local:Loc TextUnderSearchBox}" Grid.ColumnSpan="1"/>
                 <Rectangle x:Name="signupButton" Grid.Column="2" Fill="#33FFFFFF" HorizontalAlignment="Center" Height="250" Margin="0,50,0,0" RadiusY="125" RadiusX="125" Stroke="Black" VerticalAlignment="Top" Width="250" StrokeThickness="0" Cursor="Hand" MouseUp="signupButton_MouseUp" MouseEnter="signupButton_MouseEnter" MouseLeave="signupButton_MouseLeave" RenderTransformOrigin="0.5,0.5">
-                    <Rectangle.Effect>
-                        <DropShadowEffect Direction="300" Opacity="0.8" ShadowDepth="3" BlurRadius="6"/>
-                    </Rectangle.Effect>
                     <Rectangle.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -505,9 +503,6 @@
                     </Rectangle.RenderTransform>
                 </Rectangle>
                 <Rectangle x:Name="loginButton" Grid.Column="1" Fill="#33FFFFFF" HorizontalAlignment="Center" Height="250" Margin="0,50,0,0" RadiusY="125" RadiusX="125" Stroke="Black" VerticalAlignment="Top" Width="250" StrokeThickness="0" Cursor="Hand" MouseUp="loginButton_MouseUp" MouseEnter="loginButton_MouseEnter" MouseLeave="loginButton_MouseLeave" RenderTransformOrigin="0.498,0.504">
-                    <Rectangle.Effect>
-                        <DropShadowEffect Direction="300" Opacity="0.8" ShadowDepth="3"/>
-                    </Rectangle.Effect>
                     <Rectangle.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -519,7 +514,6 @@
                 </Rectangle>
                 <TextBlock x:Name="makeAnAccountText" Grid.ColumnSpan="1" Grid.Column="2" Margin="10,310,10,0" TextWrapping="Wrap" FontSize="32" Text="{local:Loc TextUnderAccountCreation}" Foreground="Black"/>
             </Grid>
-
         </Grid>
         <Grid x:Name="LanguageGrid" HorizontalAlignment="Left" Height="140" VerticalAlignment="Top" Width="85" MouseEnter="LanguageGrid_MouseEnter" MouseLeave="LanguageGrid_MouseLeave">
             <Button x:Name="English" HorizontalAlignment="Left" VerticalAlignment="Top" Width="65" Margin="10,10,0,0" Height="40" Cursor="Hand" Click="English_Click" >
