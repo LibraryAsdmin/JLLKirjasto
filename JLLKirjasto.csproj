@@ -92,6 +92,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="DatabaseInteraction.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -155,6 +156,9 @@
     <Resource Include="Telescope.gif" />
     <Resource Include="Images\background.jpg" />
     <Resource Include="Images\Image Sources.txt" />
+    <Resource Include="Images\Search.png" />
+    <Resource Include="Images\Signup.png" />
+    <Resource Include="Images\Login.png" />
     <Content Include="Images\UK.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

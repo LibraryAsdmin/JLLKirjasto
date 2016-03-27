@@ -416,12 +416,12 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <ListBox x:Name="listBox" HorizontalContentAlignment="Stretch" Margin="20,229,20,20" BorderBrush="Transparent" Background="Transparent" BorderThickness="0" FontSize="24" SelectionChanged="listBox_SelectionChanged" ItemContainerStyle="{DynamicResource ModernListBoxItemStyle}" ScrollViewer.HorizontalScrollBarVisibility="Hidden">
+            <ListBox x:Name="searchResultsListBox" HorizontalContentAlignment="Stretch" Margin="20,229,20,20" BorderBrush="Transparent" Background="Transparent" BorderThickness="0" FontSize="24" ItemContainerStyle="{DynamicResource ModernListBoxItemStyle}" ScrollViewer.HorizontalScrollBarVisibility="Hidden">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Vertical">
-                            <TextBlock Text="{Binding BookName}"/>
-                            <TextBlock Text="{Binding AuthorName}" FontSize="16"/>
+                            <TextBlock Text="{Binding Title}"/>
+                            <TextBlock Text="{Binding Author}" FontSize="16"/>
                             <Separator Background="Black"/>
                         </StackPanel>
                     </DataTemplate>
@@ -433,16 +433,40 @@
                     </Image>
                 </Border>
                 <TextBlock Margin="0,10,0,0">NAME OF THE BOOK</TextBlock>
-                <TextBlock x:Name="bookName" FontSize="24" TextWrapping="Wrap">Insert the name of the book here! This can wrap over</TextBlock>
+                <TextBlock x:Name="bookName" FontSize="24" TextWrapping="Wrap" >
+                    <TextBlock.Text>
+                        <Binding ElementName="searchResultsListBox" Path="SelectedItem.Title"/>
+                    </TextBlock.Text>
+                </TextBlock>
                 <TextBlock Margin="0,10,0,0">AUTHOR</TextBlock>
-                <TextBlock x:Name="authorName" FontSize="24" TextWrapping="Wrap">Mysterious Author guy</TextBlock>
+                <TextBlock x:Name="authorName" FontSize="24" TextWrapping="Wrap">
+                    <TextBlock.Text>
+                        <Binding ElementName="searchResultsListBox" Path="SelectedItem.Author"/>
+                    </TextBlock.Text>
+                </TextBlock>
+                <TextBlock Margin="0,10,0,0">YEAR OF PUBLICATION</TextBlock>
+                <TextBlock x:Name="Year" FontSize="24" TextWrapping="Wrap">
+                    <TextBlock.Text>
+                        <Binding ElementName="searchResultsListBox" Path="SelectedItem.Year"/>
+                    </TextBlock.Text>
+                </TextBlock>
                 <TextBlock Margin="0,10,0,0">BOOK ID</TextBlock>
-                <TextBlock x:Name="bookID" FontSize="24" TextWrapping="Wrap">Book ID goes here</TextBlock>
+                <TextBlock x:Name="bookID" FontSize="24" TextWrapping="Wrap">
+                    <TextBlock.Text>
+                        <Binding ElementName="searchResultsListBox" Path="SelectedItem.BookID"/>
+                    </TextBlock.Text>
+                </TextBlock>
                 <TextBlock Margin="0,10,0,0">AVAILABILITY</TextBlock>
-                <TextBlock x:Name="availability" FontSize="24" TextWrapping="Wrap">Availibility status of the book is here</TextBlock>
+                <TextBlock x:Name="availability" FontSize="24" TextWrapping="Wrap">
+                    <TextBlock.Text>
+                        <Binding ElementName="searchResultsListBox" Path="SelectedItem.Available"/>
+                    </TextBlock.Text>
+                </TextBlock>
                 <TextBlock Margin="0,10,0,0">ISBN</TextBlock>
-                <TextBlock x:Name="bookISBN" FontSize="24" TextWrapping="Wrap">978-951-25-2710-6</TextBlock>
-               
+                <TextBlock x:Name="bookISBN" FontSize="24" TextWrapping="Wrap">
+                    <TextBlock.Text>ISBN here!</TextBlock.Text>
+                </TextBlock>
+
             </StackPanel>
         </Grid>
         <Grid x:Name="StartPageGrid" Margin="0" RenderTransformOrigin="0,0">
@@ -472,6 +496,7 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
+                <Image x:Name="searchIcon" HorizontalAlignment="Left" Height="250" Margin="41,63,0,0" VerticalAlignment="Top" Width="250" Source="/Images/Search.png" Opacity="0.25"/>
                 <TextBox x:Name="searchBox" Margin="44,59,44,0" Grid.Column="0" VerticalAlignment="Top" Background="#00000000" Text="{local:Loc DefaultSearchBoxContent}" FontSize="24" FontFamily="Sylfaen" Visibility="Hidden" BorderThickness="0" Foreground="Black" Height="40" IsUndoEnabled="False" Opacity="0" GotFocus="searchBox_GotFocus" TextChanged="searchBox_TextChanged" LostFocus="searchBox_LostFocus"/>
                 <Rectangle x:Name="searchButton" HorizontalAlignment="Center" Height="250" Margin="0,50,0,0" VerticalAlignment="Top" Width="250" RadiusX="125" RadiusY="125" MouseUp="searchButton_MouseUp" RenderTransformOrigin="0.497,0.494" Grid.Column="0" Stroke="Black" Grid.ColumnSpan="1" Cursor="Hand" MouseEnter="searchButton_MouseEnter" MouseLeave="searchButton_MouseLeave" Fill="#33FFFFFF" StrokeThickness="0">
                     <Rectangle.RenderTransform>
@@ -486,6 +511,7 @@
 
                 <TextBlock x:Name="logInText" Grid.ColumnSpan="1" Grid.Column="1" Margin="10,310,10,0" TextWrapping="Wrap" FontSize="32" Text="{local:Loc TextUnderLogin}"/>
                 <TextBlock x:Name="searchText" Margin="10,310,10,0" TextWrapping="Wrap"  FontSize="32" Text="{local:Loc TextUnderSearchBox}" Grid.ColumnSpan="1"/>
+                <Image x:Name="signupIcon" HorizontalAlignment="Left" Height="250" Margin="41,50,0,0" VerticalAlignment="Top" Width="250" Source="Images/signUp.png" Opacity="0.25" Grid.Column="2"/>
                 <Rectangle x:Name="signupButton" Grid.Column="2" Fill="#33FFFFFF" HorizontalAlignment="Center" Height="250" Margin="0,50,0,0" RadiusY="125" RadiusX="125" Stroke="Black" VerticalAlignment="Top" Width="250" StrokeThickness="0" Cursor="Hand" MouseUp="signupButton_MouseUp" MouseEnter="signupButton_MouseEnter" MouseLeave="signupButton_MouseLeave" RenderTransformOrigin="0.5,0.5">
                     <Rectangle.RenderTransform>
                         <TransformGroup>
@@ -496,6 +522,7 @@
                         </TransformGroup>
                     </Rectangle.RenderTransform>
                 </Rectangle>
+                <Image x:Name="loginIcon" HorizontalAlignment="Left" Height="250" Margin="41,50,0,0" VerticalAlignment="Top" Width="250" Source="Images/Login.png" Opacity="0.25" Grid.Column="1"/>
                 <Rectangle x:Name="loginButton" Grid.Column="1" Fill="#33FFFFFF" HorizontalAlignment="Center" Height="250" Margin="0,50,0,0" RadiusY="125" RadiusX="125" Stroke="Black" VerticalAlignment="Top" Width="250" StrokeThickness="0" Cursor="Hand" MouseUp="loginButton_MouseUp" MouseEnter="loginButton_MouseEnter" MouseLeave="loginButton_MouseLeave" RenderTransformOrigin="0.498,0.504">
                     <Rectangle.RenderTransform>
                         <TransformGroup>

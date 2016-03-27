@@ -68,13 +68,6 @@ namespace JLLKirjasto
         }
     }
 
-    public class bookListItem
-    {
-        public string BookName { get; set; }
-        public string AuthorName { get; set; }
-        public int bookID { get; set; }   
-    }
-
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
@@ -100,11 +93,15 @@ namespace JLLKirjasto
         short currentView = 0;
 
         // Search variables
+        /**
         List<String> searchResultTitles;
         List<String> searchResultAuthors;
         List<Int32> searchResultIDs;
+        **/
 
         private SQLiteConnection dbconnection = new SQLiteConnection("Data Source=database.db");
+        private DatabaseInteraction dbi = new DatabaseInteraction();
+        List<Book> ListBoxItems;
         #endregion
 
         public MainWindow()
@@ -138,8 +135,9 @@ namespace JLLKirjasto
             gradientStoryboard.Begin();
 
             // Show all books in the beginning
-            search("");
-            updateSearchResults();
+            //search("");
+            //updateSearchResults();
+            initializeListBox();
 
 
             //initializes ShowSearchResultsGrid animation storyboard
@@ -230,7 +228,6 @@ namespace JLLKirjasto
                 searchBox.Foreground = new SolidColorBrush(Colors.Black);
 
                 // Search for books             
-                search(searchBox.Text);
                 updateSearchResults();
 
             }
@@ -401,16 +398,6 @@ namespace JLLKirjasto
                 System.Windows.MessageBox.Show(Properties.Resources.ResourceManager.GetString("SignUpErrorMessage", TranslationSource.Instance.CurrentCulture));
             }
 
-        }
-
-        private void listBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (listBox.SelectedItem != null)
-            {
-                bookListItem book = (bookListItem)listBox.SelectedItem;
-                int id = book.bookID;
-                //TODO: do something with the id
-            }
         }
 
         private void searchBox_LostFocus(object sender, RoutedEventArgs e)
@@ -628,8 +615,8 @@ namespace JLLKirjasto
         #endregion
 
         #region Search
-        // Search Titles in the book database. Hard coded to use searchBox as search bar
-        private void search(String term)
+        /** Search Titles in the book database. Hard coded to use searchBox as search bar
+        private void searööch(String term)
         {
 
             searchResultTitles = new List<String>();
@@ -672,20 +659,55 @@ namespace JLLKirjasto
                 MessageBox.Show("Something happened! " + ex.Message);
             }              
         }
+        **/
 
-        // hard coded for searchBox
         private void updateSearchResults()
         {
-            //Example: items.Add(new bookListItem() { BookName = "The Name of The Book 1", AuthorName = "The Name of The Author 1", bookID = 314159 });
-            List<bookListItem> items = new List<bookListItem>();
+            List<String> columns = new List<String>();
+            columns.Add("BookID");
+            columns.Add("Author");
+            columns.Add("Title");
+            /**
+            // Determine what to search        
+            if (IDChecked) columns.Add("BookID");
+            if (TitleChecked) columns.Add("Title");
+            if (AuthorChecked) columns.Add("Author");
+            if (YearChecked) columns.Add("Year");
+            if (LanguageChecked) columns.Add("Language");
+            if (AvailableChecked) columns.Add("Available");
+            **/
 
-            for (int i = 0; i < searchResultTitles.Count; i++)
+            List<List<String>> searchResults = new List<List<String>>();
+            searchResults = dbi.searchDatabaseRows(dbconnection, "books", searchBox.Text, columns);
+            ListBoxItems = new List<Book>();
+
+            foreach (List<String> row in searchResults)
             {
-                items.Add(new bookListItem() { BookName = searchResultTitles[i], AuthorName = searchResultAuthors[i], bookID = searchResultIDs[i] });
+                ListBoxItems.Add(new Book() { BookID = row[0], Author = row[1], Title = row[2], Year = row[3], Language = row[4], Available = row[5]});
             }
-            listBox.ItemsSource = items;
+            searchResultsListBox.ItemsSource = ListBoxItems;
+        }
+        private void initializeListBox()
+        {
+            List<String> columns = new List<String>();
+            columns.Add("Title");
+
+            List<List<String>> results = dbi.searchDatabaseRows(dbconnection, "books", "", columns);
+            ListBoxItems = new List<Book>();
+            foreach (List<String> row in results)
+            {
+                ListBoxItems.Add(new Book { BookID = row[0], Author = row[1], Title = row[2], Year = row[3], Language = row[4], Available = row[5] });
+            }
+            searchResultsListBox.ItemsSource = ListBoxItems;
         }
 
+        #endregion
+
+        #region Debug
+        private void a(String m)
+        {
+            MessageBox.Show(m);
+        }
         #endregion
     }
 }
