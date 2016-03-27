@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Data.SQLite;
 
 namespace JLLKirjasto
 {
@@ -19,19 +20,20 @@ namespace JLLKirjasto
     /// </summary>
     public partial class AdminControlsWindow : Window
     {
+
         public AdminControlsWindow()
         {
-            InitializeComponent();
+            InitializeComponent();        
         }
 
         private void BooksSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
-            // Update Books listbox
+            // Update Books datagrid
         }
 
         private void UsersSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
-            // Update users listbox
+            // Update users datagrid
         }
     }
 }

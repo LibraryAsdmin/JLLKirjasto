@@ -58,15 +58,15 @@
             <Int32AnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.ZIndex)" Storyboard.TargetName="searchBox">
                 <EasingInt32KeyFrame KeyTime="0:0:0.2" Value="2"/>
             </Int32AnimationUsingKeyFrames>
-            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[1].(GradientStop.Color)" Storyboard.TargetName="WindowGrid">
-                <EasingColorKeyFrame KeyTime="0:0:0.6" Value="#FFF91212">
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[0].(GradientStop.Color)" Storyboard.TargetName="WindowGrid">
+                <EasingColorKeyFrame KeyTime="0:0:0.6" Value="{DynamicResource search1}">
                     <EasingColorKeyFrame.EasingFunction>
                         <CircleEase EasingMode="EaseOut"/>
                     </EasingColorKeyFrame.EasingFunction>
                 </EasingColorKeyFrame>
             </ColorAnimationUsingKeyFrames>
-            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[0].(GradientStop.Color)" Storyboard.TargetName="WindowGrid">
-                <EasingColorKeyFrame KeyTime="0:0:0.6" Value="Red">
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[1].(GradientStop.Color)" Storyboard.TargetName="WindowGrid">
+                <EasingColorKeyFrame KeyTime="0:0:0.6" Value="{DynamicResource search2}">
                     <EasingColorKeyFrame.EasingFunction>
                         <CircleEase EasingMode="EaseOut"/>
                     </EasingColorKeyFrame.EasingFunction>
@@ -75,30 +75,6 @@
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="button">
                 <EasingDoubleKeyFrame KeyTime="0" Value="-80"/>
                 <EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="0">
-                    <EasingDoubleKeyFrame.EasingFunction>
-                        <CircleEase EasingMode="EaseOut"/>
-                    </EasingDoubleKeyFrame.EasingFunction>
-                </EasingDoubleKeyFrame>
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[1].(GradientStop.Offset)" Storyboard.TargetName="WindowGrid">
-                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="1">
-                    <EasingDoubleKeyFrame.EasingFunction>
-                        <CircleEase EasingMode="EaseOut"/>
-                    </EasingDoubleKeyFrame.EasingFunction>
-                </EasingDoubleKeyFrame>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="0.336">
-                    <EasingDoubleKeyFrame.EasingFunction>
-                        <CircleEase EasingMode="EaseOut"/>
-                    </EasingDoubleKeyFrame.EasingFunction>
-                </EasingDoubleKeyFrame>
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[0].(GradientStop.Offset)" Storyboard.TargetName="WindowGrid">
-                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="0.197">
-                    <EasingDoubleKeyFrame.EasingFunction>
-                        <CircleEase EasingMode="EaseOut"/>
-                    </EasingDoubleKeyFrame.EasingFunction>
-                </EasingDoubleKeyFrame>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="0.065">
                     <EasingDoubleKeyFrame.EasingFunction>
                         <CircleEase EasingMode="EaseOut"/>
                     </EasingDoubleKeyFrame.EasingFunction>
@@ -168,13 +144,13 @@
                 <SplineInt32KeyFrame KeyTime="0" Value="2"/>
                 <SplineInt32KeyFrame KeyTime="0:0:0.2" Value="0"/>
             </Int32AnimationUsingKeyFrames>
-            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[1].(GradientStop.Color)" Storyboard.TargetName="WindowGrid">
-                <SplineColorKeyFrame KeyTime="0" Value="#FFF91212"/>
-                <SplineColorKeyFrame KeyTime="0:0:0.5" Value="#FFF96912"/>
-            </ColorAnimationUsingKeyFrames>
             <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[0].(GradientStop.Color)" Storyboard.TargetName="WindowGrid">
-                <SplineColorKeyFrame KeyTime="0" Value="Red"/>
-                <SplineColorKeyFrame KeyTime="0:0:0.5" Value="#FF0080FF"/>
+                <SplineColorKeyFrame KeyTime="0" Value="{DynamicResource search1}"/>
+                <SplineColorKeyFrame KeyTime="0:0:0.5" Value="{DynamicResource home1}"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[1].(GradientStop.Color)" Storyboard.TargetName="WindowGrid">
+                <SplineColorKeyFrame KeyTime="0" Value="{DynamicResource search2}"/>
+                <SplineColorKeyFrame KeyTime="0:0:0.5" Value="{DynamicResource home2}"/>
             </ColorAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="button">
                 <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
@@ -183,14 +159,6 @@
                         <CircleEase EasingMode="EaseOut"/>
                     </EasingDoubleKeyFrame.EasingFunction>
                 </EasingDoubleKeyFrame>
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[1].(GradientStop.Offset)" Storyboard.TargetName="WindowGrid">
-                <SplineDoubleKeyFrame KeyTime="0" Value="0.336"/>
-                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="1"/>
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[0].(GradientStop.Offset)" Storyboard.TargetName="WindowGrid">
-                <SplineDoubleKeyFrame KeyTime="0" Value="0.065"/>
-                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="0.197"/>
             </DoubleAnimationUsingKeyFrames>
             <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="button">
                 <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
@@ -216,8 +184,12 @@
                 </EasingDoubleKeyFrame>
             </DoubleAnimationUsingKeyFrames>
             <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[0].(GradientStop.Color)" Storyboard.TargetName="WindowGrid">
-                <EasingColorKeyFrame KeyTime="0" Value="#FF0080FF"/>
-                <EasingColorKeyFrame KeyTime="0:0:0.5" Value="#FFF96912"/>
+                <EasingColorKeyFrame KeyTime="0" Value="{DynamicResource home1}"/>
+                <EasingColorKeyFrame KeyTime="0:0:0.5" Value="{DynamicResource login1}"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[1].(GradientStop.Color)" Storyboard.TargetName="WindowGrid">
+                <EasingColorKeyFrame KeyTime="0" Value="{DynamicResource home2}"/>
+                <EasingColorKeyFrame KeyTime="0:0:0.5" Value="{DynamicResource login2}"/>
             </ColorAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="button">
                 <EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="0">
@@ -258,11 +230,11 @@
                     </EasingDoubleKeyFrame.EasingFunction>
                 </EasingDoubleKeyFrame>
             </DoubleAnimationUsingKeyFrames>
-            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[1].(GradientStop.Color)" Storyboard.TargetName="WindowGrid">
-                <EasingColorKeyFrame KeyTime="0:0:0.5" Value="#FF4285F4"/>
-            </ColorAnimationUsingKeyFrames>
             <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[0].(GradientStop.Color)" Storyboard.TargetName="WindowGrid">
-                <EasingColorKeyFrame KeyTime="0:0:0.5" Value="#FF0080FF"/>
+                <EasingColorKeyFrame KeyTime="0:0:0.5" Value="{DynamicResource signUp1}"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[1].(GradientStop.Color)" Storyboard.TargetName="WindowGrid">
+                <EasingColorKeyFrame KeyTime="0:0:0.5" Value="{DynamicResource signUp2}"/>
             </ColorAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="button">
                 <EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="0">
@@ -277,11 +249,11 @@
             </BooleanAnimationUsingKeyFrames>
         </Storyboard>
         <Storyboard x:Key="HideLoginGrid">
-            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[1].(GradientStop.Color)" Storyboard.TargetName="WindowGrid">
-                <EasingColorKeyFrame KeyTime="0:0:0.5" Value="#FFF96912"/>
-            </ColorAnimationUsingKeyFrames>
             <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[0].(GradientStop.Color)" Storyboard.TargetName="WindowGrid">
-                <EasingColorKeyFrame KeyTime="0:0:0.5" Value="#FF0080FF"/>
+                <EasingColorKeyFrame KeyTime="0:0:0.5" Value="{DynamicResource home1}"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[1].(GradientStop.Color)" Storyboard.TargetName="WindowGrid">
+                <EasingColorKeyFrame KeyTime="0:0:0.5" Value="{DynamicResource home2}"/>
             </ColorAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="StartPageGrid">
                 <EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="0">
@@ -331,12 +303,13 @@
                     </EasingDoubleKeyFrame.EasingFunction>
                 </EasingDoubleKeyFrame>
             </DoubleAnimationUsingKeyFrames>
-            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[1].(GradientStop.Color)" Storyboard.TargetName="WindowGrid">
-                <EasingColorKeyFrame KeyTime="0:0:0.5" Value="#FFF96912"/>
-            </ColorAnimationUsingKeyFrames>
             <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[0].(GradientStop.Color)" Storyboard.TargetName="WindowGrid">
-                <EasingColorKeyFrame KeyTime="0" Value="#FF0080FF"/>
-                <EasingColorKeyFrame KeyTime="0:0:0.5" Value="#FF0080FF"/>
+                <EasingColorKeyFrame KeyTime="0" Value="{DynamicResource signUp1}"/>
+                <EasingColorKeyFrame KeyTime="0:0:0.5" Value="{DynamicResource home1}"/>
+            </ColorAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[1].(GradientStop.Color)" Storyboard.TargetName="WindowGrid">
+                <EasingColorKeyFrame KeyTime="0" Value="{DynamicResource signUp2}"/>
+                <EasingColorKeyFrame KeyTime="0:0:0.5" Value="{DynamicResource home2}"/>
             </ColorAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="StartPageGrid">
                 <EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="0">
@@ -357,37 +330,35 @@
                 </EasingDoubleKeyFrame>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
-        <Storyboard x:Key="HighlightLoginButton">
-            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="loginButton" KeyboardNavigation.TabIndex="2">
-                <EasingColorKeyFrame KeyTime="0:0:0.2" Value="#72FFFFFF"/>
-            </ColorAnimationUsingKeyFrames>
-        </Storyboard>
         <Storyboard x:Key="Startup">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="StartPageGrid">
                 <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
                 <EasingDoubleKeyFrame KeyTime="0:0:1" Value="1"/>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="LanguageGrid">
                 <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
                 <EasingDoubleKeyFrame KeyTime="0:0:1" Value="1"/>
             </DoubleAnimationUsingKeyFrames>
-            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[1].(GradientStop.Color)" Storyboard.TargetName="WindowGrid">
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[0].(GradientStop.Color)" Storyboard.TargetName="WindowGrid">
                 <EasingColorKeyFrame KeyTime="0" Value="Black"/>
-                <EasingColorKeyFrame KeyTime="0:0:0.5" Value="#FFF96912">
+                <EasingColorKeyFrame KeyTime="0:0:0.5" Value="{DynamicResource home1}">
                     <EasingColorKeyFrame.EasingFunction>
                         <CircleEase EasingMode="EaseInOut"/>
                     </EasingColorKeyFrame.EasingFunction>
                 </EasingColorKeyFrame>
             </ColorAnimationUsingKeyFrames>
-            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[0].(GradientStop.Color)" Storyboard.TargetName="WindowGrid">
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[1].(GradientStop.Color)" Storyboard.TargetName="WindowGrid">
                 <EasingColorKeyFrame KeyTime="0" Value="Black"/>
-                <EasingColorKeyFrame KeyTime="0:0:0.5" Value="#FF0080FF">
+                <EasingColorKeyFrame KeyTime="0:0:0.5" Value="{DynamicResource home2}">
                     <EasingColorKeyFrame.EasingFunction>
                         <CircleEase EasingMode="EaseInOut"/>
                     </EasingColorKeyFrame.EasingFunction>
                 </EasingColorKeyFrame>
+            </ColorAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="HighlightLoginButton">
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="loginButton" KeyboardNavigation.TabIndex="2">
+                <EasingColorKeyFrame KeyTime="0:0:0.2" Value="#72FFFFFF"/>
             </ColorAnimationUsingKeyFrames>
         </Storyboard>
         <Storyboard x:Key="LeaveLoginButton">
@@ -420,14 +391,16 @@
         </Storyboard>
     </Window.Resources>
     <Window.Triggers>
-        <EventTrigger RoutedEvent="FrameworkElement.Loaded"/>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <BeginStoryboard x:Name="Startup_BeginStoryboard" Storyboard="{StaticResource Startup}"/>
+        </EventTrigger>
     </Window.Triggers>
 
     <Grid x:Name="WindowGrid">
         <Grid.Background>
-            <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
-                <GradientStop Color="#FF0080FF" Offset="0.197"/>
-                <GradientStop Color="#FFF96912" Offset="0.937"/>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="{DynamicResource home1}" Offset="0"/>
+                <GradientStop Color="{DynamicResource home2}" Offset="1"/>
             </LinearGradientBrush>
         </Grid.Background>
         <Grid x:Name="SearchResultsGrid" Margin="0" Background="#00000000" RenderTransformOrigin="0,0">
@@ -439,7 +412,11 @@
                     <TranslateTransform X="{DynamicResource negativeScreenWidth}"/>
                 </TransformGroup>
             </Grid.RenderTransform>
-            <ListBox x:Name="listBox" HorizontalAlignment="Left" HorizontalContentAlignment="Stretch" Margin="47.143,268.857,0,31.715" Width="356.571" BorderBrush="Transparent" Background="Transparent" BorderThickness="0" FontSize="24" SelectionChanged="listBox_SelectionChanged" ItemContainerStyle="{DynamicResource ModernListBoxItemStyle}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <ListBox x:Name="listBox" HorizontalContentAlignment="Stretch" Margin="20,229,20,20" BorderBrush="Transparent" Background="Transparent" BorderThickness="0" FontSize="24" SelectionChanged="listBox_SelectionChanged" ItemContainerStyle="{DynamicResource ModernListBoxItemStyle}" ScrollViewer.HorizontalScrollBarVisibility="Hidden">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Vertical">
@@ -450,6 +427,20 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
+            <StackPanel Grid.Column="1" Margin="10">
+                <Border BorderThickness="2" BorderBrush="Black" Height="200" Width="140" Margin="0,10,0,0">
+                    <Image Height="200" Width="140" Margin="0,10,0,0">
+                    </Image>
+                </Border>
+                <TextBlock Margin="0,10,0,0">NAME OF THE BOOK</TextBlock>
+                <TextBlock x:Name="bookName" FontSize="24" TextWrapping="Wrap">Insert the name of the book here! This can wrap over</TextBlock>
+                <TextBlock Margin="0,10,0,0">AUTHOR</TextBlock>
+                <TextBlock x:Name="authorName" FontSize="24" TextWrapping="Wrap">Mysterious Author guy</TextBlock>
+                <TextBlock Margin="0,10,0,0">BOOK ID</TextBlock>
+                <TextBlock x:Name="bookID" FontSize="24" TextWrapping="Wrap">Book ID goes here</TextBlock>
+                <TextBlock Margin="0,10,0,0">ISBN</TextBlock>
+                <TextBlock x:Name="bookISBN" FontSize="24" TextWrapping="Wrap">978-951-25-2710-6</TextBlock>
+            </StackPanel>
         </Grid>
         <Grid x:Name="StartPageGrid" Margin="0" RenderTransformOrigin="0,0">
             <Grid.RenderTransform>
@@ -478,7 +469,7 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <TextBox x:Name="searchBox" Margin="44,59,44,0" Grid.Column="0" VerticalAlignment="Top" Background="#00000000" Text="{local:Loc DefaultSearchBoxContent}" FontSize="24" FontFamily="Sylfaen" Visibility="Hidden" BorderThickness="0" Foreground="Black" Height="40" IsUndoEnabled="False" Opacity="0" GotFocus="searchBox_GotFocus" TextChanged="searchBox_TextChanged" LostFocus="searchBox_LostFocus" Width="238"/>
+                <TextBox x:Name="searchBox" Margin="44,59,44,0" Grid.Column="0" VerticalAlignment="Top" Background="#00000000" Text="{local:Loc DefaultSearchBoxContent}" FontSize="24" FontFamily="Sylfaen" Visibility="Hidden" BorderThickness="0" Foreground="Black" Height="40" IsUndoEnabled="False" Opacity="0" GotFocus="searchBox_GotFocus" TextChanged="searchBox_TextChanged" LostFocus="searchBox_LostFocus"/>
                 <Rectangle x:Name="searchButton" HorizontalAlignment="Center" Height="250" Margin="0,50,0,0" VerticalAlignment="Top" Width="250" RadiusX="125" RadiusY="125" MouseUp="searchButton_MouseUp" RenderTransformOrigin="0.497,0.494" Grid.Column="0" Stroke="Black" Grid.ColumnSpan="1" Cursor="Hand" MouseEnter="searchButton_MouseEnter" MouseLeave="searchButton_MouseLeave" Fill="#33FFFFFF" StrokeThickness="0">
                     <Rectangle.RenderTransform>
                         <TransformGroup>
@@ -548,8 +539,8 @@
                 </TransformGroup>
             </Grid.RenderTransform>
             <Grid x:Name="LoginFieldsGrid" Margin="300,326">
-                <TextBox x:Name="username" Height="32" Margin="10,10,100,0" Text="{local:Loc DefaultLoginUsernameBoxContent}" VerticalAlignment="Top" MaxLength="100" TextWrapping="Wrap" GotFocus="username_GotFocus" LostFocus="username_LostFocus" FontSize="16" TextChanged="username_TextChanged"/>
-                <PasswordBox x:Name="password" Height="31" Margin="10,45,100,0" VerticalAlignment="Top" FontSize="16"/>
+                <TextBox x:Name="username" Height="32" Margin="10,10,100,0" Text="{local:Loc DefaultLoginUsernameBoxContent}" VerticalAlignment="Top" MaxLength="100" TextWrapping="Wrap" GotFocus="username_GotFocus" LostFocus="username_LostFocus" FontSize="16" TextChanged="username_TextChanged" KeyDown="username_KeyDown"/>
+                <PasswordBox x:Name="password" Height="31" Margin="10,45,100,0" VerticalAlignment="Top" FontSize="16" KeyDown="password_KeyDown"/>
                 <Button x:Name="loginButton1" Content="{local:Loc DefaultLoginButtonContent}" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Width="85" Height="66" FontSize="18.667" Padding="1,0,1,1" Style="{DynamicResource ModernButtonStyle}" Click="loginButton1_Click"/>
             </Grid>
         </Grid>
