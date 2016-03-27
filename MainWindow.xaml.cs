@@ -462,7 +462,6 @@ namespace JLLKirjasto
             currentView = 2;
             Storyboard ShowLoginGrid = this.FindResource("ShowLoginGrid") as Storyboard;
             ShowLoginGrid.Begin();
-
         }
 
         private void GoHomeStoryboardCompleted(object sender, EventArgs e)

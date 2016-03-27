@@ -18,7 +18,62 @@
             <StackPanel>
                 <TextBlock x:Name="BooksGridTitle" Margin="5" TextWrapping="Wrap" VerticalAlignment="Top" Height="31" FontWeight="Bold" TextAlignment="Center" FontSize="20"><Run Text="Kirjat"/><Run Text="ietokannan hallinta"/></TextBlock>
                 <TextBox x:Name="BooksSearch" Height="31" Margin="5" TextWrapping="Wrap" VerticalAlignment="Top" TextAlignment="Center" FontSize="20" TextChanged="BooksSearch_TextChanged"/>
-                <DataGrid x:Name="BookGrid"></DataGrid>
+                <Expander Header="Hakuasetukset" >
+                    <StackPanel Orientation="Horizontal">
+                        <Grid x:Name="IDCheckBoxGrid" Width="Auto">
+                            <StackPanel Orientation="Horizontal">
+                                <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}"/>
+                                <Label Content="ID"/>
+                                <CheckBox x:Name="IDCheckBox" VerticalContentAlignment="Center" Checked="IDCheckBox_Checked" Unchecked="IDCheckBox_Unchecked"/>
+                                <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}"/>
+                            </StackPanel>
+                            
+                        </Grid>
+                        <Grid x:Name="AuthorCheckBoxGrid" Width="Auto">
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Author"/>
+                                <CheckBox x:Name="AuthorCheckBox" VerticalContentAlignment="Center" Checked="AuthorCheckBox_Checked" Unchecked="AuthorCheckBox_Unchecked"/>
+                                <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}"/>
+                            </StackPanel>
+
+                        </Grid>
+                        <Grid x:Name="TitleCheckBoxGrid" Width="Auto">
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Title"/>
+                                <CheckBox x:Name="TitleCheckBox" VerticalContentAlignment="Center" Checked="TitleCheckBox_Checked" Unchecked="TitleCheckBox_Unchecked"/>
+                                <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}"/>
+                            </StackPanel>
+
+                        </Grid>
+                        <Grid x:Name="YearCheckBoxGrid" Width="Auto">
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Year"/>
+                                <CheckBox x:Name="YearCheckBox" VerticalContentAlignment="Center" Checked="YearCheckBox_Checked" Unchecked="YearCheckBox_Unchecked"/>
+                                <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}"/>
+                            </StackPanel>
+
+                        </Grid>
+                        <Grid x:Name="LanguageCheckBoxGrid" Width="Auto">
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Language"/>
+                                <CheckBox x:Name="LanguageCheckBox" VerticalContentAlignment="Center" Checked="LanguageCheckBox_Checked" Unchecked="LanguageCheckBox_Unchecked"/>
+                                <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}"/>
+                            </StackPanel>
+
+                        </Grid>
+                        <Grid x:Name="AvailableCheckBoxGrid" Width="Auto">
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Available"/>
+                                <CheckBox x:Name="AvailableCheckBox" VerticalContentAlignment="Center" Checked="AvailableCheckBox_Checked" Unchecked="AvailableCheckBox_Unchecked"/>
+                                <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}"/>
+                            </StackPanel>
+
+                        </Grid>
+
+
+                    </StackPanel>
+                </Expander>
+                <DataGrid x:Name="BookDataGrid"></DataGrid>
             </StackPanel>
             
         </Grid>
