@@ -12,6 +12,15 @@
         <core:Double x:Key="screenHeight">3000</core:Double>
         <core:Double x:Key="negativeScreenHeight">-3000</core:Double>
 
+        <Color x:Key="home1">Purple</Color>
+        <Color x:Key="home2">Orange</Color>
+        <Color x:Key="search1">Green</Color>
+        <Color x:Key="search2">#FF84FF44</Color>
+        <Color x:Key="login1">#FF030098</Color> 
+        <Color x:Key="login2">#FF3E5FFF</Color>
+        <Color x:Key="signUp1">Orange</Color>
+        <Color x:Key="signUp2">Orange</Color>
+
         <Style x:Key="FocusVisual">
             <Setter Property="Control.Template">
                 <Setter.Value>

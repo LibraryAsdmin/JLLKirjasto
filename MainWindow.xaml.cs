@@ -18,6 +18,7 @@ using System.ComponentModel;
 using System.Globalization;
 using System.Resources;
 using System.Data.SQLite;
+using System.Windows.Controls.Primitives;
 
 namespace JLLKirjasto
 {
@@ -83,6 +84,9 @@ namespace JLLKirjasto
         private TranslateTransform middleFlagTransform;
         private TranslateTransform bottomFlagTransform;
         private Storyboard gradientStoryboard;
+        private Storyboard ShowSearchResultsGrid;
+
+        //all the background colours used in gradients
 
         AdminControlsWindow adminwindow;
 
@@ -122,6 +126,7 @@ namespace JLLKirjasto
             bottomFlagTransform = new TranslateTransform(0, 0);
             gradientStoryboard = new Storyboard();
 
+            //initializes and begins the gradient animation
             PointAnimation gradientTurn = new PointAnimation(new Point(0.2, 1), new Point(0.8, 1), TimeSpan.FromSeconds(10));
             gradientStoryboard.Children.Add(gradientTurn);
             gradientStoryboard.RepeatBehavior = RepeatBehavior.Forever;
@@ -136,10 +141,31 @@ namespace JLLKirjasto
             search("");
             updateSearchResults();
 
+
+            //initializes ShowSearchResultsGrid animation storyboard
+            //WORK IN PROGRESS
+            ShowSearchResultsGrid = new Storyboard();
+            
+
         }
 
         #region UI Handling
-        
+
+        private void username_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                loginButton1.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+            }
+        }
+
+        private void password_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                loginButton1.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+            }
+        }
 
         private void LanguageGrid_MouseEnter(object sender, MouseEventArgs e)
         {
@@ -661,6 +687,8 @@ namespace JLLKirjasto
             listBox.ItemsSource = items;
         }
 
-        #endregion  
+        #endregion
+
+
     }
 }
