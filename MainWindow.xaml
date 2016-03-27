@@ -511,7 +511,7 @@
 
                 <TextBlock x:Name="logInText" Grid.ColumnSpan="1" Grid.Column="1" Margin="10,310,10,0" TextWrapping="Wrap" FontSize="32" Text="{local:Loc TextUnderLogin}"/>
                 <TextBlock x:Name="searchText" Margin="10,310,10,0" TextWrapping="Wrap"  FontSize="32" Text="{local:Loc TextUnderSearchBox}" Grid.ColumnSpan="1"/>
-                <Image x:Name="signupIcon" HorizontalAlignment="Left" Height="250" Margin="41,50,0,0" VerticalAlignment="Top" Width="250" Source="Images/signUp.png" Opacity="0.25" Grid.Column="2"/>
+                <Label x:Name="signupIcon" Content="?" Grid.Column="2" HorizontalAlignment="Left" Height="303" Margin="88,20,0,0" VerticalAlignment="Top" Width="190" FontSize="266.667" Foreground="White" Opacity="0.25" FontFamily="Arial"/>
                 <Rectangle x:Name="signupButton" Grid.Column="2" Fill="#33FFFFFF" HorizontalAlignment="Center" Height="250" Margin="0,50,0,0" RadiusY="125" RadiusX="125" Stroke="Black" VerticalAlignment="Top" Width="250" StrokeThickness="0" Cursor="Hand" MouseUp="signupButton_MouseUp" MouseEnter="signupButton_MouseEnter" MouseLeave="signupButton_MouseLeave" RenderTransformOrigin="0.5,0.5">
                     <Rectangle.RenderTransform>
                         <TransformGroup>
