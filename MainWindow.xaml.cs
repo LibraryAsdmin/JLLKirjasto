@@ -100,7 +100,7 @@ namespace JLLKirjasto
         List<String> searchResultAuthors;
         List<Int32> searchResultIDs;
 
-        SQLiteConnection dbconnection = new SQLiteConnection("Data Source=database.db");
+        private SQLiteConnection dbconnection = new SQLiteConnection("Data Source=database.db");
         #endregion
 
         public MainWindow()
@@ -661,6 +661,6 @@ namespace JLLKirjasto
             listBox.ItemsSource = items;
         }
 
-        #endregion  
+        #endregion
     }
 }
