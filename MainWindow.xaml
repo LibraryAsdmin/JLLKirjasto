@@ -438,8 +438,11 @@
                 <TextBlock x:Name="authorName" FontSize="24" TextWrapping="Wrap">Mysterious Author guy</TextBlock>
                 <TextBlock Margin="0,10,0,0">BOOK ID</TextBlock>
                 <TextBlock x:Name="bookID" FontSize="24" TextWrapping="Wrap">Book ID goes here</TextBlock>
+                <TextBlock Margin="0,10,0,0">AVAILABILITY</TextBlock>
+                <TextBlock x:Name="availability" FontSize="24" TextWrapping="Wrap">Availibility status of the book is here</TextBlock>
                 <TextBlock Margin="0,10,0,0">ISBN</TextBlock>
                 <TextBlock x:Name="bookISBN" FontSize="24" TextWrapping="Wrap">978-951-25-2710-6</TextBlock>
+               
             </StackPanel>
         </Grid>
         <Grid x:Name="StartPageGrid" Margin="0" RenderTransformOrigin="0,0">
