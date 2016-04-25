@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:JLLKirjasto"
              xmlns:core="clr-namespace:System;assembly=mscorlib"
+             xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing"
              StartupUri="MainWindow.xaml">
 
     <Application.Resources>
@@ -143,7 +144,7 @@
                                     </VisualState>
                                 </VisualStateGroup>
                             </VisualStateManager.VisualStateGroups>
-                            
+
                             <ContentPresenter />
                         </Border>
                         <ControlTemplate.Triggers>
@@ -177,6 +178,57 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        
+
+        <SolidColorBrush x:Key="NormalHexagonBrush" Color="#33FFFFFF"/>
+        <Color x:Key="NormalColour">#33FFFFFF</Color>
+        <Color x:Key="MouseOverHexagonColour">#72FFFFFF</Color>
+        <Color x:Key="HexagonMouseDownColour">#8FFFFFFF</Color>
+        <Color x:Key="HexagonDisabledColour">#33000000</Color>
+
+        <ControlTemplate x:Key="ModernHexagonButtonStyle" TargetType="{x:Type Button}">
+            <Grid>
+                <ed:RegularPolygon Fill="{StaticResource NormalHexagonBrush}" Name="Hexagon" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <ed:RegularPolygon Name="Icon" Cursor="Hand" Opacity="0.5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <ed:RegularPolygon.Fill>
+                        <ImageBrush ImageSource="{Binding Path=Content, RelativeSource={RelativeSource TemplatedParent}}"/>
+                    </ed:RegularPolygon.Fill>
+                </ed:RegularPolygon>
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualStateGroup.Transitions>
+                            <VisualTransition GeneratedDuration="0:0:0:0.2" />
+                            <VisualTransition GeneratedDuration="0" To="Pressed" />
+                        </VisualStateGroup.Transitions>
+                        <VisualState x:Name="Normal" />
+                        <VisualState x:Name="MouseOver">
+                            <Storyboard>
+                                <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="Fill.(SolidColorBrush.Color)"
+                                                Storyboard.TargetName="Hexagon">
+                                    <EasingColorKeyFrame KeyTime="0" Value="{StaticResource MouseOverHexagonColour}" />
+                                </ColorAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </VisualState>
+                        <VisualState x:Name="Pressed">
+                            <Storyboard>
+                                <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="Fill.(SolidColorBrush.Color)"
+                                                Storyboard.TargetName="Hexagon">
+                                    <EasingColorKeyFrame KeyTime="0" Value="{StaticResource HexagonMouseDownColour}" />
+                                </ColorAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </VisualState>
+                        <VisualState x:Name="Disabled">
+                            <Storyboard>
+                                <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="Fill.(SolidColorBrush.Color)"
+                                                Storyboard.TargetName="Hexagon">
+                                    <EasingColorKeyFrame KeyTime="0" Value="{StaticResource HexagonDisabledColour}" />
+                                </ColorAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateManager.VisualStateGroups>
+            </Grid>
+            
+        </ControlTemplate>
+
     </Application.Resources>
 </Application>

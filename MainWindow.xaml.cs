@@ -79,8 +79,6 @@ namespace JLLKirjasto
         private Storyboard gradientStoryboard;
         private Storyboard ShowSearchResultsGrid;
 
-        //all the background colours used in gradients
-
         AdminControlsWindow adminwindow;
 
         bool atHome = true; //are we currently in home view?
@@ -185,26 +183,6 @@ namespace JLLKirjasto
                 //fire up the animation by finding it from the xaml resources
                 Storyboard BringUpSearchResults = this.FindResource("BringUpSearchResults") as Storyboard;
                 BringUpSearchResults.Begin();
-
-                //searchBox and searchButton are moved from the parenthood of StartPageContentGrid to that of windowGrid.
-                //To make their coordinates stay constant, we fetch them relative to the window and then position them again.
-                GeneralTransform transformButton = searchButton.TransformToAncestor(this);
-                GeneralTransform transformBox = searchBox.TransformToAncestor(this);
-                StartPageContentGrid.Children.Remove(searchButton);
-                StartPageContentGrid.Children.Remove(searchBox);
-                WindowGrid.Children.Add(searchButton);
-                WindowGrid.Children.Add(searchBox);
-                Point whereToTransformButton = transformButton.Transform(new Point(0, 0));
-                TranslateTransform tt1 = new TranslateTransform(whereToTransformButton.X, whereToTransformButton.Y);
-                searchButton.RenderTransform = tt1;
-                searchButton.HorizontalAlignment = HorizontalAlignment.Left;
-                searchButton.Margin = new Thickness(0);
-                Point whereToTransformBox = transformBox.Transform(new Point(0, 0));
-                TranslateTransform tt2 = new TranslateTransform(whereToTransformBox.X, whereToTransformBox.Y);
-                searchBox.RenderTransform = tt2;
-                searchBox.HorizontalAlignment = HorizontalAlignment.Left;
-                searchBox.Margin = new Thickness(0);
-
             }
         }
 
@@ -231,52 +209,6 @@ namespace JLLKirjasto
                 updateSearchResults();
 
             }
-
-
-
-        }
-
-        // Home screen button visual appearance handling
-        private void searchButton_MouseEnter(object sender, MouseEventArgs e)
-        {
-            if (0 == currentView)
-            {
-                Storyboard HighlightSearchButton = this.FindResource("HighlightSearchButton") as Storyboard;
-                HighlightSearchButton.Begin();
-            }
-        }
-
-        private void searchButton_MouseLeave(object sender, MouseEventArgs e)
-        {
-            if (0 == currentView)
-            {
-                Storyboard LeaveSearchButton = this.FindResource("LeaveSearchButton") as Storyboard;
-                LeaveSearchButton.Begin();
-            }
-        }
-
-        private void signupButton_MouseEnter(object sender, MouseEventArgs e)
-        {
-            Storyboard HighlightSignUpButton = this.FindResource("HighlightSignUpButton") as Storyboard;
-            HighlightSignUpButton.Begin();
-        }
-
-        private void signupButton_MouseLeave(object sender, MouseEventArgs e)
-        {
-            Storyboard LeaveSignUpButton = this.FindResource("LeaveSignUpButton") as Storyboard;
-            LeaveSignUpButton.Begin();
-        }
-
-        private void loginButton_MouseEnter(object sender, MouseEventArgs e)
-        {
-            Storyboard HighlightLoginButton = this.FindResource("HighlightLoginButton") as Storyboard;
-            HighlightLoginButton.Begin();
-        }
-
-        private void loginButton_MouseLeave(object sender, MouseEventArgs e)
-        {
-            Storyboard LeaveLoginButton = this.FindResource("LeaveLoginButton") as Storyboard;
-            LeaveLoginButton.Begin();
         }
 
         // Login username input field behaviour
@@ -361,7 +293,7 @@ namespace JLLKirjasto
 
         private void signupButton1_Click(object sender, RoutedEventArgs e)
         {
-            if (signupField.Text.Contains("@edu.jns.fi"))
+            if (signupField.Text.EndsWith("@edu.jns.fi"))
             {
                 try
                 {
@@ -437,56 +369,30 @@ namespace JLLKirjasto
             currentView = 0; //we're home now
         }
 
-        private void signupButton_MouseUp(object sender, MouseButtonEventArgs e)
+        private void signupButton_Click(object sender, RoutedEventArgs e)
         {
             currentView = 3;
             Storyboard ShowSignUpGrid = this.FindResource("ShowSignUpGrid") as Storyboard;
             ShowSignUpGrid.Begin();
         }
 
-        private void loginButton_MouseUp(object sender, MouseButtonEventArgs e)
+        private void loginButton_Click(object sender, RoutedEventArgs e)
         {
             currentView = 2;
             Storyboard ShowLoginGrid = this.FindResource("ShowLoginGrid") as Storyboard;
             ShowLoginGrid.Begin();
         }
 
-        private void GoHomeStoryboardCompleted(object sender, EventArgs e)
+        private void searchButton_Click(object sender, RoutedEventArgs e)
         {
-            //searchBox and searchButton are returned to be children of StartPageContentGrid
-            WindowGrid.Children.Remove(searchButton);
-            WindowGrid.Children.Remove(searchBox);
-            StartPageContentGrid.Children.Add(searchButton);
-            StartPageContentGrid.Children.Add(searchBox);
-            searchButton.RenderTransform = new TranslateTransform(0, 0);
-            searchButton.VerticalAlignment = VerticalAlignment.Top;
-            searchButton.HorizontalAlignment = HorizontalAlignment.Center;
-            searchButton.Margin = new Thickness(0, 50, 0, 0);
-            searchBox.HorizontalAlignment = HorizontalAlignment.Stretch;
-            searchBox.Margin = new Thickness(44, 59, 44, 0);
-            searchBox.RenderTransform = new TranslateTransform(0, 0);
-
-            atHome = true; //we're home, so the searchButton can now trigger another animation if the user so desires
+            currentView = 1;
+            Storyboard BringUpSearchResults = this.FindResource("BringUpSearchResults") as Storyboard;
+            BringUpSearchResults.Begin();
         }
 
-        public static IEnumerable<T> FindVisualChildren<T>(DependencyObject depObj) where T : DependencyObject
+        private void GoHomeStoryboardCompleted(object sender, EventArgs e)
         {
-            if (depObj != null)
-            {
-                for (int i = 0; i < VisualTreeHelper.GetChildrenCount(depObj); i++)
-                {
-                    DependencyObject child = VisualTreeHelper.GetChild(depObj, i);
-                    if (child != null && child is T)
-                    {
-                        yield return (T)child;
-                    }
-
-                    foreach (T childOfChild in FindVisualChildren<T>(child))
-                    {
-                        yield return childOfChild;
-                    }
-                }
-            }
+            atHome = true; //we're home, so the searchButton can now trigger another animation if the user so desires
         }
 
 
@@ -574,7 +480,7 @@ namespace JLLKirjasto
         }
 
         // Extends the list of languages
-        private void showLanguages(double middleY, double bottomÝ)
+        private void showLanguages(double middleY, double bottomY)
         {
             Duration duration = new Duration(TimeSpan.FromMilliseconds(250));
 
@@ -585,7 +491,7 @@ namespace JLLKirjasto
             Swedish.RenderTransform = middleFlagTransform;
 
             // transform the bottom flag from current position to bottom
-            bottomFlagTransform = new TranslateTransform(0, bottomÝ);
+            bottomFlagTransform = new TranslateTransform(0, bottomY);
             DoubleAnimation anim2 = new DoubleAnimation(80, duration);
             bottomFlagTransform.BeginAnimation(TranslateTransform.YProperty, anim2);
             English.RenderTransform = bottomFlagTransform;
@@ -608,8 +514,6 @@ namespace JLLKirjasto
             bottomFlagTransform.BeginAnimation(TranslateTransform.YProperty, anim2);
             English.RenderTransform = bottomFlagTransform;
         }
-
-
 
 
         #endregion
@@ -709,5 +613,6 @@ namespace JLLKirjasto
             MessageBox.Show(m);
         }
         #endregion
+     
     }
 }
