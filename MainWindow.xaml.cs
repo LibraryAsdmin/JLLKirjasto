@@ -141,7 +141,7 @@ namespace JLLKirjasto
             //initializes ShowSearchResultsGrid animation storyboard
             //WORK IN PROGRESS
             ShowSearchResultsGrid = new Storyboard();
-            
+
 
         }
 
@@ -236,8 +236,19 @@ namespace JLLKirjasto
 
             }
             else
-            {
+            {            
                 username.Foreground = new SolidColorBrush(Colors.Black);
+
+                //making sure password is hidden if admin credentials not present
+                password.Visibility = Visibility.Hidden;
+                Grid.SetRowSpan(loginButton1, 1);
+
+                //making password field visible when admin credentials are present
+                if (username.Text == "admin")
+                {
+                        password.Visibility = Visibility.Visible;
+                        Grid.SetRowSpan(loginButton1, 2);
+                }
             }
         }
 
@@ -587,7 +598,7 @@ namespace JLLKirjasto
 
             foreach (List<String> row in searchResults)
             {
-                ListBoxItems.Add(new Book() { BookID = row[0], Author = row[1], Title = row[2], Year = row[3], Language = row[4], Available = row[5]});
+                ListBoxItems.Add(new Book() { BookID = row[0], Author = row[1], Title = row[2], Year = row[3], Language = row[4], Available = row[5] });
             }
             searchResultsListBox.ItemsSource = ListBoxItems;
         }
@@ -613,6 +624,6 @@ namespace JLLKirjasto
             MessageBox.Show(m);
         }
         #endregion
-     
+
     }
 }

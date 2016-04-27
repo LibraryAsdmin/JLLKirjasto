@@ -349,6 +349,7 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
+            <TextBox x:Name="searchBox" Style="{StaticResource ModernTextBoxStyle}" Margin="20,170,20,0" Grid.Column="0" VerticalAlignment="Top" Text="{local:Loc DefaultSearchBoxContent}" FontSize="24" FontFamily="Sylfaen" Foreground="Black" GotFocus="searchBox_GotFocus" TextChanged="searchBox_TextChanged" LostFocus="searchBox_LostFocus"/>
             <ListBox x:Name="searchResultsListBox" HorizontalContentAlignment="Stretch" Margin="20,229,20,20" BorderBrush="Transparent" Background="Transparent" BorderThickness="0" FontSize="24" ItemContainerStyle="{DynamicResource ModernListBoxItemStyle}" ScrollViewer.HorizontalScrollBarVisibility="Hidden">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
@@ -403,15 +404,24 @@
                         <TranslateTransform/>
                     </TransformGroup>
                 </Grid.RenderTransform>
-                <TextBox x:Name="searchBox" Margin="44,59,44,0" Grid.Column="0" VerticalAlignment="Top" Background="#00000000" Text="{local:Loc DefaultSearchBoxContent}" FontSize="24" FontFamily="Sylfaen" Visibility="Hidden" BorderThickness="0" Foreground="Black" Height="40" IsUndoEnabled="False" Opacity="0" GotFocus="searchBox_GotFocus" TextChanged="searchBox_TextChanged" LostFocus="searchBox_LostFocus"/>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                
 
 
-                <TextBlock x:Name="logInText" Margin="10,218.521,0,175.615" TextWrapping="Wrap" FontSize="32" Text="{local:Loc TextUnderLogin}" HorizontalAlignment="Left" Width="309.444"/>
+                <TextBlock x:Name="logInText" Margin="163.333,0,0,124.334" TextWrapping="Wrap" FontSize="32" Text="{local:Loc TextUnderLogin}" HorizontalAlignment="Left" Width="309.444" Grid.Row="1" Grid.Column="1" d:LayoutOverrides="VerticalAlignment"/>
                 <TextBlock x:Name="searchText" Margin="44,0,0,-11.638" TextWrapping="Wrap"  FontSize="32" Text="{local:Loc TextUnderSearchBox}" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="371.71" Height="187.253"/>
-                <TextBlock x:Name="makeAnAccountText" Margin="0,253.051,29.919,215.615" TextWrapping="Wrap" FontSize="32" Text="{local:Loc TextUnderAccountCreation}" Foreground="Black" HorizontalAlignment="Right" Width="281.494"/>
-                <Button Name="loginButton" Content="Images/Login.png" Template="{StaticResource ModernHexagonButtonStyle}" Height="300" Width="259.808" Margin="0,25,300,0" VerticalAlignment="Top" HorizontalAlignment="Center" Click="loginButton_Click" />
-                <Button Name ="searchButton" Content="Images/Search.png" Template="{StaticResource ModernHexagonButtonStyle}" Margin="0,0,0,45" Height="300" Width="259.808" VerticalAlignment="Bottom" HorizontalAlignment="Center" Click="searchButton_Click" />
-                <Button Name="signupButton" Content="Images/Signup.png" Template="{StaticResource ModernHexagonButtonStyle}" Height="300" Width="259.808" Margin="300,25,0,0" VerticalAlignment="Top" HorizontalAlignment="Center" Click="signupButton_Click"/>
+                <TextBlock x:Name="makeAnAccountText" Margin="0,136.334,30.173,10" TextWrapping="Wrap" FontSize="32" Text="{local:Loc TextUnderAccountCreation}" Foreground="Black" HorizontalAlignment="Right" Width="458.494" Grid.Row="1" d:LayoutOverrides="VerticalAlignment"/>
+                <Button Name="loginButton" Content="Images/Login.png" Template="{StaticResource ModernHexagonButtonStyle}" Height="300" Width="259.808" Margin="0,0,20,-10" VerticalAlignment="Bottom" HorizontalAlignment="Right" Click="loginButton_Click" />
+                <Button Name ="searchButton" Content="Images/Search.png" Template="{StaticResource ModernHexagonButtonStyle}" Margin="0,-20,0,0" Height="300" Width="259.808" VerticalAlignment="Top" HorizontalAlignment="Center" Click="searchButton_Click" Grid.Row="1" Grid.ColumnSpan="2" />
+                <Button Name="signupButton" Content="Images/Signup.png" Template="{StaticResource ModernHexagonButtonStyle}" Height="300" Width="259.808" Margin="20,0,0,-10" VerticalAlignment="Bottom" HorizontalAlignment="Left" Click="signupButton_Click" Grid.Column="1"/>
+
             </Grid>
         </Grid>
         <Grid x:Name="LanguageGrid" Margin="10,10,0,0" HorizontalAlignment="Left" Height="120" VerticalAlignment="Top" Width="65" MouseEnter="LanguageGrid_MouseEnter" MouseLeave="LanguageGrid_MouseLeave">
@@ -446,10 +456,18 @@
                     <TranslateTransform Y="{DynamicResource negativeScreenHeight}"/>
                 </TransformGroup>
             </Grid.RenderTransform>
-            <Grid x:Name="LoginFieldsGrid" VerticalAlignment="Center" HorizontalAlignment="Center" Width="400">
-                <TextBox x:Name="username" Height="32" Margin="0,0,90,0" Text="{local:Loc DefaultLoginUsernameBoxContent}" VerticalAlignment="Top" MaxLength="100" TextWrapping="Wrap" GotFocus="username_GotFocus" LostFocus="username_LostFocus" FontSize="16" TextChanged="username_TextChanged" KeyDown="username_KeyDown"/>
-                <PasswordBox x:Name="password" Height="32" Margin="0,0,90,0" VerticalAlignment="Bottom" FontSize="16" KeyDown="password_KeyDown"/>
-                <Button x:Name="loginButton1" Content="{local:Loc DefaultLoginButtonContent}" HorizontalAlignment="Right" Margin="0,0,0,0" VerticalAlignment="Stretch" Width="85" Height="66" FontSize="18.667"  Style="{DynamicResource ModernButtonStyle}" Click="loginButton1_Click"/>
+            <Grid x:Name="LoginFieldsGrid" VerticalAlignment="Center" HorizontalAlignment="Center" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <TextBox Width="350" x:Name="username" Grid.Column="0" Grid.Row="0" Style="{StaticResource ModernTextBoxStyle}" Margin="0" Text="{local:Loc DefaultLoginUsernameBoxContent}" VerticalAlignment="Stretch" GotFocus="username_GotFocus" LostFocus="username_LostFocus" TextChanged="username_TextChanged" KeyDown="username_KeyDown"/>
+                <PasswordBox Visibility="Hidden" Padding="5" Grid.Column ="0" Grid.Row="1" x:Name="password" Margin="0,10,0,0" VerticalAlignment="Stretch" FontSize="24" KeyDown="password_KeyDown"/>
+                <Button x:Name="loginButton1" Grid.Column="1" Grid.RowSpan="1"  Content="{local:Loc DefaultLoginButtonContent}" HorizontalAlignment="Right" Margin="10,0,0,0" Padding="10,0,10,0" VerticalAlignment="Stretch" FontSize="24"  Style="{DynamicResource ModernButtonStyle}" Click="loginButton1_Click"/>
             </Grid>
         </Grid>
         <Grid x:Name="SignUpGrid" Margin="0" RenderTransformOrigin="0,0">
@@ -462,12 +480,12 @@
                 </TransformGroup>
             </Grid.RenderTransform>
             <TextBlock x:Name="textBlock" HorizontalAlignment="Center" Margin="0,200,0,0" TextWrapping="Wrap" Text="Instructions for signing up" VerticalAlignment="Top" Height="42" Width="318" FontSize="26.667" Foreground="White"/>
-            <Grid HorizontalAlignment="Center" Height="30">
+            <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBox x:Name="signupField" Grid.Column="0" Margin="0" Text="{local:Loc DefaultSignUpUsernameBoxContent}" MaxLength="100" TextWrapping="Wrap" GotFocus="signupField_GotFocus"  LostFocus="signupField_LostFocus" TextChanged="signupField_TextChanged" FontSize="18" VerticalAlignment="Stretch"  Width="400"/>
+                <TextBox x:Name="signupField" Style="{StaticResource ModernTextBoxStyle}" Grid.Column="0"  Text="{local:Loc DefaultSignUpUsernameBoxContent}" GotFocus="signupField_GotFocus"  LostFocus="signupField_LostFocus" TextChanged="signupField_TextChanged" VerticalAlignment="Stretch"  Width="400"/>
                 <Button x:Name="signupButton1" Grid.Column="1" Content="{local:Loc SignUpButtonContent}" HorizontalAlignment="Right" Margin="10,0,0,0" Width="115" FontSize="18" Padding="1,0,1,1" Style="{DynamicResource ModernButtonStyle}" VerticalAlignment="Stretch" Click="signupButton1_Click"/>
             </Grid>
         </Grid>
