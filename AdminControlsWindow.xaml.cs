@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Data.SQLite;
+using System.Data;
 
 namespace JLLKirjasto
 {
@@ -32,36 +33,14 @@ namespace JLLKirjasto
 
         SQLiteConnection dbconnection = new SQLiteConnection("Data Source=database.db");
         DatabaseInteraction dbi = new DatabaseInteraction();
+        String bookstable = "books";
         #endregion
 
         public AdminControlsWindow()
         {
             InitializeComponent();
-            initBooksDataGrid();
+            updateBooksDataGrid();
             initCheckBoxes();
-        }
-
-        private void BooksSearch_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            // Update Books datagrid
-
-            // Determine what to search
-            List<String> columns = new List<String>();
-            if (IDChecked) columns.Add("BookID");
-            if (TitleChecked) columns.Add("Title");
-            if (AuthorChecked) columns.Add("Author");
-            if (YearChecked) columns.Add("Year");
-            if (LanguageChecked) columns.Add("Language");
-            if (AvailableChecked) columns.Add("Available");
-            
-            List<List<String>> results = dbi.searchDatabaseRows(dbconnection, "books", BooksSearch.Text, columns);
-            List<Book> books = new List<Book>();
-            // Populate ItemsSource with book details
-            foreach (List<String> row in results)
-            {
-                books.Add(new Book { BookID = row[0], Author=row[1], Title=row[2], Year=row[3], Language=row[4], Available=row[5]});
-            }
-            BookDataGrid.ItemsSource = books;
         }
 
         #region UI Handling
@@ -145,7 +124,7 @@ namespace JLLKirjasto
         #region Search
 
         // Shows all books
-        private void initBooksDataGrid()
+        private void updateBooksDataGrid()
         {
             List<String> columns = new List<String>();
             columns.Add("Title");
@@ -160,6 +139,58 @@ namespace JLLKirjasto
             BookDataGrid.ItemsSource = books;
         }
 
+        private void BooksSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            // Update Books datagrid
+
+            // Determine what to search
+            List<String> columns = new List<String>();
+            if (IDChecked) columns.Add("BookID");
+            if (TitleChecked) columns.Add("Title");
+            if (AuthorChecked) columns.Add("Author");
+            if (YearChecked) columns.Add("Year");
+            if (LanguageChecked) columns.Add("Language");
+            if (AvailableChecked) columns.Add("Available");
+
+            List<List<String>> results = dbi.searchDatabaseRows(dbconnection, "books", BooksSearch.Text, columns);
+            List<Book> books = new List<Book>();
+            // Populate ItemsSource with book details
+            foreach (List<String> row in results)
+            {
+                books.Add(new Book
+                {
+                    BookID = row[(int)Book.columnID.BookID], Author = row[(int)Book.columnID.Author],
+                    Title = row[(int)Book.columnID.Title], Year = row[(int)Book.columnID.Year],
+                    Language = row[(int)Book.columnID.Language], Available = row[(int)Book.columnID.Available]
+                });
+            }
+            BookDataGrid.ItemsSource = books;
+        }
+
+        #endregion
+
+        #region Database Manipulation
+        private void BookDataGrid_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
+        {
+            try
+            {
+                Book selectedBook = (Book)BookDataGrid.SelectedItem;
+                int columnIndex = BookDataGrid.CurrentCell.Column.DisplayIndex;
+                dbi.commitDbChanges(dbconnection, bookstable, ((TextBox)e.EditingElement).Text, selectedBook.getStringByIndex((int)Book.columnID.BookID), Book.columnNames[columnIndex]);
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void addBookButton_Click(object sender, RoutedEventArgs e)
+        {
+
+            dbi.addDatabaseRow(dbconnection, "books", "-");
+            updateBooksDataGrid();
+        }
         #endregion
 
         // Convenient abbreviations of useful methods
@@ -175,7 +206,16 @@ namespace JLLKirjasto
         }
 
 
+
+
+
         #endregion
 
+        private void delBookButton_Click(object sender, RoutedEventArgs e)
+        {
+            Book selectedBook = (Book)BookDataGrid.SelectedItem;
+            dbi.delDatabaseRow(dbconnection, "books", selectedBook.getStringByIndex((int)Book.columnID.BookID));
+            updateBooksDataGrid();
+        }
     }
 }
