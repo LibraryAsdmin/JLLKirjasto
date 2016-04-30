@@ -55,7 +55,7 @@
             <Setter Property="Padding" Value="0"/>
             <Setter Property="Template">
                 <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Button}">
+                    <ControlTemplate TargetType="Button">
                         <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
                             <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                             <VisualStateManager.VisualStateGroups>
@@ -114,6 +114,7 @@
         </Style>
 
         <SolidColorBrush x:Key="NormalTextBoxColour" Color="#33FFFFFF"/>
+        <Color x:Key="MouseOverTextBoxColour">White</Color>
 
         <Style TargetType="TextBox" x:Key="ModernTextBoxStyle">
             <Setter Property="BorderThickness" Value="0"/>
@@ -123,6 +124,39 @@
             <Setter Property="Background" Value="{StaticResource NormalTextBoxColour}"/>
             <Setter Property="BorderBrush" Value="{StaticResource NormalTextBoxColour}"/>
             <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Grid x:Name="RootElement" Background="{TemplateBinding Background}">
+                            <ScrollViewer
+                                            x:Name="PART_ContentHost"
+                                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup Name="CommonStates">
+                                        <VisualStateGroup.Transitions>
+                                            <VisualTransition GeneratedDuration="0:0:0:0.2" />
+                                        </VisualStateGroup.Transitions>
+                                        <VisualState Name="Normal"/>
+                                        <VisualState Name="MouseOver">
+                                            <Storyboard>
+                                                <ColorAnimation Storyboard.TargetName="RootElement"
+                                                                Storyboard.TargetProperty="(Grid.Background).(SolidColorBrush.Color)"
+                                                                To="{StaticResource MouseOverTextBoxColour}"
+                                                                Duration="0"/>
+                                            </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                                <VisualStateGroup Name="FocusStates">
+                                    <VisualState Name="Focused">
+                                        
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                        </Grid>
+
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
 
         <Color x:Key="SelectedBackgroundColor">#33000000</Color>
