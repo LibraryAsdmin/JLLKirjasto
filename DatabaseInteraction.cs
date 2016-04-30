@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SQLite;
+using System.Windows;
 
 namespace JLLKirjasto
 {
@@ -15,6 +16,32 @@ namespace JLLKirjasto
         public String Year { get; set; }
         public String Language { get; set; }
         public String Available { get; set; }
+
+        public enum columnID { BookID, Author, Title, Year, Language, Available, NumColumns};
+        public static String[] columnNames = new String[(int)Book.columnID.NumColumns] { "BookID", "Author", "Title", "Year", "Language", "Available" };
+
+        
+        // returns the string of a book object identified by it's index
+        public String getStringByIndex(int index)
+        {
+            switch(index)
+            {
+                case (int)columnID.BookID:
+                    return BookID;
+                case (int)columnID.Author:
+                    return Author;
+                case (int)columnID.Title:
+                    return Title;
+                case (int)columnID.Year:
+                    return Year;
+                case (int)columnID.Language:
+                    return Language;
+                case (int)columnID.Available:
+                    return Available;
+                default:
+                    return null;
+            }
+        }
     }
 
     public class DatabaseInteraction
@@ -37,26 +64,7 @@ namespace JLLKirjasto
             List<List<String>> results = new List<List<String>>();
 
             // Determine the number of columns in the table
-            Int32 tableColumnCount = 0;
-            try
-            {
-                dbconn.Open();
-                String sql = String.Format("pragma table_info({0});", table);
-                SQLiteCommand countCommand = new SQLiteCommand(sql, dbconn);
-                SQLiteDataReader counter = countCommand.ExecuteReader();
-
-                while (counter.Read())
-                {
-                    tableColumnCount++;
-                }
-
-                counter.Close();
-                dbconn.Close();
-            }
-            catch (Exception ex)
-            {
-                reportError(ex.Message);
-            }
+            Int32 tableColumnCount = countColumns(dbconn, table);           
 
             // Make sure that you are actually searching for something
             if (columns.Count > 0)
@@ -95,6 +103,9 @@ namespace JLLKirjasto
                             // Determine the datatype of the database entry, read it accordingly and convert to string
                             String dataTypeName = reader.GetDataTypeName(i);
                             String current;
+
+                            current = reader.GetString(i); // All datatypes are treated as strings as there is no intent of sorting by value functionality
+                            /**
                             switch (dataTypeName)
                             {
                                 case "int":
@@ -109,6 +120,8 @@ namespace JLLKirjasto
                                 default:
                                     throw new Exception("Could not verify data type!");
                             }
+                            **/
+
                             // Append the current row by current string
                             currentRow.Add(current);
                         }
@@ -121,16 +134,141 @@ namespace JLLKirjasto
                 }
                 catch (Exception ex)
                 {
-                    reportError(ex.Message);
+                    reportError(ex.Message, "searchDatabaseRows");
                 }
             }
 
             return results;
         }
 
-        private void reportError(String message)
+        // TODO: verification that two book id's can't be made equal
+        // Modifies a cell in an database
+        // Return codes:
+        // 0 - success
+        // 1 - failure
+        // Function Parameter Explanations:
+        // - dbcomm = SQLiteConnection object to database
+        // - table = The name of the table in the database
+        // - values = The values that are passed into the database
+        // - id = The row to which the edits are made is determined by the book id
+        // - column = To determine where the edit should be done.
+        public void commitDbChanges(SQLiteConnection dbconn, String table, String value, String id, String column)
         {
-            System.Windows.MessageBox.Show("Error! " + message);
+            try
+            {
+                dbconn.Open();
+                using (SQLiteTransaction transaction = dbconn.BeginTransaction())
+                {
+                    using (SQLiteCommand command = new SQLiteCommand(dbconn))
+                    {
+                        string commandString = String.Format("UPDATE {0} SET {1}=@VALUE WHERE BookID=@ID", table, column);
+                        command.CommandText = commandString;
+                        command.Parameters.AddWithValue("@VALUE", value);
+                        command.Parameters.AddWithValue("@ID", id);
+
+                        command.ExecuteNonQuery();
+
+                    }
+                    transaction.Commit();
+                }
+                dbconn.Close();
+            }
+            catch(Exception ex)
+            {
+                reportError(ex.Message, "commitDbChanges");
+            }        
+        }
+
+        public void addDatabaseRow(SQLiteConnection dbconn, String table, String id)
+        {
+            // Determine the number of columns in the database  
+            int columnCount = countColumns(dbconn, table);
+            try
+            {
+                dbconn.Open();
+                using (SQLiteTransaction transaction = dbconn.BeginTransaction())
+                {
+                    using (SQLiteCommand command = new SQLiteCommand(dbconn))
+                    {
+                        // Parse string columnsString for column adding command.
+                        String columnsString = "'"+id+"'";
+                        for (int i = 1; i < columnCount; i++)
+                        {
+                            columnsString += (","+"'-'");
+                        }
+
+                        string commandString = String.Format("INSERT INTO {0} VALUES ({1})", table, columnsString);
+                        command.CommandText = commandString;
+
+                        command.ExecuteNonQuery();
+                    }
+                    transaction.Commit();
+                }
+                dbconn.Close();
+            }
+            catch (Exception ex)
+            {
+                reportError(ex.Message, "addDatabaseRow");
+            }
+        }
+
+        public void delDatabaseRow(SQLiteConnection dbconn, String table, String id)
+        {
+            try
+            {
+                dbconn.Open();
+                using (SQLiteTransaction transaction = dbconn.BeginTransaction())
+                {
+                    using (SQLiteCommand command = new SQLiteCommand(dbconn))
+                    {                  
+                        string commandString = String.Format("DELETE FROM {0} WHERE BookID='{1}'", table, id);
+                        command.CommandText = commandString;
+
+                        command.ExecuteNonQuery();
+                    }
+                    transaction.Commit();
+                }
+                dbconn.Close();
+            }
+            catch (Exception ex)
+            {
+                reportError(ex.Message, "delDatabaseRow");
+            }
+        }
+
+        private int countColumns(SQLiteConnection dbconn, String table)
+        {
+            int count = 0;
+            try
+            {
+                dbconn.Open();
+                String sql = String.Format("pragma table_info({0});", table);
+                SQLiteCommand countCommand = new SQLiteCommand(sql, dbconn);
+                SQLiteDataReader counter = countCommand.ExecuteReader();
+
+                while (counter.Read())
+                {
+                    count++;
+                }
+
+                counter.Close();
+                dbconn.Close();
+            }
+            catch (Exception ex)
+            {
+                reportError(ex.Message, "countColumns");
+            }
+            return count;
+        }
+
+        private void reportError(String message, String caller)
+        {
+            System.Windows.MessageBox.Show("Error! " + message+caller);
+        }
+
+        private void a(String c)
+        {
+            MessageBox.Show(c);
         }
     }
 }

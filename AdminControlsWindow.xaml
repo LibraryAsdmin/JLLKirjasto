@@ -73,7 +73,12 @@
 
                     </StackPanel>
                 </Expander>
-                <DataGrid x:Name="BookDataGrid"></DataGrid>
+                <DataGrid x:Name="BookDataGrid" SelectionUnit="FullRow" CellEditEnding="BookDataGrid_CellEditEnding" Margin="0,0,0,25"></DataGrid>
+                <StackPanel Orientation="Horizontal" Height="25">
+                    <Button x:Name="addBookButton" Width="50" Margin="10,0,10,0" Content="Lisää" Click="addBookButton_Click"/>
+                    <Button x:Name="delBookButton" Width="50" Content="Poista" Click="delBookButton_Click"/>
+                </StackPanel>
+                
             </StackPanel>
             
         </Grid>
