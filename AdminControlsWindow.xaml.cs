@@ -24,6 +24,8 @@ namespace JLLKirjasto
     {
 
         #region Variables
+
+        // Variables for advanced search in admin control window
         bool IDChecked = true;
         bool TitleChecked = true;
         bool AuthorChecked = true;
@@ -31,6 +33,7 @@ namespace JLLKirjasto
         bool AvailableChecked = false;
         bool LanguageChecked = false;
 
+        // Variables for interaction with the database
         SQLiteConnection dbconnection = new SQLiteConnection("Data Source=database.db");
         DatabaseInteraction dbi = new DatabaseInteraction();
         String bookstable = "books";
