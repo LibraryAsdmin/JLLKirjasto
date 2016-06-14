@@ -10,6 +10,7 @@ namespace JLLKirjasto
 {
     public class Book
     {
+
         public String BookID { get; set; }
         public String Author { get; set; }
         public String Title { get; set; }

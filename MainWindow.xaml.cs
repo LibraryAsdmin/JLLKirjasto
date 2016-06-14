@@ -58,7 +58,6 @@ namespace JLLKirjasto
 
         public event PropertyChangedEventHandler PropertyChanged;
     }
-
     public class LocExtension : Binding
     {
         public LocExtension(string name) : base("[" + name + "]")
@@ -88,7 +87,7 @@ namespace JLLKirjasto
         // 1 = Search
         // 2 = LoginGrid
         // 3 = SignUpGrid
-        short currentView = 0;
+        byte currentView = 0;
 
         // Search variables
         /**
@@ -97,20 +96,24 @@ namespace JLLKirjasto
         List<Int32> searchResultIDs;
         **/
 
+        // Variables for database interaction
         private SQLiteConnection dbconnection = new SQLiteConnection("Data Source=database.db");
         private DatabaseInteraction dbi = new DatabaseInteraction();
         List<Book> ListBoxItems;
+
+        // Variables required by search
+        const uint minSearchChars = 3;  // Require at least this number of characters before searching to avoid search congestion
         #endregion
 
         public MainWindow()
         {
             InitializeComponent();
 
+            // What is this for? Requires documentation.
             Resources["negativeScreenWidth"] = -(SystemParameters.FullPrimaryScreenWidth);
             Resources["screenWidth"] = SystemParameters.FullPrimaryScreenWidth;
             Resources["negativeScreenHeight"] = -(SystemParameters.FullPrimaryScreenHeight);
             Resources["screenHeight"] = SystemParameters.FullPrimaryScreenHeight;
-
 
             //changes the flag to correspond with the system culture
             string culture = CultureInfo.CurrentUICulture.ToString();
@@ -132,12 +135,6 @@ namespace JLLKirjasto
             Storyboard.SetTargetProperty(gradientTurn, new PropertyPath("Background.EndPoint"));
             gradientStoryboard.Begin();
 
-            // Show all books in the beginning
-            //search("");
-            //updateSearchResults();
-            initializeListBox();
-
-
             //initializes ShowSearchResultsGrid animation storyboard
             //WORK IN PROGRESS
             ShowSearchResultsGrid = new Storyboard();
@@ -146,7 +143,7 @@ namespace JLLKirjasto
         }
 
         #region UI Handling
-
+        // UI navigation
         private void username_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
@@ -154,7 +151,6 @@ namespace JLLKirjasto
                 loginButton1.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
             }
         }
-
         private void password_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
@@ -162,30 +158,68 @@ namespace JLLKirjasto
                 loginButton1.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
             }
         }
+        private void GoHomeStoryboardCompleted(object sender, EventArgs e)
+        {
+            atHome = true; //we're home, so the searchButton can now trigger another animation if the user so desires
+        }
+        private void signupButton_Click(object sender, RoutedEventArgs e)
+        {
+            currentView = 3;
+            Storyboard ShowSignUpGrid = this.FindResource("ShowSignUpGrid") as Storyboard;
+            ShowSignUpGrid.Begin();
+        }
+        private void loginButton_Click(object sender, RoutedEventArgs e)
+        {
+            currentView = 2;
+            Storyboard ShowLoginGrid = this.FindResource("ShowLoginGrid") as Storyboard;
+            ShowLoginGrid.Begin();
+        }
+        private void searchButton_Click(object sender, RoutedEventArgs e)
+        {
+            currentView = 1;
+            Storyboard BringUpSearchResults = this.FindResource("BringUpSearchResults") as Storyboard;
+            BringUpSearchResults.Begin();
+        }
+        private void button_Click(object sender, RoutedEventArgs e) 
+        {
+            //In home view
+            if (0 == currentView)
+            {
+                System.Windows.MessageBox.Show("Home button should not be accessible in home screen... Go fix the program!");
+            }
+            //In search view
+            else if (1 == currentView)
+            {
+                Storyboard GoBackHome = this.FindResource("GoBackHome") as Storyboard;
+                GoBackHome.Begin();
+            }
+            //In login view
+            else if (2 == currentView)
+            {
+                Storyboard HideLoginGrid = this.FindResource("HideLoginGrid") as Storyboard;
+                HideLoginGrid.Begin();
+            }
+            //In sign up view
+            else if (3 == currentView)
+            {
+                Storyboard HideSignUpGrid = this.FindResource("HideSignUpGrid") as Storyboard;
+                HideSignUpGrid.Begin();
+            }
+            currentView = 0; //we're home now
+        }   // return to home screen
 
+        // Language
         private void LanguageGrid_MouseEnter(object sender, MouseEventArgs e)
         {
             // Show languages when mouse enters the LanguageGrid
             showLanguages(middleFlagTransform.Y, bottomFlagTransform.Y);
         }
-
         private void LanguageGrid_MouseLeave(object sender, MouseEventArgs e)
         {
             hideLanguages(middleFlagTransform.Y, bottomFlagTransform.Y);
         }
 
-        private void searchButton_MouseUp(object sender, MouseButtonEventArgs e)
-        {
-            if (atHome) //only works if we're in the home view
-            {
-                atHome = false;
-                currentView = 1;
-                //fire up the animation by finding it from the xaml resources
-                Storyboard BringUpSearchResults = this.FindResource("BringUpSearchResults") as Storyboard;
-                BringUpSearchResults.Begin();
-            }
-        }
-
+        // search behaviour
         private void searchBox_GotFocus(object sender, RoutedEventArgs e)
         {
             if (searchBox.Text == Properties.Resources.ResourceManager.GetString("DefaultSearchBoxContent", TranslationSource.Instance.CurrentCulture))
@@ -193,7 +227,13 @@ namespace JLLKirjasto
                 searchBox.Text = "";
             }
         }
-
+        private void searchBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (searchBox.Text == "")
+            {
+                searchBox.Text = Properties.Resources.ResourceManager.GetString("DefaultSearchBoxContent", TranslationSource.Instance.CurrentCulture);
+            }
+        }
         private void searchBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (searchBox.Text == Properties.Resources.ResourceManager.GetString("DefaultSearchBoxContent", TranslationSource.Instance.CurrentCulture))
@@ -205,11 +245,31 @@ namespace JLLKirjasto
                 // Console.Beep(); // just for fun. EDIT: not really fun since it makes the search laggy
                 searchBox.Foreground = new SolidColorBrush(Colors.Black);
 
-                // Search for books             
-                updateSearchResults();
+                // Search for books if the search term is long enough
+                if (searchBox.Text.Length >= minSearchChars)
+                {
+                    updateSearchResults();
+                }
+                // If the search term is shorter, display nothing
+                else
+                {
+                    searchResultsListBox.ItemsSource = null;
+                }
 
             }
         }
+        /**TODO: This seems redundant
+        private void searchButton_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            if (atHome) //only works if we're in the home view
+            {
+                atHome = false;
+                currentView = 1;
+                //fire up the animation by finding it from the xaml resources
+                Storyboard BringUpSearchResults = this.FindResource("BringUpSearchResults") as Storyboard;
+                BringUpSearchResults.Begin();
+            }
+        }**/
 
         // Login username input field behaviour
         private void username_GotFocus(object sender, RoutedEventArgs e)
@@ -219,7 +279,6 @@ namespace JLLKirjasto
                 username.Text = "";
             }
         }
-
         private void username_LostFocus(object sender, RoutedEventArgs e)
         {
             if (username.Text == "")
@@ -227,7 +286,6 @@ namespace JLLKirjasto
                 username.Text = Properties.Resources.ResourceManager.GetString("DefaultLoginUsernameBoxContent", TranslationSource.Instance.CurrentCulture);
             }
         }
-
         private void username_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (username.Text == Properties.Resources.ResourceManager.GetString("DefaultLoginUsernameBoxContent", TranslationSource.Instance.CurrentCulture))
@@ -252,6 +310,7 @@ namespace JLLKirjasto
             }
         }
 
+        // Sign up input field behaviour
         private void signupField_LostFocus(object sender, RoutedEventArgs e)
         {
             if (signupField.Text == "")
@@ -259,7 +318,6 @@ namespace JLLKirjasto
                 signupField.Text = Properties.Resources.ResourceManager.GetString("DefaultSignUpUsernameBoxContent", TranslationSource.Instance.CurrentCulture);
             }
         }
-
         private void signupField_GotFocus(object sender, RoutedEventArgs e)
         {
             if (signupField.Text == Properties.Resources.ResourceManager.GetString("DefaultSignUpUsernameBoxContent", TranslationSource.Instance.CurrentCulture))
@@ -267,7 +325,6 @@ namespace JLLKirjasto
                 signupField.Text = "";
             }
         }
-
         private void signupField_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (signupField.Text == Properties.Resources.ResourceManager.GetString("DefaultSignUpUsernameBoxContent", TranslationSource.Instance.CurrentCulture))
@@ -280,7 +337,7 @@ namespace JLLKirjasto
             }
         }
 
-        // User login handling here
+        // User database related handling (login / signing up)
         private void loginButton1_Click(object sender, RoutedEventArgs e)
         {
             if (username.Text == "admin" && password.Password == "kuulkala")
@@ -288,20 +345,7 @@ namespace JLLKirjasto
                 adminwindow = new AdminControlsWindow();
                 adminwindow.Show();
             }
-        }
-
-        private void RootWindow_Closing(object sender, CancelEventArgs e)
-        {
-            try
-            {
-                adminwindow.Close();
-            }
-            catch
-            {
-                // nothing wrong here.
-            }
-        }
-
+        }       
         private void signupButton1_Click(object sender, RoutedEventArgs e)
         {
             if (signupField.Text.EndsWith("@edu.jns.fi"))
@@ -343,86 +387,33 @@ namespace JLLKirjasto
 
         }
 
-        private void searchBox_LostFocus(object sender, RoutedEventArgs e)
+        // Program exit behaviour
+        private void RootWindow_Closing(object sender, CancelEventArgs e)
         {
-            if (searchBox.Text == "")
+            try
             {
-                searchBox.Text = Properties.Resources.ResourceManager.GetString("DefaultSearchBoxContent", TranslationSource.Instance.CurrentCulture);
+                // close children window when the main window is closed
+                adminwindow.Close();
+            }
+            catch
+            {
+                // nothing wrong here.
             }
         }
-
-        //Go home-button
-        private void button_Click(object sender, RoutedEventArgs e)
-        {
-            //In home view
-            if (0 == currentView)
-            {
-                System.Windows.MessageBox.Show("Home button should not be accessible in home screen... Go fix the program!");
-            }
-            //In search view
-            else if (1 == currentView)
-            {
-                Storyboard GoBackHome = this.FindResource("GoBackHome") as Storyboard;
-                GoBackHome.Begin();
-            }
-            //In login view
-            else if (2 == currentView)
-            {
-                Storyboard HideLoginGrid = this.FindResource("HideLoginGrid") as Storyboard;
-                HideLoginGrid.Begin();
-            }
-            //In sign up view
-            else if (3 == currentView)
-            {
-                Storyboard HideSignUpGrid = this.FindResource("HideSignUpGrid") as Storyboard;
-                HideSignUpGrid.Begin();
-            }
-            currentView = 0; //we're home now
-        }
-
-        private void signupButton_Click(object sender, RoutedEventArgs e)
-        {
-            currentView = 3;
-            Storyboard ShowSignUpGrid = this.FindResource("ShowSignUpGrid") as Storyboard;
-            ShowSignUpGrid.Begin();
-        }
-
-        private void loginButton_Click(object sender, RoutedEventArgs e)
-        {
-            currentView = 2;
-            Storyboard ShowLoginGrid = this.FindResource("ShowLoginGrid") as Storyboard;
-            ShowLoginGrid.Begin();
-        }
-
-        private void searchButton_Click(object sender, RoutedEventArgs e)
-        {
-            currentView = 1;
-            Storyboard BringUpSearchResults = this.FindResource("BringUpSearchResults") as Storyboard;
-            BringUpSearchResults.Begin();
-        }
-
-        private void GoHomeStoryboardCompleted(object sender, EventArgs e)
-        {
-            atHome = true; //we're home, so the searchButton can now trigger another animation if the user so desires
-        }
-
-
         #endregion
 
+        // Language button behaviour and culture 
         #region Language
-        // Change language to English
+
+        // Change language
         private void English_Click(object sender, RoutedEventArgs e)
         {
             changeUILanguage("en-GB");
         }
-
-        // Change language to Swedish
         private void Swedish_Click(object sender, RoutedEventArgs e)
         {
             changeUILanguage("sv-SE");
         }
-
-        // Change language to Finnish (default)
         private void Finnish_Click(object sender, RoutedEventArgs e)
         {
             changeUILanguage("fi-FI");
@@ -490,7 +481,7 @@ namespace JLLKirjasto
             }
         }
 
-        // Extends the list of languages
+        // Language box animations
         private void showLanguages(double middleY, double bottomY)
         {
             Duration duration = new Duration(TimeSpan.FromMilliseconds(250));
@@ -507,8 +498,6 @@ namespace JLLKirjasto
             bottomFlagTransform.BeginAnimation(TranslateTransform.YProperty, anim2);
             English.RenderTransform = bottomFlagTransform;
         }
-
-        // Hides the list of languages
         private void hideLanguages(double middleY, double bottomY)
         {
             Duration duration = new Duration(new TimeSpan(0, 0, 0, 0, 250));
@@ -526,56 +515,11 @@ namespace JLLKirjasto
             English.RenderTransform = bottomFlagTransform;
         }
 
-
         #endregion
 
         #region Search
-        /** Search Titles in the book database. Hard coded to use searchBox as search bar
-        private void searööch(String term)
-        {
 
-            searchResultTitles = new List<String>();
-            searchResultAuthors = new List<String>();
-            searchResultIDs = new List<Int32>();
-            
-            try
-            {
-                dbconnection.Open();
-
-                String searchTerm = '%' + term + '%';
-
-                // Search the database for a specific title
-                String sql = "SELECT BookID, Title, Author FROM books WHERE Title LIKE @SearchTerm AND Available=1 OR Author LIKE @SearchTerm AND Available=1 OR BookID LIKE @SearchTerm AND Available=1;";
-                SQLiteCommand command = new SQLiteCommand(sql, dbconnection);
-                command.Parameters.AddWithValue("SearchTerm", searchTerm);
-
-                SQLiteDataReader reader = command.ExecuteReader();
-
-                // Read search results
-                while (reader.Read())
-                {
-                    searchResultIDs.Add(reader.GetInt32(0));
-                    searchResultTitles.Add(reader.GetString(1));
-                    searchResultAuthors.Add(reader.GetString(2));
-                }
-                reader.Close();
-                dbconnection.Close();
-
-                // Write matching books to console (for debugging)
-                foreach (String result in searchResultTitles)
-                {
-                    Console.WriteLine(result);
-                }
-                Console.WriteLine();
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Something happened! " + ex.Message);
-            }              
-        }
-        **/
-
+        //TODO: Add support for advanced search, currently hard-coded for BookID, Author and Title only
         private void updateSearchResults()
         {
             List<String> columns = new List<String>();
@@ -599,19 +543,6 @@ namespace JLLKirjasto
             foreach (List<String> row in searchResults)
             {
                 ListBoxItems.Add(new Book() { BookID = row[0], Author = row[1], Title = row[2], Year = row[3], Language = row[4], Available = row[5] });
-            }
-            searchResultsListBox.ItemsSource = ListBoxItems;
-        }
-        private void initializeListBox()
-        {
-            List<String> columns = new List<String>();
-            columns.Add("Title");
-
-            List<List<String>> results = dbi.searchDatabaseRows(dbconnection, "books", "", columns);
-            ListBoxItems = new List<Book>();
-            foreach (List<String> row in results)
-            {
-                ListBoxItems.Add(new Book { BookID = row[0], Author = row[1], Title = row[2], Year = row[3], Language = row[4], Available = row[5] });
             }
             searchResultsListBox.ItemsSource = ListBoxItems;
         }
