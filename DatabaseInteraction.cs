@@ -10,7 +10,6 @@ namespace JLLKirjasto
 {
     public class Book
     {
-
         public String BookID { get; set; }
         public String Author { get; set; }
         public String Title { get; set; }
@@ -144,9 +143,6 @@ namespace JLLKirjasto
 
         // TODO: verification that two book id's can't be made equal
         // Modifies a cell in an database
-        // Return codes:
-        // 0 - success
-        // 1 - failure
         // Function Parameter Explanations:
         // - dbcomm = SQLiteConnection object to database
         // - table = The name of the table in the database

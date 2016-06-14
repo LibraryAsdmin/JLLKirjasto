@@ -138,8 +138,6 @@ namespace JLLKirjasto
             //initializes ShowSearchResultsGrid animation storyboard
             //WORK IN PROGRESS
             ShowSearchResultsGrid = new Storyboard();
-
-
         }
 
         #region UI Handling
@@ -402,7 +400,7 @@ namespace JLLKirjasto
         }
         #endregion
 
-        // Language button behaviour and culture 
+        // Language button behaviour and language selection 
         #region Language
 
         // Change language
@@ -420,19 +418,17 @@ namespace JLLKirjasto
         }
         void changeUILanguage(string language)
         {
-            bool updateSearchBoxText = false; //do we have to update searchBox's text 
-                                              //(has to be done manyally because we assign it string values elsewhere, which replaces the automatic switching)
+            //has to be done manyally because we assign it string values elsewhere, which replaces the automatic switching
+            bool updateSearchBoxText = false; 
             bool updateLogInUserNameBoxText = false;
             bool updateSignupField = false;
 
             if (username.Text == Properties.Resources.ResourceManager.GetString("DefaultLoginUsernameBoxContent", TranslationSource.Instance.CurrentCulture))
-            { updateLogInUserNameBoxText = true; }
-
+                updateLogInUserNameBoxText = true;
             if (searchBox.Text == Properties.Resources.ResourceManager.GetString("DefaultSearchBoxContent", TranslationSource.Instance.CurrentCulture))
-            { updateSearchBoxText = true; }
-
+                updateSearchBoxText = true;
             if (signupField.Text == Properties.Resources.ResourceManager.GetString("DefaultSignUpUsernameBoxContent", TranslationSource.Instance.CurrentCulture))
-            { updateSignupField = true; }
+                updateSignupField = true;
 
             switch (language)
             {
