@@ -216,9 +216,16 @@ namespace JLLKirjasto
 
         private void delBookButton_Click(object sender, RoutedEventArgs e)
         {
-            Book selectedBook = (Book)BookDataGrid.SelectedItem;
-            dbi.delDatabaseRow(dbconnection, "books", selectedBook.getStringByIndex((int)Book.columnID.BookID));
-            updateBooksDataGrid();
+            try
+            {
+                Book selectedBook = (Book)BookDataGrid.SelectedItem;
+                dbi.delDatabaseRow(dbconnection, "books", selectedBook.getStringByIndex((int)Book.columnID.BookID));
+                updateBooksDataGrid();
+            }
+            catch
+            {
+                Console.Beep();
+            }           
         }
     }
 }
