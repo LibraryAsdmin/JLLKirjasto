@@ -16,13 +16,11 @@ using System.Data;
 
 namespace JLLKirjasto
 {
-
     /// <summary>
     /// Interaction logic for AdminControlsWindow.xaml
     /// </summary>
     public partial class AdminControlsWindow : Window
     {
-
         #region Variables
 
         // Variables for advanced search in admin control window
@@ -47,67 +45,61 @@ namespace JLLKirjasto
         }
 
         #region UI Handling
+
+        // Search options
         private void IDCheckBox_Checked(object sender, RoutedEventArgs e)
         {
             IDChecked = true;
+        }
+        private void IDCheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            IDChecked = false;
         }
 
         private void AuthorCheckBox_Checked(object sender, RoutedEventArgs e)
         {
             AuthorChecked = true;
         }
+        private void AuthorCheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            AuthorChecked = false;
+        }
 
         private void TitleCheckBox_Checked(object sender, RoutedEventArgs e)
         {
             TitleChecked = true;
+        }
+        private void TitleCheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            TitleChecked = false;
         }
 
         private void YearCheckBox_Checked(object sender, RoutedEventArgs e)
         {
             YearChecked = true;
         }
+        private void YearCheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            YearChecked = false;
+        }
 
         private void LanguageCheckBox_Checked(object sender, RoutedEventArgs e)
         {
             LanguageChecked = true;
+        }
+        private void LanguageCheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            LanguageChecked = false;
         }
 
         private void AvailableCheckBox_Checked(object sender, RoutedEventArgs e)
         {
             AvailableChecked = true;
         }
-
-        private void IDCheckBox_Unchecked(object sender, RoutedEventArgs e)
-        {
-            IDChecked = false;
-
-        }
-
-        private void AuthorCheckBox_Unchecked(object sender, RoutedEventArgs e)
-        {
-            AuthorChecked = false;
-        }
-
-        private void TitleCheckBox_Unchecked(object sender, RoutedEventArgs e)
-        {
-            TitleChecked = false;
-        }
-
-        private void YearCheckBox_Unchecked(object sender, RoutedEventArgs e)
-        {
-            YearChecked = false;
-        }
-
-        private void LanguageCheckBox_Unchecked(object sender, RoutedEventArgs e)
-        {
-            LanguageChecked = false;
-        }
-
         private void AvailableCheckBox_Unchecked(object sender, RoutedEventArgs e)
         {
             AvailableChecked = false;
         }
-
         private void initCheckBoxes()
         {
             if (IDChecked) IDCheckBox.IsChecked = true;
@@ -118,11 +110,6 @@ namespace JLLKirjasto
             if (AvailableChecked) AvailableCheckBox.IsChecked = true;
         }
         #endregion
-
-        private void UsersSearch_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            // Update users datagrid
-        }
 
         #region Search
 
@@ -141,7 +128,6 @@ namespace JLLKirjasto
             }
             BookDataGrid.ItemsSource = books;
         }
-
         private void BooksSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
             // Update Books datagrid
@@ -169,6 +155,11 @@ namespace JLLKirjasto
             }
             BookDataGrid.ItemsSource = books;
         }
+        //private void updateUsersDataGrid(){}
+        private void UsersSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            // Update users datagrid
+        }
 
         #endregion
 
@@ -188,32 +179,12 @@ namespace JLLKirjasto
             }
         }
 
+        // Functionality for adding and removing whole books
         private void addBookButton_Click(object sender, RoutedEventArgs e)
         {
-
             dbi.addDatabaseRow(dbconnection, "books", "-");
             updateBooksDataGrid();
         }
-        #endregion
-
-        // Convenient abbreviations of useful methods
-        #region Degub
-        private void a(String m)
-        {
-            MessageBox.Show(m);
-        }
-        
-        private void c(String m)
-        {
-            Console.WriteLine(m);
-        }
-
-
-
-
-
-        #endregion
-
         private void delBookButton_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -225,7 +196,20 @@ namespace JLLKirjasto
             catch
             {
                 Console.Beep();
-            }           
+            }
         }
+        #endregion
+
+        #region Degub
+        private void a(String m)
+        {
+            MessageBox.Show(m);
+        }
+
+        private void c(String m)
+        {
+            Console.WriteLine(m);
+        }
+        #endregion      
     }
 }
