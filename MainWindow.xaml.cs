@@ -141,6 +141,23 @@ namespace JLLKirjasto
         }
 
         #region UI Handling
+        // Calculates UI element sizes
+        private void RootWindow_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            // Whenever RootWindow's size is changed, calculate proper height for the grids in NavigationStackPanel.
+            // The subtraction of number 17 in the equations is required for some mysterious reason (otherwise grids will scale incorrectly)
+            // In order to prevent gridHeight from being a negative number, the minimum size of RootWindow is limited in the designer.
+            double gridHeight = (RootWindow.ActualHeight - SystemParameters.CaptionHeight - HeaderGrid.ActualHeight - 17) / 3.0F;
+
+            // Verify that height is always positive
+            if (gridHeight <= 0) gridHeight = 1;
+
+            // Update the height of the grids
+            LoginGrid.Height = gridHeight;
+            SignUpGrid.Height = gridHeight;
+            SearchResultsGrid.Height = gridHeight;
+        }
+
         // UI navigation
         private void username_KeyDown(object sender, KeyEventArgs e)
         {
@@ -550,14 +567,7 @@ namespace JLLKirjasto
         {
             MessageBox.Show(m);
         }
-        #endregion
 
-        private void RootWindow_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            double gridHeight = (this.ActualHeight - HeaderGrid.ActualHeight) / 3;
-            LoginGrid.Height = gridHeight;
-            SignUpGrid.Height = gridHeight;
-            SearchResultsGrid.Height = gridHeight;
-        }
+        #endregion
     }
 }
