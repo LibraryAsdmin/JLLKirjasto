@@ -122,9 +122,9 @@ namespace JLLKirjasto
             // Initializes flag transformations
             middleFlagTransform = new TranslateTransform(0, 0);
             bottomFlagTransform = new TranslateTransform(0, 0);
-            gradientStoryboard = new Storyboard();
+            //gradientStoryboard = new Storyboard();
 
-            //initializes and begins the gradient animation
+            /*initializes and begins the gradient animation
             PointAnimation gradientTurn = new PointAnimation(new Point(0.2, 1), new Point(0.8, 1), TimeSpan.FromSeconds(10));
             gradientStoryboard.Children.Add(gradientTurn);
             gradientStoryboard.RepeatBehavior = RepeatBehavior.Forever;
@@ -133,7 +133,7 @@ namespace JLLKirjasto
             gradientStoryboard.AccelerationRatio = 0.1;
             Storyboard.SetTarget(gradientTurn, WindowGrid);
             Storyboard.SetTargetProperty(gradientTurn, new PropertyPath("Background.EndPoint"));
-            gradientStoryboard.Begin();
+            gradientStoryboard.Begin();*/
 
             //initializes ShowSearchResultsGrid animation storyboard
             //WORK IN PROGRESS
@@ -552,5 +552,12 @@ namespace JLLKirjasto
         }
         #endregion
 
+        private void RootWindow_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            double gridHeight = (this.ActualHeight - HeaderGrid.ActualHeight) / 3;
+            LoginGrid.Height = gridHeight;
+            SignUpGrid.Height = gridHeight;
+            SearchResultsGrid.Height = gridHeight;
+        }
     }
 }

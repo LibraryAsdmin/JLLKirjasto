@@ -9,7 +9,7 @@
         xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing"
         mc:Ignorable="d"
     
-        x:Name="RootWindow" x:Class="JLLKirjasto.MainWindow" Title="{local:Loc WindowTitle}"  Height="768" Width="1024" WindowStartupLocation="CenterScreen" Closing="RootWindow_Closing">
+        x:Name="RootWindow" x:Class="JLLKirjasto.MainWindow" Title="{local:Loc WindowTitle}"  Height="800" Width="1200" WindowStartupLocation="CenterScreen" Closing="RootWindow_Closing" SizeChanged="RootWindow_SizeChanged">
 
     <Window.Resources>
 
@@ -28,34 +28,6 @@
                     </EasingDoubleKeyFrame.EasingFunction>
                 </EasingDoubleKeyFrame>
             </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(Rectangle.RadiusX)" Storyboard.TargetName="searchButton">
-                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="0">
-                    <EasingDoubleKeyFrame.EasingFunction>
-                        <CircleEase EasingMode="EaseOut"/>
-                    </EasingDoubleKeyFrame.EasingFunction>
-                </EasingDoubleKeyFrame>
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(Rectangle.RadiusY)" Storyboard.TargetName="searchButton">
-                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="0">
-                    <EasingDoubleKeyFrame.EasingFunction>
-                        <CircleEase EasingMode="EaseOut"/>
-                    </EasingDoubleKeyFrame.EasingFunction>
-                </EasingDoubleKeyFrame>
-            </DoubleAnimationUsingKeyFrames>
-            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[0].(GradientStop.Color)" Storyboard.TargetName="WindowGrid">
-                <EasingColorKeyFrame KeyTime="0:0:0.6" Value="{DynamicResource search1}">
-                    <EasingColorKeyFrame.EasingFunction>
-                        <CircleEase EasingMode="EaseOut"/>
-                    </EasingColorKeyFrame.EasingFunction>
-                </EasingColorKeyFrame>
-            </ColorAnimationUsingKeyFrames>
-            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[1].(GradientStop.Color)" Storyboard.TargetName="WindowGrid">
-                <EasingColorKeyFrame KeyTime="0:0:0.6" Value="{DynamicResource search2}">
-                    <EasingColorKeyFrame.EasingFunction>
-                        <CircleEase EasingMode="EaseOut"/>
-                    </EasingColorKeyFrame.EasingFunction>
-                </EasingColorKeyFrame>
-            </ColorAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="button">
                 <EasingDoubleKeyFrame KeyTime="0" Value="-80"/>
                 <EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="0">
@@ -80,14 +52,6 @@
                     </EasingDoubleKeyFrame.EasingFunction>
                 </EasingDoubleKeyFrame>
             </DoubleAnimationUsingKeyFrames>
-            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[0].(GradientStop.Color)" Storyboard.TargetName="WindowGrid">
-                <SplineColorKeyFrame KeyTime="0" Value="{DynamicResource search1}"/>
-                <SplineColorKeyFrame KeyTime="0:0:0.5" Value="{DynamicResource home1}"/>
-            </ColorAnimationUsingKeyFrames>
-            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[1].(GradientStop.Color)" Storyboard.TargetName="WindowGrid">
-                <SplineColorKeyFrame KeyTime="0" Value="{DynamicResource search2}"/>
-                <SplineColorKeyFrame KeyTime="0:0:0.5" Value="{DynamicResource home2}"/>
-            </ColorAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="button">
                 <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
                 <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="-80">
@@ -116,14 +80,6 @@
                     </EasingDoubleKeyFrame.EasingFunction>
                 </EasingDoubleKeyFrame>
             </DoubleAnimationUsingKeyFrames>
-            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[0].(GradientStop.Color)" Storyboard.TargetName="WindowGrid">
-                <EasingColorKeyFrame KeyTime="0" Value="{DynamicResource home1}"/>
-                <EasingColorKeyFrame KeyTime="0:0:0.5" Value="{DynamicResource login1}"/>
-            </ColorAnimationUsingKeyFrames>
-            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[1].(GradientStop.Color)" Storyboard.TargetName="WindowGrid">
-                <EasingColorKeyFrame KeyTime="0" Value="{DynamicResource home2}"/>
-                <EasingColorKeyFrame KeyTime="0:0:0.5" Value="{DynamicResource login2}"/>
-            </ColorAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="button">
                 <EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="0">
                     <EasingDoubleKeyFrame.EasingFunction>
@@ -163,12 +119,6 @@
                     </EasingDoubleKeyFrame.EasingFunction>
                 </EasingDoubleKeyFrame>
             </DoubleAnimationUsingKeyFrames>
-            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[0].(GradientStop.Color)" Storyboard.TargetName="WindowGrid">
-                <EasingColorKeyFrame KeyTime="0:0:0.5" Value="{DynamicResource signUp1}"/>
-            </ColorAnimationUsingKeyFrames>
-            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[1].(GradientStop.Color)" Storyboard.TargetName="WindowGrid">
-                <EasingColorKeyFrame KeyTime="0:0:0.5" Value="{DynamicResource signUp2}"/>
-            </ColorAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="button">
                 <EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="0">
                     <EasingDoubleKeyFrame.EasingFunction>
@@ -182,12 +132,6 @@
             </BooleanAnimationUsingKeyFrames>
         </Storyboard>
         <Storyboard x:Key="HideLoginGrid">
-            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[0].(GradientStop.Color)" Storyboard.TargetName="WindowGrid">
-                <EasingColorKeyFrame KeyTime="0:0:0.5" Value="{DynamicResource home1}"/>
-            </ColorAnimationUsingKeyFrames>
-            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[1].(GradientStop.Color)" Storyboard.TargetName="WindowGrid">
-                <EasingColorKeyFrame KeyTime="0:0:0.5" Value="{DynamicResource home2}"/>
-            </ColorAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="StartPageGrid">
                 <EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="0">
                     <EasingDoubleKeyFrame.EasingFunction>
@@ -236,14 +180,6 @@
                     </EasingDoubleKeyFrame.EasingFunction>
                 </EasingDoubleKeyFrame>
             </DoubleAnimationUsingKeyFrames>
-            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[0].(GradientStop.Color)" Storyboard.TargetName="WindowGrid">
-                <EasingColorKeyFrame KeyTime="0" Value="{DynamicResource signUp1}"/>
-                <EasingColorKeyFrame KeyTime="0:0:0.5" Value="{DynamicResource home1}"/>
-            </ColorAnimationUsingKeyFrames>
-            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[1].(GradientStop.Color)" Storyboard.TargetName="WindowGrid">
-                <EasingColorKeyFrame KeyTime="0" Value="{DynamicResource signUp2}"/>
-                <EasingColorKeyFrame KeyTime="0:0:0.5" Value="{DynamicResource home2}"/>
-            </ColorAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="StartPageGrid">
                 <EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="0">
                     <EasingDoubleKeyFrame.EasingFunction>
@@ -272,233 +208,128 @@
                 <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
                 <EasingDoubleKeyFrame KeyTime="0:0:1" Value="1"/>
             </DoubleAnimationUsingKeyFrames>
-            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[0].(GradientStop.Color)" Storyboard.TargetName="WindowGrid">
-                <EasingColorKeyFrame KeyTime="0" Value="Black"/>
-                <EasingColorKeyFrame KeyTime="0:0:0.5" Value="{DynamicResource home1}">
-                    <EasingColorKeyFrame.EasingFunction>
-                        <CircleEase EasingMode="EaseInOut"/>
-                    </EasingColorKeyFrame.EasingFunction>
-                </EasingColorKeyFrame>
-            </ColorAnimationUsingKeyFrames>
-            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[1].(GradientStop.Color)" Storyboard.TargetName="WindowGrid">
-                <EasingColorKeyFrame KeyTime="0" Value="Black"/>
-                <EasingColorKeyFrame KeyTime="0:0:0.5" Value="{DynamicResource home2}">
-                    <EasingColorKeyFrame.EasingFunction>
-                        <CircleEase EasingMode="EaseInOut"/>
-                    </EasingColorKeyFrame.EasingFunction>
-                </EasingColorKeyFrame>
-            </ColorAnimationUsingKeyFrames>
         </Storyboard>
-        <Storyboard x:Key="HighlightLoginButton">
-            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="loginButton" KeyboardNavigation.TabIndex="2">
-                <EasingColorKeyFrame KeyTime="0:0:0.2" Value="#72FFFFFF"/>
-            </ColorAnimationUsingKeyFrames>
-        </Storyboard>
-        <Storyboard x:Key="LeaveLoginButton">
-            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="loginButton">
-                <EasingColorKeyFrame KeyTime="0" Value="#72FFFFFF"/>
-                <EasingColorKeyFrame KeyTime="0:0:0.2" Value="#33FFFFFF"/>
-            </ColorAnimationUsingKeyFrames>
-        </Storyboard>
-        <Storyboard x:Key="HighlightSearchButton">
-            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="searchButton">
-                <EasingColorKeyFrame KeyTime="0:0:0.2" Value="#72FFFFFF"/>
-            </ColorAnimationUsingKeyFrames>
-        </Storyboard>
-        <Storyboard x:Key="HighlightSignUpButton">
-            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="signupButton">
-                <EasingColorKeyFrame KeyTime="0:0:0.2" Value="#72FFFFFF"/>
-            </ColorAnimationUsingKeyFrames>
-        </Storyboard>
-        <Storyboard x:Key="LeaveSearchButton">
-            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="searchButton">
-                <EasingColorKeyFrame KeyTime="0" Value="#72FFFFFF"/>
-                <EasingColorKeyFrame KeyTime="0:0:0.2" Value="#33FFFFFF"/>
-            </ColorAnimationUsingKeyFrames>
-        </Storyboard>
-        <Storyboard x:Key="LeaveSignUpButton">
-            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="signupButton">
-                <EasingColorKeyFrame KeyTime="0" Value="#72FFFFFF"/>
-                <EasingColorKeyFrame KeyTime="0:0:0.2" Value="#33FFFFFF"/>
-            </ColorAnimationUsingKeyFrames>
-        </Storyboard>
+        <Storyboard x:Key="HighlightLoginButton"/>
+        <Storyboard x:Key="LeaveLoginButton"/>
+        <Storyboard x:Key="HighlightSearchButton"/>
+        <Storyboard x:Key="HighlightSignUpButton"/>
+        <Storyboard x:Key="LeaveSearchButton"/>
+        <Storyboard x:Key="LeaveSignUpButton"/>
     </Window.Resources>
     <Window.Triggers>
-        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
-            <BeginStoryboard x:Name="Startup_BeginStoryboard" Storyboard="{StaticResource Startup}"/>
-        </EventTrigger>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded"/>
     </Window.Triggers>
 
-    <Grid x:Name="WindowGrid">
-        <Grid.Background>
-            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                <GradientStop Color="{DynamicResource home1}" Offset="0"/>
-                <GradientStop Color="{DynamicResource home2}" Offset="1"/>
-            </LinearGradientBrush>
-        </Grid.Background>
-        <Grid x:Name="SearchResultsGrid" Margin="0" Background="#00000000" RenderTransformOrigin="0,0">
-            <Grid.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform/>
-                    <TranslateTransform X="{DynamicResource negativeScreenWidth}"/>
-                </TransformGroup>
-            </Grid.RenderTransform>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <TextBox x:Name="searchBox" Style="{StaticResource ModernTextBoxStyle}" Margin="20,170,20,0" Grid.Column="0" VerticalAlignment="Top" Text="{local:Loc DefaultSearchBoxContent}" FontSize="24" FontFamily="Sylfaen" Foreground="Black" GotFocus="searchBox_GotFocus" TextChanged="searchBox_TextChanged" LostFocus="searchBox_LostFocus"/>
-            <ListBox x:Name="searchResultsListBox" HorizontalContentAlignment="Stretch" Margin="20,229,20,20" BorderBrush="Transparent" Background="Transparent" BorderThickness="0" FontSize="24" ItemContainerStyle="{DynamicResource ModernListBoxItemStyle}" ScrollViewer.HorizontalScrollBarVisibility="Hidden">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Vertical">
-                            <TextBlock Text="{Binding Title}"/>
-                            <TextBlock Text="{Binding Author}" FontSize="16"/>
-                            <Separator Background="Black"/>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
-            <StackPanel Grid.Column="1" Margin="10">
-                <Border BorderThickness="2" BorderBrush="Black" Height="200" Width="140" Margin="0,10,0,0">
-                    <Image Height="200" Width="140" Margin="0,10,0,0"/>
-                </Border>
-                <TextBlock Margin="0,10,0,0"><Run Text="NAME OF THE BOOK"/></TextBlock>
-                <TextBlock x:Name="bookName" FontSize="24" TextWrapping="Wrap" Text="{Binding SelectedItem.Title, ElementName=searchResultsListBox}" />
-                <TextBlock Margin="0,10,0,0"><Run Text="AUTHOR"/></TextBlock>
-                <TextBlock x:Name="authorName" FontSize="24" TextWrapping="Wrap" Text="{Binding SelectedItem.Author, ElementName=searchResultsListBox}"/>
-                <TextBlock Margin="0,10,0,0"><Run Text="YEAR OF PUBLICATION"/></TextBlock>
-                <TextBlock x:Name="Year" FontSize="24" TextWrapping="Wrap" Text="{Binding SelectedItem.Year, ElementName=searchResultsListBox}"/>
-                <TextBlock Margin="0,10,0,0"><Run Text="BOOK ID"/></TextBlock>
-                <TextBlock x:Name="bookID" FontSize="24" TextWrapping="Wrap" Text="{Binding SelectedItem.BookID, ElementName=searchResultsListBox}"/>
-                <TextBlock Margin="0,10,0,0"><Run Text="AVAILABILITY"/></TextBlock>
-                <TextBlock x:Name="availability" FontSize="24" TextWrapping="Wrap" Text="{Binding SelectedItem.Available, ElementName=searchResultsListBox}"/>
-                <TextBlock Margin="0,10,0,0"><Run Text="ISBN"/></TextBlock>
-                <TextBlock x:Name="bookISBN" FontSize="24" TextWrapping="Wrap">
-                    <TextBlock.Text>ISBN here!</TextBlock.Text>
-                </TextBlock>
+    <Grid x:Name="WindowGrid" Background="#FF1B0031">
 
-            </StackPanel>
-        </Grid>
-        <Grid x:Name="StartPageGrid" Margin="0" RenderTransformOrigin="0,0">
-            <Grid.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Grid.RenderTransform>
-            <Grid x:Name="GreetingBackground" HorizontalAlignment="Center" Height="88" VerticalAlignment="Top" Width="340" Margin="0,10,0,0" Grid.Column="2">
-                <Rectangle HorizontalAlignment="Left" Height="88"  VerticalAlignment="Top" Width="340"/>
-                <TextBlock x:Name="Greeting" TextWrapping="Wrap" Text="{local:Loc Greeting}" Foreground="Black" FontSize="64" TextAlignment="Center"/>
-            </Grid>
-            <Grid x:Name="StartPageContentGrid" Margin="10,110,10,10" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="3">
-                <Grid.RenderTransform>
+
+        <Grid x:Name="HeaderGrid" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0" Grid.Column="2">
+            <TextBlock x:Name="Greeting" TextWrapping="Wrap" Text="{local:Loc Greeting}" Foreground="Black" FontSize="64" TextAlignment="Center" VerticalAlignment="Top"/>
+            <Button x:Name="button" Content="{local:Loc HomeButtonContent}" HorizontalAlignment="Left" Height="40" Margin="80,10,10,10" VerticalAlignment="Top" Width="67.857" RenderTransformOrigin="0.5,0.5" Click="button_Click" Cursor="Hand" KeyboardNavigation.IsTabStop="False" Style="{DynamicResource ModernButtonStyle}">
+                <Button.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
                         <SkewTransform/>
                         <RotateTransform/>
-                        <TranslateTransform/>
+                        <TranslateTransform Y="-80"/>
                     </TransformGroup>
-                </Grid.RenderTransform>
+                </Button.RenderTransform>
+            </Button>
+            <Grid x:Name="LanguageGrid" Margin="10,10,0,0" HorizontalAlignment="Left" Height="120" VerticalAlignment="Top" Width="65" MouseEnter="LanguageGrid_MouseEnter" MouseLeave="LanguageGrid_MouseLeave">
+                <Button x:Name="English" HorizontalAlignment="Left" VerticalAlignment="Top" Width="65" Margin="0" Height="40" Cursor="Hand" Click="English_Click" BorderThickness="0">
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Image Source="/Images/UK.png" Stretch="Fill"/>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <Button x:Name="Swedish" HorizontalAlignment="Left" VerticalAlignment="Top" Width="65" Margin="0" Height="40" Cursor="Hand" Click="Swedish_Click" BorderThickness="0">
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Image Source="/Images/Swedish.png" Stretch="Fill"/>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <Button x:Name="Finnish" HorizontalAlignment="Left" VerticalAlignment="Top" Width="65" Margin="0" Height="40" Cursor="Hand" Click="Finnish_Click" BorderThickness="0">
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Image Source="/Images/Finnish.png" Stretch="Fill"/>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </Grid>
+        </Grid>
+        <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,85,0,0">
+            <Grid x:Name="LoginGrid" Margin="0" Background="#FF5D005E" Height="238">
+
+                <Grid x:Name="LoginFieldsGrid" VerticalAlignment="Center" HorizontalAlignment="Center" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <TextBox Width="350" x:Name="username" Grid.Column="0" Grid.Row="0" Style="{StaticResource ModernTextBoxStyle}" Margin="0" Text="{local:Loc DefaultLoginUsernameBoxContent}" VerticalAlignment="Stretch" GotFocus="username_GotFocus" LostFocus="username_LostFocus" TextChanged="username_TextChanged" KeyDown="username_KeyDown"/>
+                    <PasswordBox Visibility="Hidden" Padding="5" Grid.Column ="0" Grid.Row="1" x:Name="password" Margin="0,10,0,0" VerticalAlignment="Stretch" FontSize="24" KeyDown="password_KeyDown"/>
+                    <Button x:Name="loginButton1" Grid.Column="1" Grid.RowSpan="1"  Content="{local:Loc DefaultLoginButtonContent}" HorizontalAlignment="Right" Margin="10,0,0,0" Padding="10,0,10,0" VerticalAlignment="Stretch" FontSize="24"  Style="{DynamicResource ModernButtonStyle}" Click="loginButton1_Click"/>
+                </Grid>
+            </Grid>
+            <Grid x:Name="SignUpGrid" Margin="0" Background="#FF870066" Height="238" >
+
+                <TextBlock x:Name="textBlock" HorizontalAlignment="Center" Margin="0,200,0,0" TextWrapping="Wrap" Text="Instructions for signing up" VerticalAlignment="Top" Height="42" Width="318" FontSize="26.667" Foreground="White"/>
+                <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox x:Name="signupField" Style="{StaticResource ModernTextBoxStyle}" Grid.Column="0"  Text="{local:Loc DefaultSignUpUsernameBoxContent}" GotFocus="signupField_GotFocus"  LostFocus="signupField_LostFocus" TextChanged="signupField_TextChanged" VerticalAlignment="Stretch"  Width="400"/>
+                    <Button x:Name="signupButton1" Grid.Column="1" Content="{local:Loc SignUpButtonContent}" HorizontalAlignment="Right" Margin="10,0,0,0" Width="115" FontSize="18" Padding="1,0,1,1" Style="{DynamicResource ModernButtonStyle}" VerticalAlignment="Stretch" Click="signupButton1_Click"/>
+                </Grid>
+            </Grid>
+            <Grid x:Name="SearchResultsGrid" Margin="0" HorizontalAlignment="Stretch" Height="238" Background="#FFBF0060">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                
+                <TextBox x:Name="searchBox" Style="{StaticResource ModernTextBoxStyle}" Margin="20,170,20,0" Grid.Column="0" VerticalAlignment="Top" Text="{local:Loc DefaultSearchBoxContent}" FontSize="24" FontFamily="Sylfaen" Foreground="Black" GotFocus="searchBox_GotFocus" TextChanged="searchBox_TextChanged" LostFocus="searchBox_LostFocus"/>
+                <ListBox x:Name="searchResultsListBox" HorizontalContentAlignment="Stretch" Margin="20,229,20,20" BorderBrush="Transparent" Background="Transparent" BorderThickness="0" FontSize="24" ItemContainerStyle="{DynamicResource ModernListBoxItemStyle}" ScrollViewer.HorizontalScrollBarVisibility="Hidden">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock Text="{Binding Title}"/>
+                                <TextBlock Text="{Binding Author}" FontSize="16"/>
+                                <Separator Background="Black"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <StackPanel Grid.Column="1" Margin="10">
+                    <Border BorderThickness="2" BorderBrush="Black" Height="200" Width="140" Margin="0,10,0,0">
+                        <Image Height="200" Width="140" Margin="0,10,0,0"/>
+                    </Border>
+                    <TextBlock Margin="0,10,0,0"><Run Text="NAME OF THE BOOK"/></TextBlock>
+                    <TextBlock x:Name="bookName" FontSize="24" TextWrapping="Wrap" Text="{Binding SelectedItem.Title, ElementName=searchResultsListBox}" />
+                    <TextBlock Margin="0,10,0,0"><Run Text="AUTHOR"/></TextBlock>
+                    <TextBlock x:Name="authorName" FontSize="24" TextWrapping="Wrap" Text="{Binding SelectedItem.Author, ElementName=searchResultsListBox}"/>
+                    <TextBlock Margin="0,10,0,0"><Run Text="YEAR OF PUBLICATION"/></TextBlock>
+                    <TextBlock x:Name="Year" FontSize="24" TextWrapping="Wrap" Text="{Binding SelectedItem.Year, ElementName=searchResultsListBox}"/>
+                    <TextBlock Margin="0,10,0,0"><Run Text="BOOK ID"/></TextBlock>
+                    <TextBlock x:Name="bookID" FontSize="24" TextWrapping="Wrap" Text="{Binding SelectedItem.BookID, ElementName=searchResultsListBox}"/>
+                    <TextBlock Margin="0,10,0,0"><Run Text="AVAILABILITY"/></TextBlock>
+                    <TextBlock x:Name="availability" FontSize="24" TextWrapping="Wrap" Text="{Binding SelectedItem.Available, ElementName=searchResultsListBox}"/>
+                    <TextBlock Margin="0,10,0,0"><Run Text="ISBN"/></TextBlock>
+                    <TextBlock x:Name="bookISBN" FontSize="24" TextWrapping="Wrap">
+                        <TextBlock.Text>ISBN here!</TextBlock.Text>
+                    </TextBlock>
+
+                </StackPanel>
+            </Grid>
+        </StackPanel>
 
 
-                <TextBlock x:Name="logInText" Margin="163.333,0,0,124.334" TextWrapping="Wrap" FontSize="32" Text="{local:Loc TextUnderLogin}" HorizontalAlignment="Left" Width="309.444" Grid.Row="1" Grid.Column="1" d:LayoutOverrides="VerticalAlignment"/>
-                <TextBlock x:Name="searchText" Margin="44,0,0,-11.638" TextWrapping="Wrap"  FontSize="32" Text="{local:Loc TextUnderSearchBox}" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="371.71" Height="187.253"/>
-                <TextBlock x:Name="makeAnAccountText" Margin="0,136.334,30.173,10" TextWrapping="Wrap" FontSize="32" Text="{local:Loc TextUnderAccountCreation}" Foreground="Black" HorizontalAlignment="Right" Width="458.494" Grid.Row="1" d:LayoutOverrides="VerticalAlignment"/>
-                <Button Name="loginButton" Content="Images/Login.png" Template="{StaticResource ModernHexagonButtonStyle}" Height="300" Width="259.808" Margin="0,0,20,-10" VerticalAlignment="Bottom" HorizontalAlignment="Right" Click="loginButton_Click" />
-                <Button Name ="searchButton" Content="Images/Search.png" Template="{StaticResource ModernHexagonButtonStyle}" Margin="0,-20,0,0" Height="300" Width="259.808" VerticalAlignment="Top" HorizontalAlignment="Center" Click="searchButton_Click" Grid.Row="1" Grid.ColumnSpan="2" />
-                <Button Name="signupButton" Content="Images/Signup.png" Template="{StaticResource ModernHexagonButtonStyle}" Height="300" Width="259.808" Margin="20,0,0,-10" VerticalAlignment="Bottom" HorizontalAlignment="Left" Click="signupButton_Click" Grid.Column="1"/>
 
-            </Grid>
-        </Grid>
-        <Grid x:Name="LanguageGrid" Margin="10,10,0,0" HorizontalAlignment="Left" Height="120" VerticalAlignment="Top" Width="65" MouseEnter="LanguageGrid_MouseEnter" MouseLeave="LanguageGrid_MouseLeave">
-            <Button x:Name="English" HorizontalAlignment="Left" VerticalAlignment="Top" Width="65" Margin="0" Height="40" Cursor="Hand" Click="English_Click" BorderThickness="0">
-                <Button.Template>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Image Source="/Images/UK.png" Stretch="Fill"/>
-                    </ControlTemplate>
-                </Button.Template>
-            </Button>
-            <Button x:Name="Swedish" HorizontalAlignment="Left" VerticalAlignment="Top" Width="65" Margin="0" Height="40" Cursor="Hand" Click="Swedish_Click" BorderThickness="0">
-                <Button.Template>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Image Source="/Images/Swedish.png" Stretch="Fill"/>
-                    </ControlTemplate>
-                </Button.Template>
-            </Button>
-            <Button x:Name="Finnish" HorizontalAlignment="Left" VerticalAlignment="Top" Width="65" Margin="0" Height="40" Cursor="Hand" Click="Finnish_Click" BorderThickness="0">
-                <Button.Template>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Image Source="/Images/Finnish.png" Stretch="Fill"/>
-                    </ControlTemplate>
-                </Button.Template>
-            </Button>
-        </Grid>
-        <Grid x:Name="LoginGrid" Margin="0" RenderTransformOrigin="0,0">
-            <Grid.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform/>
-                    <TranslateTransform Y="{DynamicResource negativeScreenHeight}"/>
-                </TransformGroup>
-            </Grid.RenderTransform>
-            <Grid x:Name="LoginFieldsGrid" VerticalAlignment="Center" HorizontalAlignment="Center" >
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <TextBox Width="350" x:Name="username" Grid.Column="0" Grid.Row="0" Style="{StaticResource ModernTextBoxStyle}" Margin="0" Text="{local:Loc DefaultLoginUsernameBoxContent}" VerticalAlignment="Stretch" GotFocus="username_GotFocus" LostFocus="username_LostFocus" TextChanged="username_TextChanged" KeyDown="username_KeyDown"/>
-                <PasswordBox Visibility="Hidden" Padding="5" Grid.Column ="0" Grid.Row="1" x:Name="password" Margin="0,10,0,0" VerticalAlignment="Stretch" FontSize="24" KeyDown="password_KeyDown"/>
-                <Button x:Name="loginButton1" Grid.Column="1" Grid.RowSpan="1"  Content="{local:Loc DefaultLoginButtonContent}" HorizontalAlignment="Right" Margin="10,0,0,0" Padding="10,0,10,0" VerticalAlignment="Stretch" FontSize="24"  Style="{DynamicResource ModernButtonStyle}" Click="loginButton1_Click"/>
-            </Grid>
-        </Grid>
-        <Grid x:Name="SignUpGrid" Margin="0" RenderTransformOrigin="0,0">
-            <Grid.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform/>
-                    <TranslateTransform X="{DynamicResource screenWidth}"/>
-                </TransformGroup>
-            </Grid.RenderTransform>
-            <TextBlock x:Name="textBlock" HorizontalAlignment="Center" Margin="0,200,0,0" TextWrapping="Wrap" Text="Instructions for signing up" VerticalAlignment="Top" Height="42" Width="318" FontSize="26.667" Foreground="White"/>
-            <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <TextBox x:Name="signupField" Style="{StaticResource ModernTextBoxStyle}" Grid.Column="0"  Text="{local:Loc DefaultSignUpUsernameBoxContent}" GotFocus="signupField_GotFocus"  LostFocus="signupField_LostFocus" TextChanged="signupField_TextChanged" VerticalAlignment="Stretch"  Width="400"/>
-                <Button x:Name="signupButton1" Grid.Column="1" Content="{local:Loc SignUpButtonContent}" HorizontalAlignment="Right" Margin="10,0,0,0" Width="115" FontSize="18" Padding="1,0,1,1" Style="{DynamicResource ModernButtonStyle}" VerticalAlignment="Stretch" Click="signupButton1_Click"/>
-            </Grid>
-        </Grid>
-        <Button x:Name="button" Content="{local:Loc HomeButtonContent}" HorizontalAlignment="Left" Height="40" Margin="80,10,10,10" VerticalAlignment="Top" Width="67.857" RenderTransformOrigin="0.5,0.5" Click="button_Click" Cursor="Hand" KeyboardNavigation.IsTabStop="False" Style="{DynamicResource ModernButtonStyle}">
-            <Button.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform/>
-                    <TranslateTransform Y="-80"/>
-                </TransformGroup>
-            </Button.RenderTransform>
-        </Button>
     </Grid>
 </Window>
 
