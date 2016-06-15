@@ -76,7 +76,7 @@ namespace JLLKirjasto
         private TranslateTransform middleFlagTransform;
         private TranslateTransform bottomFlagTransform;
         private Storyboard gradientStoryboard;
-        private Storyboard ShowSearchResultsGrid;
+        private Storyboard ShowSearchGrid;
 
         AdminControlsWindow adminwindow;
 
@@ -135,9 +135,9 @@ namespace JLLKirjasto
             Storyboard.SetTargetProperty(gradientTurn, new PropertyPath("Background.EndPoint"));
             gradientStoryboard.Begin();*/
 
-            //initializes ShowSearchResultsGrid animation storyboard
+            //initializes ShowSearchGrid animation storyboard
             //WORK IN PROGRESS
-            ShowSearchResultsGrid = new Storyboard();
+            ShowSearchGrid = new Storyboard();
         }
 
         #region UI Handling
@@ -155,22 +155,22 @@ namespace JLLKirjasto
             // Update the height of the grids
             LoginGrid.Height = gridHeight;
             SignUpGrid.Height = gridHeight;
-            SearchResultsGrid.Height = gridHeight;
+            SearchGrid.Height = gridHeight;
         }
 
         // UI navigation
-        private void username_KeyDown(object sender, KeyEventArgs e)
+        private void UsernameField_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
             {
-                loginButton1.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+                LoginButton.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
             }
         }
-        private void password_KeyDown(object sender, KeyEventArgs e)
+        private void PasswordField_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
             {
-                loginButton1.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+                LoginButton.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
             }
         }
         private void GoHomeStoryboardCompleted(object sender, EventArgs e)
@@ -235,40 +235,40 @@ namespace JLLKirjasto
         }
 
         // search behaviour
-        private void searchBox_GotFocus(object sender, RoutedEventArgs e)
+        private void SearchBox_GotFocus(object sender, RoutedEventArgs e)
         {
-            if (searchBox.Text == Properties.Resources.ResourceManager.GetString("DefaultSearchBoxContent", TranslationSource.Instance.CurrentCulture))
+            if (SearchBox.Text == Properties.Resources.ResourceManager.GetString("DefaultSearchBoxContent", TranslationSource.Instance.CurrentCulture))
             {
-                searchBox.Text = "";
+                SearchBox.Text = "";
             }
         }
-        private void searchBox_LostFocus(object sender, RoutedEventArgs e)
+        private void SearchBox_LostFocus(object sender, RoutedEventArgs e)
         {
-            if (searchBox.Text == "")
+            if (SearchBox.Text == "")
             {
-                searchBox.Text = Properties.Resources.ResourceManager.GetString("DefaultSearchBoxContent", TranslationSource.Instance.CurrentCulture);
+                SearchBox.Text = Properties.Resources.ResourceManager.GetString("DefaultSearchBoxContent", TranslationSource.Instance.CurrentCulture);
             }
         }
-        private void searchBox_TextChanged(object sender, TextChangedEventArgs e)
+        private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (searchBox.Text == Properties.Resources.ResourceManager.GetString("DefaultSearchBoxContent", TranslationSource.Instance.CurrentCulture))
+            if (SearchBox.Text == Properties.Resources.ResourceManager.GetString("DefaultSearchBoxContent", TranslationSource.Instance.CurrentCulture))
             {
-                searchBox.Foreground = new SolidColorBrush(Colors.DarkSlateGray);
+                SearchBox.Foreground = new SolidColorBrush(Colors.DarkSlateGray);
             }
             else
             {
                 // Console.Beep(); // just for fun. EDIT: not really fun since it makes the search laggy
-                searchBox.Foreground = new SolidColorBrush(Colors.Black);
+                SearchBox.Foreground = new SolidColorBrush(Colors.Black);
 
                 // Search for books if the search term is long enough
-                if (searchBox.Text.Length >= minSearchChars)
+                if (SearchBox.Text.Length >= minSearchChars)
                 {
                     updateSearchResults();
                 }
                 // If the search term is shorter, display nothing
                 else
                 {
-                    searchResultsListBox.ItemsSource = null;
+                    SearchResultsListBox.ItemsSource = null;
                 }
 
             }
@@ -286,76 +286,76 @@ namespace JLLKirjasto
             }
         }**/
 
-        // Login username input field behaviour
-        private void username_GotFocus(object sender, RoutedEventArgs e)
+        // Login UsernameField input field behaviour
+        private void UsernameField_GotFocus(object sender, RoutedEventArgs e)
         {
-            if (username.Text == Properties.Resources.ResourceManager.GetString("DefaultLoginUsernameBoxContent", TranslationSource.Instance.CurrentCulture))
+            if (UsernameField.Text == Properties.Resources.ResourceManager.GetString("DefaultLoginUsernameBoxContent", TranslationSource.Instance.CurrentCulture))
             {
-                username.Text = "";
+                UsernameField.Text = "";
             }
         }
-        private void username_LostFocus(object sender, RoutedEventArgs e)
+        private void UsernameField_LostFocus(object sender, RoutedEventArgs e)
         {
-            if (username.Text == "")
+            if (UsernameField.Text == "")
             {
-                username.Text = Properties.Resources.ResourceManager.GetString("DefaultLoginUsernameBoxContent", TranslationSource.Instance.CurrentCulture);
+                UsernameField.Text = Properties.Resources.ResourceManager.GetString("DefaultLoginUsernameBoxContent", TranslationSource.Instance.CurrentCulture);
             }
         }
-        private void username_TextChanged(object sender, TextChangedEventArgs e)
+        private void UsernameField_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (username.Text == Properties.Resources.ResourceManager.GetString("DefaultLoginUsernameBoxContent", TranslationSource.Instance.CurrentCulture))
+            if (UsernameField.Text == Properties.Resources.ResourceManager.GetString("DefaultLoginUsernameBoxContent", TranslationSource.Instance.CurrentCulture))
             {
-                username.Foreground = new SolidColorBrush(Colors.DarkSlateGray);
+                UsernameField.Foreground = new SolidColorBrush(Colors.DarkSlateGray);
 
             }
             else
             {            
-                username.Foreground = new SolidColorBrush(Colors.Black);
+                UsernameField.Foreground = new SolidColorBrush(Colors.Black);
 
                 //making sure password is hidden if admin credentials not present
-                password.Visibility = Visibility.Hidden;
-                Grid.SetRowSpan(loginButton1, 1);
+                PasswordField.Visibility = Visibility.Hidden;
+                Grid.SetRowSpan(LoginButton, 1);
 
                 //making password field visible when admin credentials are present
-                if (username.Text == "admin")
+                if (UsernameField.Text == "admin")
                 {
-                        password.Visibility = Visibility.Visible;
-                        Grid.SetRowSpan(loginButton1, 2);
+                        PasswordField.Visibility = Visibility.Visible;
+                        Grid.SetRowSpan(LoginButton, 2);
                 }
             }
         }
 
         // Sign up input field behaviour
-        private void signupField_LostFocus(object sender, RoutedEventArgs e)
+        private void SignUpField_LostFocus(object sender, RoutedEventArgs e)
         {
-            if (signupField.Text == "")
+            if (SignUpField.Text == "")
             {
-                signupField.Text = Properties.Resources.ResourceManager.GetString("DefaultSignUpUsernameBoxContent", TranslationSource.Instance.CurrentCulture);
+                SignUpField.Text = Properties.Resources.ResourceManager.GetString("DefaultSignUpUsernameBoxContent", TranslationSource.Instance.CurrentCulture);
             }
         }
-        private void signupField_GotFocus(object sender, RoutedEventArgs e)
+        private void SignUpField_GotFocus(object sender, RoutedEventArgs e)
         {
-            if (signupField.Text == Properties.Resources.ResourceManager.GetString("DefaultSignUpUsernameBoxContent", TranslationSource.Instance.CurrentCulture))
+            if (SignUpField.Text == Properties.Resources.ResourceManager.GetString("DefaultSignUpUsernameBoxContent", TranslationSource.Instance.CurrentCulture))
             {
-                signupField.Text = "";
+                SignUpField.Text = "";
             }
         }
-        private void signupField_TextChanged(object sender, TextChangedEventArgs e)
+        private void SignUpField_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (signupField.Text == Properties.Resources.ResourceManager.GetString("DefaultSignUpUsernameBoxContent", TranslationSource.Instance.CurrentCulture))
+            if (SignUpField.Text == Properties.Resources.ResourceManager.GetString("DefaultSignUpUsernameBoxContent", TranslationSource.Instance.CurrentCulture))
             {
-                signupField.Foreground = new SolidColorBrush(Colors.DarkSlateGray);
+                SignUpField.Foreground = new SolidColorBrush(Colors.DarkSlateGray);
             }
             else
             {
-                signupField.Foreground = new SolidColorBrush(Colors.Black);
+                SignUpField.Foreground = new SolidColorBrush(Colors.Black);
             }
         }
 
         // User database related handling (login / signing up)
-        private void loginButton1_Click(object sender, RoutedEventArgs e)
+        private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
-            if (username.Text == "admin" && password.Password == "kuulkala")
+            if (UsernameField.Text == "admin" && PasswordField.Password == "kuulkala")
             {
                 adminwindow = new AdminControlsWindow();
                 adminwindow.Show();
@@ -363,7 +363,7 @@ namespace JLLKirjasto
         }       
         private void signupButton1_Click(object sender, RoutedEventArgs e)
         {
-            if (signupField.Text.EndsWith("@edu.jns.fi"))
+            if (SignUpField.Text.EndsWith("@edu.jns.fi"))
             {
                 try
                 {
@@ -385,7 +385,7 @@ namespace JLLKirjasto
                     // execute command and close conection
                     SQLiteCommand command = new SQLiteCommand(sql, dbconnection);
                     command.Parameters.AddWithValue("UserID", userCount);
-                    command.Parameters.AddWithValue("Username", signupField.Text);
+                    command.Parameters.AddWithValue("Username", SignUpField.Text);
                     command.ExecuteNonQuery();
                     dbconnection.Close();
                 }
@@ -440,11 +440,11 @@ namespace JLLKirjasto
             bool updateLogInUserNameBoxText = false;
             bool updateSignupField = false;
 
-            if (username.Text == Properties.Resources.ResourceManager.GetString("DefaultLoginUsernameBoxContent", TranslationSource.Instance.CurrentCulture))
+            if (UsernameField.Text == Properties.Resources.ResourceManager.GetString("DefaultLoginUsernameBoxContent", TranslationSource.Instance.CurrentCulture))
                 updateLogInUserNameBoxText = true;
-            if (searchBox.Text == Properties.Resources.ResourceManager.GetString("DefaultSearchBoxContent", TranslationSource.Instance.CurrentCulture))
+            if (SearchBox.Text == Properties.Resources.ResourceManager.GetString("DefaultSearchBoxContent", TranslationSource.Instance.CurrentCulture))
                 updateSearchBoxText = true;
-            if (signupField.Text == Properties.Resources.ResourceManager.GetString("DefaultSignUpUsernameBoxContent", TranslationSource.Instance.CurrentCulture))
+            if (SignUpField.Text == Properties.Resources.ResourceManager.GetString("DefaultSignUpUsernameBoxContent", TranslationSource.Instance.CurrentCulture))
                 updateSignupField = true;
 
             switch (language)
@@ -480,17 +480,17 @@ namespace JLLKirjasto
 
             if (updateSearchBoxText)
             {
-                searchBox.Text = Properties.Resources.ResourceManager.GetString("DefaultSearchBoxContent", TranslationSource.Instance.CurrentCulture);
+                SearchBox.Text = Properties.Resources.ResourceManager.GetString("DefaultSearchBoxContent", TranslationSource.Instance.CurrentCulture);
             }
 
             if (updateLogInUserNameBoxText)
             {
-                username.Text = Properties.Resources.ResourceManager.GetString("DefaultLoginUsernameBoxContent", TranslationSource.Instance.CurrentCulture);
+                UsernameField.Text = Properties.Resources.ResourceManager.GetString("DefaultLoginUsernameBoxContent", TranslationSource.Instance.CurrentCulture);
             }
 
             if (updateSignupField)
             {
-                signupField.Text = Properties.Resources.ResourceManager.GetString("DefaultSignUpUsernameBoxContent", TranslationSource.Instance.CurrentCulture);
+                SignUpField.Text = Properties.Resources.ResourceManager.GetString("DefaultSignUpUsernameBoxContent", TranslationSource.Instance.CurrentCulture);
             }
         }
 
@@ -550,14 +550,14 @@ namespace JLLKirjasto
             **/
 
             List<List<String>> searchResults = new List<List<String>>();
-            searchResults = dbi.searchDatabaseRows(dbconnection, "books", searchBox.Text, columns);
+            searchResults = dbi.searchDatabaseRows(dbconnection, "books", SearchBox.Text, columns);
             ListBoxItems = new List<Book>();
 
             foreach (List<String> row in searchResults)
             {
                 ListBoxItems.Add(new Book() { BookID = row[0], Author = row[1], Title = row[2], Year = row[3], Language = row[4], Available = row[5] });
             }
-            searchResultsListBox.ItemsSource = ListBoxItems;
+            SearchResultsListBox.ItemsSource = ListBoxItems;
         }
 
         #endregion
