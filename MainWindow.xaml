@@ -249,7 +249,9 @@
 
             <!-- LoginGrid contains the UI elements required for logging in and signing out-->
             <!-- TODO: Add functionality for signing out -->
-            <Grid x:Name="LoginGrid" Margin="0" Background="#FF5D005E" Height="238" Focusable="True">
+            <Grid x:Name="LoginGrid" Margin="0" Background="#FF5D005E" Height="238" MouseUp="LoginGrid_MouseUp">
+                <TextBlock x:Name="LoginGridTooltip" Text="Login" Visibility="Visible" FontSize="60" Foreground="White" HorizontalAlignment="Center" 
+                           VerticalAlignment="Center" Focusable="True" KeyDown="LoginGridTooltip_KeyDown"/>
                 <Grid x:Name="LoginFieldsGrid" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Hidden">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -278,8 +280,12 @@
             </Grid>
 
             <!-- SignUpGrid Contains the UI elements required for account creation -->
-            <Grid x:Name="SignUpGrid" Margin="0" Background="#FF870066" Height="238" Focusable="True">
-                <TextBlock x:Name="SignUpInstruction" HorizontalAlignment="Center" Margin="0,200,0,0" TextWrapping="Wrap" Text="Instructions for signing up" 
+            <Grid x:Name="SignUpGrid" Margin="0" Background="#FF870066" Height="238" MouseUp="SignUpGrid_MouseUp">
+                <TextBlock x:Name="SignUpGridTooltip" Text="Sign Up" Visibility="Visible" FontSize="60" Foreground="White" HorizontalAlignment="Center" 
+                           VerticalAlignment="Center" Focusable="True" KeyDown="SignUpGridTooltip_KeyDown"/>
+
+                <TextBlock x:Name="SignUpInstruction" HorizontalAlignment="Center" Margin="0,200,0,0" TextWrapping="Wrap"
+                           Text="Do this and that to sign up. Additionally, add a proper text for this TextBlock" 
                            VerticalAlignment="Top" Height="42" Width="318" FontSize="26.667" Foreground="White" Visibility="Hidden" Focusable="False"/>
                 <Grid x:Name="SignUpFieldGrid" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden" Focusable="False">
                     <Grid.ColumnDefinitions>
@@ -296,47 +302,55 @@
             </Grid>
 
             <!-- SearchGrid contains the UI elements for searching the books database-->
-            <Grid x:Name="SearchGrid" Margin="0" HorizontalAlignment="Stretch" Height="238" Background="#FFBF0060" Focusable="True">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <TextBox x:Name="SearchBox" Style="{StaticResource ModernTextBoxStyle}" Margin="20,170,20,0" Grid.Column="0" VerticalAlignment="Top" 
+            <Grid x:Name="SearchGrid" Margin="0" HorizontalAlignment="Stretch" Height="238" Background="#FFBF0060" MouseUp="SearchGrid_MouseUp">
+                <TextBlock x:Name="SearchGridTooltip" Text="Search" Visibility="Visible" FontSize="60" Foreground="White" HorizontalAlignment="Center" 
+                           VerticalAlignment="Center" Focusable="True" KeyDown="SearchGridTooltip_KeyDown"/>
+                
+                <!-- Contains the search UI interaction elements. This has to exist as otherwise SearchGridToolTip couldn't be displayed properly -->
+                <!-- Because of the ColumnDefinitions in search UI interactions -->
+                <Grid x:Name="SearchContentsGrid" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox x:Name="SearchBox" Style="{StaticResource ModernTextBoxStyle}" Margin="20,170,20,0" Grid.Column="0" VerticalAlignment="Top" 
                          Text="{local:Loc DefaultSearchBoxContent}" FontSize="24" FontFamily="Sylfaen" Foreground="Black" GotFocus="SearchBox_GotFocus" 
                          TextChanged="SearchBox_TextChanged" LostFocus="SearchBox_LostFocus" Visibility="Hidden" Focusable="False"/>
-                <ListBox x:Name="SearchResultsListBox" HorizontalContentAlignment="Stretch" Margin="20,229,20,20" BorderBrush="Transparent" 
+                    <ListBox x:Name="SearchResultsListBox" HorizontalContentAlignment="Stretch" Margin="20,229,20,20" BorderBrush="Transparent" 
                          Background="Transparent" BorderThickness="0" FontSize="24" ItemContainerStyle="{DynamicResource ModernListBoxItemStyle}" 
                          ScrollViewer.HorizontalScrollBarVisibility="Hidden" Focusable="False" Visibility="Hidden">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Vertical">
-                                <TextBlock Text="{Binding Title}"/>
-                                <TextBlock Text="{Binding Author}" FontSize="16"/>
-                                <Separator Background="Black"/>
-                            </StackPanel>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-                <StackPanel Grid.Column="1" Margin="10" Focusable="False" Visibility="Hidden">
-                    <Border BorderThickness="2" BorderBrush="Black" Height="200" Width="140" Margin="0,10,0,0">
-                        <Image Height="200" Width="140" Margin="0,10,0,0"/>
-                    </Border>
-                    <TextBlock Margin="0,10,0,0"><Run Text="NAME OF THE BOOK"/></TextBlock>
-                    <TextBlock x:Name="bookName" FontSize="24" TextWrapping="Wrap" Text="{Binding SelectedItem.Title, ElementName=SearchResultsListBox}" />
-                    <TextBlock Margin="0,10,0,0"><Run Text="AUTHOR"/></TextBlock>
-                    <TextBlock x:Name="authorName" FontSize="24" TextWrapping="Wrap" Text="{Binding SelectedItem.Author, ElementName=SearchResultsListBox}"/>
-                    <TextBlock Margin="0,10,0,0"><Run Text="YEAR OF PUBLICATION"/></TextBlock>
-                    <TextBlock x:Name="Year" FontSize="24" TextWrapping="Wrap" Text="{Binding SelectedItem.Year, ElementName=SearchResultsListBox}"/>
-                    <TextBlock Margin="0,10,0,0"><Run Text="BOOK ID"/></TextBlock>
-                    <TextBlock x:Name="bookID" FontSize="24" TextWrapping="Wrap" Text="{Binding SelectedItem.BookID, ElementName=SearchResultsListBox}"/>
-                    <TextBlock Margin="0,10,0,0"><Run Text="AVAILABILITY"/></TextBlock>
-                    <TextBlock x:Name="availability" FontSize="24" TextWrapping="Wrap" Text="{Binding SelectedItem.Available, ElementName=SearchResultsListBox}"/>
-                    <TextBlock Margin="0,10,0,0"><Run Text="ISBN"/></TextBlock>
-                    <TextBlock x:Name="bookISBN" FontSize="24" TextWrapping="Wrap">
-                        <TextBlock.Text>ISBN here!</TextBlock.Text>
-                    </TextBlock>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Vertical">
+                                    <TextBlock Text="{Binding Title}"/>
+                                    <TextBlock Text="{Binding Author}" FontSize="16"/>
+                                    <Separator Background="Black"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <StackPanel Grid.Column="1" Margin="10" Focusable="False" Visibility="Hidden">
+                        <Border BorderThickness="2" BorderBrush="Black" Height="200" Width="140" Margin="0,10,0,0">
+                            <Image Height="200" Width="140" Margin="0,10,0,0"/>
+                        </Border>
+                        <TextBlock Margin="0,10,0,0"><Run Text="NAME OF THE BOOK"/></TextBlock>
+                        <TextBlock x:Name="bookName" FontSize="24" TextWrapping="Wrap" Text="{Binding SelectedItem.Title, ElementName=SearchResultsListBox}" />
+                        <TextBlock Margin="0,10,0,0"><Run Text="AUTHOR"/></TextBlock>
+                        <TextBlock x:Name="authorName" FontSize="24" TextWrapping="Wrap" Text="{Binding SelectedItem.Author, ElementName=SearchResultsListBox}"/>
+                        <TextBlock Margin="0,10,0,0"><Run Text="YEAR OF PUBLICATION"/></TextBlock>
+                        <TextBlock x:Name="Year" FontSize="24" TextWrapping="Wrap" Text="{Binding SelectedItem.Year, ElementName=SearchResultsListBox}"/>
+                        <TextBlock Margin="0,10,0,0"><Run Text="BOOK ID"/></TextBlock>
+                        <TextBlock x:Name="bookID" FontSize="24" TextWrapping="Wrap" Text="{Binding SelectedItem.BookID, ElementName=SearchResultsListBox}"/>
+                        <TextBlock Margin="0,10,0,0"><Run Text="AVAILABILITY"/></TextBlock>
+                        <TextBlock x:Name="availability" FontSize="24" TextWrapping="Wrap" Text="{Binding SelectedItem.Available, ElementName=SearchResultsListBox}"/>
+                        <TextBlock Margin="0,10,0,0"><Run Text="ISBN"/></TextBlock>
+                        <TextBlock x:Name="bookISBN" FontSize="24" TextWrapping="Wrap">
+                            <TextBlock.Text>ISBN here!</TextBlock.Text>
+                        </TextBlock>
 
-                </StackPanel>
+                    </StackPanel>
+                </Grid>
+                
             </Grid>
         </StackPanel>
 

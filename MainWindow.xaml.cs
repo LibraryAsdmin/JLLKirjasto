@@ -159,6 +159,8 @@ namespace JLLKirjasto
         }
 
         // UI navigation
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        // TODO: Create a nice and smooth animation for the visibility of tooltips
         private void UsernameField_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
@@ -222,6 +224,49 @@ namespace JLLKirjasto
             }
             currentView = 0; //we're home now
         }   // return to home screen
+        // navigation between home screen and search, login and signup
+        // The user can navigate using the mouse. This is handled by the functions *Grid_MouseUp
+        // Additionally the user can use the keyboard to navigate by tabbing into a tooltip and pressing enter. This is handled by *Tooltip_KeyDown
+        // KeyDown is used as if there is a popup notification box, the box could be shut down by pressing the key down and KeyUp would thus respawn the notification.
+        private void LoginGrid_MouseUp(object sender, MouseButtonEventArgs e)   // expand login grid
+        {
+            LoginGridTooltip.Visibility = Visibility.Hidden;
+            MessageBox.Show("This feature is not yet implemented.");
+        }
+        private void LoginGridTooltip_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.Key == Key.Enter)
+            {
+                LoginGridTooltip.Visibility = Visibility.Hidden;
+                MessageBox.Show("This feature is not yet implemented.");
+            }
+        }
+        private void SignUpGrid_MouseUp(object sender, MouseButtonEventArgs e)  // expand sign up grid
+        {
+            SignUpGridTooltip.Visibility = Visibility.Hidden;
+            MessageBox.Show("This feature is not yet implemented.");
+        }
+        private void SignUpGridTooltip_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.Key == Key.Enter)
+            {
+                SignUpGridTooltip.Visibility = Visibility.Hidden;
+                MessageBox.Show("This feature is not yet implemented.");
+            } 
+        }
+        private void SearchGrid_MouseUp(object sender, MouseButtonEventArgs e)  // expand search grid
+        {
+            SearchGridTooltip.Visibility = Visibility.Hidden;
+            MessageBox.Show("This feature is not yet implemented.");
+        }
+        private void SearchGridTooltip_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                SearchGridTooltip.Visibility = Visibility.Hidden;
+                MessageBox.Show("This feature is not yet implemented.");
+            }
+        }
 
         // Language
         private void LanguageGrid_MouseEnter(object sender, MouseEventArgs e)
@@ -568,6 +613,12 @@ namespace JLLKirjasto
             MessageBox.Show(m);
         }
 
+
+
+
         #endregion
+        
+
+        
     }
 }
