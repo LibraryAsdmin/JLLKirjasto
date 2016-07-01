@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Data.SQLite;
 using System.Data;
+using System.Reflection;
 
 namespace JLLKirjasto
 {
@@ -40,7 +41,6 @@ namespace JLLKirjasto
         public AdminControlsWindow()
         {
             InitializeComponent();
-            updateBooksDataGrid();
             initCheckBoxes();
         }
 
@@ -109,32 +109,37 @@ namespace JLLKirjasto
             if (LanguageChecked) LanguageCheckBox.IsChecked = true;
             if (AvailableChecked) AvailableCheckBox.IsChecked = true;
         }
+
+        private void BooksSearchButton_Click(object sender, RoutedEventArgs e)
+        {
+            search();
+        }
+        private void BooksSearch_KeyDown(object sender, KeyEventArgs e)
+        {
+            search();
+        }
         #endregion
 
         #region Search
 
-        // Shows all books
-        private void updateBooksDataGrid()
-        {
-            List<String> columns = new List<String>();
-            columns.Add("Title");
-
-            List<List<String>> results = dbi.searchDatabaseRows(dbconnection, "books", "", columns);
-            List<Book> books = new List<Book>();
-            // Populate ItemsSource with book details
-            foreach (List<String> row in results)
-            {
-                books.Add(new Book { BookID = row[0], Author = row[1], Title = row[2], Year = row[3], Language = row[4], Available = row[5] });
-            }
-            BookDataGrid.ItemsSource = books;
-        }
         private void BooksSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
-            // Update Books datagrid
+            if (BooksSearch.Text.Length >= MainWindow.minSearchChars)
+            {
+                search();
+            }         
+        }
+        //private void updateUsersDataGrid(){}
+        private void UsersSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            // Update users datagrid
+        }
 
+        private void search()
+        {
             // Determine what to search
             List<String> columns = new List<String>();
-            if (IDChecked) columns.Add("BookID");
+            if (IDChecked) columns.Add("ID");
             if (TitleChecked) columns.Add("Title");
             if (AuthorChecked) columns.Add("Author");
             if (YearChecked) columns.Add("Year");
@@ -148,29 +153,30 @@ namespace JLLKirjasto
             {
                 books.Add(new Book
                 {
-                    BookID = row[(int)Book.columnID.BookID], Author = row[(int)Book.columnID.Author],
-                    Title = row[(int)Book.columnID.Title], Year = row[(int)Book.columnID.Year],
-                    Language = row[(int)Book.columnID.Language], Available = row[(int)Book.columnID.Available]
+                    ID = row[(int)Book.columnID.ID],
+                    Author = row[(int)Book.columnID.Author],
+                    Title = row[(int)Book.columnID.Title],
+                    Year = row[(int)Book.columnID.Year],
+                    Language = row[(int)Book.columnID.Language],
+                    Available = row[(int)Book.columnID.Available],
+                    ISBN = row[(int)Book.columnID.ISBN],
+                    Category = row[(int)Book.columnID.Category],
                 });
             }
-            BookDataGrid.ItemsSource = books;
-        }
-        //private void updateUsersDataGrid(){}
-        private void UsersSearch_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            // Update users datagrid
+            BookListBox.ItemsSource = books;
         }
 
         #endregion
 
         #region Database Manipulation
+        /*
         private void BookDataGrid_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
         {
             try
             {
                 Book selectedBook = (Book)BookDataGrid.SelectedItem;
                 int columnIndex = BookDataGrid.CurrentCell.Column.DisplayIndex;
-                dbi.commitDbChanges(dbconnection, bookstable, ((TextBox)e.EditingElement).Text, selectedBook.getStringByIndex((int)Book.columnID.BookID), Book.columnNames[columnIndex]);
+                dbi.commitDbChanges(dbconnection, bookstable, ((TextBox)e.EditingElement).Text, selectedBook.getStringByIndex((int)Book.columnID.ID), Book.columnNames[columnIndex]);
 
             }
             catch (Exception ex)
@@ -178,27 +184,83 @@ namespace JLLKirjasto
                 MessageBox.Show(ex.Message);
             }
         }
+        */
 
         // Functionality for adding and removing whole books
         private void addBookButton_Click(object sender, RoutedEventArgs e)
         {
             dbi.addDatabaseRow(dbconnection, "books", "-");
-            updateBooksDataGrid();
         }
         private void delBookButton_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                Book selectedBook = (Book)BookDataGrid.SelectedItem;
-                dbi.delDatabaseRow(dbconnection, "books", selectedBook.getStringByIndex((int)Book.columnID.BookID));
-                updateBooksDataGrid();
+                //Book selectedBook = (Book)BookDataGrid.SelectedItem;
+                //dbi.delDatabaseRow(dbconnection, "books", selectedBook.getStringByIndex((int)Book.columnID.ID));
             }
             catch
             {
                 Console.Beep();
             }
         }
+        private void editBookButton_Click(object sender, RoutedEventArgs e)
+        {
+            editBook();
+        }
+        private void BookListBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            editBook();
+        }
+
+        private void editBook()
+        {
+            // verify that some item is selected
+            if (!(BookListBox.SelectedItem == null))
+            {
+                // Get book information from the database item
+                object selection = BookListBox.SelectedItem;
+                PropertyInfo prop = typeof(Book).GetProperty("ID");
+                string ID = prop.GetValue(selection, null).ToString();
+                prop = typeof(Book).GetProperty("Author");
+                string Author = prop.GetValue(selection, null).ToString();
+                prop = typeof(Book).GetProperty("Title");
+                string Title = prop.GetValue(selection, null).ToString();
+                prop = typeof(Book).GetProperty("Year");
+                string Year = prop.GetValue(selection, null).ToString();
+                prop = typeof(Book).GetProperty("Available");
+                string Available = prop.GetValue(selection, null).ToString();
+                prop = typeof(Book).GetProperty("Language");
+                string Language = prop.GetValue(selection, null).ToString();
+                prop = typeof(Book).GetProperty("ISBN");
+                string ISBN = prop.GetValue(selection, null).ToString();
+                prop = typeof(Book).GetProperty("Category");
+                string Category = prop.GetValue(selection, null).ToString();
+
+
+
+                // Create a new window
+                BookEditWindow bew = new BookEditWindow();
+                bew.Owner = this;
+
+                // store the current book id in bew.oldID
+                bew.setOldID(ID);
+
+                // Assign book information to new edit window
+                bew.IDBox.Text = ID;
+                bew.AuthorBox.Text = Author;
+                bew.TitleBox.Text = Title;
+                bew.YearBox.Text = Year;
+                bew.LanguageBox.Text = Language;
+                bew.AvailableBox.Text = Available;
+                bew.ISBNBox.Text = ISBN;
+                bew.CategoryBox.Text = Category;
+
+                // show the window
+                bew.ShowDialog();
+            }
+        }
         #endregion
+
 
         #region Degub
         private void a(String m)
@@ -210,6 +272,11 @@ namespace JLLKirjasto
         {
             Console.WriteLine(m);
         }
-        #endregion      
+
+
+
+        #endregion
+
+        
     }
 }

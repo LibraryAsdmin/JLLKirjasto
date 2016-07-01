@@ -129,6 +129,12 @@
   <data name="BookDbDelButtonContent" xml:space="preserve">
     <value>Svenska här</value>
   </data>
+  <data name="BookDbEditButtonContent" xml:space="preserve">
+    <value>Svenska här</value>
+  </data>
+  <data name="BookDbSearchButtonContent" xml:space="preserve">
+    <value>Sök</value>
+  </data>
   <data name="BookDbSearchOptionAuthor" xml:space="preserve">
     <value>Svenska här</value>
   </data>
@@ -148,6 +154,9 @@
     <value>Svenska här</value>
   </data>
   <data name="BookDbWindowTitle" xml:space="preserve">
+    <value>Svenska här</value>
+  </data>
+  <data name="BooksTabHeader" xml:space="preserve">
     <value>Svenska här</value>
   </data>
   <data name="DefaultLoginButtonContent" xml:space="preserve">
@@ -184,6 +193,9 @@
     <value>Söka böcker eller författare genom att skriva i lådan ovan.</value>
   </data>
   <data name="UserDbWindowTitle" xml:space="preserve">
+    <value>Svenska här</value>
+  </data>
+  <data name="UsersTabHeader" xml:space="preserve">
     <value>Svenska här</value>
   </data>
   <data name="WindowTitle" xml:space="preserve">

@@ -277,6 +277,8 @@
                             HorizontalAlignment="Right" Margin="10,0,0,0" Padding="10,0,10,0" VerticalAlignment="Stretch" FontSize="24"  
                             Style="{DynamicResource ModernButtonStyle}" Click="LoginButton_Click" Visibility="Hidden" Focusable="False"/>
                 </Grid>
+                <Button x:Name="button" Content="Admin" HorizontalAlignment="Left" Height="149" Margin="129,65,0,0" VerticalAlignment="Top" Width="128" Click="button_Click_1"/>
+                <Button x:Name="button1" Content="Search" HorizontalAlignment="Left" Height="149" Margin="904,65,0,0" VerticalAlignment="Top" Width="158" Click="button1_Click"/>
             </Grid>
 
             <!-- SignUpGrid Contains the UI elements required for account creation -->
@@ -305,7 +307,7 @@
             <Grid x:Name="SearchGrid" Margin="0" HorizontalAlignment="Stretch" Height="238" Background="#FFBF0060" MouseUp="SearchGrid_MouseUp">
                 <TextBlock x:Name="SearchGridTooltip" Text="Search" Visibility="Visible" FontSize="60" Foreground="White" HorizontalAlignment="Center" 
                            VerticalAlignment="Center" Focusable="True" KeyDown="SearchGridTooltip_KeyDown"/>
-                
+
                 <!-- Contains the search UI interaction elements. This has to exist as otherwise SearchGridToolTip couldn't be displayed properly -->
                 <!-- Because of the ColumnDefinitions in search UI interactions -->
                 <Grid x:Name="SearchContentsGrid" >
@@ -350,7 +352,7 @@
 
                     </StackPanel>
                 </Grid>
-                
+
             </Grid>
         </StackPanel>
 

@@ -129,6 +129,12 @@
   <data name="BookDbDelButtonContent" xml:space="preserve">
     <value>Poista teos tietokannasta</value>
   </data>
+  <data name="BookDbEditButtonContent" xml:space="preserve">
+    <value>Muokkaa teosta</value>
+  </data>
+  <data name="BookDbSearchButtonContent" xml:space="preserve">
+    <value>Hae</value>
+  </data>
   <data name="BookDbSearchOptionAuthor" xml:space="preserve">
     <value>Kirjailija</value>
   </data>
@@ -149,6 +155,9 @@
   </data>
   <data name="BookDbWindowTitle" xml:space="preserve">
     <value>Kirjatietokannan hallinta</value>
+  </data>
+  <data name="BooksTabHeader" xml:space="preserve">
+    <value>Kirjat</value>
   </data>
   <data name="DefaultLoginButtonContent" xml:space="preserve">
     <value>Kirjaudu</value>
@@ -185,6 +194,9 @@
   </data>
   <data name="UserDbWindowTitle" xml:space="preserve">
     <value>Käyttäjätietokannan hallinta</value>
+  </data>
+  <data name="UsersTabHeader" xml:space="preserve">
+    <value>Käyttäjät</value>
   </data>
   <data name="WindowTitle" xml:space="preserve">
     <value>Joensuun lyseon lukion kirjasto</value>

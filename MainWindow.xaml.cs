@@ -102,7 +102,9 @@ namespace JLLKirjasto
         List<Book> ListBoxItems;
 
         // Variables required by search
-        const uint minSearchChars = 3;  // Require at least this number of characters before searching to avoid search congestion
+        // Require at least this number of characters before searching to avoid search congestion
+        // Global bariable, this is used also to control search in AdminControls
+        public const uint minSearchChars = 3;  
         #endregion
 
         public MainWindow()
@@ -581,7 +583,7 @@ namespace JLLKirjasto
         private void updateSearchResults()
         {
             List<String> columns = new List<String>();
-            columns.Add("BookID");
+            columns.Add("ID");
             columns.Add("Author");
             columns.Add("Title");
             /**
@@ -600,7 +602,7 @@ namespace JLLKirjasto
 
             foreach (List<String> row in searchResults)
             {
-                ListBoxItems.Add(new Book() { BookID = row[0], Author = row[1], Title = row[2], Year = row[3], Language = row[4], Available = row[5] });
+                ListBoxItems.Add(new Book() { ID = row[0], Author = row[1], Title = row[2], Year = row[3], Language = row[4], Available = row[5] });
             }
             SearchResultsListBox.ItemsSource = ListBoxItems;
         }
@@ -616,9 +618,19 @@ namespace JLLKirjasto
 
 
 
-        #endregion
-        
 
-        
+
+        #endregion
+
+        // Temporary UI buttons
+        private void button_Click_1(object sender, RoutedEventArgs e) // admin
+        {
+            adminwindow = new AdminControlsWindow();
+            adminwindow.Show();
+        }
+        private void button1_Click(object sender, RoutedEventArgs e) // search
+        {
+
+        }
     }
 }

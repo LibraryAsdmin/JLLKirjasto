@@ -10,24 +10,26 @@ namespace JLLKirjasto
 {
     public class Book
     {
-        public String BookID { get; set; }
+        public String ID { get; set; }
         public String Author { get; set; }
         public String Title { get; set; }
         public String Year { get; set; }
         public String Language { get; set; }
         public String Available { get; set; }
+        public String ISBN { get; set; }
+        public String Category { get; set; }
 
-        public enum columnID { BookID, Author, Title, Year, Language, Available, NumColumns};
-        public static String[] columnNames = new String[(int)Book.columnID.NumColumns] { "BookID", "Author", "Title", "Year", "Language", "Available" };
+        public enum columnID { ID, Author, Title, Year, Language, Available, ISBN, Category, NumColumns};
+        public static String[] columnNames = new String[(int)Book.columnID.NumColumns] { "ID", "Author", "Title", "Year", "Language", "Available", "ISBN", "Aineistolaji"};
 
         
-        // returns the string of a book object identified by it's index
+        // returns the string of a book object identified by it's index (column number in the database)
         public String getStringByIndex(int index)
         {
             switch(index)
             {
-                case (int)columnID.BookID:
-                    return BookID;
+                case (int)columnID.ID:
+                    return ID;
                 case (int)columnID.Author:
                     return Author;
                 case (int)columnID.Title:
@@ -38,6 +40,10 @@ namespace JLLKirjasto
                     return Language;
                 case (int)columnID.Available:
                     return Available;
+                case (int)columnID.ISBN:
+                    return ISBN;
+                case (int)columnID.Category:
+                    return Category;
                 default:
                     return null;
             }
@@ -64,7 +70,7 @@ namespace JLLKirjasto
             List<List<String>> results = new List<List<String>>();
 
             // Determine the number of columns in the table
-            Int32 tableColumnCount = countColumns(dbconn, table);           
+            Int32 tableColumnCount = countColumns(dbconn, table);
 
             // Make sure that you are actually searching for something
             if (columns.Count > 0)
@@ -104,23 +110,13 @@ namespace JLLKirjasto
                             String dataTypeName = reader.GetDataTypeName(i);
                             String current;
 
-                            current = reader.GetString(i); // All datatypes are treated as strings as there is no intent of sorting by value functionality
-                            /**
-                            switch (dataTypeName)
+                            // Read the value if it is not NULL. If it is, give it the value "" (empty string)
+                            if (!reader.IsDBNull(i))
                             {
-                                case "int":
-                                    current = reader.GetInt32(i).ToString();
-                                    break;
-                                case "text":
-                                    current = reader.GetString(i);
-                                    break;
-                                case "boolean":
-                                    current = reader.GetBoolean(i).ToString();
-                                    break;
-                                default:
-                                    throw new Exception("Could not verify data type!");
+                                current = reader.GetString(i);
                             }
-                            **/
+                            else { current = ""; }
+
 
                             // Append the current row by current string
                             currentRow.Add(current);
@@ -128,7 +124,6 @@ namespace JLLKirjasto
                         // Append search results by read database row
                         results.Add(currentRow);
                     }
-
                     reader.Close();
                     dbconn.Close();
                 }
@@ -137,7 +132,6 @@ namespace JLLKirjasto
                     reportError(ex.Message, "searchDatabaseRows");
                 }
             }
-
             return results;
         }
 
@@ -158,7 +152,7 @@ namespace JLLKirjasto
                 {
                     using (SQLiteCommand command = new SQLiteCommand(dbconn))
                     {
-                        string commandString = String.Format("UPDATE {0} SET {1}=@VALUE WHERE BookID=@ID", table, column);
+                        string commandString = String.Format("UPDATE {0} SET {1}=@VALUE WHERE ID=@ID", table, column);
                         command.CommandText = commandString;
                         command.Parameters.AddWithValue("@VALUE", value);
                         command.Parameters.AddWithValue("@ID", id);
@@ -218,7 +212,7 @@ namespace JLLKirjasto
                 {
                     using (SQLiteCommand command = new SQLiteCommand(dbconn))
                     {                  
-                        string commandString = String.Format("DELETE FROM {0} WHERE BookID='{1}'", table, id);
+                        string commandString = String.Format("DELETE FROM {0} WHERE ID='{1}'", table, id);
                         command.CommandText = commandString;
 
                         command.ExecuteNonQuery();
@@ -260,7 +254,7 @@ namespace JLLKirjasto
 
         private void reportError(String message, String caller)
         {
-            System.Windows.MessageBox.Show("Error! " + message+caller);
+            System.Windows.MessageBox.Show("Error! " + message + " at "+caller);
         }
 
         private void a(String c)

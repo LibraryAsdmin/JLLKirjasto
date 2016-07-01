@@ -8,11 +8,13 @@
 
     <Application.Resources>
 
+        <!-- TODO: Add documentation -->
         <core:Double x:Key="screenWidth">4000</core:Double>
         <core:Double x:Key="negativeScreenWidth">-4000</core:Double>
         <core:Double x:Key="screenHeight">3000</core:Double>
         <core:Double x:Key="negativeScreenHeight">-3000</core:Double>
 
+        <!-- TODO: Old. Should this be removed? -->
         <Color x:Key="home1">Purple</Color>
         <Color x:Key="home2">Orange</Color>
         <Color x:Key="search1">Green</Color>
@@ -22,6 +24,7 @@
         <Color x:Key="signUp1">Orange</Color>
         <Color x:Key="signUp2">Orange</Color>
 
+        <!-- TODO: Add documentation -->
         <Style x:Key="FocusVisual">
             <Setter Property="Control.Template">
                 <Setter.Value>
@@ -31,6 +34,8 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        
+        <!-- TODO: Add documentation. -->
         <Color x:Key="Button.Static.Background.Color" A="150" R="255" G="255" B="255"/>
         <Color x:Key="Button.Static.Border.Color" A="50" R="255" G="255" B="255"/>
         <SolidColorBrush x:Key="Button.Static.Background" Color="{StaticResource Button.Static.Background.Color}"/>
@@ -44,6 +49,7 @@
         <Color x:Key="Button.Disabled.Border">#AFA2A2A2</Color>
         <Color x:Key="Button.Disabled.Foreground">#FF515151</Color>
 
+        <!-- TODO: Old. Should this be removed? -->
         <Style x:Key="ModernButtonStyle" TargetType="{x:Type Button}">
             <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
             <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
@@ -113,9 +119,11 @@
             </Setter>
         </Style>
 
+        <!-- TODO: Add documentation. -->
         <SolidColorBrush x:Key="NormalTextBoxColour" Color="#33FFFFFF"/>
         <Color x:Key="MouseOverTextBoxColour">White</Color>
 
+        <!-- TODO: Add documentation. -->
         <Style TargetType="TextBox" x:Key="ModernTextBoxStyle">
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Padding" Value="5"/>
@@ -159,14 +167,14 @@
             </Setter>
         </Style>
 
+        <!-- TODO: Add documentation. -->
         <Color x:Key="SelectedBackgroundColor">#33000000</Color>
         <Color x:Key="SelectedUnfocusedColor">#33000000</Color>
         <Color x:Key="MouseOverUnfocusedColor">#40FFFFFF</Color>
         <Color x:Key="MouseOverFocusedColor">#40FFFFFF</Color>
         <Color x:Key="NormalColor">#00000000</Color>
 
-
-
+        <!-- TODO: Add documentation. -->
         <Style TargetType="{x:Type ListBoxItem}" x:Key="ModernListBoxItemStyle">
             <Setter Property="SnapsToDevicePixels" Value="True" />
             <Setter Property="OverridesDefaultStyle" Value="True" />
@@ -231,12 +239,14 @@
             </Setter>
         </Style>
 
+        <!-- TODO: Old. Should this be removed? -->
         <SolidColorBrush x:Key="NormalHexagonBrush" Color="#33FFFFFF"/>
         <Color x:Key="NormalColour">#33FFFFFF</Color>
         <Color x:Key="MouseOverHexagonColour">#72FFFFFF</Color>
         <Color x:Key="HexagonMouseDownColour">#8FFFFFFF</Color>
         <Color x:Key="HexagonDisabledColour">#33000000</Color>
 
+        <!-- TODO: Old. Should this be removed? -->
         <ControlTemplate x:Key="ModernHexagonButtonStyle" TargetType="{x:Type Button}">
             <Grid>
                 <ed:RegularPolygon Fill="{StaticResource NormalHexagonBrush}" Name="Hexagon" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
