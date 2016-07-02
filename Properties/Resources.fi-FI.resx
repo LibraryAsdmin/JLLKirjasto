@@ -138,11 +138,17 @@
   <data name="BookDbSearchOptionAuthor" xml:space="preserve">
     <value>Kirjailija</value>
   </data>
-  <data name="BookDbSearchOptionAvailability" xml:space="preserve">
+  <data name="BookDbSearchOptionAvailable" xml:space="preserve">
     <value>Saatavilla</value>
+  </data>
+  <data name="BookDbSearchOptionCategory" xml:space="preserve">
+    <value>Aineistolaji</value>
   </data>
   <data name="BookDbSearchOptionID" xml:space="preserve">
     <value>ID</value>
+  </data>
+  <data name="BookDbSearchOptionISBN" xml:space="preserve">
+    <value>ISBN</value>
   </data>
   <data name="BookDbSearchOptionLanguage" xml:space="preserve">
     <value>Kieli</value>
@@ -155,6 +161,15 @@
   </data>
   <data name="BookDbWindowTitle" xml:space="preserve">
     <value>Kirjatietokannan hallinta</value>
+  </data>
+  <data name="BookEditWindowAcceptButtonContent" xml:space="preserve">
+    <value>Hyväksy</value>
+  </data>
+  <data name="BookEditWindowDeclineButtonContent" xml:space="preserve">
+    <value>Peruuta</value>
+  </data>
+  <data name="BookEditWindowTitle" xml:space="preserve">
+    <value>Muokkaa teosta</value>
   </data>
   <data name="BooksTabHeader" xml:space="preserve">
     <value>Kirjat</value>
@@ -191,6 +206,21 @@
   </data>
   <data name="TextUnderSearchBox" xml:space="preserve">
     <value>Hae kirjoja tai kirjailijoita kirjastosta kirjoittamalla yläpuolella olevaan laatikkoon.</value>
+  </data>
+  <data name="UserDbAddButtonContent" xml:space="preserve">
+    <value>Lisää käyttäjä</value>
+  </data>
+  <data name="UserDbDelButtonContent" xml:space="preserve">
+    <value>Poista käyttäjä</value>
+  </data>
+  <data name="UserDbEditButtonContent" xml:space="preserve">
+    <value>Muokkaa käyttäjää</value>
+  </data>
+  <data name="UserDbSearchOptionUserID" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="UserDbSearchOptionUsername" xml:space="preserve">
+    <value>Käyttäjätunnus</value>
   </data>
   <data name="UserDbWindowTitle" xml:space="preserve">
     <value>Käyttäjätietokannan hallinta</value>

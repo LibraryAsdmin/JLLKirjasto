@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:JLLKirjasto"
         mc:Ignorable="d"
-        Title="{local:Loc AdminControlsWindowTitle}" Height="600" Width="800" Topmost="True" MinWidth="800" MinHeight="600">
+        Title="{local:Loc AdminControlsWindowTitle}" Height="600" Width="800" Topmost="True" MinWidth="400" MinHeight="300" WindowStartupLocation="CenterScreen">
 
     <Grid x:Name="AdminControlsWindowGrid" Margin="0,0,0,0">
         
@@ -14,8 +14,10 @@
             
             <!-- Book tab-->
             <TabItem Header="{local:Loc BooksTabHeader}">
-                
+
                 <Grid x:Name="BooksGrid">
+
+                    <!-- BooksGrid RowDefinitions -->
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
@@ -82,74 +84,150 @@
                             <!-- Search by availability -->
                             <Grid x:Name="AvailableCheckBoxGrid" Width="Auto">
                                 <StackPanel Orientation="Horizontal">
-                                    <Label Content="{local:Loc BookDbSearchOptionAvailability}"/>
+                                    <Label Content="{local:Loc BookDbSearchOptionAvailable}"/>
                                     <CheckBox x:Name="AvailableCheckBox" VerticalContentAlignment="Center" Checked="AvailableCheckBox_Checked" 
                                                   Unchecked="AvailableCheckBox_Unchecked"/>
                                     <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}"/>
                                 </StackPanel>
                             </Grid>
 
+                            <!-- TODO: Add category and ISBN -->
+
                         </StackPanel>
                     </Expander>
 
+                    <!-- Searchbox and button -->
                     <Grid Grid.Row="1" Margin="5">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="75"/>
                         </Grid.ColumnDefinitions>
-                            <TextBox x:Name="BooksSearch" Height="30" TextWrapping="Wrap" VerticalAlignment="Top" TextAlignment="Center" 
+                        <TextBox x:Name="BooksSearch" Height="30" TextWrapping="Wrap" VerticalAlignment="Top" TextAlignment="Center" 
                              FontSize="20" TextChanged="BooksSearch_TextChanged" Width="Auto" KeyDown="BooksSearch_KeyDown"/>
-
-                            <Button x:Name="BooksSearchButton" Content="{local:Loc BookDbSearchButtonContent}" HorizontalAlignment="Stretch" Width="Auto"
+                        <Button x:Name="BooksSearchButton" Content="{local:Loc BookDbSearchButtonContent}" HorizontalAlignment="Stretch" Width="Auto"
                                     Margin="5,0,0,0" Height="Auto" Grid.Column="1" Click="BooksSearchButton_Click"/>
-
                     </Grid>
-                                  
-                        
-                        <!--<DataGrid x:Name="BookDataGrid" SelectionUnit="FullRow" CellEditEnding="BookDataGrid_CellEditEnding" 
-                        Margin="0,0,0,25" AlternatingRowBackground="LightBlue" AlternationCount="2"></DataGrid> -->
-                        <Grid Height="Auto" Margin="0" Grid.Row="2">
-                            <ListBox x:Name="BookListBox" VerticalAlignment="Stretch" ScrollViewer.VerticalScrollBarVisibility="Visible" 
+
+                    <!-- ListBox inside a grid in order for it to have a specific size to allow for a scroll bar -->
+                    <Grid Height="Auto" Margin="0" Grid.Row="2">
+                        <ListBox x:Name="BookListBox" VerticalAlignment="Stretch" ScrollViewer.VerticalScrollBarVisibility="Visible" 
                                      ScrollViewer.CanContentScroll="True" MouseDoubleClick="BookListBox_MouseDoubleClick" Margin="5">
-                                <!-- Template for item appearance -->
-                                <ListBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <Grid HorizontalAlignment="Stretch" Width="Auto">
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="50"/>
-                                                <ColumnDefinition Width="*"/>
+                            <!-- Template for item appearance -->
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid HorizontalAlignment="Stretch" Width="Auto">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="50"/>
+                                            <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
 
+                                        <!-- Information about book displayed in BookListBox-->
                                         <TextBlock Text="{Binding ID}" Grid.Column="0" HorizontalAlignment="Left"/>
                                         <TextBlock Text="{Binding Title}" Grid.Column="1" HorizontalAlignment="Left"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </Grid>
 
-                                        </Grid>
-                                    </DataTemplate>
-                                </ListBox.ItemTemplate>
-                            </ListBox>
-                        </Grid>
-
-                        <StackPanel Orientation="Horizontal" Height="25" Grid.Row="3" Margin="5">
-                            <Button x:Name="addBookButton" Width="auto" Content="{local:Loc BookDbAddButtonContent}" Click="addBookButton_Click"/>
-                            <Button x:Name="delBookButton" Width="auto" Margin="10,0,0,0" Content="{local:Loc BookDbDelButtonContent}" Click="delBookButton_Click"/>
-                            <Button x:Name="editBookButton" Width="Auto" Margin="10,0,0,0" Content="{local:Loc BookDbEditButtonContent}" Click="editBookButton_Click"/>
-                        </StackPanel>
-
+                    <!-- Database manipulation buttons -->
+                    <StackPanel Orientation="Horizontal" Height="25" Grid.Row="3" Margin="5">
+                        <Button x:Name="addBookButton" Width="auto" Content="{local:Loc BookDbAddButtonContent}" Click="addBookButton_Click"/>
+                        <Button x:Name="delBookButton" Width="auto" Margin="10,0,0,0" Content="{local:Loc BookDbDelButtonContent}" Click="delBookButton_Click"/>
+                        <Button x:Name="editBookButton" Width="Auto" Margin="10,0,0,0" Content="{local:Loc BookDbEditButtonContent}" Click="editBookButton_Click"/>
+                    </StackPanel>
+                    
                 </Grid>
             </TabItem>
             
             <!-- User tab -->
+            <!-- TODO: Add localisation resources -->
             <TabItem Header="{local:Loc UsersTabHeader}">
+                
                 <Grid x:Name="UsersGrid">
-                    <TextBlock x:Name="UsersGridTitle" Margin="10,10,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="31" FontWeight="Bold" 
-                               TextAlignment="Center" FontSize="20"><Run Text="{local:Loc UserDbWindowTitle}"/></TextBlock>
-                    <TextBox x:Name="UsersSearch" Height="31" Margin="10,46,10,0" TextWrapping="Wrap" VerticalAlignment="Top" TextAlignment="Center" 
-                             FontSize="20" TextChanged="UsersSearch_TextChanged"/>
+
+                    <!-- UsersGrid RowDefinitions -->
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Advanced search settings -->
+                    <!-- TODO: Add functionality -->
+                    <Expander Header="{local:Loc BookDbAdvancedSearchContent}" Margin="5" Grid.Row="0">
+                        <StackPanel Orientation="Horizontal">
+
+                            <!-- Search by user ID-->
+                            <Grid x:Name="UserIDCheckBoxGrid" Width="Auto">
+                                <StackPanel Orientation="Horizontal">
+                                    <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}"/>
+                                    <Label Content="{local:Loc UserDbSearchOptionUserID}"/>
+                                    <CheckBox x:Name="UserIDCheckBox" VerticalContentAlignment="Center"/>
+                                    <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}"/>
+                                </StackPanel>
+                            </Grid>
+
+                            <!-- Search by name -->
+                            <Grid x:Name="UsernameCheckBoxGrid" Width="Auto">
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Content="{local:Loc UserDbSearchOptionUsername}"/>
+                                    <CheckBox x:Name="UsernameCheckBox" VerticalContentAlignment="Center"/>
+                                    <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}"/>
+                                </StackPanel>
+                            </Grid>
+
+
+                        </StackPanel>
+                    </Expander>
+
+                    <!-- User search box and button-->
+                    <Grid Grid.Row="1" Margin="5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="75"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox x:Name="UsersSearch" Height="30" TextWrapping="Wrap" VerticalAlignment="Top" TextAlignment="Center" 
+                             FontSize="20" TextChanged="UsersSearch_TextChanged" Grid.Column="0"/>
+                        <!-- BookDbSearchButtonContent used as the text would be the same -->
+                        <Button x:Name="UsersSearchButton" Content="{local:Loc BookDbSearchButtonContent}" HorizontalAlignment="Stretch" Width="Auto"
+                                    Margin="5,0,0,0" Height="Auto" Grid.Column="1"/>
+                    </Grid>
+
+                    <!-- ListBox for displaying user information -->
+                    <Grid Height="Auto" Margin="0" Grid.Row="2">
+                        <ListBox x:Name="UsersListBox" VerticalAlignment="Stretch" ScrollViewer.VerticalScrollBarVisibility="Visible" 
+                                     ScrollViewer.CanContentScroll="True" Margin="5">
+                            <!-- Template for item appearance -->
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid HorizontalAlignment="Stretch" Width="Auto">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="50"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <!-- Information displayed in UserListBox-->
+                                        <TextBlock Text="{Binding UserID}" Grid.Column="0" HorizontalAlignment="Left"/>
+                                        <TextBlock Text="{Binding Username}" Grid.Column="1" HorizontalAlignment="Left"/>
+                                        
+                                    </Grid>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </Grid>
+
+                    <!-- User database manipulation buttons -->
+                    <StackPanel Orientation="Horizontal" Height="25" Grid.Row="3" Margin="5">
+                        <Button x:Name="addUserButton" Width="auto" Content="{local:Loc UserDbAddButtonContent}"/>
+                        <Button x:Name="delUserButton" Width="auto" Margin="10,0,0,0" Content="{local:Loc UserDbDelButtonContent}"/>
+                        <Button x:Name="editUserButton" Width="Auto" Margin="10,0,0,0" Content="{local:Loc UserDbEditButtonContent}"/>
+                    </StackPanel>
+
                 </Grid>
             </TabItem>
         </TabControl>
         
-        
-
     </Grid>
 </Window>

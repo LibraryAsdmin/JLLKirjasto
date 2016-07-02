@@ -42,6 +42,7 @@ namespace JLLKirjasto
         {
             InitializeComponent();
             initCheckBoxes();
+            BooksSearch.Focus(); // Set cursor to search box at window startup
         }
 
         #region UI Handling
@@ -116,8 +117,11 @@ namespace JLLKirjasto
         }
         private void BooksSearch_KeyDown(object sender, KeyEventArgs e)
         {
-            search();
-        }
+            if (e.Key == Key.Enter)
+            {
+                search();
+            }
+        } // search books by hitting enter when in search box
         #endregion
 
         #region Search
