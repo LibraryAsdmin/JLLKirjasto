@@ -10,7 +10,7 @@
         mc:Ignorable="d"
     
         x:Name="RootWindow" x:Class="JLLKirjasto.MainWindow" Title="{local:Loc WindowTitle}"  Height="800" Width="1200" 
-            WindowStartupLocation="CenterScreen" Closing="RootWindow_Closing" SizeChanged="RootWindow_SizeChanged" MinWidth="200" MinHeight="150">
+            WindowStartupLocation="CenterScreen" Closing="RootWindow_Closing" SizeChanged="RootWindow_SizeChanged" MinWidth="200" MinHeight="150" Icon="Images/LyseoLogo.ico">
 
     <!-- TODO: Remove redundant animations -->
     <Window.Resources>
