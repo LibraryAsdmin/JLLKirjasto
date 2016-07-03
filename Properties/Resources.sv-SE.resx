@@ -162,6 +162,10 @@
   <data name="BookDbWindowTitle" xml:space="preserve">
     <value>Svenska här</value>
   </data>
+  <data name="BookEditIDError" xml:space="preserve">
+    <value>
+Svenska här! Svenska här {0} Svenska här.</value>
+  </data>
   <data name="BookEditWindowAcceptButtonContent" xml:space="preserve">
     <value>Svenska här</value>
   </data>

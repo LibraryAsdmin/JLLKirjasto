@@ -166,6 +166,7 @@
     <Resource Include="Images\Search.png" />
     <Resource Include="Images\Signup.png" />
     <Resource Include="Images\Login.png" />
+    <Resource Include="Images\LyseoLogo.ico" />
     <Content Include="Images\UK.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

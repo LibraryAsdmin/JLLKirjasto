@@ -162,6 +162,9 @@
   <data name="BookDbWindowTitle" xml:space="preserve">
     <value>Kirjatietokannan hallinta</value>
   </data>
+  <data name="BookEditIDError" xml:space="preserve">
+    <value>Huomio! Kirjatietokanta sisältää jo teoksen jonka tunniste ID on {0}. Varmista että kirjoittamasi ID ei vastaa jo tietokannassa olevia.</value>
+  </data>
   <data name="BookEditWindowAcceptButtonContent" xml:space="preserve">
     <value>Hyväksy</value>
   </data>

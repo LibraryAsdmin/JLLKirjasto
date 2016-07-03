@@ -162,6 +162,9 @@
   <data name="BookDbWindowTitle" xml:space="preserve">
     <value>Book database administration</value>
   </data>
+  <data name="BookEditIDError" xml:space="preserve">
+    <value>Warning! The book database already contains a book with the ID: {0}. Please make sure that the ID is unique.</value>
+  </data>
   <data name="BookEditWindowAcceptButtonContent" xml:space="preserve">
     <value>Accept</value>
   </data>

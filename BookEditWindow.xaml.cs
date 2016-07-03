@@ -62,7 +62,8 @@ namespace JLLKirjasto
             }
             else
             {
-                MessageBox.Show("Warning! The book database already contains a book with the ID: " + IDBox.Text + "\nPlease make sure that the ID is unique.");
+                MessageBox.Show(String.Format(Properties.Resources.ResourceManager.GetString("BookEditIDError", TranslationSource.Instance.CurrentCulture),IDBox.Text));
+                
             }
 
 
