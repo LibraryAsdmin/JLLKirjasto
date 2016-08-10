@@ -14,7 +14,7 @@
 
     <Window.Resources>
         <!-- Sets the duration for all animations in the home view-->
-        <KeyTime x:Key="AnimationDuration">0:0:1.5</KeyTime>
+        <KeyTime x:Key="AnimationDuration">0:0:0.15</KeyTime>
         <!-- Contains all animations to expand/collapse sections -->
         <Storyboard x:Key="ShowSearchGrid" Completed="ShowSearchGridStoryboard_Completed">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="LoginGrid">
