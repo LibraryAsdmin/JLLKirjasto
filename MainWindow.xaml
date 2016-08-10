@@ -12,26 +12,38 @@
         x:Name="RootWindow" x:Class="JLLKirjasto.MainWindow" Title="{local:Loc WindowTitle}"  Height="800" Width="1200" 
             WindowStartupLocation="CenterScreen" Closing="RootWindow_Closing" SizeChanged="RootWindow_SizeChanged" MinWidth="200" MinHeight="150" Icon="Images/LyseoLogo.ico">
 
-    <!-- TODO: Remove redundant animations -->
     <Window.Resources>
-        <Storyboard x:Key="BringUpSearchResults">
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="SearchGrid">
-                <EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="0">
-                    <EasingDoubleKeyFrame.EasingFunction>
-                        <CircleEase EasingMode="EaseOut"/>
-                    </EasingDoubleKeyFrame.EasingFunction>
-                </EasingDoubleKeyFrame>
+        <!-- Sets the duration for all animations in the home view-->
+        <KeyTime x:Key="AnimationDuration">0:0:1.5</KeyTime>
+        <!-- Contains all animations to expand/collapse sections -->
+        <Storyboard x:Key="ShowSearchGrid" Completed="ShowSearchGridStoryboard_Completed">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="LoginGrid">
+                <EasingDoubleKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="0"/>
             </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="StartPageGrid">
-                <EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="{DynamicResource screenWidth}">
-                    <EasingDoubleKeyFrame.EasingFunction>
-                        <CircleEase EasingMode="EaseIn"/>
-                    </EasingDoubleKeyFrame.EasingFunction>
-                </EasingDoubleKeyFrame>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="SignUpGrid">
+                <EasingDoubleKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="0"/>
             </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames  Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="SearchGrid">
+                <EasingDoubleKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="{Binding ExpandedGridHeight, Source={x:Static local:GridHeightClass.Instance}}"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="SearchGridTooltip">
+                <EasingDoubleKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="SearchGridTooltip">
+                <DiscreteObjectKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="{x:Static Visibility.Hidden}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="SearchContentsGrid">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="SearchContentsGrid">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="Greeting">
+                <EasingColorKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="{StaticResource MenuItemColour3}"/>
+            </ColorAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="ReturnButton">
-                <EasingDoubleKeyFrame KeyTime="0" Value="-80"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="0">
+                <EasingDoubleKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="0">
                     <EasingDoubleKeyFrame.EasingFunction>
                         <CircleEase EasingMode="EaseOut"/>
                     </EasingDoubleKeyFrame.EasingFunction>
@@ -39,169 +51,240 @@
             </DoubleAnimationUsingKeyFrames>
             <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="ReturnButton">
                 <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
-                <DiscreteBooleanKeyFrame KeyTime="0:0:0.7" Value="True"/>
+                <DiscreteBooleanKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="True"/>
             </BooleanAnimationUsingKeyFrames>
         </Storyboard>
-        <Storyboard x:Key="GoBackHome" Completed="GoHomeStoryboardCompleted">
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="SearchGrid">
-                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="{DynamicResource negativeScreenWidth}"/>
+        <Storyboard x:Key="ShowLoginGrid" Completed="ShowLoginGridStoryboard_Completed">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="LoginGrid">
+                <EasingDoubleKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="{Binding ExpandedGridHeight, Source={x:Static local:GridHeightClass.Instance}}"/>
             </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="StartPageGrid">
-                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0">
-                    <EasingDoubleKeyFrame.EasingFunction>
-                        <CircleEase EasingMode="EaseOut"/>
-                    </EasingDoubleKeyFrame.EasingFunction>
-                </EasingDoubleKeyFrame>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="SignUpGrid">
+                <EasingDoubleKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="0"/>
             </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames  Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="SearchGrid">
+                <EasingDoubleKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="Greeting">
+                <EasingColorKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="{StaticResource MenuItemColour1}"/>
+            </ColorAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="ReturnButton">
-                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="-80">
+                <EasingDoubleKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="0">
                     <EasingDoubleKeyFrame.EasingFunction>
                         <CircleEase EasingMode="EaseOut"/>
                     </EasingDoubleKeyFrame.EasingFunction>
                 </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="LoginGridTooltip">
+                <EasingDoubleKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="LoginGridTooltip">
+                <DiscreteObjectKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="{x:Static Visibility.Hidden}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="LoginFieldsGrid">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="LoginFieldsGrid">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="1"/>
             </DoubleAnimationUsingKeyFrames>
             <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="ReturnButton">
                 <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
-                <DiscreteBooleanKeyFrame KeyTime="0:0:0.6" Value="True"/>
-            </BooleanAnimationUsingKeyFrames>
-        </Storyboard>
-        <Storyboard x:Key="ShowLoginGrid">
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="LoginGrid">
-                <EasingDoubleKeyFrame KeyTime="0:0:0.8" Value="0">
-                    <EasingDoubleKeyFrame.EasingFunction>
-                        <CircleEase EasingMode="EaseOut"/>
-                    </EasingDoubleKeyFrame.EasingFunction>
-                </EasingDoubleKeyFrame>
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="StartPageGrid">
-                <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="{DynamicResource screenHeight}">
-                    <EasingDoubleKeyFrame.EasingFunction>
-                        <CircleEase EasingMode="EaseIn"/>
-                    </EasingDoubleKeyFrame.EasingFunction>
-                </EasingDoubleKeyFrame>
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="ReturnButton">
-                <EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="0">
-                    <EasingDoubleKeyFrame.EasingFunction>
-                        <CircleEase EasingMode="EaseOut"/>
-                    </EasingDoubleKeyFrame.EasingFunction>
-                </EasingDoubleKeyFrame>
-            </DoubleAnimationUsingKeyFrames>
-            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="ReturnButton">
-                <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
-                <DiscreteBooleanKeyFrame KeyTime="0:0:0.7" Value="True"/>
+                <DiscreteBooleanKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="True"/>
             </BooleanAnimationUsingKeyFrames>
             <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="UsernameField">
                 <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
-                <DiscreteBooleanKeyFrame KeyTime="0:0:0.1" Value="True"/>
+                <DiscreteBooleanKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="True"/>
             </BooleanAnimationUsingKeyFrames>
             <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="PasswordField">
                 <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
-                <DiscreteBooleanKeyFrame KeyTime="0:0:0.1" Value="True"/>
+                <DiscreteBooleanKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="True"/>
             </BooleanAnimationUsingKeyFrames>
             <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="LoginButton">
                 <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
-                <DiscreteBooleanKeyFrame KeyTime="0:0:0.1" Value="True"/>
+                <DiscreteBooleanKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="True"/>
             </BooleanAnimationUsingKeyFrames>
         </Storyboard>
-        <Storyboard x:Key="ShowSignUpGrid">
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="SignUpGrid">
-                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0">
-                    <EasingDoubleKeyFrame.EasingFunction>
-                        <CircleEase EasingMode="EaseOut"/>
-                    </EasingDoubleKeyFrame.EasingFunction>
-                </EasingDoubleKeyFrame>
+        <Storyboard x:Key="ShowSignUpGrid" Completed="ShowSignUpGridStoryboard_Completed">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="SignUpGrid">
+                <EasingDoubleKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="{Binding ExpandedGridHeight, Source={x:Static local:GridHeightClass.Instance}}"/>
             </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="StartPageGrid">
-                <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="{DynamicResource negativeScreenWidth}">
-                    <EasingDoubleKeyFrame.EasingFunction>
-                        <CircleEase EasingMode="EaseIn"/>
-                    </EasingDoubleKeyFrame.EasingFunction>
-                </EasingDoubleKeyFrame>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="LoginGrid">
+                <EasingDoubleKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="0"/>
             </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames  Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="SearchGrid">
+                <EasingDoubleKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="Greeting">
+                <EasingColorKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="{StaticResource MenuItemColour2}"/>
+            </ColorAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="ReturnButton">
-                <EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="0">
+                <EasingDoubleKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="0">
                     <EasingDoubleKeyFrame.EasingFunction>
                         <CircleEase EasingMode="EaseOut"/>
                     </EasingDoubleKeyFrame.EasingFunction>
                 </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="SignUpGridTooltip">
+                <EasingDoubleKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="SignUpGridTooltip">
+                <DiscreteObjectKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="{x:Static Visibility.Hidden}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="SignUpFieldGrid">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="SignUpFieldGrid">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="SignUpInstruction">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="SignUpInstruction">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="1"/>
             </DoubleAnimationUsingKeyFrames>
             <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="ReturnButton">
                 <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
-                <DiscreteBooleanKeyFrame KeyTime="0:0:0.7" Value="True"/>
+                <DiscreteBooleanKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="True"/>
             </BooleanAnimationUsingKeyFrames>
         </Storyboard>
-        <Storyboard x:Key="HideLoginGrid">
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="StartPageGrid">
-                <EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="0">
-                    <EasingDoubleKeyFrame.EasingFunction>
-                        <CircleEase EasingMode="EaseOut"/>
-                    </EasingDoubleKeyFrame.EasingFunction>
-                </EasingDoubleKeyFrame>
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="LoginGrid">
-                <EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="{DynamicResource negativeScreenHeight}">
-                    <EasingDoubleKeyFrame.EasingFunction>
-                        <CircleEase EasingMode="EaseOut"/>
-                    </EasingDoubleKeyFrame.EasingFunction>
-                </EasingDoubleKeyFrame>
-            </DoubleAnimationUsingKeyFrames>
+        <Storyboard x:Key="HideSearchGrid" Completed="HideSearchGridStoryboard_Completed">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="ReturnButton">
                 <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="-80">
+                <EasingDoubleKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="-80">
                     <EasingDoubleKeyFrame.EasingFunction>
                         <CircleEase EasingMode="EaseOut"/>
                     </EasingDoubleKeyFrame.EasingFunction>
                 </EasingDoubleKeyFrame>
             </DoubleAnimationUsingKeyFrames>
             <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="ReturnButton">
+                <DiscreteBooleanKeyFrame KeyTime="0" Value="True"/>
+                <DiscreteBooleanKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="False"/>
+            </BooleanAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="LoginGrid">
+                <EasingDoubleKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="{Binding CollapsedGridHeight, Source={x:Static local:GridHeightClass.Instance}}"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="SignUpGrid">
+                <EasingDoubleKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="{Binding CollapsedGridHeight, Source={x:Static local:GridHeightClass.Instance}}"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="SearchGrid">
+                <EasingDoubleKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="{Binding CollapsedGridHeight, Source={x:Static local:GridHeightClass.Instance}}"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="SearchGridTooltip">
+                <EasingDoubleKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="SearchGridTooltip">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="SearchContentsGrid">
+                <DiscreteObjectKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="{x:Static Visibility.Hidden}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="SearchContentsGrid">
+                <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="Greeting">
+                <EasingColorKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="{StaticResource WindowGridColour}"/>
+            </ColorAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="HideLoginGrid" Completed="HideLoginGridStoryboard_Completed">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="LoginGrid">
+                <EasingDoubleKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="{Binding CollapsedGridHeight, Source={x:Static local:GridHeightClass.Instance}}"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="SignUpGrid">
+                <EasingDoubleKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="{Binding CollapsedGridHeight, Source={x:Static local:GridHeightClass.Instance}}"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames  Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="SearchGrid">
+                <EasingDoubleKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="{Binding CollapsedGridHeight, Source={x:Static local:GridHeightClass.Instance}}"/>
+            </DoubleAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="Greeting">
+                <EasingColorKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="{StaticResource WindowGridColour}"/>
+            </ColorAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="ReturnButton">
+                <EasingDoubleKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="-80">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="LoginGridTooltip">
+                <EasingDoubleKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="LoginGridTooltip">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="LoginFieldsGrid">
+                <DiscreteObjectKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="{x:Static Visibility.Hidden}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="LoginFieldsGrid">
+                <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="ReturnButton">
                 <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
-                <DiscreteBooleanKeyFrame KeyTime="0:0:0.7" Value="True"/>
+                <DiscreteBooleanKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="True"/>
             </BooleanAnimationUsingKeyFrames>
             <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="UsernameField">
                 <DiscreteBooleanKeyFrame KeyTime="0" Value="True"/>
-                <DiscreteBooleanKeyFrame KeyTime="0:0:0.2" Value="False"/>
+                <DiscreteBooleanKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="False"/>
             </BooleanAnimationUsingKeyFrames>
             <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="PasswordField">
                 <DiscreteBooleanKeyFrame KeyTime="0" Value="True"/>
-                <DiscreteBooleanKeyFrame KeyTime="0:0:0.2" Value="False"/>
+                <DiscreteBooleanKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="False"/>
             </BooleanAnimationUsingKeyFrames>
             <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="LoginButton">
                 <DiscreteBooleanKeyFrame KeyTime="0" Value="True"/>
-                <DiscreteBooleanKeyFrame KeyTime="0:0:0.2" Value="False"/>
+                <DiscreteBooleanKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="False"/>
             </BooleanAnimationUsingKeyFrames>
         </Storyboard>
-        <Storyboard x:Key="HideSignUpGrid">
+        <Storyboard x:Key="HideSignUpGrid" Completed="HideSignUpGridStoryboard_Completed">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="SignUpGrid">
+                <EasingDoubleKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="{Binding CollapsedGridHeight, Source={x:Static local:GridHeightClass.Instance}}"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="LoginGrid">
+                <EasingDoubleKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="{Binding CollapsedGridHeight, Source={x:Static local:GridHeightClass.Instance}}"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames  Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="SearchGrid">
+                <EasingDoubleKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="{Binding CollapsedGridHeight, Source={x:Static local:GridHeightClass.Instance}}"/>
+            </DoubleAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="Greeting">
+                <EasingColorKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="{StaticResource WindowGridColour}"/>
+            </ColorAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="ReturnButton">
-                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="-80">
+                <EasingDoubleKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="-80">
                     <EasingDoubleKeyFrame.EasingFunction>
                         <CircleEase EasingMode="EaseOut"/>
                     </EasingDoubleKeyFrame.EasingFunction>
                 </EasingDoubleKeyFrame>
             </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="StartPageGrid">
-                <EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="0">
-                    <EasingDoubleKeyFrame.EasingFunction>
-                        <CircleEase EasingMode="EaseOut"/>
-                    </EasingDoubleKeyFrame.EasingFunction>
-                </EasingDoubleKeyFrame>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="SignUpGridTooltip">
+                <EasingDoubleKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="SignUpGridTooltip">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="SignUpFieldGrid">
+                <DiscreteObjectKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="{x:Static Visibility.Hidden}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="SignUpFieldGrid">
+                <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="SignUpInstruction">
+                <DiscreteObjectKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="{x:Static Visibility.Hidden}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="SignUpInstruction">
+                <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="0"/>
             </DoubleAnimationUsingKeyFrames>
             <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="ReturnButton">
-                <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
-                <DiscreteBooleanKeyFrame KeyTime="0:0:0.7" Value="True"/>
+                <DiscreteBooleanKeyFrame KeyTime="0" Value="True"/>
+                <DiscreteBooleanKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="False"/>
             </BooleanAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="SignUpGrid">
-                <EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="{DynamicResource screenWidth}">
-                    <EasingDoubleKeyFrame.EasingFunction>
-                        <CircleEase EasingMode="EaseOut"/>
-                    </EasingDoubleKeyFrame.EasingFunction>
-                </EasingDoubleKeyFrame>
-            </DoubleAnimationUsingKeyFrames>
         </Storyboard>
         <Storyboard x:Key="Startup">
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="StartPageGrid">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="NavigationStackPanel">
                 <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
                 <EasingDoubleKeyFrame KeyTime="0:0:1" Value="1"/>
             </DoubleAnimationUsingKeyFrames>
@@ -210,29 +293,23 @@
                 <EasingDoubleKeyFrame KeyTime="0:0:1" Value="1"/>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
-        <Storyboard x:Key="HighlightLoginButton"/>
-        <Storyboard x:Key="LeaveLoginButton"/>
-        <Storyboard x:Key="HighlightSearchButton"/>
-        <Storyboard x:Key="HighlightSignUpButton"/>
-        <Storyboard x:Key="LeaveSearchButton"/>
-        <Storyboard x:Key="LeaveSignUpButton"/>
     </Window.Resources>
-
     <Window.Triggers>
-        <EventTrigger RoutedEvent="FrameworkElement.Loaded"/>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <BeginStoryboard x:Name="Startup_BeginStoryboard" Storyboard="{StaticResource Startup}"/>
+        </EventTrigger>
     </Window.Triggers>
 
     <!-- WindowGrid is the root grid for all other UI elements-->
-    <Grid x:Name="WindowGrid" Background="#FF1B0031" Margin="0">
-
+    <Grid x:Name="WindowGrid" Background="{StaticResource WindowGridColourBrush}" Margin="0">
         <!-- HeaderGrid contains the greeting for the user and the button for returning back to home view -->
         <!-- Notice! HeaderGrid no longer contains LanguageGrid. Language grid has been moved to a direct child of WindowGrid as it wasn't fully visible here-->
-        <Grid x:Name="HeaderGrid" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="85" Margin="0">
+        <Grid x:Name="HeaderGrid" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="85" Margin="0" Grid.ColumnSpan="2">
             <Label x:Name="Greeting" Content="{local:Loc Greeting}" Width="Auto" Height="Auto" HorizontalContentAlignment="Center" 
-                   VerticalContentAlignment="Top" Foreground="White" FontSize="60" Margin="0,-8,0,0"/>
-            <Button x:Name="ReturnButton" Content="{local:Loc HomeButtonContent}" HorizontalAlignment="Left" Height="40" Margin="10" 
+                   VerticalContentAlignment="Top" Foreground="White" FontSize="55" Margin="0,0,0,0" Grid.ColumnSpan="2"/>
+            <Button x:Name="ReturnButton" Content="{local:Loc HomeButtonContent}" HorizontalAlignment="Left" Height="40" Margin="10,10,0,0" 
                    VerticalAlignment="Top" Width="67.857" RenderTransformOrigin="0.5,0.5" Click="button_Click" Cursor="Hand" 
-                    KeyboardNavigation.IsTabStop="False" Style="{DynamicResource ModernButtonStyle}">
+                    KeyboardNavigation.IsTabStop="False" Style="{StaticResource ModernButtonStyle}">
                 <Button.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -245,13 +322,12 @@
         </Grid>
 
         <!-- NavigationStackPanel contains core funtionality for user interface navigation (except ReturnButton which is in HeaderGrid) -->
-        <StackPanel x:Name="NavigationStackPanel" Height="Auto" HorizontalAlignment="Stretch" Margin="0,85,0,0">
-
+        <StackPanel x:Name="NavigationStackPanel" Height="Auto" HorizontalAlignment="Stretch" Margin="0,85,0,0" Grid.ColumnSpan="2">
             <!-- LoginGrid contains the UI elements required for logging in and signing out-->
             <!-- TODO: Add functionality for signing out -->
-            <Grid x:Name="LoginGrid" Margin="0" Background="#FF5D005E" Height="238" MouseUp="LoginGrid_MouseUp">
-                <TextBlock x:Name="LoginGridTooltip" Text="Login" Visibility="Visible" FontSize="60" Foreground="White" HorizontalAlignment="Center" 
-                           VerticalAlignment="Center" Focusable="True" KeyDown="LoginGridTooltip_KeyDown"/>
+            <Grid x:Name="LoginGrid" Margin="0" Background="{StaticResource MenuItemColourBrush1}" Height="238" MouseUp="LoginGrid_MouseUp" VerticalAlignment="Top">
+                <TextBlock x:Name="LoginGridTooltip" Text="Login" Visibility="Visible" FontSize="120" Margin="20,0,0,0" Foreground="White" HorizontalAlignment="Left" 
+                           VerticalAlignment="Center" Focusable="True" KeyDown="LoginGridTooltip_KeyDown" FontFamily="Impact"/>
                 <Grid x:Name="LoginFieldsGrid" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Hidden">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -266,25 +342,23 @@
                     <TextBox Width="350" x:Name="UsernameField" Grid.Column="0" Grid.Row="0" Style="{StaticResource ModernTextBoxStyle}" Margin="0" 
                              Text="{local:Loc DefaultLoginUsernameBoxContent}" VerticalAlignment="Stretch" GotFocus="UsernameField_GotFocus" 
                              LostFocus="UsernameField_LostFocus" TextChanged="UsernameField_TextChanged" KeyDown="UsernameField_KeyDown"
-                             Visibility="Hidden" Focusable="False"/>
+                             />
 
                     <!-- Field for inputting the password-->
                     <PasswordBox Padding="5" Grid.Column ="0" Grid.Row="1" x:Name="PasswordField" Margin="0,10,0,0"
-                             VerticalAlignment="Stretch" FontSize="24" KeyDown="PasswordField_KeyDown" Visibility="Hidden" Focusable="False"/>
+                             Visibility="Hidden" VerticalAlignment="Stretch" FontSize="24" KeyDown="PasswordField_KeyDown"/>
 
                     <!-- LoginButton-->
                     <Button x:Name="LoginButton" Grid.Column="1" Grid.RowSpan="1"  Content="{local:Loc DefaultLoginButtonContent}" 
                             HorizontalAlignment="Right" Margin="10,0,0,0" Padding="10,0,10,0" VerticalAlignment="Stretch" FontSize="24"  
-                            Style="{DynamicResource ModernButtonStyle}" Click="LoginButton_Click" Visibility="Hidden" Focusable="False"/>
+                            Style="{DynamicResource ModernButtonStyle}" Click="LoginButton_Click"/>
                 </Grid>
-                <Button x:Name="button" Content="Admin" HorizontalAlignment="Left" Height="149" Margin="129,65,0,0" VerticalAlignment="Top" Width="128" Click="button_Click_1"/>
-                <Button x:Name="button1" Content="Search" HorizontalAlignment="Left" Height="149" Margin="904,65,0,0" VerticalAlignment="Top" Width="158" Click="button1_Click"/>
             </Grid>
 
             <!-- SignUpGrid Contains the UI elements required for account creation -->
-            <Grid x:Name="SignUpGrid" Margin="0" Background="#FF870066" Height="238" MouseUp="SignUpGrid_MouseUp">
-                <TextBlock x:Name="SignUpGridTooltip" Text="Sign Up" Visibility="Visible" FontSize="60" Foreground="White" HorizontalAlignment="Center" 
-                           VerticalAlignment="Center" Focusable="True" KeyDown="SignUpGridTooltip_KeyDown"/>
+            <Grid x:Name="SignUpGrid" Margin="0" Background="{StaticResource MenuItemColourBrush2}" Height="238" MouseUp="SignUpGrid_MouseUp" VerticalAlignment="Top">
+                <TextBlock x:Name="SignUpGridTooltip" Text="Sign Up" Visibility="Visible" FontSize="120" Foreground="White" HorizontalAlignment="Left" 
+                           VerticalAlignment="Center" Focusable="True" KeyDown="SignUpGridTooltip_KeyDown" Margin="20,0,0,0" FontFamily="Impact"/>
 
                 <TextBlock x:Name="SignUpInstruction" HorizontalAlignment="Center" Margin="0,200,0,0" TextWrapping="Wrap"
                            Text="Do this and that to sign up. Additionally, add a proper text for this TextBlock" 
@@ -301,26 +375,28 @@
                             Width="115" FontSize="18" Padding="1,0,1,1" Style="{DynamicResource ModernButtonStyle}" VerticalAlignment="Stretch" 
                             Click="signupButton1_Click"/>
                 </Grid>
+
             </Grid>
 
             <!-- SearchGrid contains the UI elements for searching the books database-->
-            <Grid x:Name="SearchGrid" Margin="0" HorizontalAlignment="Stretch" Height="238" Background="#FFBF0060" MouseUp="SearchGrid_MouseUp">
-                <TextBlock x:Name="SearchGridTooltip" Text="Search" Visibility="Visible" FontSize="60" Foreground="White" HorizontalAlignment="Center" 
-                           VerticalAlignment="Center" Focusable="True" KeyDown="SearchGridTooltip_KeyDown"/>
+
+            <Grid x:Name="SearchGrid" Margin="0" HorizontalAlignment="Stretch" Height="238" Background="{StaticResource MenuItemColourBrush3}" MouseUp="SearchGrid_MouseUp" VerticalAlignment="Top">
+                <TextBlock x:Name="SearchGridTooltip" Text="Search" Visibility="Visible" FontSize="120" Margin="20,0,0,0" Foreground="White" HorizontalAlignment="Left" 
+                           VerticalAlignment="Center" Focusable="True" KeyDown="SearchGridTooltip_KeyDown" FontFamily="Impact"/>
 
                 <!-- Contains the search UI interaction elements. This has to exist as otherwise SearchGridToolTip couldn't be displayed properly -->
                 <!-- Because of the ColumnDefinitions in search UI interactions -->
-                <Grid x:Name="SearchContentsGrid" >
+                <Grid x:Name="SearchContentsGrid" Visibility="Hidden">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <TextBox x:Name="SearchBox" Style="{StaticResource ModernTextBoxStyle}" Margin="20,170,20,0" Grid.Column="0" VerticalAlignment="Top" 
+                    <TextBox x:Name="SearchBox" Style="{StaticResource ModernTextBoxStyle}" Margin="20,20,20,0" Grid.Column="0" VerticalAlignment="Top" 
                          Text="{local:Loc DefaultSearchBoxContent}" FontSize="24" FontFamily="Sylfaen" Foreground="Black" GotFocus="SearchBox_GotFocus" 
-                         TextChanged="SearchBox_TextChanged" LostFocus="SearchBox_LostFocus" Visibility="Hidden" Focusable="False"/>
-                    <ListBox x:Name="SearchResultsListBox" HorizontalContentAlignment="Stretch" Margin="20,229,20,20" BorderBrush="Transparent" 
+                         TextChanged="SearchBox_TextChanged" LostFocus="SearchBox_LostFocus"/>
+                    <ListBox x:Name="SearchResultsListBox" HorizontalContentAlignment="Stretch" Margin="20,82,20,20" BorderBrush="Transparent" 
                          Background="Transparent" BorderThickness="0" FontSize="24" ItemContainerStyle="{DynamicResource ModernListBoxItemStyle}" 
-                         ScrollViewer.HorizontalScrollBarVisibility="Hidden" Focusable="False" Visibility="Hidden">
+                         ScrollViewer.HorizontalScrollBarVisibility="Hidden" Focusable="False">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Vertical">
@@ -331,7 +407,7 @@
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
-                    <StackPanel Grid.Column="1" Margin="10" Focusable="False" Visibility="Hidden">
+                    <StackPanel Grid.Column="1" Margin="10" Focusable="False">
                         <Border BorderThickness="2" BorderBrush="Black" Height="200" Width="140" Margin="0,10,0,0">
                             <Image Height="200" Width="140" Margin="0,10,0,0"/>
                         </Border>
@@ -349,16 +425,14 @@
                         <TextBlock x:Name="bookISBN" FontSize="24" TextWrapping="Wrap">
                             <TextBlock.Text>ISBN here!</TextBlock.Text>
                         </TextBlock>
-
                     </StackPanel>
                 </Grid>
-
             </Grid>
         </StackPanel>
 
         <!-- LanguageGrid contains the UI elements that are required for language selection -->
         <Grid x:Name="LanguageGrid" Margin="0,10,10,0" HorizontalAlignment="Right" Height="120" VerticalAlignment="Top" Width="65" 
-              MouseEnter="LanguageGrid_MouseEnter" MouseLeave="LanguageGrid_MouseLeave" d:IsLocked="True">
+              MouseEnter="LanguageGrid_MouseEnter" MouseLeave="LanguageGrid_MouseLeave" d:IsLocked="True" Grid.Column="1">
             <Button x:Name="English" HorizontalAlignment="Left" VerticalAlignment="Top" Width="65" Margin="0" Height="40" Cursor="Hand" 
                     Click="English_Click" BorderThickness="0">
                 <Button.Template>
