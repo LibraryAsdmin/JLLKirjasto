@@ -189,6 +189,27 @@
   <data name="DefaultSignUpUsernameBoxContent" xml:space="preserve">
     <value>Type your wilma account here</value>
   </data>
+  <data name="DisplaySearchBookAuthor" xml:space="preserve">
+    <value>Author</value>
+  </data>
+  <data name="DisplaySearchBookAvailability" xml:space="preserve">
+    <value>Available</value>
+  </data>
+  <data name="DisplaySearchBookCategory" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="DisplaySearchBookID" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="DisplaySearchBookISBN" xml:space="preserve">
+    <value>ISBN</value>
+  </data>
+  <data name="DisplaySearchBookTitle" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="DisplaySearchBookYear" xml:space="preserve">
+    <value>Year of Publication</value>
+  </data>
   <data name="Greeting" xml:space="preserve">
     <value>Greetings!</value>
   </data>

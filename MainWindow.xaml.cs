@@ -680,7 +680,7 @@ namespace JLLKirjasto
 
         #region Search
 
-        //TODO: Add support for advanced search, currently hard-coded for BookID, Author and Title only
+        //TODO: Add support for advanced search, currently hard-coded for ID, Author and Title only
         private void updateSearchResults()
         {
             List<String> columns = new List<String>();
@@ -703,7 +703,7 @@ namespace JLLKirjasto
 
             foreach (List<String> row in searchResults)
             {
-                ListBoxItems.Add(new Book() { ID = row[0], Author = row[1], Title = row[2], Year = row[3], Language = row[4], Available = row[5] });
+                ListBoxItems.Add(new Book() { ID = row[0], Author = row[1], Title = row[2], Year = row[3], Language = row[4], Available = row[5], ISBN = row[6], Category = row[7] });
             }
             SearchResultsListBox.ItemsSource = ListBoxItems;
         }

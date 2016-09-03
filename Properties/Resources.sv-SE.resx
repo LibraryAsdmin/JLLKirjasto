@@ -190,6 +190,27 @@ Svenska här! Svenska här {0} Svenska här.</value>
   <data name="DefaultSignUpUsernameBoxContent" xml:space="preserve">
     <value>Svenska här</value>
   </data>
+  <data name="DisplaySearchBookAuthor" xml:space="preserve">
+    <value>Svenska här</value>
+  </data>
+  <data name="DisplaySearchBookAvailability" xml:space="preserve">
+    <value>Svenska här</value>
+  </data>
+  <data name="DisplaySearchBookCategory" xml:space="preserve">
+    <value>Svenska här</value>
+  </data>
+  <data name="DisplaySearchBookID" xml:space="preserve">
+    <value>Svenska här</value>
+  </data>
+  <data name="DisplaySearchBookISBN" xml:space="preserve">
+    <value>Svenska här</value>
+  </data>
+  <data name="DisplaySearchBookTitle" xml:space="preserve">
+    <value>Svenska här</value>
+  </data>
+  <data name="DisplaySearchBookYear" xml:space="preserve">
+    <value>Svenska här</value>
+  </data>
   <data name="Greeting" xml:space="preserve">
     <value>Hejsan!</value>
   </data>

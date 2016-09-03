@@ -189,6 +189,27 @@
   <data name="DefaultSignUpUsernameBoxContent" xml:space="preserve">
     <value>Kirjoita tähän Wilma-tunnuksesi</value>
   </data>
+  <data name="DisplaySearchBookAuthor" xml:space="preserve">
+    <value>Kirjailija</value>
+  </data>
+  <data name="DisplaySearchBookAvailability" xml:space="preserve">
+    <value>Saatavilla</value>
+  </data>
+  <data name="DisplaySearchBookCategory" xml:space="preserve">
+    <value>Aineistolaji</value>
+  </data>
+  <data name="DisplaySearchBookID" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="DisplaySearchBookISBN" xml:space="preserve">
+    <value>ISBN</value>
+  </data>
+  <data name="DisplaySearchBookTitle" xml:space="preserve">
+    <value>Teoksen Nimi</value>
+  </data>
+  <data name="DisplaySearchBookYear" xml:space="preserve">
+    <value>Julkaisuvuosi</value>
+  </data>
   <data name="Greeting" xml:space="preserve">
     <value>Päivää!</value>
   </data>
