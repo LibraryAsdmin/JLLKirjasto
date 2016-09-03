@@ -223,6 +223,9 @@
   <data name="SignUpConfirmationButtonContent" xml:space="preserve">
     <value>Svenska här</value>
   </data>
+  <data name="SignUpEmailTitle" xml:space="preserve">
+    <value>Verifierings kod</value>
+  </data>
   <data name="SignUpErrorMessage" xml:space="preserve">
     <value>Svenska här</value>
   </data>

@@ -222,14 +222,17 @@
   <data name="SignUpConfirmationButtonContent" xml:space="preserve">
     <value>Confirm</value>
   </data>
+  <data name="SignUpEmailTitle" xml:space="preserve">
+    <value>Verification Code</value>
+  </data>
   <data name="SignUpErrorMessage" xml:space="preserve">
-    <value>Whoopsie! Something went wrong while creating a new user account. Please make sure that you typed correctly.</value>
+    <value>Whoops! Something went wrong while creating a new user account. Please make sure that you typed correctly.</value>
   </data>
   <data name="SignUpInstruction1" xml:space="preserve">
     <value>Create an account by typing your Wilma email to the text box below.</value>
   </data>
   <data name="SignUpInstruction2" xml:space="preserve">
-    <value>An email containing a confirmation code was sent to the email address associated with your Wilma account. Type the code to the text box below to finish the account creation.</value>
+    <value>An email containing a confirmation code was sent to the email address associated with your Wilma account. The link to the login page is provided below. Type the code to the text box below to finish the account creation process.</value>
   </data>
   <data name="SignUpWrongCode" xml:space="preserve">
     <value>The entered code was incorrect. Account creation unsuccessful!</value>

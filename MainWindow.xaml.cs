@@ -508,16 +508,19 @@ namespace JLLKirjasto
         }
         private void signupButton1_Click(object sender, RoutedEventArgs e)
         {
-            if (SignUpField.Text.EndsWith("@edu.jns.fi"))
+            if (SignUpField.Text.EndsWith("@edu.jns.fi") && SignUpField.Text.Length > 11) // verify that email contains proper ending and that it also contains other text
             {
                 // hide previous UI elements
-                SignUpInstruction.Text = Properties.Resources.ResourceManager.GetString("SignUpInstruction2", TranslationSource.Instance.CurrentCulture); // TODO: move this thi xaml
                 SignUpButton.Visibility = Visibility.Hidden;
                 SignUpField.Visibility = Visibility.Hidden;
 
+                // send code to the user
                 defaultSignUpOperation.generateCode();
+                defaultSignUpOperation.addEmail(SignUpField.Text);
+                defaultSignUpOperation.sendCode();
 
                 // show new UI elements
+                SignUpInstruction.Text = Properties.Resources.ResourceManager.GetString("SignUpInstruction2", TranslationSource.Instance.CurrentCulture); // TODO: move this thi xaml
                 SignUpEmailLink.Visibility = Visibility.Visible;
                 SignUpConfirmationField.Visibility = Visibility.Visible;
                 SignUpConfirmationButton.Visibility = Visibility.Visible;
@@ -535,6 +538,7 @@ namespace JLLKirjasto
             if (defaultSignUpOperation.compareCode(SignUpConfirmationField.Text))
             {
                 // add the new user to the database and return to main view
+                MessageBox.Show("TODO: Add user to the database and return to the main view for login");
                 // TODO: Add user to the database
                 // TODO: Return to main view
             }
@@ -542,6 +546,7 @@ namespace JLLKirjasto
             {
                 // complain to the user
                 MessageBox.Show(Properties.Resources.ResourceManager.GetString("SignUpWrongCode", TranslationSource.Instance.CurrentCulture));
+                defaultSignUpOperation.reset();
                 // reset to default view
                 // TODO: Reset to default view
             }

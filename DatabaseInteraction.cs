@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SQLite;
 using System.Windows;
+using System.Net.Mail;
+using System.Net;
 
 namespace JLLKirjasto
 {
@@ -69,7 +71,9 @@ namespace JLLKirjasto
             reset();
         }
 
-        public String Code { get; set; } // the code sent to user's email
+        // Variables
+        private String Code { get; set; } // the code sent to user's email
+        private String Email { get; set; } // the wilma email address of the user
 
         // generates a 4 digit random number and stores it as a string in memory
         public void generateCode()
@@ -86,10 +90,59 @@ namespace JLLKirjasto
             return false;
         }
 
-        // Reset signup operation to its original state, i.e. no code stored in memory
+        // send code to email using google SMTP servers
+        public void sendCode()
+        {
+            if (Code == null)
+                throw new Exception("Error! This function shouldn't be used before the code is generated!");
+            if (Email == null)
+                throw new Exception("Error! This function shouldn't be used before the email is given!");
+
+            // build email
+            MailMessage message = new MailMessage(
+                "JLLKirjastoMail@gmail.com",
+                Email,
+                Properties.Resources.ResourceManager.GetString("SignUpEmailTitle", TranslationSource.Instance.CurrentCulture),
+                Code
+                );
+
+            // send message using SMTP
+            SmtpClient client = new SmtpClient("smtp.gmail.com", 25);
+            client.UseDefaultCredentials = true;
+            NetworkCredential credentials = new NetworkCredential("JLLKirjastoMail@gmail.com", "b7zr%LbLC!");
+            client.Credentials = credentials;
+            client.EnableSsl = true;
+
+            try
+            {
+                client.SendAsync(message, null);
+            }
+            catch (SmtpException ex)
+            {
+                MessageBox.Show("SMTP Exception has occured: " + ex.Message);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error Occured: " + ex.Message);
+            }
+        }
+
+        // set the email address to which the code is sent
+        public void addEmail(String email)
+        {
+            Email = email;
+        }
+
+        void resetEmail()
+        {
+            Email = null;
+        }
+
+        // Reset signup operation to its original state
         public void reset()
         {
             Code = null;
+            Email = null;
         }
     }
 

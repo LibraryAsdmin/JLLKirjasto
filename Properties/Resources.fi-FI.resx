@@ -222,6 +222,9 @@
   <data name="SignUpConfirmationButtonContent" xml:space="preserve">
     <value>Luo tunnus</value>
   </data>
+  <data name="SignUpEmailTitle" xml:space="preserve">
+    <value>Varmennuskoodi</value>
+  </data>
   <data name="SignUpErrorMessage" xml:space="preserve">
     <value>Hupsista! Jotakin meni vikaan ohjelman luodessa uutta tunnusta. Varmista, että kirjoitit tunnuksesi oikein.</value>
   </data>
@@ -229,7 +232,7 @@
     <value>Luo tunnus kirjoittamalla Wilma sähköpostiosoitteesi alla olevaan laatikkoon.</value>
   </data>
   <data name="SignUpInstruction2" xml:space="preserve">
-    <value>Wilmatunnukseesi kuuluvaan sähköpostiosoitteeseen lähetettiin varmennuskoodi. Kirjoita koodi alla olevaan laatikkoon valmistaaksesi käyttäjän luonnin.</value>
+    <value>Wilmatunnukseesi kuuluvaan sähköpostiosoitteeseen lähetettiin varmennuskoodi. Löydät linkin kirjautumissivulle alta. Kirjoita koodi alla olevaan laatikkoon valmistaaksesi käyttäjän luonnin. </value>
   </data>
   <data name="SignUpWrongCode" xml:space="preserve">
     <value>Syöttämäsi koodi oli virheellinen. Käyttäjän luonti epäonnistui.</value>
