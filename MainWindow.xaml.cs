@@ -19,6 +19,7 @@ using System.Globalization;
 using System.Resources;
 using System.Data.SQLite;
 using System.Windows.Controls.Primitives;
+using System.Diagnostics;
 
 namespace JLLKirjasto
 {
@@ -150,13 +151,6 @@ namespace JLLKirjasto
         // 3 = SignUpGrid
         byte currentView = 0;
 
-        // Search variables
-        /**
-        List<String> searchResultTitles;
-        List<String> searchResultAuthors;
-        List<Int32> searchResultIDs;
-        **/
-
         // Variables for database interaction
         private SQLiteConnection dbconnection = new SQLiteConnection("Data Source=database.db");
         private DatabaseInteraction dbi = new DatabaseInteraction();
@@ -164,7 +158,10 @@ namespace JLLKirjasto
         // Variables required by search
         // Require at least this number of characters before searching to avoid search congestion
         // Global bariable, this is used also to control search in AdminControls
-        public const uint minSearchChars = 3;  
+        public const uint minSearchChars = 3;
+
+        // Variables for SignUp operation
+        SignUpOperation defaultSignUpOperation = new SignUpOperation();
         #endregion
 
 
@@ -513,41 +510,41 @@ namespace JLLKirjasto
         {
             if (SignUpField.Text.EndsWith("@edu.jns.fi"))
             {
-                try
-                {
-                    dbconnection.Open();
+                // hide previous UI elements
+                SignUpInstruction.Text = Properties.Resources.ResourceManager.GetString("SignUpInstruction2", TranslationSource.Instance.CurrentCulture); // TODO: move this thi xaml
+                SignUpButton.Visibility = Visibility.Hidden;
+                SignUpField.Visibility = Visibility.Hidden;
 
-                    // Calculate UserID 
-                    SQLiteCommand countUserIDs = new SQLiteCommand("SELECT COUNT(UserID) FROM users;", dbconnection);
-                    SQLiteDataReader readCount = countUserIDs.ExecuteReader();
+                defaultSignUpOperation.generateCode();
 
-                    int userCount = 0;
-                    while (readCount.Read())
-                    {
-                        userCount = readCount.GetInt32(0);
-                    }
-
-                    // SQL command.
-                    String sql = "INSERT INTO users VALUES (@UserID, @Username);";
-
-                    // execute command and close conection
-                    SQLiteCommand command = new SQLiteCommand(sql, dbconnection);
-                    command.Parameters.AddWithValue("UserID", userCount);
-                    command.Parameters.AddWithValue("Username", SignUpField.Text);
-                    command.ExecuteNonQuery();
-                    dbconnection.Close();
-                }
-                catch
-                {
-                    dbconnection.Close();
-                    System.Windows.MessageBox.Show(Properties.Resources.ResourceManager.GetString("SignUpErrorMessage", TranslationSource.Instance.CurrentCulture));
-                }
+                // show new UI elements
+                SignUpEmailLink.Visibility = Visibility.Visible;
+                SignUpConfirmationField.Visibility = Visibility.Visible;
+                SignUpConfirmationButton.Visibility = Visibility.Visible;
             }
             else
             {
-                System.Windows.MessageBox.Show(Properties.Resources.ResourceManager.GetString("SignUpErrorMessage", TranslationSource.Instance.CurrentCulture));
+                defaultSignUpOperation.reset();
+                MessageBox.Show(Properties.Resources.ResourceManager.GetString("SignUpErrorMessage", TranslationSource.Instance.CurrentCulture));
             }
 
+        }
+        private void SignUpConfirmationButton_Click(object sender, RoutedEventArgs e)
+        {
+            // if the code given by the user matches the one stored in memory
+            if (defaultSignUpOperation.compareCode(SignUpConfirmationField.Text))
+            {
+                // add the new user to the database and return to main view
+                // TODO: Add user to the database
+                // TODO: Return to main view
+            }
+            else
+            {
+                // complain to the user
+                MessageBox.Show(Properties.Resources.ResourceManager.GetString("SignUpWrongCode", TranslationSource.Instance.CurrentCulture));
+                // reset to default view
+                // TODO: Reset to default view
+            }
         }
 
         // Program exit behaviour
@@ -562,6 +559,13 @@ namespace JLLKirjasto
             {
                 // nothing wrong here.
             }
+        }
+
+        // Required for hyperlinks to work
+        private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
+        {
+            Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri));
+            e.Handled = true;
         }
         #endregion
 
@@ -716,6 +720,7 @@ namespace JLLKirjasto
             MessageBox.Show(m);
         }
         #endregion
+
 
     }
 }

@@ -163,8 +163,8 @@
     <value>Svenska här</value>
   </data>
   <data name="BookEditIDError" xml:space="preserve">
-    <value>
-Svenska här! Svenska här {0} Svenska här.</value>
+    <value>Svenska här! Svenska här {0} Svenska här.</value>
+    <comment>{0} is replaced with book's ID in the displayed error message</comment>
   </data>
   <data name="BookEditWindowAcceptButtonContent" xml:space="preserve">
     <value>Svenska här</value>
@@ -220,7 +220,19 @@ Svenska här! Svenska här {0} Svenska här.</value>
   <data name="SignUpButtonContent" xml:space="preserve">
     <value>Svenska här</value>
   </data>
+  <data name="SignUpConfirmationButtonContent" xml:space="preserve">
+    <value>Svenska här</value>
+  </data>
   <data name="SignUpErrorMessage" xml:space="preserve">
+    <value>Svenska här</value>
+  </data>
+  <data name="SignUpInstruction1" xml:space="preserve">
+    <value>Svenska här</value>
+  </data>
+  <data name="SignUpInstruction2" xml:space="preserve">
+    <value>Svenska här</value>
+  </data>
+  <data name="SignUpWrongCode" xml:space="preserve">
     <value>Svenska här</value>
   </data>
   <data name="TextUnderAccountCreation" xml:space="preserve">

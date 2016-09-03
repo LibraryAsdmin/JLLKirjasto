@@ -50,6 +50,49 @@ namespace JLLKirjasto
         }
     }
 
+    public class User
+    {
+        public String ID { get; set; }
+        public String Wilma { get; set; } // for signup and signin
+        public String Loans { get; set; } // A comma separated list of book IDs 
+
+        public enum columnID { ID, Wilma, Loans, NumColumns};
+        
+    }
+
+    // information that's needed to be stored during the signup operation is stored in an instance of this class
+    public class SignUpOperation
+    {
+        // constructor
+        public SignUpOperation()
+        {
+            reset();
+        }
+
+        public String Code { get; set; } // the code sent to user's email
+
+        // generates a 4 digit random number and stores it as a string in memory
+        public void generateCode()
+        {
+            Random r = new Random();
+            string code = ((int)(r.NextDouble() * 9999.0)).ToString();
+            Code = code.PadLeft(4, '0');
+        }
+
+        // compares a given code to the one stored in memory
+        public bool compareCode(string code)
+        {
+            if (code == Code) return true;
+            return false;
+        }
+
+        // Reset signup operation to its original state, i.e. no code stored in memory
+        public void reset()
+        {
+            Code = null;
+        }
+    }
+
     public class DatabaseInteraction
     {
 

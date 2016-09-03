@@ -306,7 +306,7 @@
         <!-- Notice! HeaderGrid no longer contains LanguageGrid. Language grid has been moved to a direct child of WindowGrid as it wasn't fully visible here-->
         <Grid x:Name="HeaderGrid" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="85" Margin="0" Grid.ColumnSpan="2">
             <Label x:Name="Greeting" Content="{local:Loc Greeting}" Width="Auto" Height="Auto" HorizontalContentAlignment="Center" 
-                   VerticalContentAlignment="Top" Foreground="White" FontSize="55" Margin="0,0,0,0" Grid.ColumnSpan="2"/>
+                   VerticalContentAlignment="Top" Foreground="White" FontSize="55" Margin="0,0,0,0" Grid.ColumnSpan="2" d:IsLocked="True"/>
             <Button x:Name="ReturnButton" Content="{local:Loc HomeButtonContent}" HorizontalAlignment="Left" Height="40" Margin="10,10,0,0" 
                    VerticalAlignment="Top" Width="67.857" RenderTransformOrigin="0.5,0.5" Click="button_Click" Cursor="Hand" 
                     KeyboardNavigation.IsTabStop="False" Style="{StaticResource ModernButtonStyle}">
@@ -356,26 +356,42 @@
             </Grid>
 
             <!-- SignUpGrid Contains the UI elements required for account creation -->
+
             <Grid x:Name="SignUpGrid" Margin="0" Background="{StaticResource MenuItemColourBrush2}" Height="238" MouseUp="SignUpGrid_MouseUp" VerticalAlignment="Top">
                 <TextBlock x:Name="SignUpGridTooltip" Text="Sign Up" Visibility="Visible" FontSize="120" Foreground="White" HorizontalAlignment="Left" 
                            VerticalAlignment="Center" Focusable="True" KeyDown="SignUpGridTooltip_KeyDown" Margin="20,0,0,0" FontFamily="Impact"/>
-
-                <TextBlock x:Name="SignUpInstruction" HorizontalAlignment="Center" Margin="0,200,0,0" TextWrapping="Wrap"
-                           Text="Do this and that to sign up. Additionally, add a proper text for this TextBlock" 
-                           VerticalAlignment="Top" Height="42" Width="318" FontSize="26.667" Foreground="White" Visibility="Hidden" Focusable="False"/>
-                <Grid x:Name="SignUpFieldGrid" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden" Focusable="False">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <TextBox x:Name="SignUpField" Style="{StaticResource ModernTextBoxStyle}" Grid.Column="0"  Text="{local:Loc DefaultSignUpUsernameBoxContent}" 
+                <StackPanel>
+                    <TextBlock x:Name="SignUpInstruction" HorizontalAlignment="Center" Margin="0,150,0,0" TextWrapping="Wrap"
+                           Text="{local:Loc SignUpInstruction1}" 
+                           VerticalAlignment="Top" Height="Auto" Width="318" FontSize="20" Foreground="White" Visibility="Hidden" Focusable="False"/>
+                    <!-- Link to email signin-->
+                    <TextBlock x:Name="SignUpEmailLink" Margin="10" HorizontalAlignment="Center" VerticalAlignment="Top" Height="Auto" Width="318" Visibility="Hidden" Focusable="False" TextAlignment="Center" FontSize="20">
+                        <Hyperlink NavigateUri="https://login.microsoftonline.com/" RequestNavigate="Hyperlink_RequestNavigate">
+                            https://login.microsoftonline.com/
+                        </Hyperlink>
+                    </TextBlock>
+                    <Grid x:Name="SignUpFieldGrid" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden" Focusable="False">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="50"/>
+                        </Grid.RowDefinitions>
+                        <TextBox x:Name="SignUpField" Style="{StaticResource ModernTextBoxStyle}" Grid.Column="0"  Text="{local:Loc DefaultSignUpUsernameBoxContent}" 
                              GotFocus="SignUpField_GotFocus"  LostFocus="SignUpField_LostFocus" TextChanged="SignUpField_TextChanged" VerticalAlignment="Stretch"  
                              Width="400"/>
-                    <Button x:Name="SignUpButton" Grid.Column="1" Content="{local:Loc SignUpButtonContent}" HorizontalAlignment="Right" Margin="10,0,0,0" 
+                        <Button x:Name="SignUpButton" Grid.Column="1" Content="{local:Loc SignUpButtonContent}" HorizontalAlignment="Right" Margin="10,0,0,0" 
                             Width="115" FontSize="18" Padding="1,0,1,1" Style="{DynamicResource ModernButtonStyle}" VerticalAlignment="Stretch" 
                             Click="signupButton1_Click"/>
-                </Grid>
-
+                        <TextBox x:Name="SignUpConfirmationField" Style="{StaticResource ModernTextBoxStyle}" Grid.Column="0" Grid.Row="1" VerticalAlignment="Stretch"  
+                             Width="400" Visibility="Hidden"/>
+                        <Button x:Name="SignUpConfirmationButton" Grid.Column="1" Grid.Row="1" Content="{local:Loc SignUpConfirmationButtonContent}" HorizontalAlignment="Right" Margin="10,0,0,0" 
+                            Width="115" FontSize="18" Padding="1,0,1,1" Style="{DynamicResource ModernButtonStyle}" VerticalAlignment="Stretch" Visibility="Hidden" Click="SignUpConfirmationButton_Click"/>
+                    </Grid>
+                </StackPanel>
+                
             </Grid>
 
             <!-- SearchGrid contains the UI elements for searching the books database-->
