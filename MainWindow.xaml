@@ -366,8 +366,8 @@
                            VerticalAlignment="Top" Height="Auto" Width="318" FontSize="20" Foreground="White" Visibility="Hidden" Focusable="False"/>
                     <!-- Link to email signin-->
                     <TextBlock x:Name="SignUpEmailLink" Margin="10" HorizontalAlignment="Center" VerticalAlignment="Top" Height="Auto" Width="318" Visibility="Hidden" Focusable="False" TextAlignment="Center" FontSize="20">
-                        <Hyperlink NavigateUri="https://login.microsoftonline.com/" RequestNavigate="Hyperlink_RequestNavigate">
-                            https://login.microsoftonline.com/
+                        <Hyperlink NavigateUri="https://outlook.office.com" RequestNavigate="Hyperlink_RequestNavigate">
+                            https://outlook.office.com
                         </Hyperlink>
                     </TextBlock>
                     <Grid x:Name="SignUpFieldGrid" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden" Focusable="False">
