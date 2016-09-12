@@ -412,7 +412,7 @@
                          TextChanged="SearchBox_TextChanged" LostFocus="SearchBox_LostFocus"/>
                     <ListBox x:Name="SearchResultsListBox" HorizontalContentAlignment="Stretch" Margin="20,82,20,20" BorderBrush="Transparent" 
                          Background="Transparent" BorderThickness="0" FontSize="24" ItemContainerStyle="{DynamicResource ModernListBoxItemStyle}" 
-                         ScrollViewer.HorizontalScrollBarVisibility="Hidden" Focusable="False">
+                         ScrollViewer.HorizontalScrollBarVisibility="Hidden" Focusable="False" SelectionChanged="SearchResultsListBox_SelectionChanged">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Vertical">
@@ -425,7 +425,7 @@
                     </ListBox>
                     <StackPanel Grid.Column="1" Margin="10" Focusable="False">
                         <Border BorderThickness="2" BorderBrush="Black" Height="200" Width="140" Margin="0,10,0,0">
-                            <Image Height="200" Width="140" Margin="0,10,0,0"/>
+                            <Image x:Name="coverArt" Height="200" Width="140" Margin="0,10,0,0" Stretch="Uniform"/>
                         </Border>
                         
                         <!-- Book information displayed to the user -->

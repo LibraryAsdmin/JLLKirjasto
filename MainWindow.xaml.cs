@@ -20,6 +20,11 @@ using System.Resources;
 using System.Data.SQLite;
 using System.Windows.Controls.Primitives;
 using System.Diagnostics;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System.Net;
+using System.IO;
+using System.Net.Http;
 
 namespace JLLKirjasto
 {
@@ -724,8 +729,86 @@ namespace JLLKirjasto
         {
             MessageBox.Show(m);
         }
+
         #endregion
 
 
+        private async void SearchResultsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+            Book currentBook = SearchResultsListBox.SelectedItem as Book;
+            if (currentBook != null)
+            {
+                string url = await retrieveCoverArtAsync(currentBook.ISBN);
+                if (url != String.Empty)
+                {
+                    BitmapImage bitmap = new BitmapImage();
+                    bitmap.BeginInit();
+                    bitmap.UriSource = new Uri(url, UriKind.Absolute);
+                    bitmap.EndInit();
+                    coverArt.Source = bitmap;
+                }
+                else
+                {
+                    coverArt.Source = null;
+                }
+            }
+
+        }
+
+        async Task<string> retrieveCoverArtAsync(string isbn)
+        {
+
+            // Create a request for the URL. 
+
+            using (var client = new HttpClient())
+            {
+                HttpResponseMessage response = new HttpResponseMessage();
+                try
+                {
+                    response = await client.GetAsync("https://www.googleapis.com/books/v1/volumes?q=+isbn:" + isbn);
+                }
+                catch
+                {
+                    //No internet connection (or some other problem)
+                    return String.Empty;
+                }
+
+                if (response.IsSuccessStatusCode)
+                {
+                    string content = await response.Content.ReadAsStringAsync();
+                    JObject bookInfoObject = JObject.Parse(content);
+
+                    JToken volumeCountItem = bookInfoObject["totalItems"];
+
+                    if (volumeCountItem.Value<int>() > 0)
+                    {
+                        //then we have to get the image links separately
+                        try
+                        {
+                            JToken imageLinkItem = bookInfoObject["items"].First["volumeInfo"]["imageLinks"]["thumbnail"];
+                            return imageLinkItem.ToString();
+
+                        }
+                        catch
+                        {
+                            //No cover art
+                        }
+
+                    }
+                    else
+                    {
+                        //no data available
+                    }
+                }
+                client.Dispose();
+            }
+
+            return String.Empty;
+        }
+
     }
+
 }
+
+

@@ -35,7 +35,6 @@ namespace JLLKirjasto
         // Variables for interaction with the database
         SQLiteConnection dbconnection = new SQLiteConnection("Data Source=database.db");
         DatabaseInteraction dbi = new DatabaseInteraction();
-        String bookstable = "books";
         #endregion
 
         public AdminControlsWindow()
