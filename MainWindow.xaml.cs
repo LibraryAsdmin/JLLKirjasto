@@ -717,7 +717,7 @@ namespace JLLKirjasto
 
             foreach (List<String> row in searchResults)
             {
-                ListBoxItems.Add(new Book() { ID = row[0], Author = row[1], Title = row[2], Year = row[3], Language = row[4], Available = row[5], ISBN = row[6], Category = row[7] });
+                ListBoxItems.Add(new Book(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7]));
             }
             SearchResultsListBox.ItemsSource = ListBoxItems;
         }
@@ -739,7 +739,7 @@ namespace JLLKirjasto
             Book currentBook = SearchResultsListBox.SelectedItem as Book;
             if (currentBook != null)
             {
-                string url = await retrieveCoverArtAsync(currentBook.ISBN);
+                string url = await retrieveCoverArtAsync(currentBook.getISBN());
                 if (url != String.Empty)
                 {
                     BitmapImage bitmap = new BitmapImage();

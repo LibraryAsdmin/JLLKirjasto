@@ -12,53 +12,78 @@ namespace JLLKirjasto
 {
     public class Book
     {
-        public String ID { get; set; }
-        public String Author { get; set; }
-        public String Title { get; set; }
-        public String Year { get; set; }
-        public String Language { get; set; }
-        public String Available { get; set; }
-        public String ISBN { get; set; }
-        public String Category { get; set; }
+        #region interface
+        // constructor
+        public Book(String _id, String _author, String _title, String _year, String _language, String _available, String _isbn, String _category)
+        {
+            id        = _id;
+            author    = _author;
+            title     = _title;
+            year      = _year;
+            language  = _language;
+            available = _available;
+            isbn      = _isbn;
+            category  = _category;
+        }
 
-        public enum columnID { ID, Author, Title, Year, Language, Available, ISBN, Category, NumColumns};
-        public static String[] columnNames = new String[(int)Book.columnID.NumColumns] { "ID", "Author", "Title", "Year", "Language", "Available", "ISBN", "Aineistolaji"};
-
-        
         // returns the string of a book object identified by it's index (column number in the database)
         public String getStringByIndex(int index)
         {
-            switch(index)
+            switch (index)
             {
                 case (int)columnID.ID:
-                    return ID;
+                    return id;
                 case (int)columnID.Author:
-                    return Author;
+                    return author;
                 case (int)columnID.Title:
-                    return Title;
+                    return title;
                 case (int)columnID.Year:
-                    return Year;
+                    return year;
                 case (int)columnID.Language:
-                    return Language;
+                    return language;
                 case (int)columnID.Available:
-                    return Available;
+                    return available;
                 case (int)columnID.ISBN:
-                    return ISBN;
+                    return isbn;
                 case (int)columnID.Category:
-                    return Category;
+                    return category;
                 default:
                     return null;
             }
         }
+        #endregion interface
+
+        // returns corresponding variable
+        public String getID() { return id; }
+        public String getAuthor() { return author; }
+        public String getTitle() { return title; }
+        public String getYear() { return year; }
+        public String getLanguage() { return language; }
+        public String getAvailable() { return available; }
+        public String getISBN() { return isbn; }
+        public String getCategory() { return category; }
+        #region implementation
+        private String id;// { get; set; }
+        private String author;// { get; set; }
+        private String title;// { get; set; }
+        private String year;// { get; set; }
+        private String language;// { get; set; }
+        private String available;// { get; set; }
+        private String isbn;// { get; set; }
+        private String category;// { get; set; }
+
+        public enum columnID { ID, Author, Title, Year, Language, Available, ISBN, Category, NumColumns};
+        public static String[] columnNames = new String[(int)Book.columnID.NumColumns] { "ID", "Author", "Title", "Year", "Language", "Available", "ISBN", "Aineistolaji"};
+        #endregion implementation
     }
 
     public class User
     {
-        public String ID { get; set; }
-        public String Wilma { get; set; } // for signup and signin
-        public String Loans { get; set; } // A comma separated list of book IDs 
+        private String ID { get; set; }
+        private String Wilma { get; set; } // for signup and signin
+        private String Loans { get; set; } // A comma separated list of book IDs 
 
-        public enum columnID { ID, Wilma, Loans, NumColumns};
+        private enum columnID { ID, Wilma, Loans, NumColumns};
         
     }
 

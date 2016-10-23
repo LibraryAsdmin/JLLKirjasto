@@ -155,16 +155,16 @@ namespace JLLKirjasto
             foreach (List<String> row in results)
             {
                 books.Add(new Book
-                {
-                    ID = row[(int)Book.columnID.ID],
-                    Author = row[(int)Book.columnID.Author],
-                    Title = row[(int)Book.columnID.Title],
-                    Year = row[(int)Book.columnID.Year],
-                    Language = row[(int)Book.columnID.Language],
-                    Available = row[(int)Book.columnID.Available],
-                    ISBN = row[(int)Book.columnID.ISBN],
-                    Category = row[(int)Book.columnID.Category],
-                });
+                (
+                    row[(int)Book.columnID.ID],
+                    row[(int)Book.columnID.Author],
+                    row[(int)Book.columnID.Title],
+                    row[(int)Book.columnID.Year],
+                    row[(int)Book.columnID.Language],
+                    row[(int)Book.columnID.Available],
+                    row[(int)Book.columnID.ISBN],
+                    row[(int)Book.columnID.Category]
+                ));
             }
             BookListBox.ItemsSource = books;
         }
