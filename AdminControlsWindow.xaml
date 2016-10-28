@@ -122,8 +122,8 @@
                                         </Grid.ColumnDefinitions>
 
                                         <!-- Information about book displayed in BookListBox-->
-                                        <TextBlock Text="{Binding ID}" Grid.Column="0" HorizontalAlignment="Left"/>
-                                        <TextBlock Text="{Binding Title}" Grid.Column="1" HorizontalAlignment="Left"/>
+                                        <TextBlock Text="{Binding id}" Grid.Column="0" HorizontalAlignment="Left"/>
+                                        <TextBlock Text="{Binding title}" Grid.Column="1" HorizontalAlignment="Left"/>
                                     </Grid>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
