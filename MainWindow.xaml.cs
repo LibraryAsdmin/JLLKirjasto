@@ -739,7 +739,7 @@ namespace JLLKirjasto
             Book currentBook = SearchResultsListBox.SelectedItem as Book;
             if (currentBook != null)
             {
-                string url = await retrieveCoverArtAsync(currentBook.getISBN());
+                string url = await retrieveCoverArtAsync(currentBook.isbn);
                 if (url != String.Empty)
                 {
                     BitmapImage bitmap = new BitmapImage();

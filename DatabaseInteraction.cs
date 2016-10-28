@@ -51,27 +51,17 @@ namespace JLLKirjasto
                     return null;
             }
         }
-
-        // returns corresponding variable
-        public String getID() { return id; }
-        public String getAuthor() { return author; }
-        public String getTitle() { return title; }
-        public String getYear() { return year; }
-        public String getLanguage() { return language; }
-        public String getAvailable() { return available; }
-        public String getISBN() { return isbn; }
-        public String getCategory() { return category; }
         #endregion interface
 
         #region implementation
-        public String id { get; }
-        public String author { get; }
-        public String title { get; }
-        public String year { get; }
-        public String language { get ;}
-        public String available { get; }
-        public String isbn { get; }
-        public String category { get; }
+        public String id { get; private set; }
+        public String author { get; private set; }
+        public String title { get; private set; }
+        public String year { get; private set; }
+        public String language { get; private set; }
+        public String available { get; private set; }
+        public String isbn { get; private set; }
+        public String category { get; private set; }
 
         public enum columnID { ID, Author, Title, Year, Language, Available, ISBN, Category, NumColumns};
         public static String[] columnNames = new String[(int)Book.columnID.NumColumns] { "ID", "Author", "Title", "Year", "Language", "Available", "ISBN", "Aineistolaji"};
@@ -105,9 +95,9 @@ namespace JLLKirjasto
 
         #region implementation
         private enum columnID { ID, Wilma, Loans, NumColumns};
-        private String id { get; set; }
-        private String wilma { get; set; } // for signup and signin
-        private String loans { get; set; } // A comma separated list of book IDs 
+        public String id { get; private set; }
+        public String wilma { get; private set; } // for signup and signin
+        public String loans { get; private set; } // A comma separated list of book IDs 
         #endregion implementation
     }
 
