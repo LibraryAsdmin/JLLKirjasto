@@ -628,8 +628,8 @@
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Vertical">
-                                    <TextBlock Text="{Binding Title}"/>
-                                    <TextBlock Text="{Binding Author}" FontSize="16"/>
+                                    <TextBlock Text="{Binding title}"/>
+                                    <TextBlock Text="{Binding author}" FontSize="16"/>
                                     <Separator Background="Black"/>
                                 </StackPanel>
                             </DataTemplate>
@@ -642,25 +642,25 @@
 
                         <!-- Book information displayed to the user -->
                         <TextBlock Margin="0,10,0,0"><Run Text="{local:Loc DisplaySearchBookTitle}"/></TextBlock>
-                        <TextBlock x:Name="bookName" FontSize="24" TextWrapping="Wrap" Text="{Binding SelectedItem.Title, ElementName=SearchResultsListBox}" />
+                        <TextBlock x:Name="bookName" FontSize="24" TextWrapping="Wrap" Text="{Binding SelectedItem.title, ElementName=SearchResultsListBox}" />
 
                         <TextBlock Margin="0,10,0,0"><Run Text="{local:Loc DisplaySearchBookAuthor}"/></TextBlock>
-                        <TextBlock x:Name="authorName" FontSize="24" TextWrapping="Wrap" Text="{Binding SelectedItem.Author, ElementName=SearchResultsListBox}"/>
+                        <TextBlock x:Name="authorName" FontSize="24" TextWrapping="Wrap" Text="{Binding SelectedItem.author, ElementName=SearchResultsListBox}"/>
 
                         <TextBlock Margin="0,10,0,0"><Run Text="{local:Loc DisplaySearchBookYear}"/></TextBlock>
-                        <TextBlock x:Name="Year" FontSize="24" TextWrapping="Wrap" Text="{Binding SelectedItem.Year, ElementName=SearchResultsListBox}"/>
+                        <TextBlock x:Name="Year" FontSize="24" TextWrapping="Wrap" Text="{Binding SelectedItem.year, ElementName=SearchResultsListBox}"/>
 
                         <TextBlock Margin="0,10,0,0"><Run Text="{local:Loc DisplaySearchBookID}"/></TextBlock>
-                        <TextBlock x:Name="bookID" FontSize="24" TextWrapping="Wrap" Text="{Binding SelectedItem.ID, ElementName=SearchResultsListBox}"/>
+                        <TextBlock x:Name="bookID" FontSize="24" TextWrapping="Wrap" Text="{Binding SelectedItem.id, ElementName=SearchResultsListBox}"/>
 
                         <TextBlock Margin="0,10,0,0"><Run Text="{local:Loc DisplaySearchBookAvailability}"/></TextBlock>
-                        <TextBlock x:Name="availability" FontSize="24" TextWrapping="Wrap" Text="{Binding SelectedItem.Available, ElementName=SearchResultsListBox}"/>
+                        <TextBlock x:Name="availability" FontSize="24" TextWrapping="Wrap" Text="{Binding SelectedItem.available, ElementName=SearchResultsListBox}"/>
 
                         <TextBlock Margin="0,10,0,0"><Run Text="{local:Loc DisplaySearchBookISBN}"/></TextBlock>
-                        <TextBlock x:Name="bookISBN" FontSize="24" TextWrapping="Wrap" Text="{Binding SelectedItem.ISBN, ElementName=SearchResultsListBox}"/>
+                        <TextBlock x:Name="bookISBN" FontSize="24" TextWrapping="Wrap" Text="{Binding SelectedItem.isbn, ElementName=SearchResultsListBox}"/>
 
                         <TextBlock Margin="0,10,0,0"><Run Text="{local:Loc DisplaySearchBookCategory}"/></TextBlock>
-                        <TextBlock x:Name="category" FontSize="24" TextWrapping="Wrap" Text="{Binding SelectedItem.Category, ElementName=SearchResultsListBox}"/>
+                        <TextBlock x:Name="category" FontSize="24" TextWrapping="Wrap" Text="{Binding SelectedItem.category, ElementName=SearchResultsListBox}"/>
                     </StackPanel>
                 </Grid>
             </Grid>

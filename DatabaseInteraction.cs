@@ -26,7 +26,7 @@ namespace JLLKirjasto
             category  = _category;
         }
 
-        // returns the string of a book object identified by it's index (column number in the database)
+        // returns the string of a book object identified by its index (column number in the database)
         public String getStringByIndex(int index)
         {
             switch (index)
@@ -53,24 +53,15 @@ namespace JLLKirjasto
         }
         #endregion interface
 
-        // returns corresponding variable
-        public String getID() { return id; }
-        public String getAuthor() { return author; }
-        public String getTitle() { return title; }
-        public String getYear() { return year; }
-        public String getLanguage() { return language; }
-        public String getAvailable() { return available; }
-        public String getISBN() { return isbn; }
-        public String getCategory() { return category; }
         #region implementation
-        private String id;// { get; set; }
-        private String author;// { get; set; }
-        private String title;// { get; set; }
-        private String year;// { get; set; }
-        private String language;// { get; set; }
-        private String available;// { get; set; }
-        private String isbn;// { get; set; }
-        private String category;// { get; set; }
+        public String id { get; private set; }
+        public String author { get; private set; }
+        public String title { get; private set; }
+        public String year { get; private set; }
+        public String language { get; private set; }
+        public String available { get; private set; }
+        public String isbn { get; private set; }
+        public String category { get; private set; }
 
         public enum columnID { ID, Author, Title, Year, Language, Available, ISBN, Category, NumColumns};
         public static String[] columnNames = new String[(int)Book.columnID.NumColumns] { "ID", "Author", "Title", "Year", "Language", "Available", "ISBN", "Aineistolaji"};
@@ -79,26 +70,46 @@ namespace JLLKirjasto
 
     public class User
     {
-        private String ID { get; set; }
-        private String Wilma { get; set; } // for signup and signin
-        private String Loans { get; set; } // A comma separated list of book IDs 
+        #region interface
+        // constructor
+        public User(String _id, String _wilma, String _loans)
+        {
+            id = _id;
+            wilma = _wilma;
+            loans = _loans;
+        }
 
+        public List<String> getLoans()
+        {
+            List<String> loanList = new List<String>();
+            String[] list = loans.Split(';');
+
+            foreach (string s in list)
+            {
+                loanList.Add(s);
+            }
+            
+            return loanList;
+        }
+        #endregion interface
+
+        #region implementation
         private enum columnID { ID, Wilma, Loans, NumColumns};
-        
+        public String id { get; private set; }
+        public String wilma { get; private set; } // for signup and signin
+        public String loans { get; private set; } // A comma separated list of book IDs 
+        #endregion implementation
     }
 
     // information that's needed to be stored during the signup operation is stored in an instance of this class
     public class SignUpOperation
     {
+        #region interface
         // constructor
         public SignUpOperation()
         {
             reset();
         }
-
-        // Variables
-        private String Code { get; set; } // the code sent to user's email
-        private String Email { get; set; } // the wilma email address of the user
 
         // generates a 4 digit random number and stores it as a string in memory
         public void generateCode()
@@ -169,6 +180,13 @@ namespace JLLKirjasto
             Code = null;
             Email = null;
         }
+        #endregion interface
+
+        #region implementation
+        // Variables
+        private String Code { get; set; } // the code sent to user's email
+        private String Email { get; set; } // the wilma email address of the user
+        #endregion implementation
     }
 
     public class DatabaseInteraction

@@ -222,21 +222,21 @@ namespace JLLKirjasto
             {
                 // Get book information from the database item
                 object selection = BookListBox.SelectedItem;
-                PropertyInfo prop = typeof(Book).GetProperty("ID");
+                PropertyInfo prop = typeof(Book).GetProperty("id");
                 string ID = prop.GetValue(selection, null).ToString();
-                prop = typeof(Book).GetProperty("Author");
+                prop = typeof(Book).GetProperty("author");
                 string Author = prop.GetValue(selection, null).ToString();
-                prop = typeof(Book).GetProperty("Title");
+                prop = typeof(Book).GetProperty("title");
                 string Title = prop.GetValue(selection, null).ToString();
-                prop = typeof(Book).GetProperty("Year");
+                prop = typeof(Book).GetProperty("year");
                 string Year = prop.GetValue(selection, null).ToString();
-                prop = typeof(Book).GetProperty("Available");
+                prop = typeof(Book).GetProperty("available");
                 string Available = prop.GetValue(selection, null).ToString();
-                prop = typeof(Book).GetProperty("Language");
+                prop = typeof(Book).GetProperty("language");
                 string Language = prop.GetValue(selection, null).ToString();
-                prop = typeof(Book).GetProperty("ISBN");
+                prop = typeof(Book).GetProperty("isbn");
                 string ISBN = prop.GetValue(selection, null).ToString();
-                prop = typeof(Book).GetProperty("Category");
+                prop = typeof(Book).GetProperty("category");
                 string Category = prop.GetValue(selection, null).ToString();
 
 
