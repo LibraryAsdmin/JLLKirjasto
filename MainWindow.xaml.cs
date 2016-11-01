@@ -131,6 +131,20 @@ namespace JLLKirjasto
             }
         }
 
+        private Double _doubleCollapsedGridHeight;
+        public Double DoubleCollapsedGridHeight
+        {
+            get { return _doubleCollapsedGridHeight; }
+            set
+            {
+                if (value != _doubleCollapsedGridHeight)
+                {
+                    _doubleCollapsedGridHeight = value;
+                    Notify("DoubleCollapsedGridHeight");
+                }
+            }
+        }
+
     }
 
     /// <summary>
@@ -154,7 +168,10 @@ namespace JLLKirjasto
         // 1 = SearchGrid
         // 2 = LoginGrid
         // 3 = SignUpGrid
+        // 4 = Logged In Home View (UserInfoGrid + SearchGrid)
         byte currentView = 0;
+
+        bool loggedIn = false; //defines whether the user has logged in or not
 
         // Variables for database interaction
         private SQLiteConnection dbconnection = new SQLiteConnection("Data Source=database.db");
@@ -192,6 +209,7 @@ namespace JLLKirjasto
             Double CollapsedGridHeight = ExpandedGridHeight / 3;
             GridHeightClass.Instance.ExpandedGridHeight = ExpandedGridHeight;
             GridHeightClass.Instance.CollapsedGridHeight = CollapsedGridHeight;
+            GridHeightClass.Instance.DoubleCollapsedGridHeight = 2 * CollapsedGridHeight;
 
             switch (currentView)
             {
@@ -211,6 +229,12 @@ namespace JLLKirjasto
                     break;
                 case 3:
                     SignUpGrid.Height = ExpandedGridHeight;
+                    break;
+                case 4:
+                    UserInfoGrid.Height = 2 * CollapsedGridHeight;
+                    SearchGrid.Height = CollapsedGridHeight;
+                    SignUpGrid.Height = 0;
+                    LoginGrid.Height = 0;
                     break;
             }
         }
@@ -233,46 +257,77 @@ namespace JLLKirjasto
             }
         }
 
+        private void logOutButton_Click(object sender, RoutedEventArgs e)
+        {
+            if(loggedIn)
+            {
+                Storyboard ShowHomeView = this.FindResource("ShowHomeView") as Storyboard;
+                ShowHomeView.Begin();
+                currentView = 0;
+                loggedIn = false;
+            }
+
+        }
+
         private void button_Click(object sender, RoutedEventArgs e)
         {
             //the 'return to home' button has been clicked, so now we have to determine where we are to get back home
 
-            switch (currentView)
+            if (loggedIn)
             {
-                case 0:
-                    //In home view
-                    System.Windows.MessageBox.Show("Home button should not be accessible in home screen... Go fix the program!");
-                    break;
-                case 1:
-                    //In search view
-                    Storyboard HideSearchGrid = this.FindResource("HideSearchGrid") as Storyboard;
-                    HideSearchGrid.Begin();
-                    break;
-                case 2:
-                    //In login view
-                    Storyboard HideLoginGrid = this.FindResource("HideLoginGrid") as Storyboard;
-                    HideLoginGrid.Begin();
-                    break;
-                case 3:
-                    //In signup view
-                    Storyboard HideSignUpGrid = this.FindResource("HideSignUpGrid") as Storyboard;
-                    HideSignUpGrid.Begin();
-                    break;
+                Storyboard ShowLoggedInHomeView = this.FindResource("ShowLoggedInHomeView") as Storyboard;
+                ShowLoggedInHomeView.Begin();
+                currentView = 4;
+            }
+            else
+            {
+                switch (currentView)
+                {
+                    case 0:
+                    case 4:
+                        //In home view or user info view
+                        System.Windows.MessageBox.Show("Home button should not be accessible in home screen... Go fix the program!");
+                        break;
+                    case 1:
+                    case 2:
+                    case 3:
+                        //In search view
+                        Storyboard ShowHomeView = this.FindResource("ShowHomeView") as Storyboard;
+                        ShowHomeView.Begin();
+                        break;
+                }
+                currentView = 0; //we're home now
             }
 
-            currentView = 0; //we're home now
         }
+
 
         #region Storyboard Complete Event Handlers
         void ResetAnimationsAfterArrivingToHomeView()
         {
-            //Read the name of the function to know what it does
+            //Resets animation so grids can be resized again
+
             LoginGrid.BeginAnimation(Grid.HeightProperty, null);
-            LoginGrid.Height = GridHeightClass.Instance.CollapsedGridHeight;
             SignUpGrid.BeginAnimation(Grid.HeightProperty, null);
-            SignUpGrid.Height = GridHeightClass.Instance.CollapsedGridHeight;
             SearchGrid.BeginAnimation(Grid.HeightProperty, null);
-            SearchGrid.Height = GridHeightClass.Instance.CollapsedGridHeight;
+            UserInfoGrid.BeginAnimation(Grid.HeightProperty, null);
+
+            switch (currentView)
+            {
+                case 0:
+                    LoginGrid.Height = GridHeightClass.Instance.CollapsedGridHeight;
+                    SignUpGrid.Height = GridHeightClass.Instance.CollapsedGridHeight;
+                    SearchGrid.Height = GridHeightClass.Instance.CollapsedGridHeight;
+                    UserInfoGrid.Height = 0;
+                    break;
+                case 4:
+                    LoginGrid.Height = 0;
+                    SignUpGrid.Height = 0;
+                    SearchGrid.Height = GridHeightClass.Instance.CollapsedGridHeight;
+                    UserInfoGrid.Height = 2 * GridHeightClass.Instance.CollapsedGridHeight;
+                    break;
+            }
+
         }
 
         private void ShowSearchGridStoryboard_Completed(object sender, EventArgs e)
@@ -296,21 +351,31 @@ namespace JLLKirjasto
             SignUpGrid.Height = GridHeightClass.Instance.ExpandedGridHeight;
         }
 
+        private void ShowLoggedInHomeViewStoryboard_Completed(object sender, EventArgs e)
+        {
+            ResetAnimationsAfterArrivingToHomeView();
+        }
+
+        private void ShowHomeViewStoryboard_Completed(object sender, EventArgs e)
+        {
+            ResetAnimationsAfterArrivingToHomeView();
+        }
+
         private void HideSearchGridStoryboard_Completed(object sender, EventArgs e)
         {
-            currentView = 0; //we're home
+            //currentView = 0; //we're home
             ResetAnimationsAfterArrivingToHomeView();
         }
 
         private void HideLoginGridStoryboard_Completed(object sender, EventArgs e)
         {
-            currentView = 0; //we're home
+            //currentView = 0; //we're home
             ResetAnimationsAfterArrivingToHomeView();
         }
 
         private void HideSignUpGridStoryboard_Completed(object sender, EventArgs e)
         {
-            currentView = 0; //we're home
+            //currentView = 0; //we're home
             ResetAnimationsAfterArrivingToHomeView();
         }
         #endregion
@@ -373,7 +438,7 @@ namespace JLLKirjasto
         }
         private void SearchGrid_MouseUp(object sender, MouseButtonEventArgs e)  //expand SearchGrid if we're home
         {
-            if (currentView == 0)
+            if (currentView == 0 || currentView == 4)
             {
                 showSearchGrid();
             }
@@ -510,6 +575,7 @@ namespace JLLKirjasto
                 adminwindow = new AdminControlsWindow();
                 adminwindow.Show();
             }
+            loggedIn = true;
         }
         private void signupButton1_Click(object sender, RoutedEventArgs e)
         {
@@ -732,6 +798,11 @@ namespace JLLKirjasto
 
         #endregion
 
+
+        private void LoansListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //TODO: Add Functionality
+        }
 
         private async void SearchResultsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
