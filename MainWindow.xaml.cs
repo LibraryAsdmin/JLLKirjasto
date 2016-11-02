@@ -810,6 +810,17 @@ namespace JLLKirjasto
             Book currentBook = SearchResultsListBox.SelectedItem as Book;
             if (currentBook != null)
             {
+                //show text depending on if the user is logged in or not
+                if(loggedIn)
+                {
+                    logInNotice.Visibility = Visibility.Hidden;
+                    //TODO: Show loan button
+                }
+                else
+                {
+                    logInNotice.Visibility = Visibility.Visible;
+                }
+                //retrieve cover art
                 string url = await retrieveCoverArtAsync(currentBook.isbn);
                 if (url != String.Empty)
                 {
