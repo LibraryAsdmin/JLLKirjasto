@@ -513,7 +513,7 @@
     <Grid x:Name="WindowGrid" Background="{StaticResource WindowGridColourBrush}" Margin="0">
         <!-- HeaderGrid contains the greeting for the user and the button for returning back to home view -->
         <!-- Notice! HeaderGrid no longer contains LanguageGrid. Language grid has been moved to a direct child of WindowGrid as it wasn't fully visible here-->
-        <Grid x:Name="HeaderGrid" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="85" Margin="0" Grid.ColumnSpan="2" Background="{StaticResource WindowGridColourBrush}">
+        <Grid x:Name="HeaderGrid" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="86" Margin="0" Grid.ColumnSpan="2" Background="{StaticResource WindowGridColourBrush}">
             <Label x:Name="Greeting" Content="{local:Loc Greeting}" Width="Auto" Height="Auto" HorizontalContentAlignment="Center" 
                    VerticalContentAlignment="Top" Foreground="White" FontSize="55" Margin="0,0,0,0" Grid.ColumnSpan="2" d:IsLocked="True"/>
             <Button x:Name="ReturnButton" Content="{local:Loc HomeButtonContent}" HorizontalAlignment="Left" Height="40" Margin="25,0,0,0" 
