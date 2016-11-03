@@ -813,12 +813,13 @@ namespace JLLKirjasto
                 //show text depending on if the user is logged in or not
                 if(loggedIn)
                 {
-                    logInNotice.Visibility = Visibility.Hidden;
-                    //TODO: Show loan button
+                    logInNotice.Visibility = Visibility.Collapsed;
+                    loanButton.Visibility = Visibility.Visible;
                 }
                 else
                 {
                     logInNotice.Visibility = Visibility.Visible;
+                    loanButton.Visibility = Visibility.Collapsed;
                 }
                 //retrieve cover art
                 string url = await retrieveCoverArtAsync(currentBook.isbn);
