@@ -68,6 +68,9 @@
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="quickReturnButton">
                 <EasingDoubleKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="0"/>
             </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="UserInfoGrid">
+                <EasingDoubleKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
         </Storyboard>
         <Storyboard x:Key="ShowLoginGrid" Completed="ShowLoginGridStoryboard_Completed">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="LoginGrid">
