@@ -416,10 +416,16 @@
             <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="NotificationGrid">
                 <DiscreteObjectKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="{x:Static Visibility.Collapsed}"/>
             </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="ReturnControlsGrid">
+                <DiscreteObjectKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="{x:Static Visibility.Collapsed}"/>
+            </ObjectAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="NotificationBackgroundGrid">
                 <EasingDoubleKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="0"/>
             </DoubleAnimationUsingKeyFrames>
             <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="NotificationBackgroundGrid">
+                <DiscreteObjectKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="{x:Static Visibility.Collapsed}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="LoadingNotificationGrid">
                 <DiscreteObjectKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="{x:Static Visibility.Collapsed}"/>
             </ObjectAnimationUsingKeyFrames>
         </Storyboard>
@@ -437,6 +443,35 @@
                 <EasingDoubleKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="1"/>
             </DoubleAnimationUsingKeyFrames>
             <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="NotificationGrid">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="ReturnControlsGrid">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="NotificationBackgroundGrid">
+                <EasingDoubleKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="0.4"/>
+            </DoubleAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="NotificationBackgroundGrid">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="ShowLoadingView">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Radius" Storyboard.TargetName="HeaderGridBlurEffect">
+                <EasingDoubleKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="15"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Radius" Storyboard.TargetName="NavigationStackPanelBlurEffect">
+                <EasingDoubleKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="15"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Radius" Storyboard.TargetName="LanguageGridBlurEffect">
+                <EasingDoubleKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="15"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="NotificationGrid">
+                <EasingDoubleKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="NotificationGrid">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="LoadingNotificationGrid">
                 <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
             </ObjectAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="NotificationBackgroundGrid">
@@ -601,7 +636,7 @@
     <Grid x:Name="WindowGrid" Background="{StaticResource WindowGridColourBrush}" Margin="0" KeyboardNavigation.TabNavigation="None">
         <!-- NotificationGrid contains the elements for visualizing certain actions for a brief period of time.-->
         <Grid x:Name="NotificationGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Visibility="Collapsed" Panel.ZIndex="10" Opacity="0">
-            <Grid x:Name="ReturnControlsGrid" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Grid x:Name="ReturnControlsGrid" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
@@ -615,6 +650,9 @@
                 <TextBox x:Name="loanReturnBox" Style="{StaticResource ModernTextBoxStyle}" Grid.ColumnSpan="2" Margin="0,10,0,10" Grid.Row="1" Width="300" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="24" FontFamily="Sylfaen" Foreground="Black" />
                 <Button x:Name="OKQuickReturnButton" HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="2" Margin="5,10,0,10" Content="Return" Height="40" Style="{StaticResource ModernButtonStyle}"/>
                 <Button x:Name="cancelQuickReturnButton" HorizontalAlignment="Stretch"  Grid.Column="0" Grid.Row="2" Margin="0,10,5,10" Content="Cancel" Height="40" Style="{StaticResource ModernButtonStyle}" Click="cancelQuickReturnButton_Click"/>
+            </Grid>
+            <Grid x:Name="LoadingNotificationGrid" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed">
+                <TextBlock Margin="0,0,0,0" FontSize="22" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Top" Text="Loading..."/>
             </Grid>
         </Grid>
         <Grid x:Name="NotificationBackgroundGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Visibility="Collapsed" Panel.ZIndex="9" Background="Black" Opacity="0"/>
@@ -800,7 +838,7 @@
                             <TextBlock x:Name="category" FontSize="24" TextWrapping="Wrap" Text="{Binding SelectedItem.category, ElementName=SearchResultsListBox}"/>
 
                             <TextBlock x:Name="logInNotice" FontSize ="24" FontStyle="Italic" HorizontalAlignment="Center" Margin="0,20,0,0" Text="Log In to Loan This Book" Visibility="Collapsed"/>
-                            <Button Visibility="Collapsed" x:Name="loanButton" Content="Borrow this book" HorizontalAlignment="Center" Style="{StaticResource ModernButtonStyle}" Height="40" Width="100" Margin="0,20,0,0"/>
+                            <Button Visibility="Collapsed" x:Name="loanButton" Content="Borrow this book" HorizontalAlignment="Center" Style="{StaticResource ModernButtonStyle}" Height="40" Width="100" Margin="0,20,0,0" Click="loanButton_Click"/>
                         </StackPanel>
                     </ScrollViewer>
                 </Grid>

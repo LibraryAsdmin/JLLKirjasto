@@ -907,6 +907,12 @@ namespace JLLKirjasto
         {
             Keyboard.Focus(loanReturnBox);
         }
+
+        private void loanButton_Click(object sender, RoutedEventArgs e)
+        {
+            Storyboard ShowLoadingView = this.FindResource("ShowLoadingView") as Storyboard;
+            ShowLoadingView.Begin();
+        }
     }
 
 
