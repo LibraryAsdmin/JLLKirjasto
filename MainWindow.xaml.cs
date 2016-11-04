@@ -25,6 +25,7 @@ using Newtonsoft.Json.Linq;
 using System.Net;
 using System.IO;
 using System.Net.Http;
+using System.Windows.Media.Effects;
 
 namespace JLLKirjasto
 {
@@ -890,7 +891,24 @@ namespace JLLKirjasto
             return String.Empty;
         }
 
+        private void quickReturnButton_Click(object sender, RoutedEventArgs e)
+        {
+            Storyboard ShowQuickReturnView = this.FindResource("ShowQuickReturnView") as Storyboard;
+            ShowQuickReturnView.Begin();
+        }
+
+        private void cancelQuickReturnButton_Click(object sender, RoutedEventArgs e)
+        {
+            Storyboard ShowHomeView = this.FindResource("ShowHomeView") as Storyboard;
+            ShowHomeView.Begin();
+        }
+
+        private void Storyboard_Completed(object sender, EventArgs e)
+        {
+            Keyboard.Focus(loanReturnBox);
+        }
     }
+
 
 }
 
