@@ -714,7 +714,7 @@
                 <BlurEffect x:Name="HeaderGridBlurEffect" Radius="0"/>
             </Grid.Effect>
             <Label x:Name="Greeting" Content="{local:Loc Greeting}" Width="Auto" Height="Auto" HorizontalContentAlignment="Center" 
-                   VerticalContentAlignment="Top" Foreground="White" FontSize="55" Margin="0,0,0,0" Grid.ColumnSpan="2" d:IsLocked="True"/>
+                   VerticalContentAlignment="Center" Foreground="White" FontSize="55" Margin="0,0,0,0" Grid.ColumnSpan="2" d:IsLocked="True"/>
             <Button x:Name="ReturnButton" Content="{local:Loc HomeButtonContent}" HorizontalAlignment="Left" Height="40" Margin="25,0,0,0" 
                    VerticalAlignment="Center" Width="67.857" RenderTransformOrigin="0.5,0.5" Click="button_Click" Cursor="Hand" 
                     KeyboardNavigation.IsTabStop="False" Style="{StaticResource ModernButtonStyle}">
