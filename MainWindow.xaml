@@ -922,7 +922,7 @@
         </StackPanel>
 
         <!-- LanguageGrid contains the UI elements that are required for language selection -->
-        <Grid x:Name="LanguageGrid" Margin="0,25,25,0" HorizontalAlignment="Right" Height="120" VerticalAlignment="Top" Width="65" 
+        <Grid x:Name="LanguageGrid" Margin="0,30,25,0" HorizontalAlignment="Right" Height="120" VerticalAlignment="Top" Width="65" 
               MouseEnter="LanguageGrid_MouseEnter" MouseLeave="LanguageGrid_MouseLeave" d:IsLocked="True" Grid.Column="1">
             <Grid.Effect>
                 <BlurEffect x:Name="LanguageGridBlurEffect" Radius="0"/>
