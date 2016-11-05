@@ -9,7 +9,7 @@
         xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing"
         mc:Ignorable="d"
     
-        x:Name="RootWindow" x:Class="JLLKirjasto.MainWindow" Title="{local:Loc WindowTitle}"  Height="800" Width="1200" 
+        x:Name="RootWindow" x:Class="JLLKirjasto.MainWindow" Title="{local:Loc WindowTitle}"  Height="800" Width="900" 
             WindowStartupLocation="CenterScreen" Closing="RootWindow_Closing" SizeChanged="RootWindow_SizeChanged" MinWidth="200" MinHeight="150" Icon="Images/LyseoLogo.ico">
 
     <Window.Resources>
@@ -539,7 +539,7 @@
                 <EasingDoubleKeyFrame KeyTime="{StaticResource HoverAnimationDuration}" Value="{Binding CollapsedGridHeight, Source={x:Static local:GridHeightClass.Instance}}"/>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
-        
+
         <!-- The three animations below are sort of obsolete; they were superceded by ShowHomeView storyboard which basically contains all of them. Let's keep them, though, they might prove useful-->
         <Storyboard x:Key="HideSearchGrid" Completed="HideSearchGridStoryboard_Completed">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="ReturnButton">
@@ -714,7 +714,7 @@
                 <BlurEffect x:Name="HeaderGridBlurEffect" Radius="0"/>
             </Grid.Effect>
             <Label x:Name="Greeting" Content="{local:Loc Greeting}" Width="Auto" Height="Auto" HorizontalContentAlignment="Center" 
-                   VerticalContentAlignment="Center" Foreground="White" FontSize="55" Margin="0,0,0,0" Grid.ColumnSpan="2" d:IsLocked="True"/>
+                   VerticalContentAlignment="Center" Foreground="White" FontSize="55" FontFamily="Century Gothic" Margin="0,0,0,0" Grid.ColumnSpan="2" d:IsLocked="True"/>
             <Button x:Name="ReturnButton" Content="{local:Loc HomeButtonContent}" HorizontalAlignment="Left" Height="40" Margin="25,0,0,0" 
                    VerticalAlignment="Center" Width="67.857" RenderTransformOrigin="0.5,0.5" Click="button_Click" Cursor="Hand" 
                     KeyboardNavigation.IsTabStop="False" Style="{StaticResource ModernButtonStyle}">
@@ -761,8 +761,11 @@
                 <BlurEffect x:Name="NavigationStackPanelBlurEffect" Radius="0"/>
             </StackPanel.Effect>
             <Grid x:Name="LoginGrid" Margin="0" Background="{StaticResource MenuItemColourBrush1}" Height="238" MouseUp="LoginGrid_MouseUp" VerticalAlignment="Top" MouseEnter="LoginGrid_MouseEnter">
-                <TextBlock x:Name="LoginGridTooltip" Text="Login" Visibility="Visible" FontSize="120" Margin="20,0,0,0" Foreground="White" HorizontalAlignment="Left" 
-                           VerticalAlignment="Center" Focusable="True" KeyDown="LoginGridTooltip_KeyDown" FontFamily="Impact"/>
+                <TextBlock x:Name="LoginGridTooltip" Text="Login" Visibility="Visible" FontSize="120" Margin="40,0,0,0" Foreground="White" HorizontalAlignment="Left" 
+                           VerticalAlignment="Center" Focusable="True" KeyDown="LoginGridTooltip_KeyDown" FontFamily="Niagara Engraved">
+                <LineBreak/>
+                <Run FontSize="24" FontFamily="Century Gothic">to borrow books</Run>
+                </TextBlock>
                 <Grid x:Name="LoginFieldsGrid" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Hidden">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -794,7 +797,10 @@
 
             <Grid x:Name="SignUpGrid" Margin="0" Background="{StaticResource MenuItemColourBrush2}" Height="238" MouseUp="SignUpGrid_MouseUp" VerticalAlignment="Top" MouseEnter="SignUpGrid_MouseEnter">
                 <TextBlock x:Name="SignUpGridTooltip" Text="Sign Up" Visibility="Visible" FontSize="120" Foreground="White" HorizontalAlignment="Left" 
-                           VerticalAlignment="Center" Focusable="True" KeyDown="SignUpGridTooltip_KeyDown" Margin="20,0,0,0" FontFamily="Impact"/>
+                           VerticalAlignment="Center" Focusable="True" KeyDown="SignUpGridTooltip_KeyDown" Margin="40,0,0,0" FontFamily="Niagara Engraved">
+                        <LineBreak/>
+                        <Run FontSize="24" FontFamily="Century Gothic">in order to use the library</Run>
+                </TextBlock>
                 <StackPanel>
                     <TextBlock x:Name="SignUpInstruction" HorizontalAlignment="Center" Margin="0,150,0,0" TextWrapping="Wrap"
                            Text="{local:Loc SignUpInstruction1}" 
@@ -832,8 +838,11 @@
             <!-- SearchGrid contains the UI elements for searching the books database-->
 
             <Grid x:Name="SearchGrid" Margin="0" HorizontalAlignment="Stretch" Height="238" Background="{StaticResource MenuItemColourBrush3}" MouseUp="SearchGrid_MouseUp" VerticalAlignment="Top" MouseEnter="SearchGrid_MouseEnter">
-                <TextBlock x:Name="SearchGridTooltip" Text="Search" Visibility="Visible" FontSize="120" Margin="20,0,0,0" Foreground="White" HorizontalAlignment="Left" 
-                           VerticalAlignment="Center" Focusable="True" KeyDown="SearchGridTooltip_KeyDown" FontFamily="Impact"/>
+                <TextBlock x:Name="SearchGridTooltip" Text="Search" Visibility="Visible" FontSize="120" Margin="40,0,0,0" Foreground="White" HorizontalAlignment="Left" 
+                           VerticalAlignment="Center" Focusable="True" KeyDown="SearchGridTooltip_KeyDown" FontFamily="Niagara Engraved">
+                        <LineBreak/>
+                        <Run FontSize="24" FontFamily="Century Gothic">for books and authors</Run>
+                </TextBlock>
 
                 <!-- Contains the search UI interaction elements. This has to exist as otherwise SearchGridToolTip couldn't be displayed properly -->
                 <!-- Because of the ColumnDefinitions in search UI interactions -->
