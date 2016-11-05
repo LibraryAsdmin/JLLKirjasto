@@ -15,6 +15,7 @@
     <Window.Resources>
         <!-- Sets the duration for all animations in the home view-->
         <KeyTime x:Key="AnimationDuration">0:0:0.2</KeyTime>
+        <KeyTime x:Key="HoverAnimationDuration">0:0:0.1</KeyTime>
         <!-- Contains all animations to expand/collapse sections -->
         <Storyboard x:Key="ShowSearchGrid" Completed="ShowSearchGridStoryboard_Completed">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="LoginGrid">
@@ -484,6 +485,61 @@
                 <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
             </ObjectAnimationUsingKeyFrames>
         </Storyboard>
+        <Storyboard x:Key="Startup">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="NavigationStackPanel">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="LanguageGrid">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="MouseEnterSearchGrid">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="LoginGrid">
+                <EasingDoubleKeyFrame KeyTime="{StaticResource HoverAnimationDuration}" Value="{Binding DeHoverCollapsedGridHeight, Source={x:Static local:GridHeightClass.Instance}}"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="SignUpGrid">
+                <EasingDoubleKeyFrame KeyTime="{StaticResource HoverAnimationDuration}" Value="{Binding DeHoverCollapsedGridHeight, Source={x:Static local:GridHeightClass.Instance}}"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames  Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="SearchGrid">
+                <EasingDoubleKeyFrame KeyTime="{StaticResource HoverAnimationDuration}" Value="{Binding HoverCollapsedGridHeight, Source={x:Static local:GridHeightClass.Instance}}"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="MouseEnterLoginGrid">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="SearchGrid">
+                <EasingDoubleKeyFrame KeyTime="{StaticResource HoverAnimationDuration}" Value="{Binding DeHoverCollapsedGridHeight, Source={x:Static local:GridHeightClass.Instance}}"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="SignUpGrid">
+                <EasingDoubleKeyFrame KeyTime="{StaticResource HoverAnimationDuration}" Value="{Binding DeHoverCollapsedGridHeight, Source={x:Static local:GridHeightClass.Instance}}"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames  Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="LoginGrid">
+                <EasingDoubleKeyFrame KeyTime="{StaticResource HoverAnimationDuration}" Value="{Binding HoverCollapsedGridHeight, Source={x:Static local:GridHeightClass.Instance}}"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="MouseEnterSignUpGrid">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="SearchGrid">
+                <EasingDoubleKeyFrame KeyTime="{StaticResource HoverAnimationDuration}" Value="{Binding DeHoverCollapsedGridHeight, Source={x:Static local:GridHeightClass.Instance}}"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="LoginGrid">
+                <EasingDoubleKeyFrame KeyTime="{StaticResource HoverAnimationDuration}" Value="{Binding DeHoverCollapsedGridHeight, Source={x:Static local:GridHeightClass.Instance}}"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames  Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="SignUpGrid">
+                <EasingDoubleKeyFrame KeyTime="{StaticResource HoverAnimationDuration}" Value="{Binding HoverCollapsedGridHeight, Source={x:Static local:GridHeightClass.Instance}}"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="MouseLeaveGrid" Completed="MouseLeaveGridStoryboard_Completed">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="SearchGrid">
+                <EasingDoubleKeyFrame KeyTime="{StaticResource HoverAnimationDuration}" Value="{Binding CollapsedGridHeight, Source={x:Static local:GridHeightClass.Instance}}"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="LoginGrid">
+                <EasingDoubleKeyFrame KeyTime="{StaticResource HoverAnimationDuration}" Value="{Binding CollapsedGridHeight, Source={x:Static local:GridHeightClass.Instance}}"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames  Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="SignUpGrid">
+                <EasingDoubleKeyFrame KeyTime="{StaticResource HoverAnimationDuration}" Value="{Binding CollapsedGridHeight, Source={x:Static local:GridHeightClass.Instance}}"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        
         <!-- The three animations below are sort of obsolete; they were superceded by ShowHomeView storyboard which basically contains all of them. Let's keep them, though, they might prove useful-->
         <Storyboard x:Key="HideSearchGrid" Completed="HideSearchGridStoryboard_Completed">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="ReturnButton">
@@ -618,16 +674,6 @@
                 <DiscreteBooleanKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="False"/>
             </BooleanAnimationUsingKeyFrames>
         </Storyboard>
-        <Storyboard x:Key="Startup">
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="NavigationStackPanel">
-                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="1"/>
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="LanguageGrid">
-                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="1"/>
-            </DoubleAnimationUsingKeyFrames>
-        </Storyboard>
     </Window.Resources>
     <Window.Triggers>
         <EventTrigger RoutedEvent="FrameworkElement.Loaded">
@@ -663,7 +709,7 @@
 
         <!-- HeaderGrid contains the greeting for the user and the button for returning back to home view -->
         <!-- Notice! HeaderGrid no longer contains LanguageGrid. Language grid has been moved to a direct child of WindowGrid as it wasn't fully visible here-->
-        <Grid x:Name="HeaderGrid" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="86" Margin="0" Grid.ColumnSpan="2" Background="{StaticResource WindowGridColourBrush}">
+        <Grid x:Name="HeaderGrid" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="100" Margin="0" Grid.ColumnSpan="2" Background="{StaticResource WindowGridColourBrush}">
             <Grid.Effect>
                 <BlurEffect x:Name="HeaderGridBlurEffect" Radius="0"/>
             </Grid.Effect>
@@ -708,13 +754,13 @@
         </Grid>
 
         <!-- NavigationStackPanel contains core funtionality for user interface navigation (except ReturnButton which is in HeaderGrid) -->
-        <StackPanel x:Name="NavigationStackPanel" Height="Auto" HorizontalAlignment="Stretch" Margin="0,85,0,0" Grid.ColumnSpan="2">
+        <StackPanel x:Name="NavigationStackPanel" Height="Auto" HorizontalAlignment="Stretch" Margin="0,100,0,0" Grid.ColumnSpan="2" MouseLeave="NavigationStackPanel_MouseLeave">
             <!-- LoginGrid contains the UI elements required for logging in and signing out-->
             <!-- TODO: Add functionality for signing out -->
             <StackPanel.Effect>
                 <BlurEffect x:Name="NavigationStackPanelBlurEffect" Radius="0"/>
             </StackPanel.Effect>
-            <Grid x:Name="LoginGrid" Margin="0" Background="{StaticResource MenuItemColourBrush1}" Height="238" MouseUp="LoginGrid_MouseUp" VerticalAlignment="Top">
+            <Grid x:Name="LoginGrid" Margin="0" Background="{StaticResource MenuItemColourBrush1}" Height="238" MouseUp="LoginGrid_MouseUp" VerticalAlignment="Top" MouseEnter="LoginGrid_MouseEnter">
                 <TextBlock x:Name="LoginGridTooltip" Text="Login" Visibility="Visible" FontSize="120" Margin="20,0,0,0" Foreground="White" HorizontalAlignment="Left" 
                            VerticalAlignment="Center" Focusable="True" KeyDown="LoginGridTooltip_KeyDown" FontFamily="Impact"/>
                 <Grid x:Name="LoginFieldsGrid" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Hidden">
@@ -746,7 +792,7 @@
 
             <!-- SignUpGrid Contains the UI elements required for account creation -->
 
-            <Grid x:Name="SignUpGrid" Margin="0" Background="{StaticResource MenuItemColourBrush2}" Height="238" MouseUp="SignUpGrid_MouseUp" VerticalAlignment="Top">
+            <Grid x:Name="SignUpGrid" Margin="0" Background="{StaticResource MenuItemColourBrush2}" Height="238" MouseUp="SignUpGrid_MouseUp" VerticalAlignment="Top" MouseEnter="SignUpGrid_MouseEnter">
                 <TextBlock x:Name="SignUpGridTooltip" Text="Sign Up" Visibility="Visible" FontSize="120" Foreground="White" HorizontalAlignment="Left" 
                            VerticalAlignment="Center" Focusable="True" KeyDown="SignUpGridTooltip_KeyDown" Margin="20,0,0,0" FontFamily="Impact"/>
                 <StackPanel>
@@ -785,7 +831,7 @@
 
             <!-- SearchGrid contains the UI elements for searching the books database-->
 
-            <Grid x:Name="SearchGrid" Margin="0" HorizontalAlignment="Stretch" Height="238" Background="{StaticResource MenuItemColourBrush3}" MouseUp="SearchGrid_MouseUp" VerticalAlignment="Top">
+            <Grid x:Name="SearchGrid" Margin="0" HorizontalAlignment="Stretch" Height="238" Background="{StaticResource MenuItemColourBrush3}" MouseUp="SearchGrid_MouseUp" VerticalAlignment="Top" MouseEnter="SearchGrid_MouseEnter">
                 <TextBlock x:Name="SearchGridTooltip" Text="Search" Visibility="Visible" FontSize="120" Margin="20,0,0,0" Foreground="White" HorizontalAlignment="Left" 
                            VerticalAlignment="Center" Focusable="True" KeyDown="SearchGridTooltip_KeyDown" FontFamily="Impact"/>
 
@@ -853,7 +899,7 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <ListBox x:Name="LoansListBox" Grid.Column="0" HorizontalContentAlignment="Stretch" Margin="20,82,20,20" BorderBrush="Transparent" 
+                <ListBox x:Name="LoansListBox" Grid.Column="0" HorizontalContentAlignment="Stretch" Margin="5,5,5,5" BorderBrush="Transparent" 
                          Background="Transparent" BorderThickness="0" FontSize="24" ItemContainerStyle="{DynamicResource ModernListBoxItemStyle}" 
                          ScrollViewer.HorizontalScrollBarVisibility="Hidden" Focusable="False" SelectionChanged="LoansListBox_SelectionChanged">
                     <ListBox.ItemTemplate>
@@ -866,7 +912,7 @@
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
-                <StackPanel Grid.Column="1" Margin="10" Focusable="False">
+                <StackPanel Grid.Column="1" Margin="5" Focusable="False">
                     <!-- Book information displayed to the user -->
                     <Button x:Name="returnSelectedButton" Content="Return the selected book" HorizontalAlignment="Center" Style="{StaticResource ModernButtonStyle}" Height="40" Width="160" Margin="5,5,5,5"/>
                     <Button x:Name="returnAllButton" Content="Return all your books" HorizontalAlignment="Center" Style="{StaticResource ModernButtonStyle}" Height="40" Width="160" Margin="5,5,5,5"/>
