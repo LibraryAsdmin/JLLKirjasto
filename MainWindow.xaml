@@ -877,22 +877,114 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <TextBox x:Name="SearchBox" Style="{StaticResource ModernTextBoxStyle}" Margin="20,20,20,0" Grid.Column="0" VerticalAlignment="Top" 
+                    
+                    <StackPanel Orientation="Vertical">
+                        <Expander Header="{local:Loc BookDbAdvancedSearchContent}" Margin="20,5,20,5" Grid.Column="0" 
+                                  Foreground="White" FontFamily="Century Gothic" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+                            <StackPanel>
+                                <Separator/>
+                                <!-- Search by ID-->
+                                <Grid x:Name="IDCheckBoxGrid">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                        <Label Content="{local:Loc BookDbSearchOptionID}" Margin="5,0,0,0" Grid.Column="0" Foreground="White"/>
+                                        <CheckBox x:Name="IDCheckBox" Margin="0,0,10,0" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="1"/>
+                                </Grid>
+                                <Separator/>
+                                <!-- Search by Author-->
+                                <Grid x:Name="AuthorCheckBoxGrid">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Content="{local:Loc BookDbSearchOptionAuthor}" Margin="5,0,0,0" Grid.Column="0" Foreground="White"/>
+                                    <CheckBox x:Name="AuthorCheckBox" Margin="0,0,10,0" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="1"/>
+                                </Grid>
+                                <Separator/>
+                                <!-- Search by Title-->
+                                <Grid x:Name="TitleCheckBoxGrid">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Content="{local:Loc BookDbSearchOptionTitle}" Margin="5,0,0,0" Grid.Column="0" Foreground="White"/>
+                                    <CheckBox x:Name="TitleCheckBox" Margin="0,0,10,0" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="1"/>
+                                </Grid>
+                                <Separator/>
+                                <!-- Search by year-->
+                                <Grid x:Name="YearCheckBoxGrid">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Content="{local:Loc BookDbSearchOptionYear}" Margin="5,0,0,0" Grid.Column="0" Foreground="White"/>
+                                    <CheckBox x:Name="YearCheckBox" Margin="0,0,10,0" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="1"/>
+                                </Grid>
+                                <Separator/>
+                                <!-- Search by Language-->
+                                <Grid x:Name="LanguageCheckBoxGrid">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Content="{local:Loc BookDbSearchOptionLanguage}" Margin="5,0,0,0" Grid.Column="0" Foreground="White"/>
+                                    <CheckBox x:Name="LanguageCheckBox" Margin="0,0,10,0" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="1"/>
+                                </Grid>
+                                <Separator/>
+                                <!-- Search by Availability-->
+                                <Grid x:Name="AvailabilityCheckBoxGrid">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Content="{local:Loc BookDbSearchOptionAvailable}" Margin="5,0,0,0" Grid.Column="0" Foreground="White"/>
+                                    <CheckBox x:Name="AvailabilityCheckBox" Margin="0,0,10,0" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="1"/>
+                                </Grid>
+                                <Separator/>
+                                <!-- Search by Category-->
+                                <Grid x:Name="CategoryCheckBoxGrid">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Content="{local:Loc BookDbSearchOptionCategory}" Margin="5,0,0,0" Grid.Column="0" Foreground="White"/>
+                                    <CheckBox x:Name="CategoryCheckBox" Margin="0,0,10,0" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="1"/>
+                                </Grid>
+                                <Separator/>
+                                <!-- Search by ISBN-->
+                                <Grid x:Name="ISBNCheckBoxGrid">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Content="{local:Loc BookDbSearchOptionISBN}" Margin="5,0,0,0" Grid.Column="0" Foreground="White"/>
+                                    <CheckBox x:Name="ISBNCheckBox" Margin="0,0,10,0" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="1"/>
+                                </Grid>
+                                <Separator/>
+                            </StackPanel>
+                        </Expander>
+
+                        <TextBox x:Name="SearchBox" Style="{StaticResource ModernTextBoxStyle}" Margin="20,10,20,0" Grid.Column="0" VerticalAlignment="Top" 
                          Text="{local:Loc DefaultSearchBoxContent}" FontSize="24" FontFamily="Sylfaen" Foreground="Black" GotFocus="SearchBox_GotFocus" 
                          TextChanged="SearchBox_TextChanged" LostFocus="SearchBox_LostFocus"/>
-                    <ListBox x:Name="SearchResultsListBox" HorizontalContentAlignment="Stretch" Margin="20,82,20,20" BorderBrush="Transparent" 
+
+                        <ListBox x:Name="SearchResultsListBox" HorizontalContentAlignment="Stretch" Margin="20,82,20,20" BorderBrush="Transparent" 
                          Background="Transparent" BorderThickness="0" FontSize="24" ItemContainerStyle="{DynamicResource ModernListBoxItemStyle}" 
                          ScrollViewer.HorizontalScrollBarVisibility="Hidden" Focusable="False" SelectionChanged="SearchResultsListBox_SelectionChanged">
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Vertical">
-                                    <TextBlock Text="{Binding title}"/>
-                                    <TextBlock Text="{Binding author}" FontSize="16"/>
-                                    <Separator Background="Black"/>
-                                </StackPanel>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Vertical">
+                                        <TextBlock Text="{Binding title}"/>
+                                        <TextBlock Text="{Binding author}" FontSize="16"/>
+                                        <Separator Background="Black"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </StackPanel>
+
                     <ScrollViewer x:Name="scroll" Grid.Column="1" VerticalScrollBarVisibility="Hidden">
                         <StackPanel Grid.Column="1" Margin="10" Focusable="False">
                             <Border BorderThickness="2" BorderBrush="Black" Height="200" Width="140" Margin="0,10,0,0">
