@@ -298,6 +298,20 @@ namespace JLLKirjasto
                 bew.ShowDialog();
             }
         }
+
+        private void deleteUser()
+        {
+            // verify that some item is selected
+            if (!(UsersListBox.SelectedItem == null))
+            {
+                // Get book information from the database item
+                object selection = UsersListBox.SelectedItem;
+                PropertyInfo prop = typeof(User).GetProperty("id");
+                string ID = prop.GetValue(selection, null).ToString();
+
+                dbi.delDatabaseRow(dbconnection, "users", ID);
+            }
+        }
         #endregion
 
 
@@ -314,8 +328,13 @@ namespace JLLKirjasto
 
 
 
+
         #endregion
 
-        
+        private void delUserButton_Click(object sender, RoutedEventArgs e)
+        {
+            deleteUser();
+            searchUsers();
+        }
     }
 }

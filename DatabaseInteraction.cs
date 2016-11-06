@@ -214,7 +214,7 @@ namespace JLLKirjasto
             List<string> columns = new List<string>();
             columns.Add("ID");
             List<List<string>> results = new List<List<string>>();
-            results = dbi.searchDatabaseRows(dbconnection, "users", ID, columns);
+            results = dbi.searchExactDatabaseRows(dbconnection, "users", ID, columns);
 
             if (results.Count == 0)
             {
@@ -326,6 +326,78 @@ namespace JLLKirjasto
                     for (int i = 1; i < columns.Count; i++)
                     {
                         searchColumns += String.Format("OR {0} LIKE {1} ", columns[i], searchTermParameter);
+                    }
+
+
+                    // Parse query
+                    String query = String.Format("SELECT * FROM {0} WHERE {1};", table, searchColumns);
+
+                    // Reader
+                    SQLiteCommand command = new SQLiteCommand(query, dbconn);
+                    command.Parameters.AddWithValue(searchTermParameter, searchTerm);
+                    SQLiteDataReader reader = command.ExecuteReader();
+
+                    // Read data from the database
+                    while (reader.Read())
+                    {
+                        List<String> currentRow = new List<String>();
+                        for (int i = 0; i < tableColumnCount; i++)
+                        {
+                            // Determine the datatype of the database entry, read it accordingly and convert to string
+                            String dataTypeName = reader.GetDataTypeName(i);
+                            String current;
+
+                            // Read the value if it is not NULL. If it is, give it the value "" (empty string)
+                            if (!reader.IsDBNull(i))
+                            {
+                                current = reader.GetString(i);
+                            }
+                            else { current = ""; }
+
+
+                            // Append the current row by current string
+                            currentRow.Add(current);
+                        }
+                        // Append search results by read database row
+                        results.Add(currentRow);
+                    }
+                    reader.Close();
+                    dbconn.Close();
+                }
+                catch (Exception ex)
+                {
+                    reportError(ex.Message, "searchDatabaseRows");
+                }
+            }
+            return results;
+        }
+
+        // Same as searchDatabaseRows, but the search term has to completely match the table entry for it to be considered found
+        public List<List<String>> searchExactDatabaseRows(SQLiteConnection dbconn, String table, String term, List<String> columns)
+        {
+            // List that contains the results
+            List<List<String>> results = new List<List<String>>();
+
+            // Determine the number of columns in the table
+            Int32 tableColumnCount = countColumns(dbconn, table);
+
+            // Make sure that you are actually searching for something
+            if (columns.Count > 0)
+            {
+                try
+                {
+                    dbconn.Open();
+
+                    // Define Parameter related strings
+                    String searchTermParameter = "@SEARCHTERM";
+                    String searchTerm = String.Format("{0}", term);
+
+                    // create WHERE string
+                    String searchColumns = String.Format("{0}={1} ", columns[0], searchTermParameter);
+
+                    for (int i = 1; i < columns.Count; i++)
+                    {
+                        searchColumns += String.Format("OR {0}={1} ", columns[i], searchTermParameter);
                     }
 
 
@@ -485,8 +557,9 @@ namespace JLLKirjasto
                 {
                     using (SQLiteCommand command = new SQLiteCommand(dbconn))
                     {                  
-                        string commandString = String.Format("DELETE FROM {0} WHERE ID='{1}'", table, id);
+                        string commandString = String.Format("DELETE FROM {0} WHERE ID=@ID", table);
                         command.CommandText = commandString;
+                        command.Parameters.AddWithValue("@ID", id);
 
                         command.ExecuteNonQuery();
                     }

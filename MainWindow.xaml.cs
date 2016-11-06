@@ -306,6 +306,17 @@ namespace JLLKirjasto
         {
             //the 'return to home' button has been clicked, so now we have to determine where we are to get back home
 
+            // return the signUp screen to its clean state
+            defaultSignUpOperation.reset();
+            SignUpField.Text = "";
+            SignUpConfirmationField.Text = "";
+            SignUpButton.Visibility = Visibility.Visible;
+            SignUpField.Visibility = Visibility.Visible;
+            SignUpInstruction.Text = Properties.Resources.ResourceManager.GetString("SignUpInstruction1", TranslationSource.Instance.CurrentCulture); // TODO: move this thi xaml
+            SignUpEmailLink.Visibility = Visibility.Hidden;
+            SignUpConfirmationField.Visibility = Visibility.Hidden;
+            SignUpConfirmationButton.Visibility = Visibility.Hidden;
+
             if (loggedIn)
             {
                 Storyboard ShowLoggedInHomeView = this.FindResource("ShowLoggedInHomeView") as Storyboard;
@@ -606,8 +617,40 @@ namespace JLLKirjasto
             {
                 adminwindow = new AdminControlsWindow();
                 adminwindow.Show();
+
+                UsernameField.Text = "";
+                PasswordField.Password = "";
             }
-            loggedIn = true;
+            else if (UsernameField.Text.EndsWith("@edu.jns.fi") && UsernameField.Text.Length > 11)
+            {
+                // search for the entered wilma account in the database
+                List<string> columns = new List<string>();
+                columns.Add("Wilma");
+                List<List<string>> results = new List<List<string>>();
+                results = dbi.searchExactDatabaseRows(dbconnection, "users", UsernameField.Text, columns);
+                if (results.Count == 1)
+                {
+                    // log in
+                    loggedIn = true;
+
+                    // clear UsernameField
+                    UsernameField.Text = "";
+
+                    // go to logged in view
+                    Storyboard ShowLoggedInHomeView = this.FindResource("ShowLoggedInHomeView") as Storyboard;
+                    ShowLoggedInHomeView.Begin();
+                    currentView = 4;
+                }
+                else
+                {
+                    MessageBox.Show("Error: Account does not exist. Please create an account in the Sign Up page.");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Error: The username does not seem legit. Please use your wilma address for logging in.");
+            }
+            
         }
         private void signupButton1_Click(object sender, RoutedEventArgs e)
         {
@@ -621,7 +664,7 @@ namespace JLLKirjasto
                 List<string> columns = new List<string>();
                 columns.Add("Wilma");
                 List<List<string>> results = new List<List<string>>();
-                results = dbi.searchDatabaseRows(dbconnection, "users", SignUpField.Text, columns);
+                results = dbi.searchExactDatabaseRows(dbconnection, "users", SignUpField.Text, columns);
 
                 // show relevant error message and determine if the wilma account is in use
                 if (results.Count > 1)
@@ -703,6 +746,7 @@ namespace JLLKirjasto
 
                 // return the content in signUpGrid to its original state
                 SignUpField.Text = "";
+                SignUpConfirmationField.Text = "";
                 SignUpButton.Visibility = Visibility.Visible;
                 SignUpField.Visibility = Visibility.Visible;
                 SignUpInstruction.Text = Properties.Resources.ResourceManager.GetString("SignUpInstruction1", TranslationSource.Instance.CurrentCulture); // TODO: move this thi xaml

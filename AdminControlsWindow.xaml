@@ -134,7 +134,7 @@
                     <StackPanel Orientation="Horizontal" Height="25" Grid.Row="3" Margin="5">
                         <Button x:Name="addBookButton" Width="auto" Content="{local:Loc BookDbAddButtonContent}" Click="addBookButton_Click"/>
                         <Button x:Name="delBookButton" Width="auto" Margin="10,0,0,0" Content="{local:Loc BookDbDelButtonContent}" Click="delBookButton_Click"/>
-                        <Button x:Name="editBookButton" Width="Auto" Margin="10,0,0,0" Content="{local:Loc BookDbEditButtonContent}" Click="editBookButton_Click"/>
+                        <Button x:Name="editBookButton" Width="Auto" Margin="10,0,0,0" Content="{local:Loc BookDbEditButtonContent}" Click="editBookButton_Click" Height="25" VerticalAlignment="Bottom"/>
                     </StackPanel>
                     
                 </Grid>
@@ -223,7 +223,7 @@
                     <!-- User database manipulation buttons -->
                     <StackPanel Orientation="Horizontal" Height="25" Grid.Row="3" Margin="5">
                         <Button x:Name="addUserButton" Width="auto" Content="{local:Loc UserDbAddButtonContent}"/>
-                        <Button x:Name="delUserButton" Width="auto" Margin="10,0,0,0" Content="{local:Loc UserDbDelButtonContent}"/>
+                        <Button x:Name="delUserButton" Width="auto" Margin="10,0,0,0" Content="{local:Loc UserDbDelButtonContent}" Click="delUserButton_Click"/>
                         <Button x:Name="editUserButton" Width="Auto" Margin="10,0,0,0" Content="{local:Loc UserDbEditButtonContent}"/>
                     </StackPanel>
 
