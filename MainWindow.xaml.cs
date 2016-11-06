@@ -910,19 +910,16 @@ namespace JLLKirjasto
         //TODO: Add support for advanced search, currently hard-coded for ID, Author and Title only
         private void updateSearchResults()
         {
+            // determine what to search
             List<String> columns = new List<String>();
-            columns.Add("ID");
-            columns.Add("Author");
-            columns.Add("Title");
-            /**
-            // Determine what to search        
-            if (IDChecked) columns.Add("BookID");
-            if (TitleChecked) columns.Add("Title");
-            if (AuthorChecked) columns.Add("Author");
-            if (YearChecked) columns.Add("Year");
-            if (LanguageChecked) columns.Add("Language");
-            if (AvailableChecked) columns.Add("Available");
-            **/
+            if (IDCheckBox.IsChecked.GetValueOrDefault() == true) columns.Add("ID");
+            if (TitleCheckBox.IsChecked.GetValueOrDefault() == true) columns.Add("Title");
+            if (AuthorCheckBox.IsChecked.GetValueOrDefault() == true) columns.Add("Author");
+            if (YearCheckBox.IsChecked.GetValueOrDefault() == true) columns.Add("Year");
+            if (LanguageCheckBox.IsChecked.GetValueOrDefault() == true) columns.Add("Language");
+            if (AvailabilityCheckBox.IsChecked.GetValueOrDefault() == true) columns.Add("Available");
+            if (CategoryCheckBox.IsChecked.GetValueOrDefault() == true) columns.Add("Aineistolaji");
+            if (ISBNCheckBox.IsChecked.GetValueOrDefault() == true) columns.Add("ISBN");
 
             List<List<String>> searchResults = new List<List<String>>();
             searchResults = dbi.searchDatabaseRows(dbconnection, "books", SearchBox.Text, columns);

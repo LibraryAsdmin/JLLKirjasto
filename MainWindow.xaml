@@ -890,7 +890,7 @@
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
                                         <Label Content="{local:Loc BookDbSearchOptionID}" Margin="5,0,0,0" Grid.Column="0" Foreground="White"/>
-                                        <CheckBox x:Name="IDCheckBox" Margin="0,0,10,0" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="1"/>
+                                        <CheckBox x:Name="IDCheckBox" Margin="0,0,10,0" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="1" IsChecked="True"/>
                                 </Grid>
                                 <Separator/>
                                 <!-- Search by Author-->
@@ -900,7 +900,7 @@
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
                                     <Label Content="{local:Loc BookDbSearchOptionAuthor}" Margin="5,0,0,0" Grid.Column="0" Foreground="White"/>
-                                    <CheckBox x:Name="AuthorCheckBox" Margin="0,0,10,0" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="1"/>
+                                    <CheckBox x:Name="AuthorCheckBox" Margin="0,0,10,0" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="1" IsChecked="True"/>
                                 </Grid>
                                 <Separator/>
                                 <!-- Search by Title-->
@@ -910,7 +910,7 @@
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
                                     <Label Content="{local:Loc BookDbSearchOptionTitle}" Margin="5,0,0,0" Grid.Column="0" Foreground="White"/>
-                                    <CheckBox x:Name="TitleCheckBox" Margin="0,0,10,0" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="1"/>
+                                    <CheckBox x:Name="TitleCheckBox" Margin="0,0,10,0" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="1" IsChecked="True"/>
                                 </Grid>
                                 <Separator/>
                                 <!-- Search by year-->
@@ -920,7 +920,7 @@
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
                                     <Label Content="{local:Loc BookDbSearchOptionYear}" Margin="5,0,0,0" Grid.Column="0" Foreground="White"/>
-                                    <CheckBox x:Name="YearCheckBox" Margin="0,0,10,0" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="1"/>
+                                    <CheckBox x:Name="YearCheckBox" Margin="0,0,10,0" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="1" IsChecked="False"/>
                                 </Grid>
                                 <Separator/>
                                 <!-- Search by Language-->
@@ -930,7 +930,7 @@
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
                                     <Label Content="{local:Loc BookDbSearchOptionLanguage}" Margin="5,0,0,0" Grid.Column="0" Foreground="White"/>
-                                    <CheckBox x:Name="LanguageCheckBox" Margin="0,0,10,0" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="1"/>
+                                    <CheckBox x:Name="LanguageCheckBox" Margin="0,0,10,0" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="1" IsChecked="False"/>
                                 </Grid>
                                 <Separator/>
                                 <!-- Search by Availability-->
@@ -940,7 +940,7 @@
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
                                     <Label Content="{local:Loc BookDbSearchOptionAvailable}" Margin="5,0,0,0" Grid.Column="0" Foreground="White"/>
-                                    <CheckBox x:Name="AvailabilityCheckBox" Margin="0,0,10,0" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="1"/>
+                                    <CheckBox x:Name="AvailabilityCheckBox" Margin="0,0,10,0" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="1" IsChecked="False"/>
                                 </Grid>
                                 <Separator/>
                                 <!-- Search by Category-->
@@ -950,7 +950,7 @@
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
                                     <Label Content="{local:Loc BookDbSearchOptionCategory}" Margin="5,0,0,0" Grid.Column="0" Foreground="White"/>
-                                    <CheckBox x:Name="CategoryCheckBox" Margin="0,0,10,0" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="1"/>
+                                    <CheckBox x:Name="CategoryCheckBox" Margin="0,0,10,0" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="1" IsChecked="False"/>
                                 </Grid>
                                 <Separator/>
                                 <!-- Search by ISBN-->
@@ -960,7 +960,7 @@
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
                                     <Label Content="{local:Loc BookDbSearchOptionISBN}" Margin="5,0,0,0" Grid.Column="0" Foreground="White"/>
-                                    <CheckBox x:Name="ISBNCheckBox" Margin="0,0,10,0" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="1"/>
+                                    <CheckBox x:Name="ISBNCheckBox" Margin="0,0,10,0" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="1" IsChecked="True"/>
                                 </Grid>
                                 <Separator/>
                             </StackPanel>
