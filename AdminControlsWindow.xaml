@@ -205,13 +205,15 @@
                                     <Grid HorizontalAlignment="Stretch" Width="Auto">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="50"/>
+                                            <ColumnDefinition Width="200"/>
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
 
                                         <!-- Information displayed in UserListBox-->
-                                        <TextBlock Text="{Binding UserID}" Grid.Column="0" HorizontalAlignment="Left"/>
-                                        <TextBlock Text="{Binding Username}" Grid.Column="1" HorizontalAlignment="Left"/>
-                                        
+                                        <TextBlock Text="{Binding id}" Grid.Column="0" HorizontalAlignment="Left"/>
+                                        <TextBlock Text="{Binding wilma}" Grid.Column="1" HorizontalAlignment="Left"/>
+                                        <TextBlock Text="{Binding loans}" Grid.Column="2" HorizontalAlignment="Left"/>
+
                                     </Grid>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>

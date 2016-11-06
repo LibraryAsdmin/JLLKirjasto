@@ -94,7 +94,8 @@ namespace JLLKirjasto
         #endregion interface
 
         #region implementation
-        private enum columnID { ID, Wilma, Loans, NumColumns};
+        // TODO: Does this have to be public?
+        public enum columnID { ID, Wilma, Loans, NumColumns};
         public String id { get; private set; }
         public String wilma { get; private set; } // for signup and signin
         public String loans { get; private set; } // A comma separated list of book IDs 

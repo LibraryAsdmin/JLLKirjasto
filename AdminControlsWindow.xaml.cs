@@ -112,13 +112,13 @@ namespace JLLKirjasto
 
         private void BooksSearchButton_Click(object sender, RoutedEventArgs e)
         {
-            search();
+            searchBooks();
         }
         private void BooksSearch_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
             {
-                search();
+                searchBooks();
             }
         } // search books by hitting enter when in search box
         #endregion
@@ -129,16 +129,19 @@ namespace JLLKirjasto
         {
             if (BooksSearch.Text.Length >= MainWindow.minSearchChars)
             {
-                search();
+                searchBooks();
             }         
         }
         //private void updateUsersDataGrid(){}
         private void UsersSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
-            // Update users datagrid
+            if (UsersSearch.Text.Length >= MainWindow.minSearchChars)
+            {
+                searchUsers();
+            }
         }
 
-        private void search()
+        private void searchBooks()
         {
             // Determine what to search
             List<String> columns = new List<String>();
@@ -167,6 +170,30 @@ namespace JLLKirjasto
                 ));
             }
             BookListBox.ItemsSource = books;
+        }
+
+        private void searchUsers()
+        {
+            //Determine what to search
+            List<String> columns = new List<String>();
+            // TODO: Add advanced search functionality. Currently hard-coded to search all columns
+            columns.Add("ID");
+            columns.Add("Wilma");
+            columns.Add("Loans");
+
+            List<List<String>> results = dbi.searchDatabaseRows(dbconnection, "users", UsersSearch.Text, columns);
+            List<User> users = new List<User>();
+            // Populate ItemsSource with book details
+            foreach (List<String> row in results)
+            {
+                users.Add(new User
+                (
+                    row[(int)User.columnID.ID],
+                    row[(int)User.columnID.Wilma],
+                    row[(int)User.columnID.Loans]
+                ));
+            }
+            UsersListBox.ItemsSource = users;
         }
 
         #endregion
