@@ -34,8 +34,7 @@
                                 <StackPanel Orientation="Horizontal">
                                     <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}"/>
                                     <Label Content="{local:Loc BookDbSearchOptionID}"/>
-                                    <CheckBox x:Name="IDCheckBox" VerticalContentAlignment="Center" Checked="IDCheckBox_Checked"
-                                                  Unchecked="IDCheckBox_Unchecked"/>
+                                    <CheckBox x:Name="IDCheckBox" VerticalContentAlignment="Center" IsChecked="True"/>
                                     <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}"/>
                                 </StackPanel>
                             </Grid>
@@ -44,8 +43,7 @@
                             <Grid x:Name="AuthorCheckBoxGrid" Width="Auto">
                                 <StackPanel Orientation="Horizontal">
                                     <Label Content="{local:Loc BookDbSearchOptionAuthor}"/>
-                                    <CheckBox x:Name="AuthorCheckBox" VerticalContentAlignment="Center" Checked="AuthorCheckBox_Checked" 
-                                                  Unchecked="AuthorCheckBox_Unchecked"/>
+                                    <CheckBox x:Name="AuthorCheckBox" VerticalContentAlignment="Center" IsChecked="True"/>
                                     <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}"/>
                                 </StackPanel>
                             </Grid>
@@ -54,8 +52,7 @@
                             <Grid x:Name="TitleCheckBoxGrid" Width="Auto">
                                 <StackPanel Orientation="Horizontal">
                                     <Label Content="{local:Loc BookDbSearchOptionTitle}"/>
-                                    <CheckBox x:Name="TitleCheckBox" VerticalContentAlignment="Center" Checked="TitleCheckBox_Checked"
-                                                  Unchecked="TitleCheckBox_Unchecked"/>
+                                    <CheckBox x:Name="TitleCheckBox" VerticalContentAlignment="Center" IsChecked="True"/>
                                     <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}"/>
                                 </StackPanel>
                             </Grid>
@@ -64,8 +61,7 @@
                             <Grid x:Name="YearCheckBoxGrid" Width="Auto">
                                 <StackPanel Orientation="Horizontal">
                                     <Label Content="{local:Loc BookDbSearchOptionYear}"/>
-                                    <CheckBox x:Name="YearCheckBox" VerticalContentAlignment="Center" Checked="YearCheckBox_Checked" 
-                                                  Unchecked="YearCheckBox_Unchecked"/>
+                                    <CheckBox x:Name="YearCheckBox" VerticalContentAlignment="Center" IsChecked="False"/>
                                     <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}"/>
                                 </StackPanel>
                             </Grid>
@@ -74,8 +70,7 @@
                             <Grid x:Name="LanguageCheckBoxGrid" Width="Auto">
                                 <StackPanel Orientation="Horizontal">
                                     <Label Content="{local:Loc BookDbSearchOptionLanguage}"/>
-                                    <CheckBox x:Name="LanguageCheckBox" VerticalContentAlignment="Center" Checked="LanguageCheckBox_Checked"
-                                                  Unchecked="LanguageCheckBox_Unchecked"/>
+                                    <CheckBox x:Name="LanguageCheckBox" VerticalContentAlignment="Center" IsChecked="False"/>
                                     <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}"/>
                                 </StackPanel>
 
@@ -85,13 +80,28 @@
                             <Grid x:Name="AvailableCheckBoxGrid" Width="Auto">
                                 <StackPanel Orientation="Horizontal">
                                     <Label Content="{local:Loc BookDbSearchOptionAvailable}"/>
-                                    <CheckBox x:Name="AvailableCheckBox" VerticalContentAlignment="Center" Checked="AvailableCheckBox_Checked" 
-                                                  Unchecked="AvailableCheckBox_Unchecked"/>
+                                    <CheckBox x:Name="AvailableCheckBox" VerticalContentAlignment="Center" IsChecked="False"/>
                                     <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}"/>
                                 </StackPanel>
                             </Grid>
 
-                            <!-- TODO: Add category and ISBN -->
+                            <!-- Search by Category -->
+                            <Grid x:Name="CategoryCheckBoxGrid" Width="Auto">
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Content="{local:Loc BookDbSearchOptionCategory}"/>
+                                    <CheckBox x:Name="CategoryCheckBox" VerticalContentAlignment="Center" IsChecked="False"/>
+                                    <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}"/>
+                                </StackPanel>
+                            </Grid>
+
+                            <!-- Search by ISBN -->
+                            <Grid x:Name="ISBNCheckBoxGrid" Width="Auto">
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Content="{local:Loc BookDbSearchOptionISBN}"/>
+                                    <CheckBox x:Name="ISBNCheckBox" VerticalContentAlignment="Center" IsChecked="True"/>
+                                    <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}"/>
+                                </StackPanel>
+                            </Grid>
 
                         </StackPanel>
                     </Expander>

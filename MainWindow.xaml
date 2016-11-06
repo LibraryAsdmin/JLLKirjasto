@@ -973,7 +973,7 @@
 
                         <TextBox x:Name="SearchBox" Style="{StaticResource ModernTextBoxStyle}" Margin="20,10,20,0" Grid.Column="0" Grid.Row="1" VerticalAlignment="Top" 
                          Text="{local:Loc DefaultSearchBoxContent}" FontSize="24" FontFamily="Sylfaen" Foreground="Black" GotFocus="SearchBox_GotFocus" 
-                         TextChanged="SearchBox_TextChanged" LostFocus="SearchBox_LostFocus"/>
+                         TextChanged="SearchBox_TextChanged" LostFocus="SearchBox_LostFocus" KeyDown="SearchBox_KeyDown"/>
 
                         <ListBox x:Name="SearchResultsListBox" HorizontalContentAlignment="Stretch" Margin="20, 30, 20, 20" 
                             Background="Transparent" BorderThickness="0" FontSize="24" ItemContainerStyle="{DynamicResource ModernListBoxItemStyle}" Grid.Row="2"

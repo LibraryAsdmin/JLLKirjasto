@@ -40,75 +40,13 @@ namespace JLLKirjasto
         public AdminControlsWindow()
         {
             InitializeComponent();
-            initCheckBoxes();
             BooksSearch.Focus(); // Set cursor to search box at window startup
         }
 
         #region UI Handling
 
         // Search options
-        private void IDCheckBox_Checked(object sender, RoutedEventArgs e)
-        {
-            IDChecked = true;
-        }
-        private void IDCheckBox_Unchecked(object sender, RoutedEventArgs e)
-        {
-            IDChecked = false;
-        }
-
-        private void AuthorCheckBox_Checked(object sender, RoutedEventArgs e)
-        {
-            AuthorChecked = true;
-        }
-        private void AuthorCheckBox_Unchecked(object sender, RoutedEventArgs e)
-        {
-            AuthorChecked = false;
-        }
-
-        private void TitleCheckBox_Checked(object sender, RoutedEventArgs e)
-        {
-            TitleChecked = true;
-        }
-        private void TitleCheckBox_Unchecked(object sender, RoutedEventArgs e)
-        {
-            TitleChecked = false;
-        }
-
-        private void YearCheckBox_Checked(object sender, RoutedEventArgs e)
-        {
-            YearChecked = true;
-        }
-        private void YearCheckBox_Unchecked(object sender, RoutedEventArgs e)
-        {
-            YearChecked = false;
-        }
-
-        private void LanguageCheckBox_Checked(object sender, RoutedEventArgs e)
-        {
-            LanguageChecked = true;
-        }
-        private void LanguageCheckBox_Unchecked(object sender, RoutedEventArgs e)
-        {
-            LanguageChecked = false;
-        }
-
-        private void AvailableCheckBox_Checked(object sender, RoutedEventArgs e)
-        {
-            AvailableChecked = true;
-        }
-        private void AvailableCheckBox_Unchecked(object sender, RoutedEventArgs e)
-        {
-            AvailableChecked = false;
-        }
-        private void initCheckBoxes()
-        {
-            if (IDChecked) IDCheckBox.IsChecked = true;
-            if (TitleChecked) TitleCheckBox.IsChecked = true;
-            if (AuthorChecked) AuthorCheckBox.IsChecked = true;
-            if (YearChecked) YearCheckBox.IsChecked = true;
-            if (LanguageChecked) LanguageCheckBox.IsChecked = true;
-            if (AvailableChecked) AvailableCheckBox.IsChecked = true;
-        }
+       
 
         private void BooksSearchButton_Click(object sender, RoutedEventArgs e)
         {
@@ -145,12 +83,14 @@ namespace JLLKirjasto
         {
             // Determine what to search
             List<String> columns = new List<String>();
-            if (IDChecked) columns.Add("ID");
-            if (TitleChecked) columns.Add("Title");
-            if (AuthorChecked) columns.Add("Author");
-            if (YearChecked) columns.Add("Year");
-            if (LanguageChecked) columns.Add("Language");
-            if (AvailableChecked) columns.Add("Available");
+            if (IDCheckBox.IsChecked.GetValueOrDefault() == true) columns.Add("ID");
+            if (TitleCheckBox.IsChecked.GetValueOrDefault() == true) columns.Add("Title");
+            if (AuthorCheckBox.IsChecked.GetValueOrDefault() == true) columns.Add("Author");
+            if (YearCheckBox.IsChecked.GetValueOrDefault() == true) columns.Add("Year");
+            if (LanguageCheckBox.IsChecked.GetValueOrDefault() == true) columns.Add("Language");
+            if (AvailableCheckBox.IsChecked.GetValueOrDefault() == true) columns.Add("Available");
+            if (CategoryCheckBox.IsChecked.GetValueOrDefault() == true) columns.Add("Aineistolaji");
+            if (ISBNCheckBox.IsChecked.GetValueOrDefault() == true) columns.Add("ISBN");
 
             List<List<String>> results = dbi.searchDatabaseRows(dbconnection, "books", BooksSearch.Text, columns);
             List<Book> books = new List<Book>();

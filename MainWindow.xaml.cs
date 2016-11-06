@@ -932,6 +932,15 @@ namespace JLLKirjasto
             SearchResultsListBox.ItemsSource = ListBoxItems;
         }
 
+        // search using enter key
+        private void SearchBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                updateSearchResults();
+            }
+        }
+
         #endregion
 
         #region Debug
@@ -1100,6 +1109,7 @@ namespace JLLKirjasto
                 MouseLeaveGrid.Begin();
             }
         }
+
     }
 
 
