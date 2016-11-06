@@ -120,6 +120,12 @@ namespace JLLKirjasto
             Code = code.PadLeft(4, '0');
         }
 
+        // show the code (for debugging purposes only)
+        public void displayCode()
+        {
+            MessageBox.Show(Code);
+        }
+
         // compares a given code to the one stored in memory
         public bool compareCode(string code)
         {
@@ -175,18 +181,108 @@ namespace JLLKirjasto
             Email = null;
         }
 
+        public void generateID()
+        {
+            // Variables for database interaction
+            SQLiteConnection dbconnection = new SQLiteConnection("Data Source=database.db");
+            DatabaseInteraction dbi = new DatabaseInteraction();
+
+            // count the number of users in the database
+            // search for all IDs in the user database which contain the letter 'U'
+            // All user IDs should contain 'U' so this returns all users
+            List<string> columns = new List<string>();
+            columns.Add("ID");
+            List<List<string>> results = new List<List<string>>();
+            results = dbi.searchDatabaseRows(dbconnection, "users", "U", columns);
+            idNumber = results.Count;
+
+            // Parse ID string
+            ID = "U" + idNumber.ToString().PadLeft(6, '0');
+        }
+
+        // checks if the ID is unique and can be used
+        // true: can be used
+        // false: cannot be used
+        public Boolean verifyID()
+        {
+            // Variables for database interaction
+            SQLiteConnection dbconnection = new SQLiteConnection("Data Source=database.db");
+            DatabaseInteraction dbi = new DatabaseInteraction();
+
+            // serach the user table for matching IDs
+            List<string> columns = new List<string>();
+            columns.Add("ID");
+            List<List<string>> results = new List<List<string>>();
+            results = dbi.searchDatabaseRows(dbconnection, "users", ID, columns);
+
+            if (results.Count == 0)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public String getID()
+        {
+            if (ID == null)
+            {
+                throw new Exception("The ID should be generated before using this method.");
+            }
+            else
+            {
+                return ID;
+            }
+        }
+
+        public void setWilma(String wilmaAddress)
+        {
+            Wilma = wilmaAddress;
+        }
+
+        public String getWilma()
+        {
+            if (Wilma == null)
+            {
+                throw new Exception("The Wilma address should be set before using this method.");
+            }
+            else
+            {
+                return Wilma;
+            }
+        }
+
+
+        public void incrementID()
+        {
+            if (idNumber < 0)
+            {
+                throw new Exception("The ID should be generated before using this method.");
+            }
+            else
+            {
+                idNumber++;
+                ID = "U" + idNumber.ToString().PadLeft(6, '0');
+            }
+        }
+
         // Reset signup operation to its original state
         public void reset()
         {
             Code = null;
             Email = null;
+            ID = null;
+            Wilma = null;
+            idNumber = -1;
         }
         #endregion interface
 
         #region implementation
         // Variables
-        private String Code { get; set; } // the code sent to user's email
-        private String Email { get; set; } // the wilma email address of the user
+        private String Code;     // the code sent to user's email
+        private String Email;    // the wilma email address of the user
+        private String ID;       // the actual user ID string
+        private String Wilma;    // the Wilma address of the user
+        private int idNumber;    // holds the number included in the user id
         #endregion implementation
     }
 
@@ -310,10 +406,22 @@ namespace JLLKirjasto
             }        
         }
 
-        public void addDatabaseRow(SQLiteConnection dbconn, String table, String id)
+        // Function Parameter Explanations:
+        // - dbconn = SQLiteConnection object to database
+        // - table = The name of the table in the database
+        // - columns = determines what is added to each column in the database table. For example, {"0001", "test"} would 
+        //      ad a new database entry with "0001" and "test" on the first and second column respectively
+        // Adds a new row to the database table
+        public void addDatabaseRow(SQLiteConnection dbconn, String table, String id, List<String> columns)
         {
-            // Determine the number of columns in the database  
+            // Determine the number of columns in the database table  
             int columnCount = countColumns(dbconn, table);
+            // Verify that colums has the right number of entries
+            if (columns.Count != columnCount)
+            {
+                throw new Exception("Error. Table size and argument size mismatch. Verify that columns list has the right number of entries");
+            }
+
             try
             {
                 dbconn.Open();
@@ -321,15 +429,39 @@ namespace JLLKirjasto
                 {
                     using (SQLiteCommand command = new SQLiteCommand(dbconn))
                     {
-                        // Parse string columnsString for column adding command.
-                        String columnsString = "'"+id+"'";
-                        for (int i = 1; i < columnCount; i++)
+                        List<String> commandParameters = new List<String>();
+                        List<String> commandArguments = new List<String>();
+                        String commandParametersString = "";
+
+                        // generate parameters for the command
+                        for (int i = 0; i < columnCount; i++)
                         {
-                            columnsString += (","+"'-'");
+                            commandParameters.Add("@Parameter" + i.ToString());
                         }
 
-                        string commandString = String.Format("INSERT INTO {0} VALUES ({1})", table, columnsString);
+                        // crate string with command parameters
+                        commandParametersString = commandParameters[0];
+                        for (int i = 1; i < commandParameters.Count; i++)
+                        {
+                            commandParametersString += "," + commandParameters[i];
+                        }
+                        //a(commandParametersString);
+
+                        // generate a list of command arguments based on id and columns
+                        commandArguments.Add(id);
+                        for (int i = 1; i < columnCount; i++)
+                        {
+                            commandArguments.Add(columns[i - 1]);
+                        }
+
+                        string commandString = String.Format("INSERT INTO {0} VALUES ({1})", table, commandParametersString);
                         command.CommandText = commandString;
+
+                        // add command parameters
+                        for (int i = 0; i < commandParameters.Count; i++)
+                        {
+                            command.Parameters.AddWithValue(commandParameters[i], commandArguments[i]);
+                        }
 
                         command.ExecuteNonQuery();
                     }
@@ -367,6 +499,7 @@ namespace JLLKirjasto
             }
         }
 
+        // Helper function. Counts the number of columns in a database table
         private int countColumns(SQLiteConnection dbconn, String table)
         {
             int count = 0;

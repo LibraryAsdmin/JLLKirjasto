@@ -47,7 +47,7 @@ namespace JLLKirjasto
             results = dbi.searchDatabaseRows(dbconnection, bookstable, IDBox.Text, columns);
             
 
-            // if there is only one occurrence
+            // The ID has to either match the old ID or be unique
             if (results.Count == 0 || results.Count == 1 && results[0][(int)Book.columnID.ID]==oldID)
             {
                 // Commit changes to each column individually by ID
@@ -62,6 +62,7 @@ namespace JLLKirjasto
             }
             else
             {
+                // notify the user that there is something wrong with the new book ID
                 MessageBox.Show(String.Format(Properties.Resources.ResourceManager.GetString("BookEditIDError", TranslationSource.Instance.CurrentCulture),IDBox.Text));
                 
             }

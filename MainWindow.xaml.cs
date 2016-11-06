@@ -611,8 +611,44 @@ namespace JLLKirjasto
         }
         private void signupButton1_Click(object sender, RoutedEventArgs e)
         {
-            if (SignUpField.Text.EndsWith("@edu.jns.fi") && SignUpField.Text.Length > 11) // verify that email contains proper ending and that it also contains other text
+            defaultSignUpOperation.reset();
+            Boolean isLegit = false;
+            // verify that email contains proper ending and that it also contains other text
+            if (SignUpField.Text.EndsWith("@edu.jns.fi") && SignUpField.Text.Length > 11)
             {
+                // search if the user database already contains the same wilma account
+
+                List<string> columns = new List<string>();
+                columns.Add("Wilma");
+                List<List<string>> results = new List<List<string>>();
+                results = dbi.searchDatabaseRows(dbconnection, "users", SignUpField.Text, columns);
+
+                // show relevant error message and determine if the wilma account is in use
+                if (results.Count > 1)
+                {
+                    isLegit = false;
+                    MessageBox.Show("Beep boop! Something went wrong and you should contact the person responsible for managing this!");
+                }
+                else if (results.Count == 1)
+                {
+                    isLegit = false;
+                    MessageBox.Show("Error: This Wilma address is already in use.");
+                }
+                else if (results.Count == 0)
+                {
+                    isLegit = true;
+                }
+            }
+            else
+            {
+                MessageBox.Show(Properties.Resources.ResourceManager.GetString("SignUpErrorMessage", TranslationSource.Instance.CurrentCulture));
+            }
+
+            if (isLegit)
+            {
+                // store address
+                defaultSignUpOperation.setWilma(SignUpField.Text);
+
                 // hide previous UI elements
                 SignUpButton.Visibility = Visibility.Hidden;
                 SignUpField.Visibility = Visibility.Hidden;
@@ -622,17 +658,16 @@ namespace JLLKirjasto
                 defaultSignUpOperation.addEmail(SignUpField.Text);
                 defaultSignUpOperation.sendCode();
 
+                // for development purposes only, remove this when finished
+                // defaultSignUpOperation.displayCode();
+
                 // show new UI elements
                 SignUpInstruction.Text = Properties.Resources.ResourceManager.GetString("SignUpInstruction2", TranslationSource.Instance.CurrentCulture); // TODO: move this thi xaml
                 SignUpEmailLink.Visibility = Visibility.Visible;
                 SignUpConfirmationField.Visibility = Visibility.Visible;
                 SignUpConfirmationButton.Visibility = Visibility.Visible;
             }
-            else
-            {
-                defaultSignUpOperation.reset();
-                MessageBox.Show(Properties.Resources.ResourceManager.GetString("SignUpErrorMessage", TranslationSource.Instance.CurrentCulture));
-            }
+           
 
         }
         private void SignUpConfirmationButton_Click(object sender, RoutedEventArgs e)
@@ -640,10 +675,35 @@ namespace JLLKirjasto
             // if the code given by the user matches the one stored in memory
             if (defaultSignUpOperation.compareCode(SignUpConfirmationField.Text))
             {
-                // add the new user to the database and return to main view
-                MessageBox.Show("TODO: Add user to the database and return to the main view for login");
-                // TODO: Add user to the database
+                // generate new ID for the user
+                defaultSignUpOperation.generateID();
+
+                // verify that the generated ID is not in use
+                // if it is, increment the number in ID until an unique ID is found
+                Boolean isUnique;
+                do
+                {
+                    isUnique  = defaultSignUpOperation.verifyID();
+                    if (!isUnique)
+                    {
+                        defaultSignUpOperation.incrementID();
+                    }
+                }
+                while (!isUnique); // increment the ID until no conflicting IDs are found
+
+                // add the user to user database table
+                List<String> columns = new List<String>();
+                columns.Add(defaultSignUpOperation.getWilma()); // Wilma
+                columns.Add("");                                // Loans
+                dbi.addDatabaseRow(dbconnection, "users", defaultSignUpOperation.getID(), columns);
+
+                // account creation complete, reset defaultSignUpOperation to its clean state
+                defaultSignUpOperation.reset();
+
+
+
                 // TODO: Return to main view
+
             }
             else
             {

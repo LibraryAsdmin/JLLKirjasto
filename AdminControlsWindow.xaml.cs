@@ -219,7 +219,16 @@ namespace JLLKirjasto
         // Functionality for adding and removing whole books
         private void addBookButton_Click(object sender, RoutedEventArgs e)
         {
-            dbi.addDatabaseRow(dbconnection, "books", "-");
+            // dbi.addDatabaseRow(dbconnection, "books", "-");
+
+            // display book edit prompt
+            // Create a new window
+            BookEditWindow bew = new BookEditWindow();
+            bew.Owner = this;
+
+            // show the window
+            bew.ShowDialog();
+
         }
         private void delBookButton_Click(object sender, RoutedEventArgs e)
         {
