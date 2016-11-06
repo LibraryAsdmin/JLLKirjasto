@@ -910,7 +910,7 @@ namespace JLLKirjasto
         {
 
             Book currentBook = SearchResultsListBox.SelectedItem as Book;
-            if (currentBook != null)
+            if (currentBook != null && currentBook.isbn!="")
             {
                 //show text depending on if the user is logged in or not
                 if(loggedIn)
@@ -937,6 +937,9 @@ namespace JLLKirjasto
                 {
                     coverArt.Source = null;
                 }
+            } else
+            {
+                coverArt.Source = null;
             }
 
         }
