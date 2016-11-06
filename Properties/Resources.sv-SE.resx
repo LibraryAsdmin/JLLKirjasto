@@ -256,10 +256,13 @@
   <data name="UserDbEditButtonContent" xml:space="preserve">
     <value>Svenska här</value>
   </data>
+  <data name="UserDbSearchOptionLoans" xml:space="preserve">
+    <value>Svenska här</value>
+  </data>
   <data name="UserDbSearchOptionUserID" xml:space="preserve">
     <value>ID</value>
   </data>
-  <data name="UserDbSearchOptionUsername" xml:space="preserve">
+  <data name="UserDbSearchOptionWilma" xml:space="preserve">
     <value>Svenska här</value>
   </data>
   <data name="UserDbWindowTitle" xml:space="preserve">

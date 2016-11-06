@@ -174,16 +174,25 @@
                                 <StackPanel Orientation="Horizontal">
                                     <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}"/>
                                     <Label Content="{local:Loc UserDbSearchOptionUserID}"/>
-                                    <CheckBox x:Name="UserIDCheckBox" VerticalContentAlignment="Center"/>
+                                    <CheckBox x:Name="UserIDCheckBox" VerticalContentAlignment="Center" IsChecked="True"/>
                                     <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}"/>
                                 </StackPanel>
                             </Grid>
 
-                            <!-- Search by name -->
-                            <Grid x:Name="UsernameCheckBoxGrid" Width="Auto">
+                            <!-- Search by Wilma -->
+                            <Grid x:Name="WilmaCheckBoxGrid" Width="Auto">
                                 <StackPanel Orientation="Horizontal">
-                                    <Label Content="{local:Loc UserDbSearchOptionUsername}"/>
-                                    <CheckBox x:Name="UsernameCheckBox" VerticalContentAlignment="Center"/>
+                                    <Label Content="{local:Loc UserDbSearchOptionWilma}"/>
+                                    <CheckBox x:Name="WilmaCheckBox" VerticalContentAlignment="Center" IsChecked="True"/>
+                                    <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}"/>
+                                </StackPanel>
+                            </Grid>
+
+                            <!-- Search by Loans -->
+                            <Grid x:Name="LoansCheckBoxGrid" Width="Auto">
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Content="{local:Loc UserDbSearchOptionLoans}"/>
+                                    <CheckBox x:Name="LoansCheckBox" VerticalContentAlignment="Center" IsChecked="False"/>
                                     <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}"/>
                                 </StackPanel>
                             </Grid>
@@ -199,10 +208,10 @@
                             <ColumnDefinition Width="75"/>
                         </Grid.ColumnDefinitions>
                         <TextBox x:Name="UsersSearch" Height="30" TextWrapping="Wrap" VerticalAlignment="Top" TextAlignment="Center" 
-                             FontSize="20" TextChanged="UsersSearch_TextChanged" Grid.Column="0"/>
+                             FontSize="20" TextChanged="UsersSearch_TextChanged" KeyDown="UsersSearch_KeyDown" Grid.Column="0"/>
                         <!-- BookDbSearchButtonContent used as the text would be the same -->
                         <Button x:Name="UsersSearchButton" Content="{local:Loc BookDbSearchButtonContent}" HorizontalAlignment="Stretch" Width="Auto"
-                                    Margin="5,0,0,0" Height="Auto" Grid.Column="1"/>
+                                    Margin="5,0,0,0" Height="Auto" Grid.Column="1" Click="UsersSearchButton_Click"/>
                     </Grid>
 
                     <!-- ListBox for displaying user information -->

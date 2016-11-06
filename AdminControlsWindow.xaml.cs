@@ -116,10 +116,9 @@ namespace JLLKirjasto
         {
             //Determine what to search
             List<String> columns = new List<String>();
-            // TODO: Add advanced search functionality. Currently hard-coded to search all columns
-            columns.Add("ID");
-            columns.Add("Wilma");
-            columns.Add("Loans");
+            if (UserIDCheckBox.IsChecked.GetValueOrDefault() == true) columns.Add("ID");
+            if (WilmaCheckBox.IsChecked.GetValueOrDefault() == true) columns.Add("Wilma");
+            if (LoansCheckBox.IsChecked.GetValueOrDefault() == true) columns.Add("Loans");
 
             List<List<String>> results = dbi.searchDatabaseRows(dbconnection, "users", UsersSearch.Text, columns);
             List<User> users = new List<User>();
@@ -275,6 +274,19 @@ namespace JLLKirjasto
         {
             deleteUser();
             searchUsers();
+        }
+
+        private void UsersSearchButton_Click(object sender, RoutedEventArgs e)
+        {
+            searchUsers();
+        }
+
+        private void UsersSearch_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                searchUsers();
+            }
         }
     }
 }

@@ -255,10 +255,13 @@
   <data name="UserDbEditButtonContent" xml:space="preserve">
     <value>Edit user</value>
   </data>
+  <data name="UserDbSearchOptionLoans" xml:space="preserve">
+    <value>Loans</value>
+  </data>
   <data name="UserDbSearchOptionUserID" xml:space="preserve">
     <value>ID</value>
   </data>
-  <data name="UserDbSearchOptionUsername" xml:space="preserve">
+  <data name="UserDbSearchOptionWilma" xml:space="preserve">
     <value>Username</value>
   </data>
   <data name="UserDbWindowTitle" xml:space="preserve">
