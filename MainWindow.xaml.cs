@@ -378,6 +378,7 @@ namespace JLLKirjasto
             currentView = 1;
             SearchGrid.BeginAnimation(Grid.HeightProperty, null); //removes the ShowSearchGrid animation to allow for code-behind height change to take place
             SearchGrid.Height = GridHeightClass.Instance.ExpandedGridHeight; //apply the correct height value to SearchGrid (wihtout this SearchGrid would revert back to original height value
+            Keyboard.Focus(SearchBox);
         }
 
         private void ShowLoginGridStoryboard_Completed(object sender, EventArgs e)
@@ -954,7 +955,7 @@ namespace JLLKirjasto
         {
 
             Book currentBook = SearchResultsListBox.SelectedItem as Book;
-            if (currentBook != null)
+            if (currentBook != null && currentBook.isbn!="")
             {
                 //show text depending on if the user is logged in or not
                 if(loggedIn)
@@ -981,6 +982,9 @@ namespace JLLKirjasto
                 {
                     coverArt.Source = null;
                 }
+            } else
+            {
+                coverArt.Source = null;
             }
 
         }
