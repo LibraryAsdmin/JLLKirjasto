@@ -146,6 +146,34 @@ namespace JLLKirjasto
             }
         }
 
+        private Double _hoverCollapsedGridHeight;
+        public Double HoverCollapsedGridHeight
+        {
+            get { return _hoverCollapsedGridHeight; }
+            set
+            {
+                if (value != _hoverCollapsedGridHeight)
+                {
+                    _hoverCollapsedGridHeight = value;
+                    Notify("HoverCollapsedGridHeight");
+                }
+            }
+        }
+
+        private Double _deHoverCollapsedGridHeight;
+        public Double DeHoverCollapsedGridHeight
+        {
+            get { return _deHoverCollapsedGridHeight; }
+            set
+            {
+                if (value != _deHoverCollapsedGridHeight)
+                {
+                    _deHoverCollapsedGridHeight = value;
+                    Notify("DeHoverCollapsedGridHeight");
+                }
+            }
+        }
+
     }
 
     /// <summary>
@@ -206,11 +234,15 @@ namespace JLLKirjasto
         // Calculates NavigationStackPanel grid sizes
         private void RootWindow_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            Double ExpandedGridHeight = WindowGrid.ActualHeight - HeaderGrid.ActualHeight;
+            Double ExpandedGridHeight = WindowGrid.ActualHeight - (HeaderGrid.ActualHeight);
             Double CollapsedGridHeight = ExpandedGridHeight / 3;
+            Double HoverCollapsedGridHeight = CollapsedGridHeight + 20;
+            Double DeHoverCollapsedGridHeight = CollapsedGridHeight - 10;
             GridHeightClass.Instance.ExpandedGridHeight = ExpandedGridHeight;
             GridHeightClass.Instance.CollapsedGridHeight = CollapsedGridHeight;
             GridHeightClass.Instance.DoubleCollapsedGridHeight = 2 * CollapsedGridHeight;
+            GridHeightClass.Instance.HoverCollapsedGridHeight = HoverCollapsedGridHeight;
+            GridHeightClass.Instance.DeHoverCollapsedGridHeight = DeHoverCollapsedGridHeight;
 
             switch (currentView)
             {
@@ -328,7 +360,6 @@ namespace JLLKirjasto
                     UserInfoGrid.Height = 2 * GridHeightClass.Instance.CollapsedGridHeight;
                     break;
             }
-
         }
 
         private void ShowSearchGridStoryboard_Completed(object sender, EventArgs e)
@@ -912,6 +943,47 @@ namespace JLLKirjasto
         {
             Storyboard ShowLoadingView = this.FindResource("ShowLoadingView") as Storyboard;
             ShowLoadingView.Begin();
+        }
+
+        private void SearchGrid_MouseEnter(object sender, MouseEventArgs e)
+        {
+            if(currentView == 0)
+            {
+                Storyboard MouseEnterSearchGrid = this.FindResource("MouseEnterSearchGrid") as Storyboard;
+                MouseEnterSearchGrid.Begin();
+            }
+        }
+
+        private void LoginGrid_MouseEnter(object sender, MouseEventArgs e)
+        {
+            if (currentView == 0)
+            {
+                Storyboard MouseEnterLoginGrid = this.FindResource("MouseEnterLoginGrid") as Storyboard;
+                MouseEnterLoginGrid.Begin();
+            }
+        }
+
+        private void SignUpGrid_MouseEnter(object sender, MouseEventArgs e)
+        {
+            if (currentView == 0)
+            {
+                Storyboard MouseEnterSignUpGrid = this.FindResource("MouseEnterSignUpGrid") as Storyboard;
+                MouseEnterSignUpGrid.Begin();
+            }
+        }
+
+        private void MouseLeaveGridStoryboard_Completed(object sender, EventArgs e)
+        {
+            ResetAnimationsAfterArrivingToHomeView();
+        }
+
+        private void NavigationStackPanel_MouseLeave(object sender, MouseEventArgs e)
+        {
+            if (currentView == 0)
+            {
+                Storyboard MouseLeaveGrid = this.FindResource("MouseLeaveGrid") as Storyboard;
+                MouseLeaveGrid.Begin();
+            }
         }
     }
 

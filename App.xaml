@@ -8,14 +8,14 @@
     <Application.Resources>
 
         <!-- Colours for the menu items used in the main view -->
-        <Color x:Key="MenuItemColour1">#FF5D005E</Color>
-        <Color x:Key="MenuItemColour2">#FF870066</Color>
-        <Color x:Key="MenuItemColour3">#FFBF0060</Color>
-        <Color x:Key="WindowGridColour">#FF1B0031</Color>
-        <SolidColorBrush x:Key="MenuItemColourBrush1" Color="#FF5D005E"/>
-        <SolidColorBrush x:Key="MenuItemColourBrush2" Color="#FF870066"/>
-        <SolidColorBrush x:Key="MenuItemColourBrush3" Color="#FFBF0060"/>
-        <SolidColorBrush x:Key="WindowGridColourBrush" Color="#FF1B0031"/>
+        <Color x:Key="MenuItemColour1">#f46036</Color>
+        <Color x:Key="MenuItemColour2">#1b998b</Color>
+        <Color x:Key="MenuItemColour3">#2e294e</Color>
+        <Color x:Key="WindowGridColour">#f9a03f</Color>
+        <SolidColorBrush x:Key="MenuItemColourBrush1" Color="#f46036"/>
+        <SolidColorBrush x:Key="MenuItemColourBrush2" Color="#1b998b"/>
+        <SolidColorBrush x:Key="MenuItemColourBrush3" Color="#2e294e"/>
+        <SolidColorBrush x:Key="WindowGridColourBrush" Color="#f9a03f"/>
 
         <!-- TODO: Add documentation -->
         <Style x:Key="FocusVisual">
