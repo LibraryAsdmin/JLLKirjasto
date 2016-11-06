@@ -367,6 +367,7 @@ namespace JLLKirjasto
             currentView = 1;
             SearchGrid.BeginAnimation(Grid.HeightProperty, null); //removes the ShowSearchGrid animation to allow for code-behind height change to take place
             SearchGrid.Height = GridHeightClass.Instance.ExpandedGridHeight; //apply the correct height value to SearchGrid (wihtout this SearchGrid would revert back to original height value
+            Keyboard.Focus(SearchBox);
         }
 
         private void ShowLoginGridStoryboard_Completed(object sender, EventArgs e)
