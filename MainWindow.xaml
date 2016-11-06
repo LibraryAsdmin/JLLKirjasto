@@ -877,9 +877,14 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    
-                    <StackPanel Orientation="Vertical">
-                        <Expander Header="{local:Loc BookDbAdvancedSearchContent}" Margin="20,5,20,5" Grid.Column="0" 
+
+                    <Grid Grid.Column="0" VerticalAlignment="Stretch" Height="Auto" Margin="0,0,0,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Expander Header="{local:Loc BookDbAdvancedSearchContent}" Margin="20,5,20,5" Grid.Column="0" Grid.Row="0"
                                   Foreground="White" FontFamily="Century Gothic" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Stretch">
                             <StackPanel>
                                 <Separator/>
@@ -889,8 +894,8 @@
                                         <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
-                                        <Label Content="{local:Loc BookDbSearchOptionID}" Margin="5,0,0,0" Grid.Column="0" Foreground="White"/>
-                                        <CheckBox x:Name="IDCheckBox" Margin="0,0,10,0" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="1" IsChecked="True"/>
+                                    <Label Content="{local:Loc BookDbSearchOptionID}" Margin="5,0,0,0" Grid.Column="0" Foreground="White"/>
+                                    <CheckBox x:Name="IDCheckBox" Margin="0,0,10,0" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="1" IsChecked="True"/>
                                 </Grid>
                                 <Separator/>
                                 <!-- Search by Author-->
@@ -966,13 +971,14 @@
                             </StackPanel>
                         </Expander>
 
-                        <TextBox x:Name="SearchBox" Style="{StaticResource ModernTextBoxStyle}" Margin="20,10,20,0" Grid.Column="0" VerticalAlignment="Top" 
+                        <TextBox x:Name="SearchBox" Style="{StaticResource ModernTextBoxStyle}" Margin="20,10,20,0" Grid.Column="0" Grid.Row="1" VerticalAlignment="Top" 
                          Text="{local:Loc DefaultSearchBoxContent}" FontSize="24" FontFamily="Sylfaen" Foreground="Black" GotFocus="SearchBox_GotFocus" 
                          TextChanged="SearchBox_TextChanged" LostFocus="SearchBox_LostFocus"/>
 
-                        <ListBox x:Name="SearchResultsListBox" HorizontalContentAlignment="Stretch" Margin="20,82,20,20" BorderBrush="Transparent" 
-                         Background="Transparent" BorderThickness="0" FontSize="24" ItemContainerStyle="{DynamicResource ModernListBoxItemStyle}" 
-                         ScrollViewer.HorizontalScrollBarVisibility="Hidden" Focusable="False" SelectionChanged="SearchResultsListBox_SelectionChanged">
+                        <ListBox x:Name="SearchResultsListBox" HorizontalContentAlignment="Stretch" Margin="20, 30, 20, 20" 
+                            Background="Transparent" BorderThickness="0" FontSize="24" ItemContainerStyle="{DynamicResource ModernListBoxItemStyle}" Grid.Row="2"
+                            ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.CanContentScroll="True"
+                            Focusable="False" SelectionChanged="SearchResultsListBox_SelectionChanged">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Vertical">
@@ -983,7 +989,9 @@
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
                         </ListBox>
-                    </StackPanel>
+
+                        
+                    </Grid>
 
                     <ScrollViewer x:Name="scroll" Grid.Column="1" VerticalScrollBarVisibility="Hidden">
                         <StackPanel Grid.Column="1" Margin="10" Focusable="False">
