@@ -208,7 +208,7 @@ namespace JLLKirjasto
         List<Book> ListBoxItems;
         // Variables required by search
         // Require at least this number of characters before searching to avoid search congestion
-        // Global bariable, this is used also to control search in AdminControls
+        // Global variable, this is used also to control search in AdminControls
         public const uint minSearchChars = 3;
 
         // Variables for SignUp operation
@@ -654,6 +654,7 @@ namespace JLLKirjasto
                 SignUpField.Visibility = Visibility.Hidden;
 
                 // send code to the user
+
                 defaultSignUpOperation.generateCode();
                 defaultSignUpOperation.addEmail(SignUpField.Text);
                 defaultSignUpOperation.sendCode();
@@ -700,11 +701,20 @@ namespace JLLKirjasto
                 // account creation complete, reset defaultSignUpOperation to its clean state
                 defaultSignUpOperation.reset();
 
+                // return the content in signUpGrid to its original state
+                SignUpField.Text = "";
+                SignUpButton.Visibility = Visibility.Visible;
+                SignUpField.Visibility = Visibility.Visible;
+                SignUpInstruction.Text = Properties.Resources.ResourceManager.GetString("SignUpInstruction1", TranslationSource.Instance.CurrentCulture); // TODO: move this thi xaml
+                SignUpEmailLink.Visibility = Visibility.Hidden;
+                SignUpConfirmationField.Visibility = Visibility.Hidden;
+                SignUpConfirmationButton.Visibility = Visibility.Hidden;
 
-
-                // TODO: Return to main view
-
-            }
+                // return to home screen
+                Storyboard ShowHomeView = this.FindResource("ShowHomeView") as Storyboard;
+                ShowHomeView.Begin();
+                currentView = 0; // set current view to home
+        }
             else
             {
                 // complain to the user

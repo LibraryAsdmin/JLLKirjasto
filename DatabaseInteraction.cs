@@ -159,6 +159,7 @@ namespace JLLKirjasto
             try
             {
                 client.SendAsync(message, null);
+                //client.Send(message);
             }
             catch (SmtpException ex)
             {
@@ -417,7 +418,7 @@ namespace JLLKirjasto
             // Determine the number of columns in the database table  
             int columnCount = countColumns(dbconn, table);
             // Verify that colums has the right number of entries
-            if (columns.Count != columnCount)
+            if (columns.Count != columnCount-1)
             {
                 throw new Exception("Error. Table size and argument size mismatch. Verify that columns list has the right number of entries");
             }
