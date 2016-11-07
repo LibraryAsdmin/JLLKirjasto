@@ -287,6 +287,52 @@ namespace JLLKirjasto
         #endregion implementation
     }
 
+    public class LoginSession
+    {
+        #region interface
+        public LoginSession()
+        {
+            reset();
+        }
+
+        public void begin(String ID, String Wilma)
+        {
+            end();
+            loggedIn = true;
+            parseUsername(Wilma);
+        }
+
+        public void end()
+        {
+            loggedIn = false;
+            Name = null;
+        }
+
+        #endregion interface
+
+        #region implementation
+        private void reset()
+        {
+            Name = null;
+            loggedIn = false;
+        }
+
+        private void parseUsername(String Wilma)
+        {
+            int index = Wilma.IndexOf(".");
+            if (index > 0)
+            {
+                Wilma = Wilma.Substring(0, index);
+                Wilma = Wilma.Substring(0, 1).ToUpper() + Wilma.Substring(1, Wilma.Length - 1);
+            }
+            Name = Wilma;
+        }
+
+        public String Name { get; private set; }
+        public Boolean loggedIn { get; private set; }
+        #endregion implementation
+    }
+
     public class DatabaseInteraction
     {
 

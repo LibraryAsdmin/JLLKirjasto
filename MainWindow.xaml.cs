@@ -200,9 +200,6 @@ namespace JLLKirjasto
         // 4 = Logged In Home View (UserInfoGrid + SearchGrid)
         byte currentView = 0;
 
-        bool loggedIn = false; //defines whether the user has logged in or not
-        String loggedInID = null;
-
         // Variables for database interaction
         private SQLiteConnection dbconnection = new SQLiteConnection("Data Source=database.db");
         private DatabaseInteraction dbi = new DatabaseInteraction();
@@ -214,6 +211,9 @@ namespace JLLKirjasto
 
         // Variables for SignUp operation
         SignUpOperation defaultSignUpOperation = new SignUpOperation();
+
+        // Variables for LoginSession
+        LoginSession defaultLoginSession = new LoginSession();
         #endregion
 
 
@@ -293,12 +293,12 @@ namespace JLLKirjasto
 
         private void logOutButton_Click(object sender, RoutedEventArgs e)
         {
-            if (loggedIn)
+            if (defaultLoginSession.loggedIn)
             {
                 Storyboard ShowHomeView = this.FindResource("ShowHomeView") as Storyboard;
                 ShowHomeView.Begin();
                 currentView = 0;
-                loggedIn = false;
+                defaultLoginSession.end();
             }
 
         }
@@ -318,7 +318,7 @@ namespace JLLKirjasto
             SignUpConfirmationField.Visibility = Visibility.Hidden;
             SignUpConfirmationButton.Visibility = Visibility.Hidden;
 
-            if (loggedIn)
+            if (defaultLoginSession.loggedIn)
             {
                 Storyboard ShowLoggedInHomeView = this.FindResource("ShowLoggedInHomeView") as Storyboard;
                 ShowLoggedInHomeView.Begin();
@@ -618,20 +618,13 @@ namespace JLLKirjasto
                 if (results.Count == 1)
                 {
                     // log in
-                    loggedIn = true;
-                    loggedInID = results[0][0];
-                    showHazardNotification(loggedInID);
+                    defaultLoginSession.begin(results[0][0], results[0][1]);
 
                     // clear UsernameField
                     UsernameField.Text = "";
-                    String parseName = results[0][1]; // change to [0][1] if name preferred
-                    int index = parseName.IndexOf(".");
-                    if (index > 0)
-                    {
-                        parseName = parseName.Substring(0, index);
-                        parseName = parseName.Substring(0, 1).ToUpper() + parseName.Substring(1, parseName.Length - 1);
-                    }
-                    loggedInUserGreeting.Text = String.Format(loggedInUserGreeting.Text, parseName);
+
+                    // greet the user
+                    loggedInUserGreeting.Text = String.Format(loggedInUserGreeting.Text, defaultLoginSession.Name);
 
                     // go to logged in view
                     Storyboard ShowLoggedInHomeView = this.FindResource("ShowLoggedInHomeView") as Storyboard;
@@ -736,7 +729,16 @@ namespace JLLKirjasto
                 List<String> columns = new List<String>();
                 columns.Add(defaultSignUpOperation.getWilma()); // Wilma
                 columns.Add("");                                // Loans
-                dbi.addDatabaseRow(dbconnection, "users", defaultSignUpOperation.getID(), columns);
+                dbi.addDatabaseRow(dbconnection, "users", defaultSignUpOperation.getID(), columns);       
+
+                // log in and greet the user
+                defaultLoginSession.begin(defaultSignUpOperation.getID(), SignUpField.Text.ToLower());
+                loggedInUserGreeting.Text = String.Format(loggedInUserGreeting.Text, defaultLoginSession.Name);
+
+                // go to logged in view
+                Storyboard ShowLoggedInHomeView = this.FindResource("ShowLoggedInHomeView") as Storyboard;
+                ShowLoggedInHomeView.Begin();
+                currentView = 4;
 
                 // account creation complete, reset defaultSignUpOperation to its clean state
                 defaultSignUpOperation.reset();
@@ -750,11 +752,6 @@ namespace JLLKirjasto
                 SignUpEmailLink.Visibility = Visibility.Hidden;
                 SignUpConfirmationField.Visibility = Visibility.Hidden;
                 SignUpConfirmationButton.Visibility = Visibility.Hidden;
-
-                // return to home screen
-                Storyboard ShowHomeView = this.FindResource("ShowHomeView") as Storyboard;
-                ShowHomeView.Begin();
-                currentView = 0; // set current view to home
             }
             else
             {
@@ -960,7 +957,7 @@ namespace JLLKirjasto
             if (currentBook != null)
             {
                 //show text depending on if the user is logged in or not
-                if (loggedIn)
+                if (defaultLoginSession.loggedIn)
                 {
                     logInNotice.Visibility = Visibility.Collapsed;
                     loanButton.Visibility = Visibility.Visible;
