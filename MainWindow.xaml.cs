@@ -937,10 +937,10 @@ namespace JLLKirjasto
         #endregion
 
         #region Debug
-        /*private void a(String m)
+        private void a(String m)
         {
             MessageBox.Show(m);
-        }*/
+        }
 
         #endregion
 
@@ -956,6 +956,20 @@ namespace JLLKirjasto
             Book currentBook = SearchResultsListBox.SelectedItem as Book;
             if (currentBook != null)
             {
+                // check whether the book has been borrowed or not
+                if (currentBook.available == "TRUE")
+                {
+                    // TODO change text to say the book is available in correct language
+                    a("TODO: Change Availability text to state whether the book is available in correct language");
+                    loanButton.IsEnabled = true;
+                }
+                else
+                {
+                    // TODO change text to say the book is not available in correct language
+                    a("TODO: Change Availability text to state whether the book is available in correct language");
+                    loanButton.IsEnabled = false;
+                }
+
                 //show text depending on if the user is logged in or not
                 if (defaultLoginSession.loggedIn)
                 {
@@ -1069,6 +1083,49 @@ namespace JLLKirjasto
             //Storyboard ShowLoadingView = this.FindResource("ShowLoadingView") as Storyboard;
             //ShowLoadingView.Begin();
             showHazardNotification("You are about to borrow this book!");
+
+            if (!defaultLoginSession.loggedIn)
+            {
+                // The user is trying to borrow a book without being signed in. This message should never be visible.
+                showHazardNotification("You are doing it all wrong! Please log in before attempting to borrow books.");
+                return;
+            }
+
+            // Find out which book is selected
+            Book selection = SearchResultsListBox.SelectedItem as Book;
+
+            // Search user's entries in the database
+            List<string> columns = new List<string>();
+            columns.Add("ID");
+            List<List<string>> results = new List<List<string>>();
+            results = dbi.searchExactDatabaseRows(dbconnection, "users", defaultLoginSession.ID, columns);
+
+            if (results.Count != 1) throw new Exception("There should be only one user loaning the book");
+
+            User user = new User(results[0][0], results[0][1], results[0][2]);
+
+            // add book to loans
+            List<String> loans = user.getLoans();
+            loans.Add(selection.id);
+
+            // parse loans to csv
+            String loans_csv = loans[0];
+            if (loans.Count > 1) // if there are more than one books to add to csv
+            {
+                for (int i = 1; i < loans.Count; i++)
+                {
+                    loans_csv += String.Format(";{0}", loans[i]);
+                }
+            }
+
+            // update user table entry for loans
+            dbi.commitDbChanges(dbconnection, "users", loans_csv, defaultLoginSession.ID, "Loans");
+
+            // change availability to false in book database table
+            dbi.commitDbChanges(dbconnection, "books", "FALSE", selection.id, "Available");
+
+            // update displayed info in searh TODO: Change to return button
+            updateSearchResults();
         }
 
         private void SearchGrid_MouseEnter(object sender, MouseEventArgs e)

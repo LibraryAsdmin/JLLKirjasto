@@ -86,7 +86,10 @@ namespace JLLKirjasto
 
             foreach (string s in list)
             {
-                loanList.Add(s);
+                if (s != "")
+                {
+                    loanList.Add(s);
+                }
             }
             
             return loanList;
@@ -295,9 +298,10 @@ namespace JLLKirjasto
             reset();
         }
 
-        public void begin(String ID, String Wilma)
+        public void begin(String _ID, String Wilma)
         {
             end();
+            ID = _ID;
             loggedIn = true;
             parseUsername(Wilma);
         }
@@ -313,6 +317,7 @@ namespace JLLKirjasto
         #region implementation
         private void reset()
         {
+            ID = null;
             Name = null;
             loggedIn = false;
         }
@@ -329,6 +334,7 @@ namespace JLLKirjasto
         }
 
         public String Name { get; private set; }
+        public String ID { get; private set; }
         public Boolean loggedIn { get; private set; }
         #endregion implementation
     }
