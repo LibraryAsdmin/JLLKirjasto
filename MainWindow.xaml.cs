@@ -314,9 +314,9 @@ namespace JLLKirjasto
             SignUpButton.Visibility = Visibility.Visible;
             SignUpField.Visibility = Visibility.Visible;
             SignUpInstruction.Text = Properties.Resources.ResourceManager.GetString("SignUpInstruction1", TranslationSource.Instance.CurrentCulture); // TODO: move this thi xaml
-            SignUpEmailLink.Visibility = Visibility.Hidden;
-            SignUpConfirmationField.Visibility = Visibility.Hidden;
-            SignUpConfirmationButton.Visibility = Visibility.Hidden;
+            SignUpEmailLink.Visibility = Visibility.Collapsed;
+            SignUpConfirmationField.Visibility = Visibility.Collapsed;
+            SignUpConfirmationButton.Visibility = Visibility.Collapsed;
 
             if (defaultLoginSession.loggedIn)
             {
@@ -964,14 +964,12 @@ namespace JLLKirjasto
                 // check whether the book has been borrowed or not
                 if (currentBook.available == "TRUE")
                 {
-                    // TODO change text to say the book is available in correct language
-                    a("TODO: Change Availability text to state whether the book is available in correct language");
+                    availability.Text = Properties.Resources.ResourceManager.GetString("bookAvailable", TranslationSource.Instance.CurrentCulture);
                     loanButton.IsEnabled = true;
                 }
                 else
                 {
-                    // TODO change text to say the book is not available in correct language
-                    a("TODO: Change Availability text to state whether the book is available in correct language");
+                    availability.Text = Properties.Resources.ResourceManager.GetString("bookNotAvailable", TranslationSource.Instance.CurrentCulture);
                     loanButton.IsEnabled = false;
                 }
 

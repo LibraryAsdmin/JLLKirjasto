@@ -139,7 +139,7 @@
     <value>Kirjailija</value>
   </data>
   <data name="BookDbSearchOptionAvailable" xml:space="preserve">
-    <value>Saatavilla</value>
+    <value>Saatavuus</value>
   </data>
   <data name="BookDbSearchOptionCategory" xml:space="preserve">
     <value>Aineistolaji</value>
@@ -193,7 +193,7 @@
     <value>Kirjailija</value>
   </data>
   <data name="DisplaySearchBookAvailability" xml:space="preserve">
-    <value>Saatavilla</value>
+    <value>Saatavuus</value>
   </data>
   <data name="DisplaySearchBookCategory" xml:space="preserve">
     <value>Aineistolaji</value>
@@ -278,5 +278,11 @@
   </data>
   <data name="WindowTitle" xml:space="preserve">
     <value>Joensuun lyseon lukion kirjasto</value>
+  </data>
+  <data name="bookAvailable" xml:space="preserve">
+    <value>Saatavilla</value>
+  </data>
+  <data name="bookNotAvailable" xml:space="preserve">
+    <value>Lainassa</value>
   </data>
 </root>

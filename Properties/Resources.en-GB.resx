@@ -139,7 +139,7 @@
     <value>Author</value>
   </data>
   <data name="BookDbSearchOptionAvailable" xml:space="preserve">
-    <value>Available</value>
+    <value>Availability</value>
   </data>
   <data name="BookDbSearchOptionCategory" xml:space="preserve">
     <value>Category</value>
@@ -193,7 +193,7 @@
     <value>Author</value>
   </data>
   <data name="DisplaySearchBookAvailability" xml:space="preserve">
-    <value>Available</value>
+    <value>Availability</value>
   </data>
   <data name="DisplaySearchBookCategory" xml:space="preserve">
     <value>Category</value>
@@ -278,5 +278,11 @@
   </data>
   <data name="WindowTitle" xml:space="preserve">
     <value>The Library of Joensuun lyseon lukio</value>
+  </data>
+  <data name="bookAvailable" xml:space="preserve">
+    <value>Available for borrowing</value>
+  </data>
+  <data name="bookNotAvailable" xml:space="preserve">
+    <value>Borrowed by someone</value>
   </data>
 </root>

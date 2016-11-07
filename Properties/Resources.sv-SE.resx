@@ -280,4 +280,10 @@
   <data name="WindowTitle" xml:space="preserve">
     <value>Joensuun lyseon lukios bibliotek</value>
   </data>
+  <data name="bookAvailable" xml:space="preserve">
+    <value>Svenska här</value>
+  </data>
+  <data name="bookNotAvailable" xml:space="preserve">
+    <value>Svenska här</value>
+  </data>
 </root>
