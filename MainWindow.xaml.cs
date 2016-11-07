@@ -201,6 +201,7 @@ namespace JLLKirjasto
         byte currentView = 0;
 
         bool loggedIn = false; //defines whether the user has logged in or not
+        String loggedInID = null;
 
         // Variables for database interaction
         private SQLiteConnection dbconnection = new SQLiteConnection("Data Source=database.db");
@@ -613,11 +614,13 @@ namespace JLLKirjasto
                 List<string> columns = new List<string>();
                 columns.Add("Wilma");
                 List<List<string>> results = new List<List<string>>();
-                results = dbi.searchExactDatabaseRows(dbconnection, "users", UsernameField.Text, columns);
+                results = dbi.searchExactDatabaseRows(dbconnection, "users", UsernameField.Text.ToLower(), columns);
                 if (results.Count == 1)
                 {
                     // log in
                     loggedIn = true;
+                    loggedInID = results[0][0];
+                    a(loggedInID);
 
                     // clear UsernameField
                     UsernameField.Text = "";
@@ -650,7 +653,7 @@ namespace JLLKirjasto
                 List<string> columns = new List<string>();
                 columns.Add("Wilma");
                 List<List<string>> results = new List<List<string>>();
-                results = dbi.searchExactDatabaseRows(dbconnection, "users", SignUpField.Text, columns);
+                results = dbi.searchExactDatabaseRows(dbconnection, "users", SignUpField.Text.ToLower(), columns);
 
                 // show relevant error message and determine if the wilma account is in use
                 if (results.Count > 1)
@@ -676,7 +679,7 @@ namespace JLLKirjasto
             if (isLegit)
             {
                 // store address
-                defaultSignUpOperation.setWilma(SignUpField.Text);
+                defaultSignUpOperation.setWilma(SignUpField.Text.ToLower());
 
                 // hide previous UI elements
                 SignUpButton.Visibility = Visibility.Hidden;
@@ -685,7 +688,7 @@ namespace JLLKirjasto
                 // send code to the user
 
                 defaultSignUpOperation.generateCode();
-                defaultSignUpOperation.addEmail(SignUpField.Text);
+                defaultSignUpOperation.addEmail(SignUpField.Text.ToLower());
                 defaultSignUpOperation.sendCode();
 
                 // for development purposes only, remove this when finished
