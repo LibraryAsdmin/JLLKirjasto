@@ -1117,7 +1117,9 @@
                 </ListBox>
                 <StackPanel Grid.Column="1" Margin="5" Focusable="False">
                     <!-- Book information displayed to the user -->
-                    <TextBlock x:Name="loggedInUserGreeting" Text="Hello, {0}!&#10;You can borrow more books from the book search, or return your books by selecting them in the list on the left and pressing the button." Margin="0,20,0,20" Foreground="White" FontSize="24" TextWrapping="Wrap" HorizontalAlignment="Stretch"/>
+                    <!-- The greeting message is set in language changing functions in csharp file -->
+                    <TextBlock x:Name="loggedInUserGreeting" Text="Error: This message should be set to something else in code when signing in!" Margin="0,20,0,0" Foreground="White" FontSize="24" TextWrapping="Wrap" HorizontalAlignment="Stretch"/>
+                    <TextBlock x:Name="loggedInUserInstruction" Text="{local:Loc loggedInUserInstruction}" Margin="0,0,0,20" Foreground="White" FontSize="24" TextWrapping="Wrap" HorizontalAlignment="Stretch"/>
                     <Button x:Name="returnSelectedButton" Content="Return the selected book" HorizontalAlignment="Center" Style="{StaticResource ModernButtonStyle}" Height="40" Width="160" Margin="5,5,5,5"/>
                     <Button x:Name="returnAllButton" Content="Return all your books" HorizontalAlignment="Center" Style="{StaticResource ModernButtonStyle}" Height="40" Width="160" Margin="5,5,5,5"/>
                     <Button x:Name="returnOtherButton" Content="Return a book not listed here" HorizontalAlignment="Center" Style="{StaticResource ModernButtonStyle}" Height="40" Width="160" Margin="5,5,5,5"/>

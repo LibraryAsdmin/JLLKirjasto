@@ -217,6 +217,12 @@
   <data name="HomeButtonContent" xml:space="preserve">
     <value>Svenska här</value>
   </data>
+  <data name="loggedInUserGreeting" xml:space="preserve">
+    <value>Hejsan, {0}!</value>
+  </data>
+  <data name="loggedInUserInstruction" xml:space="preserve">
+    <value>Svenska här</value>
+  </data>
   <data name="SignUpButtonContent" xml:space="preserve">
     <value>Svenska här</value>
   </data>

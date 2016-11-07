@@ -216,6 +216,12 @@
   <data name="HomeButtonContent" xml:space="preserve">
     <value>Go Home</value>
   </data>
+  <data name="loggedInUserGreeting" xml:space="preserve">
+    <value>Greetings, {0}!</value>
+  </data>
+  <data name="loggedInUserInstruction" xml:space="preserve">
+    <value>You can borrow more books from the book search, or return your books by selecting them in the list on the left and pressing the button.</value>
+  </data>
   <data name="SignUpButtonContent" xml:space="preserve">
     <value>Sign Up</value>
   </data>

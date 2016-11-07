@@ -216,6 +216,12 @@
   <data name="HomeButtonContent" xml:space="preserve">
     <value>Alkusivu</value>
   </data>
+  <data name="loggedInUserGreeting" xml:space="preserve">
+    <value>Tervehdys, {0}!</value>
+  </data>
+  <data name="loggedInUserInstruction" xml:space="preserve">
+    <value>Voit lainata kirjoja hausta tai palauttaa niitä valitsemalla ne listasta ja painamalla oikeasta nappulasta.</value>
+  </data>
   <data name="SignUpButtonContent" xml:space="preserve">
     <value>Rekisteröidy</value>
   </data>

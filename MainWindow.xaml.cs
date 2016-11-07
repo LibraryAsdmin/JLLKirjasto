@@ -624,6 +624,7 @@ namespace JLLKirjasto
                     UsernameField.Text = "";
 
                     // greet the user
+                    loggedInUserGreeting.Text = Properties.Resources.ResourceManager.GetString("loggedInUserGreeting", TranslationSource.Instance.CurrentCulture);
                     loggedInUserGreeting.Text = String.Format(loggedInUserGreeting.Text, defaultLoginSession.Name);
 
                     // go to logged in view
@@ -860,6 +861,10 @@ namespace JLLKirjasto
             {
                 SignUpField.Text = Properties.Resources.ResourceManager.GetString("DefaultSignUpUsernameBoxContent", TranslationSource.Instance.CurrentCulture);
             }
+
+            // update logged in user greeting
+            loggedInUserGreeting.Text = Properties.Resources.ResourceManager.GetString("loggedInUserGreeting", TranslationSource.Instance.CurrentCulture);
+            loggedInUserGreeting.Text = String.Format(loggedInUserGreeting.Text, defaultLoginSession.Name);
         }
 
         // Language box animations
