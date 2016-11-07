@@ -976,6 +976,10 @@ namespace JLLKirjasto
                         coverArt.Source = null;
                     }
                 }
+                else
+                {
+                    coverArt.Source = null;
+                }
             } else
             {
                 coverArt.Source = null;
@@ -1089,6 +1093,7 @@ namespace JLLKirjasto
             ResetAnimationsAfterArrivingToHomeView();
         }
 
+        //return the grids to default heights when the mouse leaves them completely
         private void NavigationStackPanel_MouseLeave(object sender, MouseEventArgs e)
         {
             if (currentView == 0)
