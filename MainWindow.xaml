@@ -622,7 +622,7 @@
                 <EasingDoubleKeyFrame KeyTime="{StaticResource HoverAnimationDuration}" Value="{Binding HoverCollapsedGridHeight, Source={x:Static local:GridHeightClass.Instance}}"/>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
-        <Storyboard x:Key="MouseLeaveLoggedInSearchGrid">
+        <Storyboard x:Key="MouseLeaveLoggedInSearchGrid" Completed="Storyboard_Completed_1">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="SearchGrid">
                 <EasingDoubleKeyFrame KeyTime="{StaticResource HoverAnimationDuration}" Value="{Binding CollapsedGridHeight, Source={x:Static local:GridHeightClass.Instance}}"/>
             </DoubleAnimationUsingKeyFrames>

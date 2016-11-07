@@ -1142,6 +1142,11 @@ namespace JLLKirjasto
                 MouseLeaveLoggedInSearchGrid.Begin();
             }
         }
+
+        private void Storyboard_Completed_1(object sender, EventArgs e)
+        {
+            ResetAnimationsAfterArrivingToHomeView();
+        }
     }
 
 
