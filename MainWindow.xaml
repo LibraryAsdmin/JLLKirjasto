@@ -1049,7 +1049,7 @@
                 </ListBox>
                 <StackPanel Grid.Column="1" Margin="5" Focusable="False">
                     <!-- Book information displayed to the user -->
-                    <TextBlock x:Name="loggedInUserGreeting" Text="Hello, X!" Margin="0,0,0,20" Foreground="White" FontSize="24" TextWrapping="Wrap" HorizontalAlignment="Stretch">
+                    <TextBlock x:Name="loggedInUserGreeting" Text="Hello, {0}!" Margin="0,0,0,20" Foreground="White" FontSize="24" TextWrapping="Wrap" HorizontalAlignment="Stretch">
                         <LineBreak/>
                         <Run Text="You can borrow more books from the book search, or return your books by selecting them in the list on the left and pressing the button."/>
                     </TextBlock>

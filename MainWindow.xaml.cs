@@ -293,7 +293,7 @@ namespace JLLKirjasto
 
         private void logOutButton_Click(object sender, RoutedEventArgs e)
         {
-            if(loggedIn)
+            if (loggedIn)
             {
                 Storyboard ShowHomeView = this.FindResource("ShowHomeView") as Storyboard;
                 ShowHomeView.Begin();
@@ -620,11 +620,18 @@ namespace JLLKirjasto
                     // log in
                     loggedIn = true;
                     loggedInID = results[0][0];
-                    a(loggedInID);
 
                     // clear UsernameField
                     UsernameField.Text = "";
-
+                    String parseName = results[0][1]; // change to [0][1] if name preferred
+                    int index = parseName.IndexOf(".");
+                    if (index > 0)
+                    {
+                        parseName = parseName.Substring(0, index);
+                        parseName = parseName.Substring(0, 1).ToUpper() + parseName.Substring(1, parseName.Length-1);
+                    }
+                    loggedInUserGreeting.Text = String.Format(loggedInUserGreeting.Text, parseName);
+                    
                     // go to logged in view
                     Storyboard ShowLoggedInHomeView = this.FindResource("ShowLoggedInHomeView") as Storyboard;
                     ShowLoggedInHomeView.Begin();
@@ -639,7 +646,7 @@ namespace JLLKirjasto
             {
                 MessageBox.Show("Error: The username does not seem legit. Please use your wilma address for logging in.");
             }
-            
+
         }
         private void signupButton1_Click(object sender, RoutedEventArgs e)
         {
@@ -700,7 +707,7 @@ namespace JLLKirjasto
                 SignUpConfirmationField.Visibility = Visibility.Visible;
                 SignUpConfirmationButton.Visibility = Visibility.Visible;
             }
-           
+
 
         }
         private void SignUpConfirmationButton_Click(object sender, RoutedEventArgs e)
@@ -716,7 +723,7 @@ namespace JLLKirjasto
                 Boolean isUnique;
                 do
                 {
-                    isUnique  = defaultSignUpOperation.verifyID();
+                    isUnique = defaultSignUpOperation.verifyID();
                     if (!isUnique)
                     {
                         defaultSignUpOperation.incrementID();
@@ -747,7 +754,7 @@ namespace JLLKirjasto
                 Storyboard ShowHomeView = this.FindResource("ShowHomeView") as Storyboard;
                 ShowHomeView.Begin();
                 currentView = 0; // set current view to home
-        }
+            }
             else
             {
                 // complain to the user
@@ -952,7 +959,7 @@ namespace JLLKirjasto
             if (currentBook != null)
             {
                 //show text depending on if the user is logged in or not
-                if(loggedIn)
+                if (loggedIn)
                 {
                     logInNotice.Visibility = Visibility.Collapsed;
                     loanButton.Visibility = Visibility.Visible;
@@ -983,7 +990,8 @@ namespace JLLKirjasto
                 {
                     coverArt.Source = null;
                 }
-            } else
+            }
+            else
             {
                 coverArt.Source = null;
             }
@@ -1066,7 +1074,7 @@ namespace JLLKirjasto
 
         private void SearchGrid_MouseEnter(object sender, MouseEventArgs e)
         {
-            if(currentView == 0)
+            if (currentView == 0)
             {
                 Storyboard MouseEnterSearchGrid = this.FindResource("MouseEnterSearchGrid") as Storyboard;
                 MouseEnterSearchGrid.Begin();
