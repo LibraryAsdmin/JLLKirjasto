@@ -617,6 +617,16 @@
                 <EasingDoubleKeyFrame KeyTime="{StaticResource HoverAnimationDuration}" Value="{Binding CollapsedGridHeight, Source={x:Static local:GridHeightClass.Instance}}"/>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
+        <Storyboard x:Key="MouseEnterLoggedInSearchGrid">
+            <DoubleAnimationUsingKeyFrames  Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="SearchGrid">
+                <EasingDoubleKeyFrame KeyTime="{StaticResource HoverAnimationDuration}" Value="{Binding HoverCollapsedGridHeight, Source={x:Static local:GridHeightClass.Instance}}"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="MouseLeaveLoggedInSearchGrid">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="SearchGrid">
+                <EasingDoubleKeyFrame KeyTime="{StaticResource HoverAnimationDuration}" Value="{Binding CollapsedGridHeight, Source={x:Static local:GridHeightClass.Instance}}"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
 
         <!-- The three animations below are sort of obsolete; they were superceded by ShowHomeView storyboard which basically contains all of them. Let's keep them, though, they might prove useful-->
         <Storyboard x:Key="HideSearchGrid">
@@ -783,8 +793,8 @@
             </Grid>
             <Grid x:Name="HazardNotificationGrid" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed">
                 <StackPanel>
-                    <TextBlock x:Name="hazardNotificationText" Margin="0,0,0,0" FontSize="22" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Top" Text=""/>
-                    <Button x:Name="dismissHazardNotificationButton" Style="{StaticResource ModernButtonStyle}" HorizontalAlignment="Stretch" Content="OK" Height="40" Margin="0,20,0,0" Click="dismissHazardNotificationButton_Click"/>
+                    <TextBlock x:Name="hazardNotificationText" Margin="0,0,0,0" FontSize="22" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Top" Text="" TextWrapping="Wrap" MaxWidth="300"/>
+                    <Button x:Name="dismissHazardNotificationButton" Style="{StaticResource ModernButtonStyle}" HorizontalAlignment="Stretch" MaxWidth="100" Content="OK" Height="40" Margin="0,20,0,0" Click="dismissHazardNotificationButton_Click"/>
                 </StackPanel>
             </Grid>
         </Grid>
@@ -921,7 +931,7 @@
 
             <!-- SearchGrid contains the UI elements for searching the books database-->
 
-            <Grid x:Name="SearchGrid" Margin="0" HorizontalAlignment="Stretch" Height="238" Background="{StaticResource MenuItemColourBrush3}" MouseUp="SearchGrid_MouseUp" VerticalAlignment="Top" MouseEnter="SearchGrid_MouseEnter">
+            <Grid x:Name="SearchGrid" Margin="0" HorizontalAlignment="Stretch" Height="238" Background="{StaticResource MenuItemColourBrush3}" MouseUp="SearchGrid_MouseUp" VerticalAlignment="Top" MouseEnter="SearchGrid_MouseEnter" MouseLeave="SearchGrid_MouseLeave">
                 <TextBlock x:Name="SearchGridTooltip" Text="Search" Visibility="Visible" FontSize="120" Margin="40,0,0,0" Foreground="White" HorizontalAlignment="Left" 
                            VerticalAlignment="Center" Focusable="True" KeyDown="SearchGridTooltip_KeyDown" FontFamily="Niagara Engraved">
                         <LineBreak/>
@@ -1107,7 +1117,7 @@
                 </ListBox>
                 <StackPanel Grid.Column="1" Margin="5" Focusable="False">
                     <!-- Book information displayed to the user -->
-                    <TextBlock x:Name="loggedInUserGreeting" Text="Hello, {0}!" Margin="0,0,0,20" Foreground="White" FontSize="24" TextWrapping="Wrap" HorizontalAlignment="Stretch">
+                    <TextBlock x:Name="loggedInUserGreeting" Text="Hello, {0}!" Margin="0,20,0,20" Foreground="White" FontSize="24" TextWrapping="Wrap" HorizontalAlignment="Stretch">
                         <LineBreak/>
                         <Run Text="You can borrow more books from the book search, or return your books by selecting them in the list on the left and pressing the button."/>
                     </TextBlock>

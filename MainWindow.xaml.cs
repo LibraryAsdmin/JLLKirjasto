@@ -331,7 +331,7 @@ namespace JLLKirjasto
                     case 0:
                     case 4:
                         //In home view or user info view
-                        System.Windows.MessageBox.Show("Home button should not be accessible in home screen... Go fix the program!");
+                        showHazardNotification("Home button should not be accessible in home screen... Go fix the program!");
                         break;
                     case 1:
                     case 2:
@@ -629,7 +629,7 @@ namespace JLLKirjasto
                     if (index > 0)
                     {
                         parseName = parseName.Substring(0, index);
-                        parseName = parseName.Substring(0, 1).ToUpper() + parseName.Substring(1, parseName.Length-1);
+                        parseName = parseName.Substring(0, 1).ToUpper() + parseName.Substring(1, parseName.Length - 1);
                     }
                     loggedInUserGreeting.Text = String.Format(loggedInUserGreeting.Text, parseName);
 
@@ -640,14 +640,14 @@ namespace JLLKirjasto
                 }
                 else
                 {
-                    MessageBox.Show("Error: Account does not exist. Please create an account in the Sign Up page.");
+                    showHazardNotification("Error: Account does not exist. Please create an account in the Sign Up page.");
                 }
             }
             else
             {
-                MessageBox.Show("Error: The username does not seem legit. Please use your wilma address for logging in.");
+                showHazardNotification("Error: The username does not seem legit. Please use your wilma address for logging in.");
             }
-            
+
         }
         private void signupButton1_Click(object sender, RoutedEventArgs e)
         {
@@ -667,12 +667,12 @@ namespace JLLKirjasto
                 if (results.Count > 1)
                 {
                     isLegit = false;
-                    MessageBox.Show("Beep boop! Something went wrong and you should contact the person responsible for managing this!");
+                    showHazardNotification("Beep boop! Something went wrong and you should contact the person responsible for managing this!");
                 }
                 else if (results.Count == 1)
                 {
                     isLegit = false;
-                    MessageBox.Show("Error: This Wilma address is already in use.");
+                    showHazardNotification("Error: This Wilma address is already in use.");
                 }
                 else if (results.Count == 0)
                 {
@@ -681,7 +681,7 @@ namespace JLLKirjasto
             }
             else
             {
-                MessageBox.Show(Properties.Resources.ResourceManager.GetString("SignUpErrorMessage", TranslationSource.Instance.CurrentCulture));
+                showHazardNotification(Properties.Resources.ResourceManager.GetString("SignUpErrorMessage", TranslationSource.Instance.CurrentCulture));
             }
 
             if (isLegit)
@@ -708,7 +708,7 @@ namespace JLLKirjasto
                 SignUpConfirmationField.Visibility = Visibility.Visible;
                 SignUpConfirmationButton.Visibility = Visibility.Visible;
             }
-           
+
 
         }
         private void SignUpConfirmationButton_Click(object sender, RoutedEventArgs e)
@@ -755,11 +755,11 @@ namespace JLLKirjasto
                 Storyboard ShowHomeView = this.FindResource("ShowHomeView") as Storyboard;
                 ShowHomeView.Begin();
                 currentView = 0; // set current view to home
-        }
+            }
             else
             {
                 // complain to the user
-                MessageBox.Show(Properties.Resources.ResourceManager.GetString("SignUpWrongCode", TranslationSource.Instance.CurrentCulture));
+                showHazardNotification(Properties.Resources.ResourceManager.GetString("SignUpWrongCode", TranslationSource.Instance.CurrentCulture));
                 defaultSignUpOperation.reset();
                 // reset to default view
                 // TODO: Reset to default view
@@ -1081,6 +1081,11 @@ namespace JLLKirjasto
                 Storyboard MouseEnterSearchGrid = this.FindResource("MouseEnterSearchGrid") as Storyboard;
                 MouseEnterSearchGrid.Begin();
             }
+            if (currentView == 4)
+            {
+                Storyboard MouseEnterLoggedInSearchGrid = this.FindResource("MouseEnterLoggedInSearchGrid") as Storyboard;
+                MouseEnterLoggedInSearchGrid.Begin();
+            }
         }
 
         private void LoginGrid_MouseEnter(object sender, MouseEventArgs e)
@@ -1122,11 +1127,20 @@ namespace JLLKirjasto
             HideHazardNotification.Begin();
         }
 
-        void showHazardNotification (string message)
+        void showHazardNotification(string message)
         {
             hazardNotificationText.Text = message;
             Storyboard ShowHazardNotification = this.FindResource("ShowHazardNotification") as Storyboard;
             ShowHazardNotification.Begin();
+        }
+
+        private void SearchGrid_MouseLeave(object sender, MouseEventArgs e)
+        {
+            if(currentView==4)
+            {
+                Storyboard MouseLeaveLoggedInSearchGrid = this.FindResource("MouseLeaveLoggedInSearchGrid") as Storyboard;
+                MouseLeaveLoggedInSearchGrid.Begin();
+            }
         }
     }
 
