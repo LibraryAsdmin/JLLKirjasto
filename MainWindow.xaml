@@ -1045,7 +1045,7 @@
 
                         <ListBox x:Name="SearchResultsListBox" HorizontalContentAlignment="Stretch" Margin="20, 30, 20, 20" 
                             Background="Transparent" Foreground="White" BorderThickness="0" FontSize="24" ItemContainerStyle="{DynamicResource ModernListBoxItemStyle}" Grid.Row="2"
-                            ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.CanContentScroll="True"
+                            ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.CanContentScroll="True"
                             Focusable="False" SelectionChanged="SearchResultsListBox_SelectionChanged">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
