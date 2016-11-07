@@ -375,7 +375,6 @@ namespace JLLKirjasto
 
         private void ShowSearchGridStoryboard_Completed(object sender, EventArgs e)
         {
-            currentView = 1;
             SearchGrid.BeginAnimation(Grid.HeightProperty, null); //removes the ShowSearchGrid animation to allow for code-behind height change to take place
             SearchGrid.Height = GridHeightClass.Instance.ExpandedGridHeight; //apply the correct height value to SearchGrid (wihtout this SearchGrid would revert back to original height value
             Keyboard.Focus(SearchBox);
@@ -383,14 +382,13 @@ namespace JLLKirjasto
 
         private void ShowLoginGridStoryboard_Completed(object sender, EventArgs e)
         {
-            currentView = 2;
             LoginGrid.BeginAnimation(Grid.HeightProperty, null); //removes the ShowLoginGrid animation to allow for code-behind height change to take place
             LoginGrid.Height = GridHeightClass.Instance.ExpandedGridHeight;
         }
 
         private void ShowSignUpGridStoryboard_Completed(object sender, EventArgs e)
         {
-            currentView = 3;  //removes the ShowSignUpGrid animation to allow for code-behind height change to take place
+            //removes the ShowSignUpGrid animation to allow for code-behind height change to take place
             SignUpGrid.BeginAnimation(Grid.HeightProperty, null);
             SignUpGrid.Height = GridHeightClass.Instance.ExpandedGridHeight;
         }
@@ -404,24 +402,6 @@ namespace JLLKirjasto
         {
             ResetAnimationsAfterArrivingToHomeView();
         }
-
-        private void HideSearchGridStoryboard_Completed(object sender, EventArgs e)
-        {
-            //currentView = 0; //we're home
-            ResetAnimationsAfterArrivingToHomeView();
-        }
-
-        private void HideLoginGridStoryboard_Completed(object sender, EventArgs e)
-        {
-            //currentView = 0; //we're home
-            ResetAnimationsAfterArrivingToHomeView();
-        }
-
-        private void HideSignUpGridStoryboard_Completed(object sender, EventArgs e)
-        {
-            //currentView = 0; //we're home
-            ResetAnimationsAfterArrivingToHomeView();
-        }
         #endregion
 
 
@@ -433,6 +413,7 @@ namespace JLLKirjasto
         //starts ShowSearchGrid animation
         void showSearchGrid()
         {
+            currentView = 1;
             Storyboard ShowSearchGrid = this.FindResource("ShowSearchGrid") as Storyboard;
             ShowSearchGrid.Begin();
         }
@@ -440,6 +421,7 @@ namespace JLLKirjasto
         //starts ShowLoginGrid animation
         void showLoginGrid()
         {
+            currentView = 2;
             Storyboard ShowLoginGrid = this.FindResource("ShowLoginGrid") as Storyboard;
             ShowLoginGrid.Begin();
         }
@@ -447,6 +429,7 @@ namespace JLLKirjasto
         //starts ShowSignUpGrid animation
         void showSignUpGrid()
         {
+            currentView = 3;
             Storyboard ShowSignUpGrid = this.FindResource("ShowSignUpGrid") as Storyboard;
             ShowSignUpGrid.Begin();
         }
@@ -458,6 +441,8 @@ namespace JLLKirjasto
                 showLoginGrid();
             }
         }
+
+        //TODO: probably not necessary since keyboard navigation is disabled
         private void LoginGridTooltip_KeyDown(object sender, KeyEventArgs e)    //expand LoginGrid if we're home
         {
             if (e.Key == Key.Enter && currentView == 0)
@@ -961,7 +946,7 @@ namespace JLLKirjasto
         {
 
             Book currentBook = SearchResultsListBox.SelectedItem as Book;
-            if (currentBook != null && currentBook.isbn!="")
+            if (currentBook != null)
             {
                 //show text depending on if the user is logged in or not
                 if(loggedIn)
@@ -974,19 +959,22 @@ namespace JLLKirjasto
                     logInNotice.Visibility = Visibility.Visible;
                     loanButton.Visibility = Visibility.Collapsed;
                 }
-                //retrieve cover art
-                string url = await retrieveCoverArtAsync(currentBook.isbn);
-                if (url != String.Empty)
+                if (currentBook.isbn != "")
                 {
-                    BitmapImage bitmap = new BitmapImage();
-                    bitmap.BeginInit();
-                    bitmap.UriSource = new Uri(url, UriKind.Absolute);
-                    bitmap.EndInit();
-                    coverArt.Source = bitmap;
-                }
-                else
-                {
-                    coverArt.Source = null;
+                    //retrieve cover art
+                    string url = await retrieveCoverArtAsync(currentBook.isbn);
+                    if (url != String.Empty)
+                    {
+                        BitmapImage bitmap = new BitmapImage();
+                        bitmap.BeginInit();
+                        bitmap.UriSource = new Uri(url, UriKind.Absolute);
+                        bitmap.EndInit();
+                        coverArt.Source = bitmap;
+                    }
+                    else
+                    {
+                        coverArt.Source = null;
+                    }
                 }
             } else
             {
