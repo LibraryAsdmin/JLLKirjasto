@@ -1108,9 +1108,9 @@
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Vertical">
-                                <TextBlock Text="{Binding Title}"/>
-                                <TextBlock Text="{Binding Author}" FontSize="16"/>
-                                <Separator Background="Black"/>
+                                <TextBlock Text="{Binding title}" Foreground="White"/>
+                                <TextBlock Text="{Binding author}" Foreground="White" FontSize="16"/>
+                                <Separator Background="White"/>
                             </StackPanel>
                         </DataTemplate>
                     </ListBox.ItemTemplate>

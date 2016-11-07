@@ -323,6 +323,9 @@ namespace JLLKirjasto
                 Storyboard ShowLoggedInHomeView = this.FindResource("ShowLoggedInHomeView") as Storyboard;
                 ShowLoggedInHomeView.Begin();
                 currentView = 4;
+
+                // update loans listbox
+                updateLoansListbox();
             }
             else
             {
@@ -627,6 +630,8 @@ namespace JLLKirjasto
                     loggedInUserGreeting.Text = Properties.Resources.ResourceManager.GetString("loggedInUserGreeting", TranslationSource.Instance.CurrentCulture);
                     loggedInUserGreeting.Text = String.Format(loggedInUserGreeting.Text, defaultLoginSession.Name);
 
+                    updateLoansListbox();         
+
                     // go to logged in view
                     Storyboard ShowLoggedInHomeView = this.FindResource("ShowLoggedInHomeView") as Storyboard;
                     ShowLoggedInHomeView.Begin();
@@ -905,7 +910,6 @@ namespace JLLKirjasto
 
         #region Search
 
-        //TODO: Add support for advanced search, currently hard-coded for ID, Author and Title only
         private void updateSearchResults()
         {
             // determine what to search
@@ -1085,7 +1089,6 @@ namespace JLLKirjasto
         {
             //Storyboard ShowLoadingView = this.FindResource("ShowLoadingView") as Storyboard;
             //ShowLoadingView.Begin();
-            showHazardNotification("You are about to borrow this book!");
 
             if (!defaultLoginSession.loggedIn)
             {
@@ -1127,8 +1130,12 @@ namespace JLLKirjasto
             // change availability to false in book database table
             dbi.commitDbChanges(dbconnection, "books", "FALSE", selection.id, "Available");
 
-            // update displayed info in searh TODO: Change to return button
+            // update book displayed info
+            availability.Text = Properties.Resources.ResourceManager.GetString("bookNotAvailable", TranslationSource.Instance.CurrentCulture);
+            loanButton.IsEnabled = false;
+            showHazardNotification("Book borrowed successfully!");
             updateSearchResults();
+
         }
 
         private void SearchGrid_MouseEnter(object sender, MouseEventArgs e)
@@ -1203,6 +1210,36 @@ namespace JLLKirjasto
         private void Storyboard_Completed_1(object sender, EventArgs e)
         {
             ResetAnimationsAfterArrivingToHomeView();
+        }
+
+        private void updateLoansListbox()
+        {
+            // populate the users loans listbox
+            List<string> columns = new List<string>();
+            columns.Add("ID");
+            List<List<string>> results = new List<List<string>>();
+            results = dbi.searchExactDatabaseRows(dbconnection, "users", defaultLoginSession.ID, columns);
+
+            if (results.Count != 1) throw new Exception("There should be only one user logged in");
+
+            User user = new User(results[0][0], results[0][1], results[0][2]);
+
+            // add book to loans
+            List<String> loanIDs = user.getLoans();
+            List<Book> loans = new List<Book>();
+
+            foreach (String ID in loanIDs)
+            {
+                // fetch the remaining book info
+                List<List<String>> searchResults = new List<List<String>>();
+                searchResults = dbi.searchDatabaseRows(dbconnection, "books", ID, columns);
+                if (searchResults.Count != 1) throw new Exception("Conflicting book IDs!");
+
+                loans.Add(new Book(ID, searchResults[0][1], searchResults[0][2], searchResults[0][3],
+                    searchResults[0][4], searchResults[0][5], searchResults[0][6], searchResults[0][7]));
+            }
+
+            LoansListBox.ItemsSource = loans;
         }
     }
 
