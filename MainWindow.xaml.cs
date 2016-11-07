@@ -620,7 +620,7 @@ namespace JLLKirjasto
                     // log in
                     loggedIn = true;
                     loggedInID = results[0][0];
-                    a(loggedInID);
+                    showHazardNotification(loggedInID);
 
                     // clear UsernameField
                     UsernameField.Text = "";
@@ -932,10 +932,10 @@ namespace JLLKirjasto
         #endregion
 
         #region Debug
-        private void a(String m)
+        /*private void a(String m)
         {
             MessageBox.Show(m);
-        }
+        }*/
 
         #endregion
 
@@ -1060,8 +1060,9 @@ namespace JLLKirjasto
 
         private void loanButton_Click(object sender, RoutedEventArgs e)
         {
-            Storyboard ShowLoadingView = this.FindResource("ShowLoadingView") as Storyboard;
-            ShowLoadingView.Begin();
+            //Storyboard ShowLoadingView = this.FindResource("ShowLoadingView") as Storyboard;
+            //ShowLoadingView.Begin();
+            showHazardNotification("You are about to borrow this book!");
         }
 
         private void SearchGrid_MouseEnter(object sender, MouseEventArgs e)
@@ -1106,6 +1107,18 @@ namespace JLLKirjasto
             }
         }
 
+        private void dismissHazardNotificationButton_Click(object sender, RoutedEventArgs e)
+        {
+            Storyboard HideHazardNotification = this.FindResource("HideHazardNotification") as Storyboard;
+            HideHazardNotification.Begin();
+        }
+
+        void showHazardNotification (string message)
+        {
+            hazardNotificationText.Text = message;
+            Storyboard ShowHazardNotification = this.FindResource("ShowHazardNotification") as Storyboard;
+            ShowHazardNotification.Begin();
+        }
     }
 
 
