@@ -282,6 +282,10 @@ namespace JLLKirjasto
             {
                 LoginButton.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
             }
+            if (UsernameField.Text == "admin" && e.Key == Key.Tab)
+            {
+                Keyboard.Focus(PasswordField);
+            }
         }
         private void PasswordField_KeyDown(object sender, KeyEventArgs e)
         {
