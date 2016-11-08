@@ -178,13 +178,13 @@
     <value>Books</value>
   </data>
   <data name="DefaultLoginButtonContent" xml:space="preserve">
-    <value>Login</value>
+    <value>Log In</value>
   </data>
   <data name="DefaultLoginUsernameBoxContent" xml:space="preserve">
     <value>Wilma username</value>
   </data>
   <data name="DefaultSearchBoxContent" xml:space="preserve">
-    <value>Search!</value>
+    <value>Search</value>
   </data>
   <data name="DefaultSignUpUsernameBoxContent" xml:space="preserve">
     <value>Type your wilma account here</value>
@@ -284,5 +284,23 @@
   </data>
   <data name="bookNotAvailable" xml:space="preserve">
     <value>Borrowed by someone</value>
+  </data>
+  <data name="HomeLoginButtonInstruction" xml:space="preserve">
+    <value>to borrow books</value>
+  </data>
+  <data name="HomeLoginButtonTitle" xml:space="preserve">
+    <value>Log In</value>
+  </data>
+  <data name="HomeSearchButtonInstruction" xml:space="preserve">
+    <value>for books and authors</value>
+  </data>
+  <data name="HomeSearchButtonTitle" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="HomeSignUpButtonInstruction" xml:space="preserve">
+    <value>in order to use the llibrary</value>
+  </data>
+  <data name="HomeSignUpButtonTitle" xml:space="preserve">
+    <value>Sign Up</value>
   </data>
 </root>

@@ -286,4 +286,22 @@
   <data name="bookNotAvailable" xml:space="preserve">
     <value>Svenska här</value>
   </data>
+  <data name="HomeLoginButtonInstruction" xml:space="preserve">
+    <value>Svenska här</value>
+  </data>
+  <data name="HomeLoginButtonTitle" xml:space="preserve">
+    <value>Svenska här</value>
+  </data>
+  <data name="HomeSearchButtonInstruction" xml:space="preserve">
+    <value>Svenska här</value>
+  </data>
+  <data name="HomeSearchButtonTitle" xml:space="preserve">
+    <value>Svenska här</value>
+  </data>
+  <data name="HomeSignUpButtonInstruction" xml:space="preserve">
+    <value>Svenska här</value>
+  </data>
+  <data name="HomeSignUpButtonTitle" xml:space="preserve">
+    <value>Svenska här</value>
+  </data>
 </root>
