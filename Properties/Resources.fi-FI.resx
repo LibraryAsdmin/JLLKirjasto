@@ -285,4 +285,22 @@
   <data name="bookNotAvailable" xml:space="preserve">
     <value>Lainassa</value>
   </data>
+  <data name="HomeLoginButtonInstruction" xml:space="preserve">
+    <value>lainataksesi kirjoja</value>
+  </data>
+  <data name="HomeLoginButtonTitle" xml:space="preserve">
+    <value>Kirjaudu sisään</value>
+  </data>
+  <data name="HomeSearchButtonInstruction" xml:space="preserve">
+    <value>teoksia ja kirjailijoita</value>
+  </data>
+  <data name="HomeSearchButtonTitle" xml:space="preserve">
+    <value>Hae</value>
+  </data>
+  <data name="HomeSignUpButtonInstruction" xml:space="preserve">
+    <value>käyttääksesi kirjastoa</value>
+  </data>
+  <data name="HomeSignUpButtonTitle" xml:space="preserve">
+    <value>Rekisteröidy</value>
+  </data>
 </root>

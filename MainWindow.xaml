@@ -855,10 +855,11 @@
                 <BlurEffect x:Name="NavigationStackPanelBlurEffect" Radius="0"/>
             </StackPanel.Effect>
             <Grid x:Name="LoginGrid" Margin="0" Background="{StaticResource MenuItemColourBrush1}" Height="238" MouseUp="LoginGrid_MouseUp" VerticalAlignment="Top" MouseEnter="LoginGrid_MouseEnter">
-                <TextBlock x:Name="LoginGridTooltip" Text="Login" Visibility="Visible" FontSize="120" Margin="40,0,0,0" Foreground="White" HorizontalAlignment="Left" 
+                <TextBlock x:Name="LoginGridTooltip" Visibility="Visible" FontSize="120" Margin="40,0,0,0" Foreground="White" HorizontalAlignment="Left" 
                            VerticalAlignment="Center" Focusable="True" KeyDown="LoginGridTooltip_KeyDown" FontFamily="Niagara Engraved">
-                <LineBreak/>
-                <Run FontSize="24" FontFamily="Century Gothic">to borrow books</Run>
+                    <Run Text="{local:Loc HomeLoginButtonTitle}"/>
+                    <LineBreak/>
+                    <Run FontSize="24" FontFamily="Century Gothic" Text="{local:Loc HomeLoginButtonInstruction}"/>
                 </TextBlock>
                 <Grid x:Name="LoginFieldsGrid" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Hidden">
                     <Grid.ColumnDefinitions>
@@ -890,10 +891,11 @@
             <!-- SignUpGrid Contains the UI elements required for account creation -->
 
             <Grid x:Name="SignUpGrid" Margin="0" Background="{StaticResource MenuItemColourBrush2}" Height="238" MouseUp="SignUpGrid_MouseUp" VerticalAlignment="Top" MouseEnter="SignUpGrid_MouseEnter">
-                <TextBlock x:Name="SignUpGridTooltip" Text="Sign Up" Visibility="Visible" FontSize="120" Foreground="White" HorizontalAlignment="Left" 
+                <TextBlock x:Name="SignUpGridTooltip" Visibility="Visible" FontSize="120" Foreground="White" HorizontalAlignment="Left" 
                            VerticalAlignment="Center" Focusable="True" KeyDown="SignUpGridTooltip_KeyDown" Margin="40,0,0,0" FontFamily="Niagara Engraved">
-                        <LineBreak/>
-                        <Run FontSize="24" FontFamily="Century Gothic">in order to use the library</Run>
+                    <Run Text="{local:Loc HomeSignUpButtonTitle}"/>    
+                    <LineBreak/>
+                    <Run FontSize="24" FontFamily="Century Gothic" Text="{local:Loc HomeSignUpButtonInstruction}"/>
                 </TextBlock>
                 <StackPanel>
                     <TextBlock x:Name="SignUpInstruction" HorizontalAlignment="Center" Margin="0,150,0,0" TextWrapping="Wrap"
@@ -932,10 +934,11 @@
             <!-- SearchGrid contains the UI elements for searching the books database-->
 
             <Grid x:Name="SearchGrid" Margin="0" HorizontalAlignment="Stretch" Height="238" Background="{StaticResource MenuItemColourBrush3}" MouseUp="SearchGrid_MouseUp" VerticalAlignment="Top" MouseEnter="SearchGrid_MouseEnter" MouseLeave="SearchGrid_MouseLeave">
-                <TextBlock x:Name="SearchGridTooltip" Text="Search" Visibility="Visible" FontSize="120" Margin="40,0,0,0" Foreground="White" HorizontalAlignment="Left" 
+                <TextBlock x:Name="SearchGridTooltip" Visibility="Visible" FontSize="120" Margin="40,0,0,0" Foreground="White" HorizontalAlignment="Left" 
                            VerticalAlignment="Center" Focusable="True" KeyDown="SearchGridTooltip_KeyDown" FontFamily="Niagara Engraved">
-                        <LineBreak/>
-                        <Run FontSize="24" FontFamily="Century Gothic">for books and authors</Run>
+                    <Run Text="{local:Loc HomeSearchButtonTitle}"/> 
+                    <LineBreak/>
+                    <Run FontSize="24" FontFamily="Century Gothic" Text="{local:Loc HomeSearchButtonInstruction}"/>
                 </TextBlock>
 
                 <!-- Contains the search UI interaction elements. This has to exist as otherwise SearchGridToolTip couldn't be displayed properly -->
@@ -1058,7 +1061,7 @@
                             </ListBox.ItemTemplate>
                         </ListBox>
 
-                        
+
                     </Grid>
 
                     <ScrollViewer x:Name="scroll" Grid.Column="1" VerticalScrollBarVisibility="Hidden">
