@@ -1241,6 +1241,66 @@ namespace JLLKirjasto
 
             LoansListBox.ItemsSource = loans;
         }
+
+        private void returnSelectedButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (!defaultLoginSession.loggedIn)
+            {
+                // The user is trying to borrow a book without being signed in. This message should never be visible.
+                showHazardNotification("This button should only be available to users logged in.");
+                return;
+            }
+
+            // Find out which book is selected
+            Book selection = LoansListBox.SelectedItem as Book;
+
+            // Search user's entries in the database
+            List<string> columns = new List<string>();
+            columns.Add("ID");
+            List<List<string>> results = new List<List<string>>();
+            results = dbi.searchExactDatabaseRows(dbconnection, "users", defaultLoginSession.ID, columns);
+
+            if (results.Count != 1) throw new Exception("There should be only one user returning the book");
+
+            User user = new User(results[0][0], results[0][1], results[0][2]);
+
+            // remove book from loans
+            List<String> loans = user.getLoans();
+            loans.Remove(selection.id);
+
+            // parse loans to csv
+            String loans_csv = "";
+            if (loans.Count > 1) // if there are more than one books to add to csv
+            {
+                loans_csv = loans[0];
+                for (int i = 1; i < loans.Count; i++)
+                {
+                    loans_csv += String.Format(";{0}", loans[i]);
+                }
+            }
+
+            // update user table entry for loans
+            dbi.commitDbChanges(dbconnection, "users", loans_csv, defaultLoginSession.ID, "Loans");
+
+            // change availability to false in book database table
+            dbi.commitDbChanges(dbconnection, "books", "TRUE", selection.id, "Available");
+
+            // update book displayed info
+            availability.Text = Properties.Resources.ResourceManager.GetString("bookNotAvailable", TranslationSource.Instance.CurrentCulture);
+            loanButton.IsEnabled = false;
+            showHazardNotification("Book returned successfully!");
+            updateLoansListbox();
+        }
+
+        private void returnAllButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void returnOtherButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 
 
