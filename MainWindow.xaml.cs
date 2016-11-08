@@ -1133,8 +1133,9 @@ namespace JLLKirjasto
             // update book displayed info
             availability.Text = Properties.Resources.ResourceManager.GetString("bookNotAvailable", TranslationSource.Instance.CurrentCulture);
             loanButton.IsEnabled = false;
-            showHazardNotification("Book borrowed successfully!");
-            updateSearchResults();
+            availability.Text = Properties.Resources.ResourceManager.GetString("bookNotAvailable", TranslationSource.Instance.CurrentCulture);
+            //showHazardNotification("Book borrowed successfully!");
+            //updateSearchResults();
 
         }
 
@@ -1338,7 +1339,7 @@ namespace JLLKirjasto
 
         private void returnOtherButton_Click(object sender, RoutedEventArgs e)
         {
-
+            quickReturnButton_Click(sender, e);
         }
     }
 
