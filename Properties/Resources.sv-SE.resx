@@ -304,4 +304,10 @@
   <data name="HomeSignUpButtonTitle" xml:space="preserve">
     <value>Svenska här</value>
   </data>
+  <data name="No" xml:space="preserve">
+    <value>Nej</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Ja</value>
+  </data>
 </root>

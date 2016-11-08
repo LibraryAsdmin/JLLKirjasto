@@ -1076,8 +1076,8 @@ namespace JLLKirjasto
 
         private void cancelQuickReturnButton_Click(object sender, RoutedEventArgs e)
         {
-            Storyboard ShowHomeView = this.FindResource("ShowHomeView") as Storyboard;
-            ShowHomeView.Begin();
+            Storyboard HideQuickReturnView = this.FindResource("HideQuickReturnView") as Storyboard;
+            HideQuickReturnView.Begin();
         }
 
         private void Storyboard_Completed(object sender, EventArgs e)
