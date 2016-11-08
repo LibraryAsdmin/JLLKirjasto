@@ -1098,6 +1098,7 @@ namespace JLLKirjasto
         {
             Storyboard HideQuickReturnView = this.FindResource("HideQuickReturnView") as Storyboard;
             HideQuickReturnView.Begin();
+            loanReturnBox.Text = "";
         }
 
         private void Storyboard_Completed(object sender, EventArgs e)
@@ -1372,9 +1373,87 @@ namespace JLLKirjasto
         {
             quickReturnButton_Click(sender, e);
         }
+
+        private void OKQuickReturnButton_Click(object sender, RoutedEventArgs e)
+        {
+            String ID = loanReturnBox.Text;
+            if (ID.Length != 6)
+            {
+                showHazardNotification("The book ID entered doesn't seem valid.");
+            }
+            else
+            {
+                // determine if the user is lying
+                foreach (Book book in LoansListBox.Items)
+                {
+                    if (book.id == ID)
+                    {
+                        showHazardNotification("This book is listed you loans window. Please return the from there instead.");
+                        return;
+                    }
+                }
+
+                // Find out which user has borrowed the book
+                List<string> columns = new List<string>();
+                columns.Add("ID");
+                List<List<string>> results = new List<List<string>>();
+                results = dbi.searchExactDatabaseRows(dbconnection, "users", defaultLoginSession.ID, columns);
+
+                // an user with this loan was found, return the book and remove it from the users loans
+                if (results.Count == 1)
+                {
+                    User user = new User(results[0][0], results[0][1], results[0][2]);
+
+                    // remove book from loans
+                    List<String> loans = user.getLoans();
+                    loans.Remove(ID);
+
+                    // change availability to TRUE in book database table
+                    dbi.commitDbChanges(dbconnection, "books", "TRUE", ID, "Available");
+
+                    // parse loans to csv
+                    String loans_csv = "";
+                    // if there are more than zero books remaining
+                    if (loans.Count > 0)
+                    {
+                        loans_csv = loans[0];
+                        for (int i = 1; i < loans.Count; i++)
+                        {
+                            loans_csv += String.Format(";{0}", loans[i]);
+                        }
+                    }
+
+                    // update user table entry for loans
+                    dbi.commitDbChanges(dbconnection, "users", loans_csv, defaultLoginSession.ID, "Loans");    
+                }
+                // no users have loaned this book, change its Available to TRUE in the books database
+                else if (results.Count == 0)
+                {
+                    // determine if the book exists
+                    columns.Add("ID");
+                    List<List<string>> bookResults = new List<List<string>>();
+                    results = dbi.searchExactDatabaseRows(dbconnection, "users", defaultLoginSession.ID, columns);
+                    if (results.Count == 0)
+                    {
+                        showHazardNotification("Error: There is no book in the database with the ID you entered.");
+                    }
+                    else if (results.Count > 1)
+                    {
+                        showHazardNotification("Error: There are multiple books with this ID in the library. Please contact the library administrator.");
+                    }
+
+                    // change availability to TRUE in book database table
+                    dbi.commitDbChanges(dbconnection, "books", "TRUE", ID, "Available");
+                }
+
+                Storyboard HideQuickReturnView = this.FindResource("HideQuickReturnView") as Storyboard;
+                HideQuickReturnView.Begin();
+
+                showHazardNotification("Book returned successfully!");
+                loanReturnBox.Text = "";
+            }
+        }
     }
-
-
 }
 
 

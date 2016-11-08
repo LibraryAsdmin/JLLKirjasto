@@ -863,7 +863,7 @@
                 </Grid.RowDefinitions>
                 <TextBlock Margin="0,10,0,10" FontSize="22" Foreground="White" Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Top" Text="Please input the ID of the book"/>
                 <TextBox x:Name="loanReturnBox" Style="{StaticResource ModernTextBoxStyle}" Grid.ColumnSpan="2" Margin="0,10,0,10" Grid.Row="1" Width="300" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="24" FontFamily="Sylfaen" Foreground="Black" />
-                <Button x:Name="OKQuickReturnButton" HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="2" Margin="5,10,0,10" Content="Return" Height="40" Style="{StaticResource ModernButtonStyle}"/>
+                <Button x:Name="OKQuickReturnButton" HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="2" Margin="5,10,0,10" Content="Return" Height="40" Style="{StaticResource ModernButtonStyle}" Click="OKQuickReturnButton_Click"/>
                 <Button x:Name="cancelQuickReturnButton" HorizontalAlignment="Stretch"  Grid.Column="0" Grid.Row="2" Margin="0,10,5,10" Content="Cancel" Height="40" Style="{StaticResource ModernButtonStyle}" Click="cancelQuickReturnButton_Click"/>
             </Grid>
             <Grid x:Name="LoadingNotificationGrid" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed">
