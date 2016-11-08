@@ -303,8 +303,20 @@
   <data name="HomeSignUpButtonTitle" xml:space="preserve">
     <value>Sign Up</value>
   </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
   <data name="No" xml:space="preserve">
     <value>No</value>
+  </data>
+  <data name="QuickReturnButtonContent" xml:space="preserve">
+    <value>Quick Return</value>
+  </data>
+  <data name="QuickReturnInstruction" xml:space="preserve">
+    <value>Please type the ID of the book</value>
+  </data>
+  <data name="ReturnButtonContent" xml:space="preserve">
+    <value>Return</value>
   </data>
   <data name="Yes" xml:space="preserve">
     <value>Yes</value>

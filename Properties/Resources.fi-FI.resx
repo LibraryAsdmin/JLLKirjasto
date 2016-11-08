@@ -303,8 +303,20 @@
   <data name="HomeSignUpButtonTitle" xml:space="preserve">
     <value>Rekisteröidy</value>
   </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Peruuta</value>
+  </data>
   <data name="No" xml:space="preserve">
     <value>Ei</value>
+  </data>
+  <data name="QuickReturnButtonContent" xml:space="preserve">
+    <value>Pikapalautus</value>
+  </data>
+  <data name="QuickReturnInstruction" xml:space="preserve">
+    <value>Kirjoita kirjan ID</value>
+  </data>
+  <data name="ReturnButtonContent" xml:space="preserve">
+    <value>Palauta</value>
   </data>
   <data name="Yes" xml:space="preserve">
     <value>Kyllä</value>

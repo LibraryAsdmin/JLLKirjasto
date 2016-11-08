@@ -861,10 +861,10 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <TextBlock Margin="0,10,0,10" FontSize="22" Foreground="White" Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Top" Text="Please input the ID of the book"/>
+                <TextBlock Margin="0,10,0,10" FontSize="22" Foreground="White" Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Top" Text="{local:Loc QuickReturnInstruction}"/>
                 <TextBox x:Name="loanReturnBox" Style="{StaticResource ModernTextBoxStyle}" Grid.ColumnSpan="2" Margin="0,10,0,10" Grid.Row="1" Width="300" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="24" FontFamily="Sylfaen" Foreground="Black" />
-                <Button x:Name="OKQuickReturnButton" HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="2" Margin="5,10,0,10" Content="Return" Height="40" Style="{StaticResource ModernButtonStyle}"/>
-                <Button x:Name="cancelQuickReturnButton" HorizontalAlignment="Stretch"  Grid.Column="0" Grid.Row="2" Margin="0,10,5,10" Content="Cancel" Height="40" Style="{StaticResource ModernButtonStyle}" Click="cancelQuickReturnButton_Click"/>
+                <Button x:Name="OKQuickReturnButton" HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="2" Margin="5,10,0,10" Content="{local:Loc ReturnButtonContent}" Height="40" Style="{StaticResource ModernButtonStyle}"/>
+                <Button x:Name="cancelQuickReturnButton" HorizontalAlignment="Stretch"  Grid.Column="0" Grid.Row="2" Margin="0,10,5,10" Content="{local:Loc Cancel}" Height="40" Style="{StaticResource ModernButtonStyle}" Click="cancelQuickReturnButton_Click"/>
             </Grid>
             <Grid x:Name="LoadingNotificationGrid" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed">
                 <TextBlock Margin="0,0,0,0" FontSize="22" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Top" Text="Loading..."/>
@@ -876,11 +876,17 @@
                 </StackPanel>
             </Grid>
             <Grid x:Name="UserPromptGrid" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed">
-                <StackPanel>
-                    <TextBlock x:Name="YesNoPromptText" Margin="0,0,0,0" FontSize="22" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Top" Text="" TextWrapping="Wrap" MaxWidth="300"/>
-                    <Button x:Name="promptYesButton" Style="{StaticResource ModernButtonStyle}" HorizontalAlignment="Stretch" MaxWidth="100" Content="{local:Loc Yes}" Height="40" Margin="0,20,0,0"/>
-                    <Button x:Name="promptNoButton" Style="{StaticResource ModernButtonStyle}" HorizontalAlignment="Stretch" MaxWidth="100" Content="{local:Loc No}" Height="40" Margin="0,20,0,0"/>
-                </StackPanel>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <TextBlock x:Name="YesNoPromptText" Margin="0,0,0,20" Grid.Row="0" Grid.ColumnSpan="2" FontSize="22" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Top" Text="" TextWrapping="Wrap" MaxWidth="400"/>
+                <Button x:Name="promptYesButton" Grid.Row="1" Grid.Column="1" Style="{StaticResource ModernButtonStyle}" HorizontalAlignment="Stretch" Content="{local:Loc Yes}" Height="40" Margin="5,20,0,0"/>
+                <Button x:Name="promptNoButton" Grid.Row="1" Grid.Column="0" Style="{StaticResource ModernButtonStyle}" HorizontalAlignment="Stretch" Content="{local:Loc No}" Height="40" Margin="0,20,5,0"/>
             </Grid>
         </Grid>
         <Grid x:Name="NotificationBackgroundGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Visibility="Collapsed" Panel.ZIndex="9" Background="Black" Opacity="0"/>
@@ -918,7 +924,7 @@
                     </TransformGroup>
                 </Button.RenderTransform>
             </Button>
-            <Button x:Name="quickReturnButton" Content="Quick Return" HorizontalAlignment="Right" Height="40" Margin="10,0,110,0" 
+            <Button x:Name="quickReturnButton" Content="{local:Loc QuickReturnButtonContent}" HorizontalAlignment="Right" Height="40" Margin="10,0,110,0" 
                    VerticalAlignment="Center" Width="80" RenderTransformOrigin="0.5,0.5" Cursor="Hand" 
                     KeyboardNavigation.IsTabStop="False" Style="{StaticResource ModernButtonStyle}" Click="quickReturnButton_Click">
                 <Button.RenderTransform>
