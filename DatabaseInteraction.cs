@@ -59,7 +59,7 @@ namespace JLLKirjasto
         public String title { get; private set; }
         public String year { get; private set; }
         public String language { get; private set; }
-        public String available { get; private set; }
+        public String available { get; set; }
         public String isbn { get; private set; }
         public String category { get; private set; }
 

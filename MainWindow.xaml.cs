@@ -282,6 +282,10 @@ namespace JLLKirjasto
             {
                 LoginButton.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
             }
+            if (UsernameField.Text == "admin" && e.Key == Key.Tab)
+            {
+                Keyboard.Focus(PasswordField);
+            }
         }
         private void PasswordField_KeyDown(object sender, KeyEventArgs e)
         {
@@ -301,6 +305,8 @@ namespace JLLKirjasto
                 defaultLoginSession.end();
             }
 
+            // empty search results
+            SearchResultsListBox.ItemsSource = null;
         }
 
         private void button_Click(object sender, RoutedEventArgs e)
@@ -326,6 +332,9 @@ namespace JLLKirjasto
 
                 // update loans listbox
                 updateLoansListbox();
+
+                // clear search results
+                SearchResultsListBox.ItemsSource = null;
             }
             else
             {
@@ -417,6 +426,16 @@ namespace JLLKirjasto
         //starts ShowSearchGrid animation
         void showSearchGrid()
         {
+            // clear search results and search text
+            SearchResultsListBox.ItemsSource = null;
+            SearchBox.Text = "";
+
+            // clear the book availability message
+            availability.Text = "";
+
+            // hide login message
+            logInNotice.Visibility = Visibility.Collapsed;
+
             currentView = 1;
             Storyboard ShowSearchGrid = this.FindResource("ShowSearchGrid") as Storyboard;
             ShowSearchGrid.Begin();
@@ -988,6 +1007,7 @@ namespace JLLKirjasto
                     logInNotice.Visibility = Visibility.Visible;
                     loanButton.Visibility = Visibility.Collapsed;
                 }
+
                 if (currentBook.isbn != "")
                 {
                     //retrieve cover art
@@ -1078,6 +1098,7 @@ namespace JLLKirjasto
         {
             Storyboard HideQuickReturnView = this.FindResource("HideQuickReturnView") as Storyboard;
             HideQuickReturnView.Begin();
+            loanReturnBox.Text = "";
         }
 
         private void Storyboard_Completed(object sender, EventArgs e)
@@ -1099,44 +1120,51 @@ namespace JLLKirjasto
 
             // Find out which book is selected
             Book selection = SearchResultsListBox.SelectedItem as Book;
-
-            // Search user's entries in the database
-            List<string> columns = new List<string>();
-            columns.Add("ID");
-            List<List<string>> results = new List<List<string>>();
-            results = dbi.searchExactDatabaseRows(dbconnection, "users", defaultLoginSession.ID, columns);
-
-            if (results.Count != 1) throw new Exception("There should be only one user loaning the book");
-
-            User user = new User(results[0][0], results[0][1], results[0][2]);
-
-            // add book to loans
-            List<String> loans = user.getLoans();
-            loans.Add(selection.id);
-
-            // parse loans to csv
-            String loans_csv = loans[0];
-            if (loans.Count > 1) // if there are more than one books to add to csv
+            if (selection.available == "TRUE")
             {
-                for (int i = 1; i < loans.Count; i++)
+                // Search user's entries in the database
+                List<string> columns = new List<string>();
+                columns.Add("ID");
+                List<List<string>> results = new List<List<string>>();
+                results = dbi.searchExactDatabaseRows(dbconnection, "users", defaultLoginSession.ID, columns);
+
+                if (results.Count != 1) throw new Exception("There should be only one user loaning the book");
+
+                User user = new User(results[0][0], results[0][1], results[0][2]);
+
+                // add book to loans
+                List<String> loans = user.getLoans();
+                loans.Add(selection.id);
+
+                // parse loans to csv
+                String loans_csv = loans[0];
+                if (loans.Count > 1) // if there are more than one books to add to csv
                 {
-                    loans_csv += String.Format(";{0}", loans[i]);
+                    for (int i = 1; i < loans.Count; i++)
+                    {
+                        loans_csv += String.Format(";{0}", loans[i]);
+                    }
                 }
+
+                // update user table entry for loans
+                dbi.commitDbChanges(dbconnection, "users", loans_csv, defaultLoginSession.ID, "Loans");
+
+                // change availability to false in book database table
+                dbi.commitDbChanges(dbconnection, "books", "FALSE", selection.id, "Available");
+
+                // update the book info into listbox to prevent further loaning
+                selection.available = "FALSE";
+
+                // update book displayed info
+                availability.Text = Properties.Resources.ResourceManager.GetString("bookNotAvailable", TranslationSource.Instance.CurrentCulture);
+                loanButton.IsEnabled = false;
+                //showHazardNotification("Book borrowed successfully!");
+
             }
-
-            // update user table entry for loans
-            dbi.commitDbChanges(dbconnection, "users", loans_csv, defaultLoginSession.ID, "Loans");
-
-            // change availability to false in book database table
-            dbi.commitDbChanges(dbconnection, "books", "FALSE", selection.id, "Available");
-
-            // update book displayed info
-            availability.Text = Properties.Resources.ResourceManager.GetString("bookNotAvailable", TranslationSource.Instance.CurrentCulture);
-            loanButton.IsEnabled = false;
-            availability.Text = Properties.Resources.ResourceManager.GetString("bookNotAvailable", TranslationSource.Instance.CurrentCulture);
-            //showHazardNotification("Book borrowed successfully!");
-            //updateSearchResults();
-
+            else
+            {
+                showHazardNotification("Error: This book has already been borrowed by someone.");
+            }
         }
 
         private void SearchGrid_MouseEnter(object sender, MouseEventArgs e)
@@ -1271,9 +1299,13 @@ namespace JLLKirjasto
                 List<String> loans = user.getLoans();
                 loans.Remove(selection.id);
 
+                // change availability to false in book database table
+                dbi.commitDbChanges(dbconnection, "books", "TRUE", selection.id, "Available");
+
                 // parse loans to csv
                 String loans_csv = "";
-                if (loans.Count > 1) // if there are more than one books to add to csv
+                // if there are more than zero books remaining
+                if (loans.Count > 0)
                 {
                     loans_csv = loans[0];
                     for (int i = 1; i < loans.Count; i++)
@@ -1283,15 +1315,12 @@ namespace JLLKirjasto
                 }
 
                 // update user table entry for loans
-                dbi.commitDbChanges(dbconnection, "users", loans_csv, defaultLoginSession.ID, "Loans");
-
-                // change availability to false in book database table
-                dbi.commitDbChanges(dbconnection, "books", "TRUE", selection.id, "Available");
+                dbi.commitDbChanges(dbconnection, "users", loans_csv, defaultLoginSession.ID, "Loans");               
 
                 // update book displayed info
                 availability.Text = Properties.Resources.ResourceManager.GetString("bookNotAvailable", TranslationSource.Instance.CurrentCulture);
                 loanButton.IsEnabled = false;
-                showHazardNotification("Book returned successfully!");
+                //showHazardNotification("Book returned successfully!");
                 updateLoansListbox();
             }
         }
@@ -1305,45 +1334,126 @@ namespace JLLKirjasto
                 return;
             }
 
-            // Search user's entries in the database
-            List<string> columns = new List<string>();
-            columns.Add("ID");
-            List<List<string>> results = new List<List<string>>();
-            results = dbi.searchExactDatabaseRows(dbconnection, "users", defaultLoginSession.ID, columns);
-
-            if (results.Count != 1) throw new Exception("There should be only one user returning the book");
-
-            User user = new User(results[0][0], results[0][1], results[0][2]);
-
-            // remove book from loans
-            List<String> loans = user.getLoans();
-
-            foreach (String id in loans)
+            if (LoansListBox.Items.Count > 0)
             {
-                // change availability to false in book database table
-                dbi.commitDbChanges(dbconnection, "books", "TRUE", id, "Available");
-            }
+                // Search user's entries in the database
+                List<string> columns = new List<string>();
+                columns.Add("ID");
+                List<List<string>> results = new List<List<string>>();
+                results = dbi.searchExactDatabaseRows(dbconnection, "users", defaultLoginSession.ID, columns);
 
-            // parse loans to csv
-            String loans_csv = "";
+                if (results.Count != 1) throw new Exception("There should be only one user returning the book");
 
-            // update user table entry for loans
-            dbi.commitDbChanges(dbconnection, "users", loans_csv, defaultLoginSession.ID, "Loans");
+                User user = new User(results[0][0], results[0][1], results[0][2]);
 
-            // update book displayed info
-            availability.Text = Properties.Resources.ResourceManager.GetString("bookNotAvailable", TranslationSource.Instance.CurrentCulture);
-            loanButton.IsEnabled = false;
-            showHazardNotification("Books returned successfully!");
-            updateLoansListbox();
+                // remove book from loans
+                List<String> loans = user.getLoans();
+
+                foreach (String id in loans)
+                {
+                    // change availability to false in book database table
+                    dbi.commitDbChanges(dbconnection, "books", "TRUE", id, "Available");
+                }
+
+                // parse loans to csv
+                String loans_csv = "";
+
+                // update user table entry for loans
+                dbi.commitDbChanges(dbconnection, "users", loans_csv, defaultLoginSession.ID, "Loans");
+
+                // update book displayed info
+                availability.Text = Properties.Resources.ResourceManager.GetString("bookNotAvailable", TranslationSource.Instance.CurrentCulture);
+                loanButton.IsEnabled = false;
+                showHazardNotification("Books returned successfully!");
+                updateLoansListbox();
+            }        
         }
 
         private void returnOtherButton_Click(object sender, RoutedEventArgs e)
         {
             quickReturnButton_Click(sender, e);
         }
+
+        private void OKQuickReturnButton_Click(object sender, RoutedEventArgs e)
+        {
+            String ID = loanReturnBox.Text;
+            if (ID.Length != 6)
+            {
+                showHazardNotification("The book ID entered doesn't seem valid.");
+            }
+            else
+            {
+                // determine if the user is lying
+                foreach (Book book in LoansListBox.Items)
+                {
+                    if (book.id == ID)
+                    {
+                        showHazardNotification("This book is listed you loans window. Please return the from there instead.");
+                        return;
+                    }
+                }
+
+                // Find out which user has borrowed the book
+                List<string> columns = new List<string>();
+                columns.Add("ID");
+                List<List<string>> results = new List<List<string>>();
+                results = dbi.searchExactDatabaseRows(dbconnection, "users", defaultLoginSession.ID, columns);
+
+                // an user with this loan was found, return the book and remove it from the users loans
+                if (results.Count == 1)
+                {
+                    User user = new User(results[0][0], results[0][1], results[0][2]);
+
+                    // remove book from loans
+                    List<String> loans = user.getLoans();
+                    loans.Remove(ID);
+
+                    // change availability to TRUE in book database table
+                    dbi.commitDbChanges(dbconnection, "books", "TRUE", ID, "Available");
+
+                    // parse loans to csv
+                    String loans_csv = "";
+                    // if there are more than zero books remaining
+                    if (loans.Count > 0)
+                    {
+                        loans_csv = loans[0];
+                        for (int i = 1; i < loans.Count; i++)
+                        {
+                            loans_csv += String.Format(";{0}", loans[i]);
+                        }
+                    }
+
+                    // update user table entry for loans
+                    dbi.commitDbChanges(dbconnection, "users", loans_csv, defaultLoginSession.ID, "Loans");    
+                }
+                // no users have loaned this book, change its Available to TRUE in the books database
+                else if (results.Count == 0)
+                {
+                    // determine if the book exists
+                    columns.Add("ID");
+                    List<List<string>> bookResults = new List<List<string>>();
+                    results = dbi.searchExactDatabaseRows(dbconnection, "users", defaultLoginSession.ID, columns);
+                    if (results.Count == 0)
+                    {
+                        showHazardNotification("Error: There is no book in the database with the ID you entered.");
+                    }
+                    else if (results.Count > 1)
+                    {
+                        showHazardNotification("Error: There are multiple books with this ID in the library. Please contact the library administrator.");
+                    }
+
+                    // change availability to TRUE in book database table
+                    dbi.commitDbChanges(dbconnection, "books", "TRUE", ID, "Available");
+                }
+
+                Storyboard HideQuickReturnView = this.FindResource("HideQuickReturnView") as Storyboard;
+                HideQuickReturnView.Begin();
+
+                showHazardNotification("Book returned successfully!");
+                loanReturnBox.Text = "";
+            }
+        }
     }
-
-
 }
 
 
