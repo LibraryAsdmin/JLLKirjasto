@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="{local:Loc AdminControlsWindowTitle}" Height="600" Width="800" Topmost="True" MinWidth="400" MinHeight="300" WindowStartupLocation="CenterScreen">
 
-    <Grid x:Name="AdminControlsWindowGrid" Margin="0,0,0,0">
+    <Grid x:Name="AdminControlsWindowGrid" Margin="0,0,0,0" d:IsLocked="True">
         
         <!-- Use Tabs for selecting which database to administrate -->
         <TabControl Margin="5">
@@ -165,7 +165,6 @@
                     </Grid.RowDefinitions>
 
                     <!-- Advanced search settings -->
-                    <!-- TODO: Add functionality -->
                     <Expander Header="{local:Loc BookDbAdvancedSearchContent}" Margin="5" Grid.Row="0">
                         <StackPanel Orientation="Horizontal">
 
@@ -241,9 +240,9 @@
 
                     <!-- User database manipulation buttons -->
                     <StackPanel Orientation="Horizontal" Height="25" Grid.Row="3" Margin="5">
-                        <Button x:Name="addUserButton" Width="auto" Content="{local:Loc UserDbAddButtonContent}"/>
+                        <Button x:Name="addUserButton" Width="auto" Content="{local:Loc UserDbAddButtonContent}" Click="addUserButton_Click"/>
                         <Button x:Name="delUserButton" Width="auto" Margin="10,0,0,0" Content="{local:Loc UserDbDelButtonContent}" Click="delUserButton_Click"/>
-                        <Button x:Name="editUserButton" Width="Auto" Margin="10,0,0,0" Content="{local:Loc UserDbEditButtonContent}"/>
+                        <Button x:Name="editUserButton" Width="Auto" Margin="10,0,0,0" Content="{local:Loc UserDbEditButtonContent}" Click="editUserButton_Click"/>
                     </StackPanel>
 
                 </Grid>

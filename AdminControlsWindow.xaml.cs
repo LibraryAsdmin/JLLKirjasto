@@ -171,20 +171,29 @@ namespace JLLKirjasto
         }
         private void delBookButton_Click(object sender, RoutedEventArgs e)
         {
-            try
+            
+            // verify that some item is selected
+            if (!(BookListBox.SelectedItem == null))
             {
-                //Book selectedBook = (Book)BookDataGrid.SelectedItem;
-                //dbi.delDatabaseRow(dbconnection, "books", selectedBook.getStringByIndex((int)Book.columnID.ID));
-            }
-            catch
-            {
-                Console.Beep();
+                MessageBoxResult confirmBookDeletion = System.Windows.MessageBox.Show("Are you sure you want to delete the selected book?", "Delete Confirmation", System.Windows.MessageBoxButton.YesNo);
+                if (confirmBookDeletion == MessageBoxResult.Yes)
+                {
+                    // Get book information from the database item
+                    object selection = BookListBox.SelectedItem;
+                    PropertyInfo prop = typeof(Book).GetProperty("id");
+                    string ID = prop.GetValue(selection, null).ToString();
+
+                    dbi.delDatabaseRow(dbconnection, "books", ID);
+                    searchBooks();  // update BookListBox
+                }
             }
         }
+
         private void editBookButton_Click(object sender, RoutedEventArgs e)
         {
             editBook();
         }
+
         private void BookListBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             editBook();
@@ -237,20 +246,6 @@ namespace JLLKirjasto
                 bew.ShowDialog();
             }
         }
-
-        private void deleteUser()
-        {
-            // verify that some item is selected
-            if (!(UsersListBox.SelectedItem == null))
-            {
-                // Get book information from the database item
-                object selection = UsersListBox.SelectedItem;
-                PropertyInfo prop = typeof(User).GetProperty("id");
-                string ID = prop.GetValue(selection, null).ToString();
-
-                dbi.delDatabaseRow(dbconnection, "users", ID);
-            }
-        }
         #endregion
 
 
@@ -272,8 +267,21 @@ namespace JLLKirjasto
 
         private void delUserButton_Click(object sender, RoutedEventArgs e)
         {
-            deleteUser();
-            searchUsers();
+            // verify that some item is selected
+            if (!(UsersListBox.SelectedItem == null))
+            {
+                MessageBoxResult confirmUserDeletion = System.Windows.MessageBox.Show("Are you sure you want to delete the selected user?", "Delete Confirmation", System.Windows.MessageBoxButton.YesNo);
+                if (confirmUserDeletion == MessageBoxResult.Yes)
+                {
+                    // Get book information from the database item
+                    object selection = UsersListBox.SelectedItem;
+                    PropertyInfo prop = typeof(User).GetProperty("id");
+                    string ID = prop.GetValue(selection, null).ToString();
+
+                    dbi.delDatabaseRow(dbconnection, "users", ID);
+                    searchUsers();
+                }
+            }   
         }
 
         private void UsersSearchButton_Click(object sender, RoutedEventArgs e)
@@ -287,6 +295,17 @@ namespace JLLKirjasto
             {
                 searchUsers();
             }
+        }
+
+        private void addUserButton_Click(object sender, RoutedEventArgs e)
+        {
+
+
+        }
+
+        private void editUserButton_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
