@@ -321,4 +321,10 @@
   <data name="Yes" xml:space="preserve">
     <value>Yes</value>
   </data>
+  <data name="UserEditWindowTitle" xml:space="preserve">
+    <value>Edit user information</value>
+  </data>
+  <data name="UserEditWilmaError" xml:space="preserve">
+    <value>Warning! The user database already contains an user with the Wilma address: {0}. Please make sure that the Wilma address is unique.</value>
+  </data>
 </root>

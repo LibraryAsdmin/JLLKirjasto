@@ -58,6 +58,9 @@ namespace JLLKirjasto
                 dbi.commitDbChanges(dbconnection, bookstable, AvailableBox.Text, IDBox.Text, Book.columnNames[(int)Book.columnID.Available]);
                 dbi.commitDbChanges(dbconnection, bookstable, ISBNBox.Text, IDBox.Text, Book.columnNames[(int)Book.columnID.ISBN]);
                 dbi.commitDbChanges(dbconnection, bookstable, CategoryBox.Text, IDBox.Text, Book.columnNames[(int)Book.columnID.Category]);
+
+                var parentWindow = this.Owner as AdminControlsWindow;
+                parentWindow.searchBooks();
                 this.Close();
             }
             else
@@ -66,10 +69,8 @@ namespace JLLKirjasto
                 MessageBox.Show(String.Format(Properties.Resources.ResourceManager.GetString("BookEditIDError", TranslationSource.Instance.CurrentCulture),IDBox.Text));
                 
             }
-
-
-
         }
+
         private void DeclineButton_Click(object sender, RoutedEventArgs e)
         {
             this.Close();

@@ -117,7 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AdminControlsWindowTitle" xml:space="preserve">
+  <data name="UserEditWindowTitle" xml:space="preserve">
     <value>Svenska här</value>
   </data>
   <data name="BookDbAddButtonContent" xml:space="preserve">
@@ -321,5 +321,8 @@
   </data>
   <data name="Yes" xml:space="preserve">
     <value>Ja</value>
+  </data>
+  <data name="UserEditWilmaError" xml:space="preserve">
+    <value>Svenska här! Svenska här: {0}. Svenska här.</value>
   </data>
 </root>

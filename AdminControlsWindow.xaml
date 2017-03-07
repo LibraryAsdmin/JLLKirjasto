@@ -216,7 +216,7 @@
                     <!-- ListBox for displaying user information -->
                     <Grid Height="Auto" Margin="0" Grid.Row="2">
                         <ListBox x:Name="UsersListBox" VerticalAlignment="Stretch" ScrollViewer.VerticalScrollBarVisibility="Visible" 
-                                     ScrollViewer.CanContentScroll="True" Margin="5">
+                                     ScrollViewer.CanContentScroll="True" Margin="5" MouseDoubleClick="UsersListBox_MouseDoubleClick">
                             <!-- Template for item appearance -->
                             <ListBox.ItemTemplate>
                                 <DataTemplate>

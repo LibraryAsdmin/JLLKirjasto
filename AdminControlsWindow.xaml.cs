@@ -79,7 +79,7 @@ namespace JLLKirjasto
             }
         }
 
-        private void searchBooks()
+        public void searchBooks()
         {
             // Determine what to search
             List<String> columns = new List<String>();
@@ -112,7 +112,7 @@ namespace JLLKirjasto
             BookListBox.ItemsSource = books;
         }
 
-        private void searchUsers()
+        public void searchUsers()
         {
             //Determine what to search
             List<String> columns = new List<String>();
@@ -299,13 +299,69 @@ namespace JLLKirjasto
 
         private void addUserButton_Click(object sender, RoutedEventArgs e)
         {
+            SignUpOperation adminCreateUserOperation = new SignUpOperation();
+            // generate new ID for the user
+            adminCreateUserOperation.generateID();
 
+            // verify that the generated ID is not in use
+            // if it is, increment the number in ID until an unique ID is found
+            Boolean isUnique;
+            do
+            {
+                isUnique = adminCreateUserOperation.verifyID();
+                if (!isUnique)
+                {
+                    adminCreateUserOperation.incrementID();
+                }
+            }
+            while (!isUnique); // increment the ID until no conflicting IDs are found
 
+            // add the user to user database table
+            List<String> columns = new List<String>();
+            columns.Add("Wilma-address");                   // Empty wilma for later editing
+            columns.Add("");                                // Loans
+            dbi.addDatabaseRow(dbconnection, "users", adminCreateUserOperation.getID(), columns);
+            searchUsers();
+        }
+
+        private void editUser()
+        {
+            // verify that some item is selected
+            if (!(UsersListBox.SelectedItem == null))
+            {
+                object selection = UsersListBox.SelectedItem;
+                PropertyInfo prop = typeof(User).GetProperty("wilma");
+                string Wilma = prop.GetValue(selection, null).ToString();
+                prop = typeof(User).GetProperty("loans");
+                string Loans = prop.GetValue(selection, null).ToString();
+                prop = typeof(User).GetProperty("id");
+                string ID = prop.GetValue(selection, null).ToString();
+
+                // Create a new window
+                UserEditWindow uew = new UserEditWindow();
+                uew.Owner = this;
+
+                // store old wilma address to allow for its reuse
+                uew.setOldWilma(Wilma);
+
+                // store user id for database identification
+                uew.setOldID(ID);
+
+                uew.WilmaBox.Text = Wilma;
+                uew.LoansBox.Text = Loans;
+
+                uew.Show();
+            }
         }
 
         private void editUserButton_Click(object sender, RoutedEventArgs e)
         {
+            editUser();
+        }
 
+        private void UsersListBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            editUser();
         }
     }
 }

@@ -99,6 +99,7 @@ namespace JLLKirjasto
         #region implementation
         // TODO: Does this have to be public?
         public enum columnID { ID, Wilma, Loans, NumColumns};
+        public static String[] columnNames = new String[(int)User.columnID.NumColumns] { "ID", "Wilma", "Loans" };
         public String id { get; private set; }
         public String wilma { get; private set; } // for signup and signin
         public String loans { get; private set; } // A comma separated list of book IDs 
