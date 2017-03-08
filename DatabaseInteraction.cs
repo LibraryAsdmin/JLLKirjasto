@@ -59,12 +59,13 @@ namespace JLLKirjasto
         public String title { get; private set; }
         public String year { get; private set; }
         public String language { get; private set; }
+        public String amount { get; private set; }
         public String available { get; set; }
         public String isbn { get; private set; }
         public String category { get; private set; }
 
-        public enum columnID { ID, Author, Title, Year, Language, Available, ISBN, Category, NumColumns};
-        public static String[] columnNames = new String[(int)Book.columnID.NumColumns] { "ID", "Author", "Title", "Year", "Language", "Available", "ISBN", "Aineistolaji"};
+        public enum columnID { ID, Author, Title, Year, Language, Amount, Available, ISBN, Category, NumColumns};
+        public static String[] columnNames = new String[(int)Book.columnID.NumColumns] { "ID", "Author", "Title", "Year", "Language", "Amount", "Available", "ISBN", "Category"};
         #endregion implementation
     }
 
