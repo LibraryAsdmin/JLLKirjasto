@@ -984,17 +984,27 @@ namespace JLLKirjasto
             Book currentBook = SearchResultsListBox.SelectedItem as Book;
             if (currentBook != null)
             {
-                // check whether the book has been borrowed or not
-                if (currentBook.available == "TRUE")
+                // check whether there are books available or not
+                try
                 {
-                    availability.Text = Properties.Resources.ResourceManager.GetString("bookAvailable", TranslationSource.Instance.CurrentCulture);
-                    loanButton.IsEnabled = true;
+                    if (Int32.Parse(currentBook.available) > 0)
+                    {
+                        availability.Text = Properties.Resources.ResourceManager.GetString("bookAvailable", TranslationSource.Instance.CurrentCulture);
+                        loanButton.IsEnabled = true;
+                    }
+                    else
+                    {
+                        availability.Text = Properties.Resources.ResourceManager.GetString("bookNotAvailable", TranslationSource.Instance.CurrentCulture);
+                        loanButton.IsEnabled = false;
+                    }
                 }
-                else
+                catch
                 {
-                    availability.Text = Properties.Resources.ResourceManager.GetString("bookNotAvailable", TranslationSource.Instance.CurrentCulture);
+                    MessageBox.Show("An error occured while trying to determine the number of books available. Please seek help from the library administrator.");
+                    availability.Text = "ERROR!";
                     loanButton.IsEnabled = false;
                 }
+                
 
                 //show text depending on if the user is logged in or not
                 if (defaultLoginSession.loggedIn)
@@ -1090,8 +1100,12 @@ namespace JLLKirjasto
 
         private void quickReturnButton_Click(object sender, RoutedEventArgs e)
         {
-            Storyboard ShowQuickReturnView = this.FindResource("ShowQuickReturnView") as Storyboard;
-            ShowQuickReturnView.Begin();
+            // TODO: Add functionality for quick return
+            showHazardNotification("Warning! This functionality is broken. Please do not use it. If you are Otto, fix the quick return view!");
+            return;
+
+            //Storyboard ShowQuickReturnView = this.FindResource("ShowQuickReturnView") as Storyboard;
+            //ShowQuickReturnView.Begin();
         }
 
         private void cancelQuickReturnButton_Click(object sender, RoutedEventArgs e)
@@ -1106,6 +1120,7 @@ namespace JLLKirjasto
             Keyboard.Focus(loanReturnBox);
         }
 
+        // TODO: Verify that the user can borrow a certian book only one at a time
         private void loanButton_Click(object sender, RoutedEventArgs e)
         {
             //Storyboard ShowLoadingView = this.FindResource("ShowLoadingView") as Storyboard;
@@ -1120,9 +1135,11 @@ namespace JLLKirjasto
 
             // Find out which book is selected
             Book selection = SearchResultsListBox.SelectedItem as Book;
-            if (selection.available == "TRUE")
+
+            // verift that the book is available
+            if (Int32.Parse(selection.available) > 0)
             {
-                // Search user's entries in the database
+                // Verify that the user loaning the book is unique (i.e. only one user loaning the book per login)
                 List<string> columns = new List<string>();
                 columns.Add("ID");
                 List<List<string>> results = new List<List<string>>();
@@ -1149,14 +1166,19 @@ namespace JLLKirjasto
                 // update user table entry for loans
                 dbi.commitDbChanges(dbconnection, "users", loans_csv, defaultLoginSession.ID, "Loans");
 
-                // change availability to false in book database table
-                dbi.commitDbChanges(dbconnection, "books", "FALSE", selection.id, "Available");
+                // update the number of specified books available
+                Int32 totalAmount = Int32.Parse(selection.amount);
+                Int32 newAvailable = Int32.Parse(selection.available) - 1;
+                Int32 loaned = totalAmount - newAvailable;
+
+                // change availability to state the new number of availble books
+                dbi.commitDbChanges(dbconnection, "books", newAvailable.ToString(), selection.id, "Available");
 
                 // update the book info into listbox to prevent further loaning
-                selection.available = "FALSE";
+                selection.available = newAvailable.ToString();
 
                 // update book displayed info
-                availability.Text = Properties.Resources.ResourceManager.GetString("bookNotAvailable", TranslationSource.Instance.CurrentCulture);
+                availability.Text = String.Format(Properties.Resources.ResourceManager.GetString("booksAvailable", TranslationSource.Instance.CurrentCulture), newAvailable, loaned);
                 loanButton.IsEnabled = false;
                 //showHazardNotification("Book borrowed successfully!");
 
@@ -1299,8 +1321,11 @@ namespace JLLKirjasto
                 List<String> loans = user.getLoans();
                 loans.Remove(selection.id);
 
-                // change availability to false in book database table
-                dbi.commitDbChanges(dbconnection, "books", "TRUE", selection.id, "Available");
+                // update the number of specified books available
+                Int32 newAvailable = Int32.Parse(selection.available) + 1;
+
+                // update the number of books available in the database
+                dbi.commitDbChanges(dbconnection, "books", newAvailable.ToString(), selection.id, "Available");
 
                 // parse loans to csv
                 String loans_csv = "";
@@ -1334,6 +1359,17 @@ namespace JLLKirjasto
                 return;
             }
 
+            // verify that it wasn't a misclick
+            MessageBoxResult confirmReturnAll = System.Windows.MessageBox.Show(
+                Properties.Resources.ResourceManager.GetString("confirmReturnAll", TranslationSource.Instance.CurrentCulture),
+                Properties.Resources.ResourceManager.GetString("confirmReturnAllTitle", TranslationSource.Instance.CurrentCulture),
+                System.Windows.MessageBoxButton.YesNo);
+
+            if (confirmReturnAll == MessageBoxResult.No)
+            {
+                return;
+            }
+
             if (LoansListBox.Items.Count > 0)
             {
                 // Search user's entries in the database
@@ -1351,8 +1387,26 @@ namespace JLLKirjasto
 
                 foreach (String id in loans)
                 {
+                    // find the book matching the id and find how many are available
+                    List<String> bookSearchColumns = new List<String>();
+                    bookSearchColumns.Add("ID");
+
+                    List<List<String>> searchResults = new List<List<String>>();
+                    searchResults = dbi.searchDatabaseRows(dbconnection, "books", id, bookSearchColumns);
+
+                    // if there are other than one matching id, something is wrong (either the id is too short or no matches at all)
+                    if (searchResults.Count != 1)
+                    {
+                        MessageBox.Show(String.Format("Error: An error occured while trying to return the book with the id {0}. Please contact the library administrator.", id));
+                        showHazardNotification("Aborting returning books.");
+                        return;
+                    }
+
+                    // update the number of specified books available
+                    Int32 newAvailable = Int32.Parse(searchResults[0][(int)Book.columnID.Available]) + 1;
+
                     // change availability to false in book database table
-                    dbi.commitDbChanges(dbconnection, "books", "TRUE", id, "Available");
+                    dbi.commitDbChanges(dbconnection, "books", newAvailable.ToString(), id, "Available");
                 }
 
                 // parse loans to csv
@@ -1364,7 +1418,7 @@ namespace JLLKirjasto
                 // update book displayed info
                 availability.Text = Properties.Resources.ResourceManager.GetString("bookNotAvailable", TranslationSource.Instance.CurrentCulture);
                 loanButton.IsEnabled = false;
-                showHazardNotification("Books returned successfully!");
+                //showHazardNotification("Books returned successfully!");
                 updateLoansListbox();
             }        
         }

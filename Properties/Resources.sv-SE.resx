@@ -325,4 +325,16 @@
   <data name="UserEditWilmaError" xml:space="preserve">
     <value>Svenska här! Svenska här: {0}. Svenska här.</value>
   </data>
+  <data name="booksAvailable" xml:space="preserve">
+    <value>{0} ({1} svenska här)</value>
+  </data>
+  <data name="BookDbSearchOptionAmount" xml:space="preserve">
+    <value>Svenska här</value>
+  </data>
+  <data name="confirmReturnAll" xml:space="preserve">
+    <value>Svenska här</value>
+  </data>
+  <data name="confirmReturnAllTitle" xml:space="preserve">
+    <value>Svenska här</value>
+  </data>
 </root>

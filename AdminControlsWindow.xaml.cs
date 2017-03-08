@@ -24,14 +24,6 @@ namespace JLLKirjasto
     {
         #region Variables
 
-        // Variables for advanced search in admin control window
-        bool IDChecked = true;
-        bool TitleChecked = true;
-        bool AuthorChecked = true;
-        bool YearChecked = false;
-        bool AvailableChecked = false;
-        bool LanguageChecked = false;
-
         // Variables for interaction with the database
         SQLiteConnection dbconnection = new SQLiteConnection("Data Source=database.db");
         DatabaseInteraction dbi = new DatabaseInteraction();
@@ -215,6 +207,8 @@ namespace JLLKirjasto
                 string Title = prop.GetValue(selection, null).ToString();
                 prop = typeof(Book).GetProperty("year");
                 string Year = prop.GetValue(selection, null).ToString();
+                prop = typeof(Book).GetProperty("amount");
+                string Amount = prop.GetValue(selection, null).ToString();
                 prop = typeof(Book).GetProperty("available");
                 string Available = prop.GetValue(selection, null).ToString();
                 prop = typeof(Book).GetProperty("language");
@@ -239,6 +233,7 @@ namespace JLLKirjasto
                 bew.TitleBox.Text = Title;
                 bew.YearBox.Text = Year;
                 bew.LanguageBox.Text = Language;
+                bew.AmountBox.Text = Amount;
                 bew.AvailableBox.Text = Available;
                 bew.ISBNBox.Text = ISBN;
                 bew.CategoryBox.Text = Category;

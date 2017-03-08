@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:JLLKirjasto"
         mc:Ignorable="d"
-        Title="{local:Loc BookEditWindowTitle}" Height="325" Width="300" WindowStartupLocation="CenterScreen" MinHeight="325" MaxHeight="325" MinWidth="200">
+        Title="{local:Loc BookEditWindowTitle}" Height="Auto" Width="300" WindowStartupLocation="CenterScreen" MinHeight="350" MaxHeight="350" MinWidth="200">
     
     <Grid Margin="10">
         <Grid.RowDefinitions>
@@ -28,6 +28,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
             <TextBlock Grid.Row="0" Margin="5" Text="{local:Loc BookDbSearchOptionID}"/>
@@ -35,18 +36,20 @@
             <TextBlock Grid.Row="2" Margin="5" Text="{local:Loc BookDbSearchOptionTitle}"/>
             <TextBlock Grid.Row="3" Margin="5" Text="{local:Loc BookDbSearchOptionYear}"/>
             <TextBlock Grid.Row="4" Margin="5" Text="{local:Loc BookDbSearchOptionLanguage}"/>
-            <TextBlock Grid.Row="5" Margin="5" Text="{local:Loc BookDbSearchOptionAvailable}"/>
-            <TextBlock Grid.Row="6" Margin="5" Text="{local:Loc BookDbSearchOptionISBN}"/>
-            <TextBlock Grid.Row="7" Margin="5" Text="{local:Loc BookDbSearchOptionCategory}"/>
+            <TextBlock Grid.Row="5" Margin="5" Text="{local:Loc BookDbSearchOptionAmount}"/>
+            <TextBlock Grid.Row="6" Margin="5" Text="{local:Loc BookDbSearchOptionAvailable}"/>
+            <TextBlock Grid.Row="7" Margin="5" Text="{local:Loc BookDbSearchOptionISBN}"/>
+            <TextBlock Grid.Row="8" Margin="5" Text="{local:Loc BookDbSearchOptionCategory}"/>
 
             <TextBox x:Name="IDBox" Grid.Row="0" Grid.Column="2" Margin="5"/>
             <TextBox x:Name="AuthorBox" Grid.Row="1" Grid.Column="2" Margin="5"/>
             <TextBox x:Name="TitleBox" Grid.Row="2" Grid.Column="2" Margin="5"/>
             <TextBox x:Name="YearBox" Grid.Row="3" Grid.Column="2" Margin="5"/>
             <TextBox x:Name="LanguageBox" Grid.Row="4" Grid.Column="2" Margin="5"/>
-            <TextBox x:Name="AvailableBox" Grid.Row="5" Grid.Column="2" Margin="5"/>
-            <TextBox x:Name="ISBNBox" Grid.Row="6" Grid.Column="2" Margin="5"/>
-            <TextBox x:Name="CategoryBox" Grid.Row="7" Grid.Column="2" Margin="5"/>
+            <TextBox x:Name="AmountBox" Grid.Row="5" Grid.Column="2" Margin="5"/>
+            <TextBox x:Name="AvailableBox" Grid.Row="6" Grid.Column="2" Margin="5"/>
+            <TextBox x:Name="ISBNBox" Grid.Row="7" Grid.Column="2" Margin="5"/>
+            <TextBox x:Name="CategoryBox" Grid.Row="8" Grid.Column="2" Margin="5"/>
         </Grid>
         <StackPanel Orientation="Horizontal" Grid.Row="1" FlowDirection="RightToLeft">
             <Button x:Name="DeclineButton" Content="{local:Loc BookEditWindowDeclineButtonContent}" Margin="5" 

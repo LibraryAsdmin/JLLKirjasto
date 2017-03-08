@@ -193,7 +193,7 @@
     <value>Author</value>
   </data>
   <data name="DisplaySearchBookAvailability" xml:space="preserve">
-    <value>Availability</value>
+    <value>Available</value>
   </data>
   <data name="DisplaySearchBookCategory" xml:space="preserve">
     <value>Category</value>
@@ -326,5 +326,17 @@
   </data>
   <data name="UserEditWilmaError" xml:space="preserve">
     <value>Warning! The user database already contains an user with the Wilma address: {0}. Please make sure that the Wilma address is unique.</value>
+  </data>
+  <data name="booksAvailable" xml:space="preserve">
+    <value>{0} ({1} currently borrowed)</value>
+  </data>
+  <data name="BookDbSearchOptionAmount" xml:space="preserve">
+    <value>Total number</value>
+  </data>
+  <data name="confirmReturnAll" xml:space="preserve">
+    <value>Are you sure you want to return all of your loans?</value>
+  </data>
+  <data name="confirmReturnAllTitle" xml:space="preserve">
+    <value>Confirm returning all loans</value>
   </data>
 </root>

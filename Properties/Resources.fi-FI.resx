@@ -139,7 +139,7 @@
     <value>Kirjailija</value>
   </data>
   <data name="BookDbSearchOptionAvailable" xml:space="preserve">
-    <value>Saatavuus</value>
+    <value>Saatavilla</value>
   </data>
   <data name="BookDbSearchOptionCategory" xml:space="preserve">
     <value>Aineistolaji</value>
@@ -326,5 +326,17 @@
   </data>
   <data name="UserEditWilmaError" xml:space="preserve">
     <value>Huomio! Käyttäjätietokanta sisältää jo käyttäjän, jolla on sama Wilma osoite: {0}. Varmista että Wilma osoite on ainutlaatuinen.</value>
+  </data>
+  <data name="booksAvailable" xml:space="preserve">
+    <value>{0} ({1} lainassa)</value>
+  </data>
+  <data name="BookDbSearchOptionAmount" xml:space="preserve">
+    <value>Kokonaismäärä</value>
+  </data>
+  <data name="confirmReturnAll" xml:space="preserve">
+    <value>Oletko varma että haluat palauttaa kaikki lainasi?</value>
+  </data>
+  <data name="confirmReturnAllTitle" xml:space="preserve">
+    <value>Varmista lainojen palautus</value>
   </data>
 </root>

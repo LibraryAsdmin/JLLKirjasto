@@ -25,6 +25,15 @@ namespace JLLKirjasto
             available   = _available;
             isbn        = _isbn;
             category    = _category;
+
+            try
+            {
+                borrowed = (Int32.Parse(amount) - Int32.Parse(available)).ToString();
+            }
+            catch
+            {
+                MessageBox.Show(String.Format("Error: The database entry of the book {0} with the ID {1} contains errors. Please contact the library administrator.", title, id));
+            }
         }
 
         // returns the string of a book object identified by its index (column number in the database)
@@ -42,6 +51,8 @@ namespace JLLKirjasto
                     return year;
                 case (int)columnID.Language:
                     return language;
+                case (int)columnID.Amount:
+                    return amount;
                 case (int)columnID.Available:
                     return available;
                 case (int)columnID.ISBN:
@@ -64,6 +75,9 @@ namespace JLLKirjasto
         public String available { get; set; }
         public String isbn { get; private set; }
         public String category { get; private set; }
+
+        // number of books borrowed
+        public String borrowed;
 
         public enum columnID { ID, Author, Title, Year, Language, Amount, Available, ISBN, Category, NumColumns};
         public static String[] columnNames = new String[(int)Book.columnID.NumColumns] { "ID", "Author", "Title", "Year", "Language", "Amount", "Available", "ISBN", "Category"};
