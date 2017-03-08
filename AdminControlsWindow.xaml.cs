@@ -104,6 +104,7 @@ namespace JLLKirjasto
                     row[(int)Book.columnID.Title],
                     row[(int)Book.columnID.Year],
                     row[(int)Book.columnID.Language],
+                    row[(int)Book.columnID.Amount],
                     row[(int)Book.columnID.Available],
                     row[(int)Book.columnID.ISBN],
                     row[(int)Book.columnID.Category]

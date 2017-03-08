@@ -14,16 +14,17 @@ namespace JLLKirjasto
     {
         #region interface
         // constructor
-        public Book(String _id, String _author, String _title, String _year, String _language, String _available, String _isbn, String _category)
+        public Book(String _id, String _author, String _title, String _year, String _language, String _amount, String _available, String _isbn, String _category)
         {
-            id        = _id;
-            author    = _author;
-            title     = _title;
-            year      = _year;
-            language  = _language;
-            available = _available;
-            isbn      = _isbn;
-            category  = _category;
+            id          = _id;
+            author      = _author;
+            title       = _title;
+            year        = _year;
+            language    = _language;
+            amount      = _amount;
+            available   = _available;
+            isbn        = _isbn;
+            category    = _category;
         }
 
         // returns the string of a book object identified by its index (column number in the database)

@@ -948,7 +948,7 @@ namespace JLLKirjasto
 
             foreach (List<String> row in searchResults)
             {
-                ListBoxItems.Add(new Book(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7]));
+                ListBoxItems.Add(new Book(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8]));
             }
             SearchResultsListBox.ItemsSource = ListBoxItems;
         }
@@ -1265,7 +1265,7 @@ namespace JLLKirjasto
                 if (searchResults.Count != 1) throw new Exception("Conflicting book IDs!");
 
                 loans.Add(new Book(ID, searchResults[0][1], searchResults[0][2], searchResults[0][3],
-                    searchResults[0][4], searchResults[0][5], searchResults[0][6], searchResults[0][7]));
+                    searchResults[0][4], searchResults[0][5], searchResults[0][6], searchResults[0][7], searchResults[0][8]));
             }
 
             LoansListBox.ItemsSource = loans;
