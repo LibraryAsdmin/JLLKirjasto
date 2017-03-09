@@ -168,7 +168,7 @@ namespace JLLKirjasto
             // verify that some item is selected
             if (!(BookListBox.SelectedItem == null))
             {
-                MessageBoxResult confirmBookDeletion = System.Windows.MessageBox.Show("Are you sure you want to delete the selected book?", "Delete Confirmation", System.Windows.MessageBoxButton.YesNo);
+                MessageBoxResult confirmBookDeletion = System.Windows.MessageBox.Show(Properties.Resources.ResourceManager.GetString("DeleteBookConfirmationDialogContent", TranslationSource.Instance.CurrentCulture), Properties.Resources.ResourceManager.GetString("DeleteBookConfirmationDialogTitle", TranslationSource.Instance.CurrentCulture), System.Windows.MessageBoxButton.YesNo);
                 if (confirmBookDeletion == MessageBoxResult.Yes)
                 {
                     // Get book information from the database item
@@ -266,7 +266,7 @@ namespace JLLKirjasto
             // verify that some item is selected
             if (!(UsersListBox.SelectedItem == null))
             {
-                MessageBoxResult confirmUserDeletion = System.Windows.MessageBox.Show("Are you sure you want to delete the selected user?", "Delete Confirmation", System.Windows.MessageBoxButton.YesNo);
+                MessageBoxResult confirmUserDeletion = System.Windows.MessageBox.Show(Properties.Resources.ResourceManager.GetString ("DeleteUserConfirmationDialogContent", TranslationSource.Instance.CurrentCulture), Properties.Resources.ResourceManager.GetString("DeleteUserConfirmationDialogTitle",TranslationSource.Instance.CurrentCulture), System.Windows.MessageBoxButton.YesNo);
                 if (confirmUserDeletion == MessageBoxResult.Yes)
                 {
                     // Get book information from the database item

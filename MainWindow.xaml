@@ -63,12 +63,14 @@
             <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(ScrollViewer.VerticalScrollBarVisibility)" Storyboard.TargetName="scroll">
                 <DiscreteObjectKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="{x:Static ScrollBarVisibility.Auto}"/>
             </ObjectAnimationUsingKeyFrames>
+            <!--
             <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="quickReturnButton">
                 <DiscreteBooleanKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="False"/>
             </BooleanAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="quickReturnButton">
                 <EasingDoubleKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="0"/>
             </DoubleAnimationUsingKeyFrames>
+            -->
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="UserInfoGrid">
                 <EasingDoubleKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="0"/>
             </DoubleAnimationUsingKeyFrames>
@@ -128,12 +130,14 @@
                 <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
                 <DiscreteBooleanKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="True"/>
             </BooleanAnimationUsingKeyFrames>
+            <!--
             <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="quickReturnButton">
                 <DiscreteBooleanKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="False"/>
             </BooleanAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="quickReturnButton">
                 <EasingDoubleKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="0"/>
             </DoubleAnimationUsingKeyFrames>
+            -->
         </Storyboard>
         <Storyboard x:Key="ShowSignUpGrid" Completed="ShowSignUpGridStoryboard_Completed">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="SignUpGrid">
@@ -185,12 +189,14 @@
                 <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
                 <DiscreteBooleanKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="True"/>
             </BooleanAnimationUsingKeyFrames>
+            <!--
             <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="quickReturnButton">
                 <DiscreteBooleanKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="False"/>
             </BooleanAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="quickReturnButton">
                 <EasingDoubleKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="0"/>
             </DoubleAnimationUsingKeyFrames>
+            -->
         </Storyboard>
         <Storyboard x:Key="ShowLoggedInHomeView" Completed="ShowLoggedInHomeViewStoryboard_Completed">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="ReturnButton">
@@ -207,6 +213,7 @@
                     </EasingDoubleKeyFrame.EasingFunction>
                 </EasingDoubleKeyFrame>
             </DoubleAnimationUsingKeyFrames>
+            <!--
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="quickReturnButton">
                 <EasingDoubleKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="-90">
                     <EasingDoubleKeyFrame.EasingFunction>
@@ -220,6 +227,7 @@
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="quickReturnButton">
                 <EasingDoubleKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="0"/>
             </DoubleAnimationUsingKeyFrames>
+            -->
             <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="ReturnButton">
                 <DiscreteBooleanKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="False"/>
             </BooleanAnimationUsingKeyFrames>
@@ -314,6 +322,7 @@
                     </EasingDoubleKeyFrame.EasingFunction>
                 </EasingDoubleKeyFrame>
             </DoubleAnimationUsingKeyFrames>
+            <!--
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="quickReturnButton">
                 <EasingDoubleKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="0">
                     <EasingDoubleKeyFrame.EasingFunction>
@@ -327,6 +336,7 @@
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="quickReturnButton">
                 <EasingDoubleKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="1"/>
             </DoubleAnimationUsingKeyFrames>
+            -->
             <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="ReturnButton">
                 <DiscreteBooleanKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="False"/>
             </BooleanAnimationUsingKeyFrames>
@@ -912,8 +922,8 @@
                     </TransformGroup>
                 </Button.RenderTransform>
             </Button>
-            <Button x:Name="LogOutButton" Content="Log Out" HorizontalAlignment="Right" Height="40" Margin="10,0,110,0" 
-                   VerticalAlignment="Center" Width="67.857" RenderTransformOrigin="0.5,0.5" Click="logOutButton_Click" Cursor="Hand" 
+            <Button x:Name="LogOutButton" Content="{local:Loc LogOutButtonContent}" HorizontalAlignment="Right" Height="40" Margin="10,0,110,0" 
+                   VerticalAlignment="Center" Width="80" RenderTransformOrigin="0.5,0.5" Click="logOutButton_Click" Cursor="Hand" 
                     KeyboardNavigation.IsTabStop="False" Style="{StaticResource ModernButtonStyle}">
                 <Button.RenderTransform>
                     <TransformGroup>
@@ -924,7 +934,8 @@
                     </TransformGroup>
                 </Button.RenderTransform>
             </Button>
-            <Button x:Name="quickReturnButton" Content="{local:Loc QuickReturnButtonContent}" HorizontalAlignment="Right" Height="40" Margin="10,0,110,0" 
+        <!-- 
+        <Button x:Name="quickReturnButton" Content="{local:Loc QuickReturnButtonContent}" HorizontalAlignment="Right" Height="40" Margin="10,0,110,0" 
                    VerticalAlignment="Center" Width="80" RenderTransformOrigin="0.5,0.5" Cursor="Hand" 
                     KeyboardNavigation.IsTabStop="False" Style="{StaticResource ModernButtonStyle}" Click="quickReturnButton_Click">
                 <Button.RenderTransform>
@@ -936,6 +947,7 @@
                     </TransformGroup>
                 </Button.RenderTransform>
             </Button>
+            -->
         </Grid>
 
         <!-- NavigationStackPanel contains core funtionality for user interface navigation (except ReturnButton which is in HeaderGrid) -->
@@ -1214,8 +1226,8 @@
                     <!-- The greeting message is set in language changing functions in csharp file -->
                     <TextBlock x:Name="loggedInUserGreeting" Text="Error: This message should be set to something else in code when signing in!" Margin="0,20,0,0" Foreground="White" FontSize="24" TextWrapping="Wrap" HorizontalAlignment="Stretch"/>
                     <TextBlock x:Name="loggedInUserInstruction" Text="{local:Loc loggedInUserInstruction}" Margin="0,0,0,20" Foreground="White" FontSize="24" TextWrapping="Wrap" HorizontalAlignment="Stretch"/>
-                    <Button x:Name="returnSelectedButton" Content="{local:Loc ReturnSelectedButtonContent}" HorizontalAlignment="Center" Style="{StaticResource ModernButtonStyle}" Height="40" Width="160" Margin="5,5,5,5" Click="returnSelectedButton_Click"/>
-                    <Button x:Name="returnAllButton" Content="{local:Loc ReturnAllButtonContent}" HorizontalAlignment="Center" Style="{StaticResource ModernButtonStyle}" Height="40" Width="160" Margin="5,5,5,5" Click="returnAllButton_Click"/>
+                    <Button x:Name="returnSelectedButton" Content="{local:Loc ReturnSelectedButtonContent}" HorizontalAlignment="Center" Style="{StaticResource ModernButtonStyle}" Height="40" Width="160" Margin="5,5,5,5" Click="returnSelectedButton_Click" IsEnabled="false"/>
+                    <Button x:Name="returnAllButton" Content="{local:Loc ReturnAllButtonContent}" HorizontalAlignment="Center" Style="{StaticResource ModernButtonStyle}" Height="40" Width="160" Margin="5,5,5,5" Click="returnAllButton_Click" IsEnabled="false"/>
                     <!--<Button x:Name="returnOtherButton" Content="Return a book not listed here" HorizontalAlignment="Center" Style="{StaticResource ModernButtonStyle}" Height="40" Width="160" Margin="5,5,5,5" Click="returnOtherButton_Click"/> -->
                 </StackPanel>
             </Grid>

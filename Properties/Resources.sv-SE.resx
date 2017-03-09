@@ -337,6 +337,21 @@
   <data name="confirmReturnAllTitle" xml:space="preserve">
     <value>Svenska här</value>
   </data>
+  <data name="DeleteBookConfirmationDialogContent" xml:space="preserve">
+    <value>Svenska här</value>
+  </data>
+  <data name="DeleteBookConfirmationDialogTitle" xml:space="preserve">
+    <value>Svenska här</value>
+  </data>
+  <data name="DeleteUserConfirmationDialogContent" xml:space="preserve">
+    <value>Svenska här</value>
+  </data>
+  <data name="DeleteUserConfirmationDialogTitle" xml:space="preserve">
+    <value>Svenska här</value>
+  </data>
+  <data name="LogOutButtonContent" xml:space="preserve">
+    <value>Svenska här</value>
+  </data>
   <data name="ReturnAllButtonContent" xml:space="preserve">
     <value>Svenska här</value>
   </data>

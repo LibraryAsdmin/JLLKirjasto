@@ -996,8 +996,16 @@ namespace JLLKirjasto
         private void LoansListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             //TODO: Add Functionality
+            Book currentBook = LoansListBox.SelectedItem as Book;
+            if (currentBook != null)
+            {
+                returnSelectedButton.IsEnabled = true;
+            }
+            else
+            {
+                returnSelectedButton.IsEnabled = false;
+            }
         }
-
         private async void SearchResultsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
@@ -1125,6 +1133,7 @@ namespace JLLKirjasto
             return String.Empty;
         }
 
+        /* This function is obsolete since quick return functionality has been removed
         private void quickReturnButton_Click(object sender, RoutedEventArgs e)
         {
             // TODO: Add functionality for quick return
@@ -1134,7 +1143,9 @@ namespace JLLKirjasto
             //Storyboard ShowQuickReturnView = this.FindResource("ShowQuickReturnView") as Storyboard;
             //ShowQuickReturnView.Begin();
         }
+        */
 
+        //This function is obsolete since quick return functionality has been removed
         private void cancelQuickReturnButton_Click(object sender, RoutedEventArgs e)
         {
             Storyboard HideQuickReturnView = this.FindResource("HideQuickReturnView") as Storyboard;
@@ -1326,6 +1337,14 @@ namespace JLLKirjasto
             }
 
             LoansListBox.ItemsSource = loans;
+            if (loans.Count>0)
+            {
+                returnAllButton.IsEnabled = true;
+            }
+            else
+            {
+                returnAllButton.IsEnabled = false;
+            }
         }
 
         private void returnSelectedButton_Click(object sender, RoutedEventArgs e)
@@ -1400,6 +1419,8 @@ namespace JLLKirjasto
                 Properties.Resources.ResourceManager.GetString("confirmReturnAllTitle", TranslationSource.Instance.CurrentCulture),
                 System.Windows.MessageBoxButton.YesNo);
 
+           
+
             if (confirmReturnAll == MessageBoxResult.No)
             {
                 return;
@@ -1464,6 +1485,8 @@ namespace JLLKirjasto
             //quickReturnButton_Click(sender, e);
         }
 
+
+        //The function below is obsolete since quick return has been removed
         private void OKQuickReturnButton_Click(object sender, RoutedEventArgs e)
         {
             String ID = loanReturnBox.Text;

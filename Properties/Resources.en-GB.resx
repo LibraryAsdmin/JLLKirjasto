@@ -339,6 +339,21 @@
   <data name="confirmReturnAllTitle" xml:space="preserve">
     <value>Confirm returning all loans</value>
   </data>
+  <data name="DeleteBookConfirmationDialogContent" xml:space="preserve">
+    <value>Are you sure you want to delete the selected book?</value>
+  </data>
+  <data name="DeleteBookConfirmationDialogTitle" xml:space="preserve">
+    <value>Delete Book Confirmation</value>
+  </data>
+  <data name="DeleteUserConfirmationDialogContent" xml:space="preserve">
+    <value>Are you sure you want to delete the selected user?</value>
+  </data>
+  <data name="DeleteUserConfirmationDialogTitle" xml:space="preserve">
+    <value>Delete User Confirmation</value>
+  </data>
+  <data name="LogOutButtonContent" xml:space="preserve">
+    <value>Log out</value>
+  </data>
   <data name="ReturnAllButtonContent" xml:space="preserve">
     <value>Return all your books</value>
   </data>

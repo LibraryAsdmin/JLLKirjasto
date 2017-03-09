@@ -339,6 +339,21 @@
   <data name="confirmReturnAllTitle" xml:space="preserve">
     <value>Varmista lainojen palautus</value>
   </data>
+  <data name="DeleteBookConfirmationDialogContent" xml:space="preserve">
+    <value>Oletko varma että haluat poistaa valitun teoksen?</value>
+  </data>
+  <data name="DeleteBookConfirmationDialogTitle" xml:space="preserve">
+    <value>Vahvistus</value>
+  </data>
+  <data name="DeleteUserConfirmationDialogContent" xml:space="preserve">
+    <value>Oletko varma että haluat poistaa valitun käyttäjän?</value>
+  </data>
+  <data name="DeleteUserConfirmationDialogTitle" xml:space="preserve">
+    <value>Vahvistus</value>
+  </data>
+  <data name="LogOutButtonContent" xml:space="preserve">
+    <value>Kirjaudu ulos</value>
+  </data>
   <data name="ReturnAllButtonContent" xml:space="preserve">
     <value>Palauta kaikki lainat</value>
   </data>
