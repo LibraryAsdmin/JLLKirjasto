@@ -200,6 +200,13 @@ namespace JLLKirjasto
         // 4 = Logged In Home View (UserInfoGrid + SearchGrid)
         byte currentView = 0;
 
+
+        //what answer did the user give in the yes no prompt?
+        // 0 = no answer yet
+        // 1 = yes
+        // 2 = no
+        byte yesNoPromptAnswer = 0;
+
         // Variables for database interaction
         private SQLiteConnection dbconnection = new SQLiteConnection("Data Source=database.db");
         private DatabaseInteraction dbi = new DatabaseInteraction();
@@ -1404,79 +1411,94 @@ namespace JLLKirjasto
             }
         }
 
-        private void returnAllButton_Click(object sender, RoutedEventArgs e)
+        public async Task<byte> GetYesNoPromptUserResponseAsync()
+        {
+            while (yesNoPromptAnswer == 0)
+            {
+                await Task.Delay(200); //let's wait for a while asynchronously. The user hasn't yet answered
+            }
+            return yesNoPromptAnswer; //there's an answer!
+        }
+
+        private async void returnAllButton_Click(object sender, RoutedEventArgs e)
         {
             if (!defaultLoginSession.loggedIn)
             {
                 // The user is trying to borrow a book without being signed in. This message should never be visible.
-                showHazardNotification("This button should only be available to users logged in.");
+                showHazardNotification("NO!");
                 return;
             }
 
-            // verify that it wasn't a misclick
-            MessageBoxResult confirmReturnAll = System.Windows.MessageBox.Show(
-                Properties.Resources.ResourceManager.GetString("confirmReturnAll", TranslationSource.Instance.CurrentCulture),
-                Properties.Resources.ResourceManager.GetString("confirmReturnAllTitle", TranslationSource.Instance.CurrentCulture),
-                System.Windows.MessageBoxButton.YesNo);
-
+            yesNoPromptAnswer = 0;
+            YesNoPromptText.Text = Properties.Resources.ResourceManager.GetString("confirmReturnAll", TranslationSource.Instance.CurrentCulture);
+            Storyboard ShowYesNoPrompt = this.FindResource("ShowYesNoPrompt") as Storyboard;
+            ShowYesNoPrompt.Begin();
            
+            //start listening for the answer
+            byte answer = await GetYesNoPromptUserResponseAsync(); //let's get user response asynchronously
+            yesNoPromptAnswer = 0; //reset the variable for next time
 
-            if (confirmReturnAll == MessageBoxResult.No)
+            if (answer==1)
             {
-                return;
-            }
+                //user answered yes
 
-            if (LoansListBox.Items.Count > 0)
-            {
-                // Search user's entries in the database
-                List<string> columns = new List<string>();
-                columns.Add("ID");
-                List<List<string>> results = new List<List<string>>();
-                results = dbi.searchExactDatabaseRows(dbconnection, "users", defaultLoginSession.ID, columns);
-
-                if (results.Count != 1) throw new Exception("There should be only one user returning the book");
-
-                User user = new User(results[0][0], results[0][1], results[0][2]);
-
-                // remove book from loans
-                List<String> loans = user.getLoans();
-
-                foreach (String id in loans)
+                if (LoansListBox.Items.Count > 0)
                 {
-                    // find the book matching the id and find how many are available
-                    List<String> bookSearchColumns = new List<String>();
-                    bookSearchColumns.Add("ID");
+                    // Search user's entries in the database
+                    List<string> columns = new List<string>();
+                    columns.Add("ID");
+                    List<List<string>> results = new List<List<string>>();
+                    results = dbi.searchExactDatabaseRows(dbconnection, "users", defaultLoginSession.ID, columns);
 
-                    List<List<String>> searchResults = new List<List<String>>();
-                    searchResults = dbi.searchDatabaseRows(dbconnection, "books", id, bookSearchColumns);
+                    if (results.Count != 1) throw new Exception("There should be only one user returning the book");
 
-                    // if there are other than one matching id, something is wrong (either the id is too short or no matches at all)
-                    if (searchResults.Count != 1)
+                    User user = new User(results[0][0], results[0][1], results[0][2]);
+
+                    // remove book from loans
+                    List<String> loans = user.getLoans();
+
+                    foreach (String id in loans)
                     {
-                        MessageBox.Show(String.Format("Error: An error occured while trying to return the book with the id {0}. Please contact the library administrator.", id));
-                        showHazardNotification("Aborting returning books.");
-                        return;
+                        // find the book matching the id and find how many are available
+                        List<String> bookSearchColumns = new List<String>();
+                        bookSearchColumns.Add("ID");
+
+                        List<List<String>> searchResults = new List<List<String>>();
+                        searchResults = dbi.searchDatabaseRows(dbconnection, "books", id, bookSearchColumns);
+
+                        // if there are other than one matching id, something is wrong (either the id is too short or no matches at all)
+                        if (searchResults.Count != 1)
+                        {
+                            MessageBox.Show(String.Format("Error: An error occured while trying to return the book with the id {0}. Please contact the library administrator.", id));
+                            showHazardNotification("Aborting returning books.");
+                            return;
+                        }
+
+                        // update the number of specified books available
+                        Int32 newAvailable = Int32.Parse(searchResults[0][(int)Book.columnID.Available]) + 1;
+
+                        // change availability to false in book database table
+                        dbi.commitDbChanges(dbconnection, "books", newAvailable.ToString(), id, "Available");
                     }
 
-                    // update the number of specified books available
-                    Int32 newAvailable = Int32.Parse(searchResults[0][(int)Book.columnID.Available]) + 1;
+                    // parse loans to csv
+                    String loans_csv = "";
 
-                    // change availability to false in book database table
-                    dbi.commitDbChanges(dbconnection, "books", newAvailable.ToString(), id, "Available");
+                    // update user table entry for loans
+                    dbi.commitDbChanges(dbconnection, "users", loans_csv, defaultLoginSession.ID, "Loans");
+
+                    // update book displayed info
+                    availability.Text = Properties.Resources.ResourceManager.GetString("bookNotAvailable", TranslationSource.Instance.CurrentCulture);
+                    loanButton.IsEnabled = false;
+                    //showHazardNotification("Books returned successfully!");
+                    updateLoansListbox();
                 }
-
-                // parse loans to csv
-                String loans_csv = "";
-
-                // update user table entry for loans
-                dbi.commitDbChanges(dbconnection, "users", loans_csv, defaultLoginSession.ID, "Loans");
-
-                // update book displayed info
-                availability.Text = Properties.Resources.ResourceManager.GetString("bookNotAvailable", TranslationSource.Instance.CurrentCulture);
-                loanButton.IsEnabled = false;
-                //showHazardNotification("Books returned successfully!");
-                updateLoansListbox();
-            }        
+            }
+            else
+            {
+                //user answer no
+                return;
+            }      
         }
 
         private void returnOtherButton_Click(object sender, RoutedEventArgs e)
@@ -1565,6 +1587,22 @@ namespace JLLKirjasto
                 showHazardNotification("Book returned successfully!");
                 loanReturnBox.Text = "";
             }
+        }
+
+        private void promptYesButton_Click(object sender, RoutedEventArgs e)
+        {
+            yesNoPromptAnswer = 1;
+            YesNoPromptText.Text = "";
+            Storyboard HideYesNoPrompt = this.FindResource("HideYesNoPrompt") as Storyboard;
+            HideYesNoPrompt.Begin();
+        }
+
+        private void promptNoButton_Click(object sender, RoutedEventArgs e)
+        {
+            yesNoPromptAnswer = 2;
+            YesNoPromptText.Text = "";
+            Storyboard HideYesNoPrompt = this.FindResource("HideYesNoPrompt") as Storyboard;
+            HideYesNoPrompt.Begin();
         }
     }
 }
