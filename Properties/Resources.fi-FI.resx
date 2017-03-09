@@ -328,7 +328,7 @@
     <value>Huomio! Käyttäjätietokanta sisältää jo käyttäjän, jolla on sama Wilma osoite: {0}. Varmista että Wilma osoite on ainutlaatuinen.</value>
   </data>
   <data name="booksAvailable" xml:space="preserve">
-    <value>{0} ({1} lainassa)</value>
+    <value>{0}/{1} kirjaa saatavilla</value>
   </data>
   <data name="BookDbSearchOptionAmount" xml:space="preserve">
     <value>Kokonaismäärä</value>

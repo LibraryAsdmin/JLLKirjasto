@@ -193,7 +193,7 @@
     <value>Author</value>
   </data>
   <data name="DisplaySearchBookAvailability" xml:space="preserve">
-    <value>Available</value>
+    <value>Availability</value>
   </data>
   <data name="DisplaySearchBookCategory" xml:space="preserve">
     <value>Category</value>
@@ -328,7 +328,7 @@
     <value>Warning! The user database already contains an user with the Wilma address: {0}. Please make sure that the Wilma address is unique.</value>
   </data>
   <data name="booksAvailable" xml:space="preserve">
-    <value>{0} ({1} currently borrowed)</value>
+    <value>{0}/{1} books available</value>
   </data>
   <data name="BookDbSearchOptionAmount" xml:space="preserve">
     <value>Total number</value>

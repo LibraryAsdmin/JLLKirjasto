@@ -335,6 +335,10 @@ namespace JLLKirjasto
 
                 // clear search results
                 SearchResultsListBox.ItemsSource = null;
+
+                //hide the borrow button
+                loanButton.Visibility = Visibility.Collapsed;
+                loanButton.IsEnabled = false;
             }
             else
             {
@@ -989,14 +993,13 @@ namespace JLLKirjasto
                 {
                     if (Int32.Parse(currentBook.available) > 0)
                     {
-                        availability.Text = Properties.Resources.ResourceManager.GetString("bookAvailable", TranslationSource.Instance.CurrentCulture);
                         loanButton.IsEnabled = true;
                     }
                     else
                     {
-                        availability.Text = Properties.Resources.ResourceManager.GetString("bookNotAvailable", TranslationSource.Instance.CurrentCulture);
                         loanButton.IsEnabled = false;
                     }
+                    availability.Text = String.Format(Properties.Resources.ResourceManager.GetString("booksAvailable", TranslationSource.Instance.CurrentCulture), Int32.Parse(currentBook.available), Int32.Parse(currentBook.amount));
                 }
                 catch
                 {
@@ -1014,7 +1017,15 @@ namespace JLLKirjasto
                 }
                 else
                 {
-                    logInNotice.Visibility = Visibility.Visible;
+                    //only show logInNotice if there are books available
+                    if (Int32.Parse(currentBook.available) > 0)
+                    {
+                        logInNotice.Visibility = Visibility.Visible;
+                    }
+                    else
+                    {
+                        logInNotice.Visibility = Visibility.Collapsed;
+                    }
                     loanButton.Visibility = Visibility.Collapsed;
                 }
 
@@ -1136,7 +1147,7 @@ namespace JLLKirjasto
             // Find out which book is selected
             Book selection = SearchResultsListBox.SelectedItem as Book;
 
-            // verift that the book is available
+            // verify that the book is available
             if (Int32.Parse(selection.available) > 0)
             {
                 // Verify that the user loaning the book is unique (i.e. only one user loaning the book per login)
@@ -1178,8 +1189,8 @@ namespace JLLKirjasto
                 selection.available = newAvailable.ToString();
 
                 // update book displayed info
-                availability.Text = String.Format(Properties.Resources.ResourceManager.GetString("booksAvailable", TranslationSource.Instance.CurrentCulture), newAvailable, loaned);
-                loanButton.IsEnabled = false;
+                availability.Text = String.Format(Properties.Resources.ResourceManager.GetString("booksAvailable", TranslationSource.Instance.CurrentCulture), newAvailable, totalAmount);
+                //loanButton.IsEnabled = false;
                 //showHazardNotification("Book borrowed successfully!");
 
             }
