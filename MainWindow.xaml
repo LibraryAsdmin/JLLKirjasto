@@ -60,7 +60,7 @@
                 <DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
                 <DiscreteBooleanKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="True"/>
             </BooleanAnimationUsingKeyFrames>
-            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(ScrollViewer.VerticalScrollBarVisibility)" Storyboard.TargetName="scroll">
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(ScrollViewer.VerticalScrollBarVisibility)" Storyboard.TargetName="BookInfoScroll">
                 <DiscreteObjectKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="{x:Static ScrollBarVisibility.Auto}"/>
             </ObjectAnimationUsingKeyFrames>
             <!--
@@ -303,7 +303,7 @@
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="SignUpInstruction">
                 <EasingDoubleKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="0"/>
             </DoubleAnimationUsingKeyFrames>
-            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(ScrollViewer.VerticalScrollBarVisibility)" Storyboard.TargetName="scroll">
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(ScrollViewer.VerticalScrollBarVisibility)" Storyboard.TargetName="BookInfoScroll">
                 <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static ScrollBarVisibility.Hidden}"/>
             </ObjectAnimationUsingKeyFrames>
         </Storyboard>
@@ -412,7 +412,7 @@
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="SignUpInstruction">
                 <EasingDoubleKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="0"/>
             </DoubleAnimationUsingKeyFrames>
-            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(ScrollViewer.VerticalScrollBarVisibility)" Storyboard.TargetName="scroll">
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(ScrollViewer.VerticalScrollBarVisibility)" Storyboard.TargetName="BookInfoScroll">
                 <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static ScrollBarVisibility.Hidden}"/>
             </ObjectAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Radius" Storyboard.TargetName="HeaderGridBlurEffect">
@@ -1167,7 +1167,7 @@
 
                     </Grid>
 
-                    <ScrollViewer x:Name="scroll" Grid.Column="1" VerticalScrollBarVisibility="Hidden">
+                    <ScrollViewer x:Name="BookInfoScroll" Grid.Column="1" VerticalScrollBarVisibility="Hidden">
                         <StackPanel Grid.Column="1" Margin="10" Focusable="False">
                             <Border BorderThickness="2" BorderBrush="White" Height="200" Width="140" Margin="0,10,0,0">
                                 <Image x:Name="coverArt" Height="200" Width="140" Margin="0,10,0,0" Stretch="Uniform"/>
@@ -1210,7 +1210,7 @@
                 </Grid.ColumnDefinitions>
                 <ListBox x:Name="LoansListBox" Grid.Column="0" HorizontalContentAlignment="Stretch" Margin="5,5,5,5" BorderBrush="Transparent" 
                          Background="Transparent" BorderThickness="0" FontSize="24" ItemContainerStyle="{DynamicResource ModernListBoxItemStyle}" 
-                         ScrollViewer.HorizontalScrollBarVisibility="Hidden" Focusable="False" SelectionChanged="LoansListBox_SelectionChanged">
+                         ScrollViewer.HorizontalScrollBarVisibility="Auto" Focusable="False" SelectionChanged="LoansListBox_SelectionChanged">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Vertical">
