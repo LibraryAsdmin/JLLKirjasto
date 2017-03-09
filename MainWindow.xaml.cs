@@ -893,6 +893,22 @@ namespace JLLKirjasto
             // update logged in user greeting
             loggedInUserGreeting.Text = Properties.Resources.ResourceManager.GetString("loggedInUserGreeting", TranslationSource.Instance.CurrentCulture);
             loggedInUserGreeting.Text = String.Format(loggedInUserGreeting.Text, defaultLoginSession.Name);
+
+            //update availability count. First let's check if there's a book selected
+            try
+            {
+                Book currentBook = SearchResultsListBox.SelectedItem as Book;
+                if (currentBook != null)
+                {
+                    availability.Text = String.Format(Properties.Resources.ResourceManager.GetString("booksAvailable", TranslationSource.Instance.CurrentCulture), Int32.Parse(currentBook.available), Int32.Parse(currentBook.amount));
+                }
+            }
+            catch
+            {
+                MessageBox.Show("An error occured while trying to determine the number of books available. Please seek help from the library administrator.");
+                availability.Text = "ERROR!";
+                loanButton.IsEnabled = false;
+            }
         }
 
         // Language box animations
@@ -1190,7 +1206,15 @@ namespace JLLKirjasto
 
                 // update book displayed info
                 availability.Text = String.Format(Properties.Resources.ResourceManager.GetString("booksAvailable", TranslationSource.Instance.CurrentCulture), newAvailable, totalAmount);
-                //loanButton.IsEnabled = false;
+
+                if(newAvailable > 0)
+                {
+                    loanButton.IsEnabled = true;
+                }
+                else
+                {
+                    loanButton.IsEnabled = false;
+                }
                 //showHazardNotification("Book borrowed successfully!");
 
             }
@@ -1436,7 +1460,8 @@ namespace JLLKirjasto
 
         private void returnOtherButton_Click(object sender, RoutedEventArgs e)
         {
-            quickReturnButton_Click(sender, e);
+            //this is obsolete
+            //quickReturnButton_Click(sender, e);
         }
 
         private void OKQuickReturnButton_Click(object sender, RoutedEventArgs e)

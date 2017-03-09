@@ -339,4 +339,10 @@
   <data name="confirmReturnAllTitle" xml:space="preserve">
     <value>Confirm returning all loans</value>
   </data>
+  <data name="ReturnAllButtonContent" xml:space="preserve">
+    <value>Return all your books</value>
+  </data>
+  <data name="ReturnSelectedButtonContent" xml:space="preserve">
+    <value>Return the selected book</value>
+  </data>
 </root>

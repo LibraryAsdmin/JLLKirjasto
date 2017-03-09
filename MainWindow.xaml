@@ -1214,9 +1214,9 @@
                     <!-- The greeting message is set in language changing functions in csharp file -->
                     <TextBlock x:Name="loggedInUserGreeting" Text="Error: This message should be set to something else in code when signing in!" Margin="0,20,0,0" Foreground="White" FontSize="24" TextWrapping="Wrap" HorizontalAlignment="Stretch"/>
                     <TextBlock x:Name="loggedInUserInstruction" Text="{local:Loc loggedInUserInstruction}" Margin="0,0,0,20" Foreground="White" FontSize="24" TextWrapping="Wrap" HorizontalAlignment="Stretch"/>
-                    <Button x:Name="returnSelectedButton" Content="Return the selected book" HorizontalAlignment="Center" Style="{StaticResource ModernButtonStyle}" Height="40" Width="160" Margin="5,5,5,5" Click="returnSelectedButton_Click"/>
-                    <Button x:Name="returnAllButton" Content="Return all your books" HorizontalAlignment="Center" Style="{StaticResource ModernButtonStyle}" Height="40" Width="160" Margin="5,5,5,5" Click="returnAllButton_Click"/>
-                    <Button x:Name="returnOtherButton" Content="Return a book not listed here" HorizontalAlignment="Center" Style="{StaticResource ModernButtonStyle}" Height="40" Width="160" Margin="5,5,5,5" Click="returnOtherButton_Click"/>
+                    <Button x:Name="returnSelectedButton" Content="{local:Loc ReturnSelectedButtonContent}" HorizontalAlignment="Center" Style="{StaticResource ModernButtonStyle}" Height="40" Width="160" Margin="5,5,5,5" Click="returnSelectedButton_Click"/>
+                    <Button x:Name="returnAllButton" Content="{local:Loc ReturnAllButtonContent}" HorizontalAlignment="Center" Style="{StaticResource ModernButtonStyle}" Height="40" Width="160" Margin="5,5,5,5" Click="returnAllButton_Click"/>
+                    <!--<Button x:Name="returnOtherButton" Content="Return a book not listed here" HorizontalAlignment="Center" Style="{StaticResource ModernButtonStyle}" Height="40" Width="160" Margin="5,5,5,5" Click="returnOtherButton_Click"/> -->
                 </StackPanel>
             </Grid>
         </StackPanel>

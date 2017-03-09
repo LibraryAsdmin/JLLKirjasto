@@ -339,4 +339,10 @@
   <data name="confirmReturnAllTitle" xml:space="preserve">
     <value>Varmista lainojen palautus</value>
   </data>
+  <data name="ReturnAllButtonContent" xml:space="preserve">
+    <value>Palauta kaikki lainat</value>
+  </data>
+  <data name="ReturnSelectedButtonContent" xml:space="preserve">
+    <value>Palauta valittu laina</value>
+  </data>
 </root>

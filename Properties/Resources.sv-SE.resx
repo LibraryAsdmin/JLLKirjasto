@@ -337,4 +337,10 @@
   <data name="confirmReturnAllTitle" xml:space="preserve">
     <value>Svenska här</value>
   </data>
+  <data name="ReturnAllButtonContent" xml:space="preserve">
+    <value>Svenska här</value>
+  </data>
+  <data name="ReturnSelectedButtonContent" xml:space="preserve">
+    <value>Svenska här</value>
+  </data>
 </root>
