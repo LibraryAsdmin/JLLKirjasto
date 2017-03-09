@@ -25,6 +25,18 @@ namespace JLLKirjasto
             InitializeComponent();
         }
 
+        // verify that a string contains only digits
+        bool IsDigitsOnly(string str)
+        {
+            foreach (char c in str)
+            {
+                if (c < '0' || c > '9')
+                    return false;
+            }
+
+            return true;
+        }
+
         // Variables for interaction with the database
         SQLiteConnection dbconnection = new SQLiteConnection("Data Source=database.db");
         DatabaseInteraction dbi = new DatabaseInteraction();
@@ -57,7 +69,49 @@ namespace JLLKirjasto
             {
                 // Commit changes to each column individually by ID
                 dbi.commitDbChanges(dbconnection, userstable, WilmaBox.Text, ID, User.columnNames[(int)User.columnID.Wilma]);
-                dbi.commitDbChanges(dbconnection, userstable, LoansBox.Text, ID, User.columnNames[(int)User.columnID.Loans]);
+
+                // verify that the loan book IDs are valid
+                
+                // create a User object for extracting individual IDs with getLoans
+                User user = new User(ID, WilmaBox.Text, LoansBox.Text);
+                List<String> loans = user.getLoans();
+
+                List<int> removeIndex = new List<int>();
+                for (int i = 0; i < loans.Count; i++)
+                {
+                    // verify that the loan id has correct length and is numeric value
+                    if (IsDigitsOnly(loans[i]) == false || loans[i].Length != 6)
+                    {
+                        MessageBox.Show(String.Format("Warning: The book ID {0} is invalid. This entry will be ignored..", loans[i]));
+                        removeIndex.Add(i);
+                    } 
+                }
+
+                // Filter invalid IDs marked to removeIndex from loans
+                // Has to be done this way because removing an entry changes the indices of the rest
+                List<String> legitIDs = new List<String>();
+                for (int i = 0; i < loans.Count; i++)
+                {
+                    if (removeIndex.Contains(i))
+                    {
+                        continue;
+                    }
+                    legitIDs.Add(loans[i]);
+                }
+
+                // convert the filtered list to a csv string
+                String loans_csv = "";
+                // if there are more than zero books remaining
+                if (legitIDs.Count > 0)
+                {
+                    loans_csv = legitIDs[0];
+                    for (int i = 1; i < legitIDs.Count; i++)
+                    {
+                        loans_csv += String.Format(";{0}", legitIDs[i]);
+                    }
+                }
+
+                dbi.commitDbChanges(dbconnection, userstable, loans_csv, ID, User.columnNames[(int)User.columnID.Loans]);
 
                 var parentWindow = this.Owner as AdminControlsWindow;
                 parentWindow.searchUsers();
@@ -67,7 +121,6 @@ namespace JLLKirjasto
             {
                 // notify the user that there is something wrong with the new book ID
                 MessageBox.Show(String.Format(Properties.Resources.ResourceManager.GetString("UserEditWilmaError", TranslationSource.Instance.CurrentCulture), WilmaBox.Text));
-
             }
         }
 

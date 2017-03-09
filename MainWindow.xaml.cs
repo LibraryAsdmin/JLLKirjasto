@@ -939,7 +939,7 @@ namespace JLLKirjasto
             if (YearCheckBox.IsChecked.GetValueOrDefault() == true) columns.Add("Year");
             if (LanguageCheckBox.IsChecked.GetValueOrDefault() == true) columns.Add("Language");
             if (AvailabilityCheckBox.IsChecked.GetValueOrDefault() == true) columns.Add("Available");
-            if (CategoryCheckBox.IsChecked.GetValueOrDefault() == true) columns.Add("Aineistolaji");
+            if (CategoryCheckBox.IsChecked.GetValueOrDefault() == true) columns.Add("Category");
             if (ISBNCheckBox.IsChecked.GetValueOrDefault() == true) columns.Add("ISBN");
 
             List<List<String>> searchResults = new List<List<String>>();

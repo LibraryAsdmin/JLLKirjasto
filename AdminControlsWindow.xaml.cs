@@ -295,6 +295,9 @@ namespace JLLKirjasto
 
         private void addUserButton_Click(object sender, RoutedEventArgs e)
         {
+            // TODO: prompt for Wilma address and use that for the Wilma address
+            // TODO: Verify that the Wilma address is legit (see code used for signing in)
+
             SignUpOperation adminCreateUserOperation = new SignUpOperation();
             // generate new ID for the user
             adminCreateUserOperation.generateID();
