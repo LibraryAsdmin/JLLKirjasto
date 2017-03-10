@@ -25,6 +25,18 @@ namespace JLLKirjasto
             InitializeComponent();
         }
 
+        // verify that a string contains only digits
+        bool IsDigitsOnly(string str)
+        {
+            foreach (char c in str)
+            {
+                if (c < '0' || c > '9')
+                    return false;
+            }
+
+            return true;
+        }
+
         // Variables for interaction with the database
         SQLiteConnection dbconnection = new SQLiteConnection("Data Source=database.db");
         DatabaseInteraction dbi = new DatabaseInteraction();
@@ -45,16 +57,24 @@ namespace JLLKirjasto
             // search id in IDBox from the database
             List<List<string>> results = new List<List<string>>();
             results = dbi.searchDatabaseRows(dbconnection, bookstable, IDBox.Text, columns);
-            
+
+            // verify that the ID is properly formatted
+            if (IsDigitsOnly(IDBox.Text) == false || IDBox.Text.Length != 6)
+            {
+                MessageBox.Show(String.Format(Properties.Resources.ResourceManager.GetString("BookEditIDError", TranslationSource.Instance.CurrentCulture), IDBox.Text));
+                return;
+            }
 
             // The ID has to either match the old ID or be unique
             if (results.Count == 0 || results.Count == 1 && results[0][(int)Book.columnID.ID]==oldID)
             {
                 // Commit changes to each column individually by ID
+                dbi.commitDbChanges(dbconnection, bookstable, IDBox.Text, oldID, Book.columnNames[(int)Book.columnID.ID]);
                 dbi.commitDbChanges(dbconnection, bookstable, AuthorBox.Text, IDBox.Text, Book.columnNames[(int)Book.columnID.Author]);
                 dbi.commitDbChanges(dbconnection, bookstable, TitleBox.Text, IDBox.Text, Book.columnNames[(int)Book.columnID.Title]);
                 dbi.commitDbChanges(dbconnection, bookstable, YearBox.Text, IDBox.Text, Book.columnNames[(int)Book.columnID.Year]);
                 dbi.commitDbChanges(dbconnection, bookstable, LanguageBox.Text, IDBox.Text, Book.columnNames[(int)Book.columnID.Language]);
+                dbi.commitDbChanges(dbconnection, bookstable, AmountBox.Text, IDBox.Text, Book.columnNames[(int)Book.columnID.Amount]);
                 dbi.commitDbChanges(dbconnection, bookstable, AvailableBox.Text, IDBox.Text, Book.columnNames[(int)Book.columnID.Available]);
                 dbi.commitDbChanges(dbconnection, bookstable, ISBNBox.Text, IDBox.Text, Book.columnNames[(int)Book.columnID.ISBN]);
                 dbi.commitDbChanges(dbconnection, bookstable, CategoryBox.Text, IDBox.Text, Book.columnNames[(int)Book.columnID.Category]);
@@ -66,8 +86,8 @@ namespace JLLKirjasto
             else
             {
                 // notify the user that there is something wrong with the new book ID
-                MessageBox.Show(String.Format(Properties.Resources.ResourceManager.GetString("BookEditIDError", TranslationSource.Instance.CurrentCulture),IDBox.Text));
-                
+                MessageBox.Show(String.Format(Properties.Resources.ResourceManager.GetString("BookEditIDConflict", TranslationSource.Instance.CurrentCulture), IDBox.Text));
+                return;
             }
         }
 

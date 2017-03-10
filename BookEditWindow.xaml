@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:JLLKirjasto"
         mc:Ignorable="d"
-        Title="{local:Loc BookEditWindowTitle}" Height="Auto" Width="300" WindowStartupLocation="CenterScreen" MinHeight="350" MaxHeight="350" MinWidth="200">
+        Title="{local:Loc BookEditWindowTitle}" Height="Auto" Width="300" WindowStartupLocation="CenterScreen" MinHeight="360" MaxHeight="360" MinWidth="200">
     
     <Grid Margin="10">
         <Grid.RowDefinitions>

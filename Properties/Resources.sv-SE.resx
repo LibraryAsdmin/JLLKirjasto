@@ -162,7 +162,7 @@
   <data name="BookDbWindowTitle" xml:space="preserve">
     <value>Svenska här</value>
   </data>
-  <data name="BookEditIDError" xml:space="preserve">
+  <data name="BookEditIDConflict" xml:space="preserve">
     <value>Svenska här! Svenska här {0} Svenska här.</value>
     <comment>{0} is replaced with book's ID in the displayed error message</comment>
   </data>
@@ -357,5 +357,8 @@
   </data>
   <data name="ReturnSelectedButtonContent" xml:space="preserve">
     <value>Svenska här</value>
+  </data>
+  <data name="BookEditIDError" xml:space="preserve">
+    <value>Svenska här: Svenska här {0} svenska här. Svenska här.</value>
   </data>
 </root>

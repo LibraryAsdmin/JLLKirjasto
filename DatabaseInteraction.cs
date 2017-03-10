@@ -26,6 +26,7 @@ namespace JLLKirjasto
             isbn        = _isbn;
             category    = _category;
 
+            // calculate the number of borrowed books. Also notifies if an illegal entry is present in either numerical field.
             try
             {
                 borrowed = (Int32.Parse(amount) - Int32.Parse(available)).ToString();

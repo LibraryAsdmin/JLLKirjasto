@@ -162,7 +162,7 @@
   <data name="BookDbWindowTitle" xml:space="preserve">
     <value>Kirjatietokannan hallinta</value>
   </data>
-  <data name="BookEditIDError" xml:space="preserve">
+  <data name="BookEditIDConflict" xml:space="preserve">
     <value>Huomio! Kirjatietokanta sisältää jo teoksen jonka tunniste ID on {0}. Varmista että kirjoittamasi ID ei vastaa jo tietokannassa olevia.</value>
   </data>
   <data name="BookEditWindowAcceptButtonContent" xml:space="preserve">
@@ -359,5 +359,8 @@
   </data>
   <data name="ReturnSelectedButtonContent" xml:space="preserve">
     <value>Palauta valittu laina</value>
+  </data>
+  <data name="BookEditIDError" xml:space="preserve">
+    <value>Huomio! ID {0} on väärin muotoiltu. Varmista että ID sisältää vain numeroita ja on 6 kirjainta pitkä.</value>
   </data>
 </root>

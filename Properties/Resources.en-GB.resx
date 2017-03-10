@@ -162,7 +162,7 @@
   <data name="BookDbWindowTitle" xml:space="preserve">
     <value>Book database administration</value>
   </data>
-  <data name="BookEditIDError" xml:space="preserve">
+  <data name="BookEditIDConflict" xml:space="preserve">
     <value>Warning! The book database already contains a book with the ID: {0}. Please make sure that the ID is unique.</value>
   </data>
   <data name="BookEditWindowAcceptButtonContent" xml:space="preserve">
@@ -359,5 +359,8 @@
   </data>
   <data name="ReturnSelectedButtonContent" xml:space="preserve">
     <value>Return the selected book</value>
+  </data>
+  <data name="BookEditIDError" xml:space="preserve">
+    <value>Error: The ID {0} is badly formatted. Make sure the ID contains only numbers and is 6 digits long.</value>
   </data>
 </root>
