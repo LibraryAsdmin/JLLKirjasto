@@ -16,14 +16,19 @@ using System.Windows.Shapes;
 namespace JLLKirjasto
 {
     /// <summary>
-    /// Interaction logic for UserEditWindow.xaml
+    /// Interaction logic for UserAddWindow.xaml
     /// </summary>
-    public partial class UserEditWindow : Window
+    public partial class UserAddWindow : Window
     {
-        public UserEditWindow()
+        public UserAddWindow()
         {
             InitializeComponent();
         }
+
+        // Variables for interaction with the database
+        SQLiteConnection dbconnection = new SQLiteConnection("Data Source=database.db");
+        DatabaseInteraction dbi = new DatabaseInteraction();
+        String userstable = "users";
 
         // verify that a string contains only digits
         bool IsDigitsOnly(string str)
@@ -37,14 +42,7 @@ namespace JLLKirjasto
             return true;
         }
 
-        // Variables for interaction with the database
-        SQLiteConnection dbconnection = new SQLiteConnection("Data Source=database.db");
-        DatabaseInteraction dbi = new DatabaseInteraction();
-        String userstable = "users";
-
-        // store previous wilma address
-        private String oldWilma;
-        private String ID;
+        private String userID;
 
         private void DeclineButton_Click(object sender, RoutedEventArgs e)
         {
@@ -72,15 +70,12 @@ namespace JLLKirjasto
 
 
             // The Wilma address has to either match the old address or be unique
-            if (results.Count == 0 || results.Count == 1 && results[0][(int)User.columnID.Wilma] == oldWilma)
+            if (results.Count == 0)
             {
-                // Commit changes to each column individually by ID
-                dbi.commitDbChanges(dbconnection, userstable, WilmaBox.Text, ID, User.columnNames[(int)User.columnID.Wilma]);
-
                 // verify that the loan book IDs are valid
-                
+
                 // create a User object for extracting individual IDs with getLoans
-                User user = new User(ID, WilmaBox.Text, LoansBox.Text);
+                User user = new User(userID, WilmaBox.Text, LoansBox.Text);
                 List<String> loans = user.getLoans();
 
                 List<int> removeIndex = new List<int>();
@@ -91,7 +86,7 @@ namespace JLLKirjasto
                     {
                         MessageBox.Show(String.Format("Warning: The book ID {0} is invalid. This entry will be ignored..", loans[i]));
                         removeIndex.Add(i);
-                    } 
+                    }
                 }
 
                 // Filter invalid IDs marked to removeIndex from loans
@@ -118,7 +113,12 @@ namespace JLLKirjasto
                     }
                 }
 
-                dbi.commitDbChanges(dbconnection, userstable, loans_csv, ID, User.columnNames[(int)User.columnID.Loans]);
+                String[] addUserColumns = new String[(int)User.columnID.NumColumns - 1];
+                addUserColumns[0] = WilmaBox.Text;
+                addUserColumns[1] = loans_csv;
+                List<String> addUserColumnsList = new List<String>(addUserColumns);
+
+                dbi.addDatabaseRow(dbconnection, userstable, userID, addUserColumnsList);
 
                 var parentWindow = this.Owner as AdminControlsWindow;
                 parentWindow.searchUsers();
@@ -131,15 +131,9 @@ namespace JLLKirjasto
             }
         }
 
-        public void setOldWilma(String address)
+        public void setUserID(String id)
         {
-            oldWilma = address;
+            userID = id;
         }
-
-        public void setOldID(String id)
-        {
-            ID = id;
-        }
-
     }
 }

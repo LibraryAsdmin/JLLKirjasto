@@ -361,4 +361,10 @@
   <data name="BookEditIDError" xml:space="preserve">
     <value>Svenska här: Svenska här {0} svenska här. Svenska här.</value>
   </data>
+  <data name="UserAddWindowTitle" xml:space="preserve">
+    <value>Svenska här</value>
+  </data>
+  <data name="UserAddWilmaError" xml:space="preserve">
+    <value>Svenska här! Svenska här {0} svenska här. Svenska här.</value>
+  </data>
 </root>

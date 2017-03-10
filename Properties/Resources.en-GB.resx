@@ -363,4 +363,10 @@
   <data name="BookEditIDError" xml:space="preserve">
     <value>Error: The ID {0} is badly formatted. Make sure the ID contains only numbers and is 6 digits long.</value>
   </data>
+  <data name="UserAddWindowTitle" xml:space="preserve">
+    <value>Add user to the database</value>
+  </data>
+  <data name="UserAddWilmaError" xml:space="preserve">
+    <value>Error: The Wilma address {0} does not seem valid. Make sure that the Wilma address does not contain typing errors.</value>
+  </data>
 </root>

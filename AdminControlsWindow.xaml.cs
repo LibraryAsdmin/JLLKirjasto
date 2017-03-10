@@ -81,7 +81,7 @@ namespace JLLKirjasto
             if (YearCheckBox.IsChecked.GetValueOrDefault() == true) columns.Add("Year");
             if (LanguageCheckBox.IsChecked.GetValueOrDefault() == true) columns.Add("Language");
             if (AvailableCheckBox.IsChecked.GetValueOrDefault() == true) columns.Add("Available");
-            if (CategoryCheckBox.IsChecked.GetValueOrDefault() == true) columns.Add("Aineistolaji");
+            if (CategoryCheckBox.IsChecked.GetValueOrDefault() == true) columns.Add("Category");
             if (ISBNCheckBox.IsChecked.GetValueOrDefault() == true) columns.Add("ISBN");
 
             List<List<String>> results = dbi.searchDatabaseRows(dbconnection, "books", BooksSearch.Text, columns);
@@ -327,9 +327,6 @@ namespace JLLKirjasto
 
         private void addUserButton_Click(object sender, RoutedEventArgs e)
         {
-            // TODO: prompt for Wilma address and use that for the Wilma address
-            // TODO: Verify that the Wilma address is legit (see code used for signing in)
-
             SignUpOperation adminCreateUserOperation = new SignUpOperation();
             // generate new ID for the user
             adminCreateUserOperation.generateID();
@@ -347,12 +344,10 @@ namespace JLLKirjasto
             }
             while (!isUnique); // increment the ID until no conflicting IDs are found
 
-            // add the user to user database table
-            List<String> columns = new List<String>();
-            columns.Add("Wilma-address");                   // Empty wilma for later editing
-            columns.Add("");                                // Loans
-            dbi.addDatabaseRow(dbconnection, "users", adminCreateUserOperation.getID(), columns);
-            searchUsers();
+            UserAddWindow uaw = new UserAddWindow();
+            uaw.Owner = this;
+            uaw.setUserID(adminCreateUserOperation.getID());
+            uaw.ShowDialog();
         }
 
         private void editUser()

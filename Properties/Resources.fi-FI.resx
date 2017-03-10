@@ -363,4 +363,10 @@
   <data name="BookEditIDError" xml:space="preserve">
     <value>Huomio! ID {0} on väärin muotoiltu. Varmista että ID sisältää vain numeroita ja on 6 kirjainta pitkä.</value>
   </data>
+  <data name="UserAddWindowTitle" xml:space="preserve">
+    <value>Lisää käyttäjä tietokantaan</value>
+  </data>
+  <data name="UserAddWilmaError" xml:space="preserve">
+    <value>Huomio! Wilma tunnus {0} on virheellinen. Tarkistta ettei siinä ole kirjoitusvirheitä.</value>
+  </data>
 </root>
