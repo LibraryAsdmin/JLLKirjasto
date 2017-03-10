@@ -151,16 +151,48 @@ namespace JLLKirjasto
         // Functionality for adding and removing whole books
         private void addBookButton_Click(object sender, RoutedEventArgs e)
         {
-            // dbi.addDatabaseRow(dbconnection, "books", "-");
+            // get a list of currently used Book IDs
+            List<String> columns = new List<String>();
+            columns.Add("ID");
 
-            // display book edit prompt
+            // get the list of used Book IDs in the database
+            List<String> IDs = new List<String>();
+            List<List<String>> results = dbi.searchDatabaseRows(dbconnection, "books", "", columns);
+            List<Book> books = new List<Book>();
+
+            foreach(List<String> result in results)
+            {
+                IDs.Add(result[(int)Book.columnID.ID]);
+            }
+
+            // loop from 0 to 999999 until a free ID is found
+            String ID = null;
+            for (int i = 0; i <= 999999; i++)
+            {
+                ID = i.ToString().PadLeft(6, '0');
+                if (!IDs.Contains(ID))
+                {
+                    break;
+                }
+            }
+
             // Create a new window
-            BookEditWindow bew = new BookEditWindow();
-            bew.Owner = this;
+            BookAddWindow baw = new BookAddWindow();
+            baw.Owner = this;
+
+            // Assign book information to new edit window
+            baw.IDBox.Text = ID;
+            baw.AuthorBox.Text = "";
+            baw.TitleBox.Text = "";
+            baw.YearBox.Text = "";
+            baw.LanguageBox.Text = "";
+            baw.AmountBox.Text = "1";
+            baw.AvailableBox.Text = "1";
+            baw.ISBNBox.Text = "";
+            baw.CategoryBox.Text = "";
 
             // show the window
-            bew.ShowDialog();
-
+            baw.ShowDialog();
         }
         private void delBookButton_Click(object sender, RoutedEventArgs e)
         {
