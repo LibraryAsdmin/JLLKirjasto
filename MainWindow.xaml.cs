@@ -282,7 +282,6 @@ namespace JLLKirjasto
 
         // UI navigation
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-        // TODO: Create a nice and smooth animation for the visibility of tooltips
         private void UsernameField_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
@@ -322,11 +321,11 @@ namespace JLLKirjasto
 
             // return the signUp screen to its clean state
             defaultSignUpOperation.reset();
-            SignUpField.Text = "";
+            SignUpField.Text = Properties.Resources.ResourceManager.GetString("DefaultSignUpUsernameBoxContent", TranslationSource.Instance.CurrentCulture);
             SignUpConfirmationField.Text = "";
             SignUpButton.Visibility = Visibility.Visible;
             SignUpField.Visibility = Visibility.Visible;
-            SignUpInstruction.Text = Properties.Resources.ResourceManager.GetString("SignUpInstruction1", TranslationSource.Instance.CurrentCulture); // TODO: move this thi xaml
+            SignUpInstruction.Text = Properties.Resources.ResourceManager.GetString("SignUpInstruction1", TranslationSource.Instance.CurrentCulture);
             SignUpEmailLink.Visibility = Visibility.Collapsed;
             SignUpConfirmationField.Visibility = Visibility.Collapsed;
             SignUpConfirmationButton.Visibility = Visibility.Collapsed;
@@ -669,12 +668,12 @@ namespace JLLKirjasto
                 }
                 else
                 {
-                    showHazardNotification("Error: Account does not exist. Please create an account in the Sign Up page.");
+                    showHazardNotification(Properties.Resources.ResourceManager.GetString("LoginErrorAccountDoesntExist", TranslationSource.Instance.CurrentCulture));
                 }
             }
             else
             {
-                showHazardNotification("Error: The username does not seem legit. Please use your wilma address for logging in.");
+                showHazardNotification(Properties.Resources.ResourceManager.GetString("LoginErrorIncorrectAddress", TranslationSource.Instance.CurrentCulture));
             }
 
         }
@@ -701,7 +700,7 @@ namespace JLLKirjasto
                 else if (results.Count == 1)
                 {
                     isLegit = false;
-                    showHazardNotification("Error: This Wilma address is already in use.");
+                    showHazardNotification(Properties.Resources.ResourceManager.GetString("SignUpErrorAccountAlreadyInUse", TranslationSource.Instance.CurrentCulture));
                 }
                 else if (results.Count == 0)
                 {
@@ -732,7 +731,7 @@ namespace JLLKirjasto
                 // defaultSignUpOperation.displayCode();
 
                 // show new UI elements
-                SignUpInstruction.Text = Properties.Resources.ResourceManager.GetString("SignUpInstruction2", TranslationSource.Instance.CurrentCulture); // TODO: move this thi xaml
+                SignUpInstruction.Text = Properties.Resources.ResourceManager.GetString("SignUpInstruction2", TranslationSource.Instance.CurrentCulture);
                 SignUpEmailLink.Visibility = Visibility.Visible;
                 SignUpConfirmationField.Visibility = Visibility.Visible;
                 SignUpConfirmationButton.Visibility = Visibility.Visible;
@@ -784,7 +783,7 @@ namespace JLLKirjasto
                 SignUpConfirmationField.Text = "";
                 SignUpButton.Visibility = Visibility.Visible;
                 SignUpField.Visibility = Visibility.Visible;
-                SignUpInstruction.Text = Properties.Resources.ResourceManager.GetString("SignUpInstruction1", TranslationSource.Instance.CurrentCulture); // TODO: move this thi xaml
+                SignUpInstruction.Text = Properties.Resources.ResourceManager.GetString("SignUpInstruction1", TranslationSource.Instance.CurrentCulture);
                 SignUpEmailLink.Visibility = Visibility.Hidden;
                 SignUpConfirmationField.Visibility = Visibility.Hidden;
                 SignUpConfirmationButton.Visibility = Visibility.Hidden;
@@ -793,9 +792,6 @@ namespace JLLKirjasto
             {
                 // complain to the user
                 showHazardNotification(Properties.Resources.ResourceManager.GetString("SignUpWrongCode", TranslationSource.Instance.CurrentCulture));
-                defaultSignUpOperation.reset();
-                // reset to default view
-                // TODO: Reset to default view
             }
         }
 
@@ -843,6 +839,8 @@ namespace JLLKirjasto
             bool updateSearchBoxText = false;
             bool updateLogInUserNameBoxText = false;
             bool updateSignupField = false;
+            bool updateSignUpInstructionText1 = false;
+            bool updateSignUpInstructionText2 = false;
 
             if (UsernameField.Text == Properties.Resources.ResourceManager.GetString("DefaultLoginUsernameBoxContent", TranslationSource.Instance.CurrentCulture))
                 updateLogInUserNameBoxText = true;
@@ -850,6 +848,11 @@ namespace JLLKirjasto
                 updateSearchBoxText = true;
             if (SignUpField.Text == Properties.Resources.ResourceManager.GetString("DefaultSignUpUsernameBoxContent", TranslationSource.Instance.CurrentCulture))
                 updateSignupField = true;
+            if (SignUpInstruction.Text == Properties.Resources.ResourceManager.GetString("SignUpInstruction2", TranslationSource.Instance.CurrentCulture))
+                updateSignUpInstructionText2 = true;
+            if (SignUpInstruction.Text == Properties.Resources.ResourceManager.GetString("SignUpInstruction1", TranslationSource.Instance.CurrentCulture))
+                updateSignUpInstructionText1 = true;
+
 
             switch (language)
             {
@@ -895,6 +898,16 @@ namespace JLLKirjasto
             if (updateSignupField)
             {
                 SignUpField.Text = Properties.Resources.ResourceManager.GetString("DefaultSignUpUsernameBoxContent", TranslationSource.Instance.CurrentCulture);
+            }
+
+            if (updateSignUpInstructionText2)
+            {
+                SignUpInstruction.Text = Properties.Resources.ResourceManager.GetString("SignUpInstruction2", TranslationSource.Instance.CurrentCulture);
+            }
+
+            if (updateSignUpInstructionText1)
+            {
+                SignUpInstruction.Text = Properties.Resources.ResourceManager.GetString("SignUpInstruction1", TranslationSource.Instance.CurrentCulture);
             }
 
             // update logged in user greeting
@@ -1002,7 +1015,6 @@ namespace JLLKirjasto
 
         private void LoansListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //TODO: Add Functionality
             Book currentBook = LoansListBox.SelectedItem as Book;
             if (currentBook != null)
             {
@@ -1019,6 +1031,10 @@ namespace JLLKirjasto
             Book currentBook = SearchResultsListBox.SelectedItem as Book;
             if (currentBook != null)
             {
+                //make book info visible
+                Storyboard ShowBookInfo = this.FindResource("ShowBookInfo") as Storyboard;
+                ShowBookInfo.Begin();
+
                 // check whether there are books available or not
                 try
                 {
@@ -1085,6 +1101,11 @@ namespace JLLKirjasto
             else
             {
                 coverArt.Source = null;
+                Storyboard HideBookInfo = this.FindResource("HideBookInfo") as Storyboard;
+                HideBookInfo.Begin();
+                //hide book info list
+                //add link to animation which hides the book info list and shows the placeholder
+
             }
 
         }
@@ -1165,7 +1186,6 @@ namespace JLLKirjasto
             Keyboard.Focus(loanReturnBox);
         }
 
-        // TODO: Verify that the user can borrow a certian book only one at a time
         private void loanButton_Click(object sender, RoutedEventArgs e)
         {
             //Storyboard ShowLoadingView = this.FindResource("ShowLoadingView") as Storyboard;

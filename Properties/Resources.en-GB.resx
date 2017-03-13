@@ -187,7 +187,7 @@
     <value>Search</value>
   </data>
   <data name="DefaultSignUpUsernameBoxContent" xml:space="preserve">
-    <value>Type your wilma account here</value>
+    <value>Type your Wilma account address here</value>
   </data>
   <data name="DisplaySearchBookAuthor" xml:space="preserve">
     <value>Author</value>
@@ -235,22 +235,13 @@
     <value>Whoops! Something went wrong while creating a new user account. Please make sure that you typed correctly.</value>
   </data>
   <data name="SignUpInstruction1" xml:space="preserve">
-    <value>Create an account by typing your Wilma email to the text box below.</value>
+    <value>Create an account by typing your Wilma account address to the text box below.</value>
   </data>
   <data name="SignUpInstruction2" xml:space="preserve">
     <value>An email containing a confirmation code was sent to the email address associated with your Wilma account. The link to the login page is provided below. Type the code to the text box below to finish the account creation process.</value>
   </data>
   <data name="SignUpWrongCode" xml:space="preserve">
     <value>The entered code was incorrect. Account creation unsuccessful!</value>
-  </data>
-  <data name="TextUnderAccountCreation" xml:space="preserve">
-    <value>Here's the text under accout creation button.</value>
-  </data>
-  <data name="TextUnderLogin" xml:space="preserve">
-    <value>Here's the text under login button.</value>
-  </data>
-  <data name="TextUnderSearchBox" xml:space="preserve">
-    <value>Search for books or authors by typing into the box above.</value>
   </data>
   <data name="UserDbAddButtonContent" xml:space="preserve">
     <value>Add user</value>
@@ -368,5 +359,23 @@
   </data>
   <data name="UserAddWilmaError" xml:space="preserve">
     <value>Error: The Wilma address {0} does not seem valid. Make sure that the Wilma address does not contain typing errors.</value>
+  </data>
+  <data name="LogInToBorrowNotice" xml:space="preserve">
+    <value>Log in to borrow this book</value>
+  </data>
+  <data name="BorrowBookButtonContent" xml:space="preserve">
+    <value>Borrow this book</value>
+  </data>
+  <data name="SelectBookForMoreInfo" xml:space="preserve">
+    <value>Select a book from the search results to see more information about it.</value>
+  </data>
+  <data name="LoginErrorAccountDoesntExist" xml:space="preserve">
+    <value>Error: Account does not exist. Please create an account in the Sign Up page.</value>
+  </data>
+  <data name="LoginErrorIncorrectAddress" xml:space="preserve">
+    <value>Error: The username does not seem legit. Please use your wilma address for logging in.</value>
+  </data>
+  <data name="SignUpErrorAccountAlreadyInUse" xml:space="preserve">
+    <value>Error: This Wilma address is already in use.</value>
   </data>
 </root>

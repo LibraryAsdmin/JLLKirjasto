@@ -36,6 +36,16 @@
             <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="SearchContentsGrid">
                 <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
             </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="NoBookSelectedGrid">
+                    <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="BookInfoStackPanel">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="NoBookSelectedGrid">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="SearchContentsGrid">
                 <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
                 <EasingDoubleKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="1"/>
@@ -261,6 +271,12 @@
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="SearchContentsGrid">
                 <EasingDoubleKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="0"/>
             </DoubleAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="NoBookSelectedGrid">
+                <DiscreteObjectKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="{x:Static Visibility.Hidden}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="BookInfoStackPanel">
+                <DiscreteObjectKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="{x:Static Visibility.Hidden}"/>
+            </ObjectAnimationUsingKeyFrames>
             <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="HeaderGrid">
                 <EasingColorKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="{StaticResource WindowGridColour}"/>
             </ColorAnimationUsingKeyFrames>
@@ -357,6 +373,15 @@
             </DoubleAnimationUsingKeyFrames>
             <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="Greeting">
                 <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="NoBookSelectedGrid">
+                <EasingDoubleKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="NoBookSelectedGrid">
+                <DiscreteObjectKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="{x:Static Visibility.Hidden}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="BookInfoStackPanel">
+                <DiscreteObjectKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="{x:Static Visibility.Hidden}"/>
             </ObjectAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="SearchGridTooltip">
                 <EasingDoubleKeyFrame KeyTime="{StaticResource AnimationDuration}" Value="1"/>
@@ -715,7 +740,22 @@
                 <EasingDoubleKeyFrame KeyTime="{StaticResource HoverAnimationDuration}" Value="{Binding CollapsedGridHeight, Source={x:Static local:GridHeightClass.Instance}}"/>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
-
+        <Storyboard x:Key="ShowBookInfo">
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="NoBookSelectedGrid">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="BookInfoStackPanel">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="HideBookInfo">
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="NoBookSelectedGrid">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="BookInfoStackPanel">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}"/>
+            </ObjectAnimationUsingKeyFrames>
+        </Storyboard>
         <!-- The three animations below are sort of obsolete; they were superceded by ShowHomeView storyboard which basically contains all of them. Let's keep them, though, they might prove useful-->
         <Storyboard x:Key="HideSearchGrid">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="ReturnButton">
@@ -877,11 +917,11 @@
                 <Button x:Name="cancelQuickReturnButton" HorizontalAlignment="Stretch"  Grid.Column="0" Grid.Row="2" Margin="0,10,5,10" Content="{local:Loc Cancel}" Height="40" Style="{StaticResource ModernButtonStyle}" Click="cancelQuickReturnButton_Click"/>
             </Grid>
             <Grid x:Name="LoadingNotificationGrid" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed">
-                <TextBlock Margin="0,0,0,0" FontSize="22" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Top" Text="Loading..."/>
+                <TextBlock Margin="0,0,0,0" FontSize="22" Foreground="White" HorizontalAlignment="Center" FontFamily="Century Gothic" VerticalAlignment="Top" Text="Loading..."/>
             </Grid>
             <Grid x:Name="HazardNotificationGrid" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed">
                 <StackPanel>
-                    <TextBlock x:Name="hazardNotificationText" Margin="0,0,0,0" FontSize="22" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Top" Text="" TextWrapping="Wrap" MaxWidth="300"/>
+                    <TextBlock x:Name="hazardNotificationText" Margin="0,0,0,0" FontSize="22" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="Century Gothic" Text="" TextWrapping="Wrap" MaxWidth="300"/>
                     <Button x:Name="dismissHazardNotificationButton" Style="{StaticResource ModernButtonStyle}" HorizontalAlignment="Stretch" MaxWidth="100" Content="OK" Height="40" Margin="0,20,0,0" Click="dismissHazardNotificationButton_Click"/>
                 </StackPanel>
             </Grid>
@@ -894,7 +934,7 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <TextBlock x:Name="YesNoPromptText" Margin="0,0,0,20" Grid.Row="0" Grid.ColumnSpan="2" FontSize="22" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Top" Text="" TextWrapping="Wrap" MaxWidth="400"/>
+                <TextBlock x:Name="YesNoPromptText" FontFamily="Century Gothic" Margin="0,0,0,20" Grid.Row="0" Grid.ColumnSpan="2" FontSize="22" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Top" Text="" TextWrapping="Wrap" MaxWidth="400"/>
                 <Button x:Name="promptYesButton" Grid.Row="1" Grid.Column="0" Style="{StaticResource ModernButtonStyle}" HorizontalAlignment="Stretch" Content="{local:Loc Yes}" Height="40" Margin="0,20,5,0" Click="promptYesButton_Click"/>
                 <Button x:Name="promptNoButton" Grid.Row="1" Grid.Column="1" Style="{StaticResource ModernButtonStyle}" HorizontalAlignment="Stretch" Content="{local:Loc No}" Height="40" Margin="5,20,0,0" Click="promptNoButton_Click"/>
             </Grid>
@@ -910,8 +950,8 @@
             </Grid.Effect>
             <Label x:Name="Greeting" Content="{local:Loc Greeting}" Width="Auto" Height="Auto" HorizontalContentAlignment="Center" 
                    VerticalContentAlignment="Center" Foreground="White" FontSize="55" FontFamily="Century Gothic" Margin="0,0,0,0" Grid.ColumnSpan="2" d:IsLocked="True"/>
-            <Button x:Name="ReturnButton" Content="{local:Loc HomeButtonContent}" HorizontalAlignment="Left" Height="40" Margin="25,30,0,0" 
-                   VerticalAlignment="Top" Width="68" RenderTransformOrigin="0.5,0.5" Click="button_Click" Cursor="Hand" 
+            <Button x:Name="ReturnButton" Content="{local:Loc HomeButtonContent}" HorizontalAlignment="Left" Margin="25,30,0,0" 
+                   VerticalAlignment="Top"  RenderTransformOrigin="0.5,0.5" Click="button_Click" Cursor="Hand" 
                     KeyboardNavigation.IsTabStop="False" Style="{StaticResource ModernButtonStyle}">
                 <Button.RenderTransform>
                     <TransformGroup>
@@ -922,8 +962,8 @@
                     </TransformGroup>
                 </Button.RenderTransform>
             </Button>
-            <Button x:Name="LogOutButton" Content="{local:Loc LogOutButtonContent}" HorizontalAlignment="Right" Height="40" Margin="10,0,110,0" 
-                   VerticalAlignment="Center" Width="80" RenderTransformOrigin="0.5,0.5" Click="logOutButton_Click" Cursor="Hand" 
+            <Button x:Name="LogOutButton" Content="{local:Loc LogOutButtonContent}" HorizontalAlignment="Right" Margin="10,0,110,0" 
+                   VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5" Click="logOutButton_Click" Cursor="Hand" 
                     KeyboardNavigation.IsTabStop="False" Style="{StaticResource ModernButtonStyle}">
                 <Button.RenderTransform>
                     <TransformGroup>
@@ -964,7 +1004,7 @@
                     <LineBreak/>
                     <Run FontSize="24" FontFamily="Century Gothic" Text="{local:Loc HomeLoginButtonInstruction}"/>
                 </TextBlock>
-                <Grid x:Name="LoginFieldsGrid" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Hidden">
+                <Grid x:Name="LoginFieldsGrid" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Hidden" Margin="0,0,0,80">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
@@ -977,17 +1017,17 @@
                     <!-- Field for inputting the username-->
                     <TextBox Width="350" x:Name="UsernameField" Grid.Column="0" Grid.Row="0" Style="{StaticResource ModernTextBoxStyle}" Margin="0" 
                              Text="{local:Loc DefaultLoginUsernameBoxContent}" VerticalAlignment="Stretch" GotFocus="UsernameField_GotFocus" 
-                             LostFocus="UsernameField_LostFocus" TextChanged="UsernameField_TextChanged" KeyDown="UsernameField_KeyDown"
+                             LostFocus="UsernameField_LostFocus" VerticalContentAlignment="Center" TextChanged="UsernameField_TextChanged" KeyDown="UsernameField_KeyDown"
                              />
 
                     <!-- Field for inputting the password-->
                     <PasswordBox Padding="5" Grid.Column ="0" Grid.Row="1" x:Name="PasswordField" Margin="0,10,0,0"
-                             Visibility="Hidden" VerticalAlignment="Stretch" FontSize="24" KeyDown="PasswordField_KeyDown"/>
+                             Visibility="Hidden" VerticalAlignment="Stretch" FontSize="22" KeyDown="PasswordField_KeyDown"/>
 
                     <!-- LoginButton-->
                     <Button x:Name="LoginButton" Grid.Column="1" Grid.RowSpan="1"  Content="{local:Loc DefaultLoginButtonContent}" 
-                            HorizontalAlignment="Right" Margin="10,0,0,0" Padding="10,0,10,0" VerticalAlignment="Stretch" FontSize="24"  
-                            Style="{DynamicResource ModernButtonStyle}" Click="LoginButton_Click"/>
+                            HorizontalAlignment="Right" Margin="10,0,0,0" Padding="10,0,10,0" VerticalAlignment="Stretch"  
+                            Style="{DynamicResource ModernButtonStyle}" Click="LoginButton_Click" FontSize="22"/>
                 </Grid>
             </Grid>
 
@@ -1001,12 +1041,12 @@
                     <Run FontSize="24" FontFamily="Century Gothic" Text="{local:Loc HomeSignUpButtonInstruction}"/>
                 </TextBlock>
                 <StackPanel>
-                    <TextBlock x:Name="SignUpInstruction" HorizontalAlignment="Center" Margin="0,150,0,0" TextWrapping="Wrap"
+                    <TextBlock x:Name="SignUpInstruction" HorizontalAlignment="Center" TextAlignment="Left" Margin="0,150,0,40" TextWrapping="Wrap"
                            Text="{local:Loc SignUpInstruction1}" 
-                           VerticalAlignment="Top" Height="Auto" Width="318" FontSize="20" Foreground="White" Visibility="Hidden" Focusable="False"/>
+                           VerticalAlignment="Top" Height="Auto" Width="{Binding ActualWidth, ElementName=SignUpFieldGrid}" FontFamily="Century Gothic" FontSize="22" Foreground="White" Visibility="Hidden" Focusable="False"/>
                     <!-- Link to email signin-->
                     <TextBlock x:Name="SignUpEmailLink" Margin="10" HorizontalAlignment="Center" VerticalAlignment="Top" Height="Auto" Width="318" Visibility="Hidden" Focusable="False" TextAlignment="Center" FontSize="20">
-                        <Hyperlink NavigateUri="https://outlook.office.com" RequestNavigate="Hyperlink_RequestNavigate">
+                        <Hyperlink NavigateUri="htt+ps://outlook.office.com" RequestNavigate="Hyperlink_RequestNavigate">
                             https://outlook.office.com
                         </Hyperlink>
                     </TextBlock>
@@ -1016,19 +1056,19 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="50"/>
-                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-                        <TextBox x:Name="SignUpField" Style="{StaticResource ModernTextBoxStyle}" Grid.Column="0"  Text="{local:Loc DefaultSignUpUsernameBoxContent}" 
-                             GotFocus="SignUpField_GotFocus"  LostFocus="SignUpField_LostFocus" TextChanged="SignUpField_TextChanged" VerticalAlignment="Stretch"  
-                             Width="400"/>
-                        <Button x:Name="SignUpButton" Grid.Column="1" Content="{local:Loc SignUpButtonContent}" HorizontalAlignment="Right" Margin="10,0,0,0" 
-                            Width="115" FontSize="18" Padding="1,0,1,1" Style="{DynamicResource ModernButtonStyle}" VerticalAlignment="Stretch" 
+                        <TextBox x:Name="SignUpField" Style="{StaticResource ModernTextBoxStyle}" Grid.Column="0" Grid.Row="0"  Text="{local:Loc DefaultSignUpUsernameBoxContent}" 
+                             GotFocus="SignUpField_GotFocus" VerticalContentAlignment="Center" LostFocus="SignUpField_LostFocus" TextChanged="SignUpField_TextChanged" 
+                             Width="350"/>
+                        <Button x:Name="SignUpButton" Grid.Column="1" Grid.Row="0" Content="{local:Loc SignUpButtonContent}" Margin="10,0,0,0" Padding="5,0,5,0" 
+                             Style="{DynamicResource ModernButtonStyle}" VerticalAlignment="Stretch" 
                             Click="signupButton1_Click"/>
                         <TextBox x:Name="SignUpConfirmationField" Style="{StaticResource ModernTextBoxStyle}" Grid.Column="0" Grid.Row="1" VerticalAlignment="Stretch"  
-                             Width="400" Visibility="Hidden"/>
-                        <Button x:Name="SignUpConfirmationButton" Grid.Column="1" Grid.Row="1" Content="{local:Loc SignUpConfirmationButtonContent}" HorizontalAlignment="Right" Margin="10,0,0,0" 
-                            Width="115" FontSize="18" Padding="1,0,1,1" Style="{DynamicResource ModernButtonStyle}" VerticalAlignment="Stretch" Visibility="Hidden" Click="SignUpConfirmationButton_Click"/>
+                             Width="350" Visibility="Hidden"/>
+                        <Button x:Name="SignUpConfirmationButton" Grid.Column="1" Grid.Row="1" Content="{local:Loc SignUpConfirmationButtonContent}" Margin="10,0,0,0" 
+                            Padding="5,0,5,0" Style="{DynamicResource ModernButtonStyle}" VerticalAlignment="Stretch" Visibility="Hidden" Click="SignUpConfirmationButton_Click"/>
                     </Grid>
                 </StackPanel>
 
@@ -1146,7 +1186,7 @@
                         </Expander>
 
                         <TextBox x:Name="SearchBox" Style="{StaticResource ModernTextBoxStyle}" Margin="20,10,20,0" Grid.Column="0" Grid.Row="1" VerticalAlignment="Top" 
-                         Text="{local:Loc DefaultSearchBoxContent}" FontSize="24" FontFamily="Sylfaen" Foreground="Black" GotFocus="SearchBox_GotFocus" 
+                         Text="{local:Loc DefaultSearchBoxContent}" Foreground="Black" GotFocus="SearchBox_GotFocus" 
                          TextChanged="SearchBox_TextChanged" LostFocus="SearchBox_LostFocus" KeyDown="SearchBox_KeyDown"/>
 
                         <ListBox x:Name="SearchResultsListBox" HorizontalContentAlignment="Stretch" Margin="20, 30, 20, 20" 
@@ -1156,47 +1196,49 @@
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Vertical">
-                                        <TextBlock Text="{Binding title}"/>
-                                        <TextBlock Text="{Binding author}" FontSize="16"/>
+                                        <TextBlock FontFamily ="Century Gothic" Text="{Binding title}"/>
+                                        <TextBlock FontFamily ="Century Gothic" Text="{Binding author}" FontSize="16"/>
                                         <Separator Background="White"/>
                                     </StackPanel>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
                         </ListBox>
+                    </Grid>
 
-
+                    <Grid x:Name="NoBookSelectedGrid"  Background="{StaticResource MenuItemColourBrush3}" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Visibility="Hidden">
+                        <TextBlock Text="{local:Loc SelectBookForMoreInfo}" FontFamily="Century Gothic" Foreground="White" FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Center" TextWrapping="Wrap" Margin="10,0,10,0"/>
                     </Grid>
 
                     <ScrollViewer x:Name="BookInfoScroll" Grid.Column="1" VerticalScrollBarVisibility="Hidden">
-                        <StackPanel Grid.Column="1" Margin="10" Focusable="False">
+                        <StackPanel x:Name="BookInfoStackPanel" Margin="10" Focusable="False">
                             <Border BorderThickness="2" BorderBrush="White" Height="200" Width="140" Margin="0,10,0,0">
                                 <Image x:Name="coverArt" Height="200" Width="140" Margin="0,10,0,0" Stretch="Uniform"/>
                             </Border>
 
                             <!-- Book information displayed to the user -->
-                            <TextBlock Margin="0,10,0,0" Foreground="White"><Run Text="{local:Loc DisplaySearchBookTitle}"/></TextBlock>
-                            <TextBlock x:Name="bookName" FontSize="24" Foreground="White" TextWrapping="Wrap" Text="{Binding SelectedItem.title, ElementName=SearchResultsListBox}" />
+                            <TextBlock Margin="0,10,0,0" FontFamily="Century Gothic" Foreground="White"><Run Text="{local:Loc DisplaySearchBookTitle}"/></TextBlock>
+                            <TextBlock x:Name="bookName" FontFamily="Century Gothic" FontSize="24" Foreground="White" TextWrapping="Wrap" Text="{Binding SelectedItem.title, ElementName=SearchResultsListBox}" />
 
-                            <TextBlock Margin="0,10,0,0" Foreground="White"><Run Text="{local:Loc DisplaySearchBookAuthor}"/></TextBlock>
-                            <TextBlock x:Name="authorName" FontSize="24" Foreground="White" TextWrapping="Wrap" Text="{Binding SelectedItem.author, ElementName=SearchResultsListBox}"/>
+                            <TextBlock Margin="0,10,0,0" FontFamily="Century Gothic" Foreground="White"><Run Text="{local:Loc DisplaySearchBookAuthor}"/></TextBlock>
+                            <TextBlock x:Name="authorName" FontFamily="Century Gothic" FontSize="24" Foreground="White" TextWrapping="Wrap" Text="{Binding SelectedItem.author, ElementName=SearchResultsListBox}"/>
 
-                            <TextBlock Margin="0,10,0,0" Foreground="White"><Run Text="{local:Loc DisplaySearchBookYear}"/></TextBlock>
-                            <TextBlock x:Name="Year" FontSize="24" Foreground="White" TextWrapping="Wrap" Text="{Binding SelectedItem.year, ElementName=SearchResultsListBox}"/>
+                            <TextBlock Margin="0,10,0,0" FontFamily="Century Gothic" Foreground="White"><Run Text="{local:Loc DisplaySearchBookYear}"/></TextBlock>
+                            <TextBlock x:Name="Year" FontFamily="Century Gothic" FontSize="24" Foreground="White" TextWrapping="Wrap" Text="{Binding SelectedItem.year, ElementName=SearchResultsListBox}"/>
 
-                            <TextBlock Margin="0,10,0,0" Foreground="White"><Run Text="{local:Loc DisplaySearchBookID}"/></TextBlock>
-                            <TextBlock x:Name="bookID" FontSize="24" Foreground="White" TextWrapping="Wrap" Text="{Binding SelectedItem.id, ElementName=SearchResultsListBox}"/>
+                            <TextBlock Margin="0,10,0,0" FontFamily="Century Gothic" Foreground="White"><Run Text="{local:Loc DisplaySearchBookID}"/></TextBlock>
+                            <TextBlock x:Name="bookID" FontFamily="Century Gothic" FontSize="24" Foreground="White" TextWrapping="Wrap" Text="{Binding SelectedItem.id, ElementName=SearchResultsListBox}"/>
 
-                            <TextBlock Margin="0,10,0,0" Foreground="White"><Run Text="{local:Loc DisplaySearchBookAvailability}"/></TextBlock>
-                            <TextBlock x:Name="availability" FontSize="24" Foreground="White" TextWrapping="Wrap" Text="{Binding SelectedItem.available, ElementName=SearchResultsListBox}"/>
+                            <TextBlock Margin="0,10,0,0" FontFamily="Century Gothic" Foreground="White"><Run Text="{local:Loc DisplaySearchBookAvailability}"/></TextBlock>
+                            <TextBlock x:Name="availability" FontFamily="Century Gothic" FontSize="24" Foreground="White" TextWrapping="Wrap" Text="{Binding SelectedItem.available, ElementName=SearchResultsListBox}"/>
 
-                            <TextBlock Margin="0,10,0,0" Foreground="White"><Run Text="{local:Loc DisplaySearchBookISBN}"/></TextBlock>
-                            <TextBlock x:Name="bookISBN" FontSize="24" Foreground="White" TextWrapping="Wrap" Text="{Binding SelectedItem.isbn, ElementName=SearchResultsListBox}"/>
+                            <TextBlock Margin="0,10,0,0" FontFamily="Century Gothic" Foreground="White"><Run Text="{local:Loc DisplaySearchBookISBN}"/></TextBlock>
+                            <TextBlock x:Name="bookISBN" FontFamily="Century Gothic" FontSize="24" Foreground="White" TextWrapping="Wrap" Text="{Binding SelectedItem.isbn, ElementName=SearchResultsListBox}"/>
 
-                            <TextBlock Margin="0,10,0,0" Foreground="White"><Run Text="{local:Loc DisplaySearchBookCategory}"/></TextBlock>
-                            <TextBlock x:Name="category" FontSize="24" Foreground="White" TextWrapping="Wrap" Text="{Binding SelectedItem.category, ElementName=SearchResultsListBox}"/>
+                            <TextBlock Margin="0,10,0,0" FontFamily="Century Gothic" Foreground="White"><Run Text="{local:Loc DisplaySearchBookCategory}"/></TextBlock>
+                            <TextBlock x:Name="category" FontFamily="Century Gothic" FontSize="24" Foreground="White" TextWrapping="Wrap" Text="{Binding SelectedItem.category, ElementName=SearchResultsListBox}"/>
 
-                            <TextBlock x:Name="logInNotice" FontSize ="24" Foreground="White" FontStyle="Italic" HorizontalAlignment="Center" Margin="0,20,0,0" Text="Log In to Borrow This Book" Visibility="Collapsed"/>
-                            <Button Visibility="Collapsed" x:Name="loanButton" Content="Borrow this book" HorizontalAlignment="Center" Style="{StaticResource ModernButtonStyle}" Height="40" Width="100" Margin="0,20,0,0" Click="loanButton_Click"/>
+                            <TextBlock x:Name="logInNotice" FontFamily="Century Gothic" FontSize ="24" Foreground="White" FontStyle="Italic" HorizontalAlignment="Center" Margin="0,20,0,0" Text="{local:Loc LogInToBorrowNotice}" Visibility="Collapsed" TextWrapping="Wrap"/>
+                            <Button Visibility="Collapsed" FontFamily="Century Gothic" x:Name="loanButton" Content="{local:Loc BorrowBookButtonContent}" HorizontalAlignment="Center" Style="{StaticResource ModernButtonStyle}" Height="40" Margin="0,20,0,0" Click="loanButton_Click"/>
                         </StackPanel>
                     </ScrollViewer>
                 </Grid>
@@ -1214,8 +1256,8 @@
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Vertical">
-                                <TextBlock Text="{Binding title}" Foreground="White"/>
-                                <TextBlock Text="{Binding author}" Foreground="White" FontSize="16"/>
+                                <TextBlock Text="{Binding title}" FontFamily="Century Gothic" Foreground="White"/>
+                                <TextBlock Text="{Binding author}" FontFamily="Century Gothic" Foreground="White" FontSize="16"/>
                                 <Separator Background="White"/>
                             </StackPanel>
                         </DataTemplate>
@@ -1224,10 +1266,10 @@
                 <StackPanel Grid.Column="1" Margin="5" Focusable="False">
                     <!-- Book information displayed to the user -->
                     <!-- The greeting message is set in language changing functions in csharp file -->
-                    <TextBlock x:Name="loggedInUserGreeting" Text="Error: This message should be set to something else in code when signing in!" Margin="0,20,0,0" Foreground="White" FontSize="24" TextWrapping="Wrap" HorizontalAlignment="Stretch"/>
-                    <TextBlock x:Name="loggedInUserInstruction" Text="{local:Loc loggedInUserInstruction}" Margin="0,0,0,20" Foreground="White" FontSize="24" TextWrapping="Wrap" HorizontalAlignment="Stretch"/>
-                    <Button x:Name="returnSelectedButton" Content="{local:Loc ReturnSelectedButtonContent}" HorizontalAlignment="Center" Style="{StaticResource ModernButtonStyle}" Height="40" Width="160" Margin="5,5,5,5" Click="returnSelectedButton_Click" IsEnabled="false"/>
-                    <Button x:Name="returnAllButton" Content="{local:Loc ReturnAllButtonContent}" HorizontalAlignment="Center" Style="{StaticResource ModernButtonStyle}" Height="40" Width="160" Margin="5,5,5,5" Click="returnAllButton_Click" IsEnabled="false"/>
+                    <TextBlock x:Name="loggedInUserGreeting" FontFamily="Century Gothic" Text="Error: This message should be set to something else in code when signing in!" Margin="0,20,0,0" Foreground="White" FontSize="24" TextWrapping="Wrap" HorizontalAlignment="Stretch"/>
+                    <TextBlock x:Name="loggedInUserInstruction" Text="{local:Loc loggedInUserInstruction}" FontFamily="Century Gothic"  Margin="0,0,0,20" Foreground="White" FontSize="24" TextWrapping="Wrap" HorizontalAlignment="Stretch"/>
+                    <Button x:Name="returnSelectedButton" Content="{local:Loc ReturnSelectedButtonContent}" HorizontalAlignment="Center" Style="{StaticResource ModernButtonStyle}" Height="40" Margin="5,5,5,5" Click="returnSelectedButton_Click" IsEnabled="false"/>
+                    <Button x:Name="returnAllButton" Content="{local:Loc ReturnAllButtonContent}" HorizontalAlignment="Center" Style="{StaticResource ModernButtonStyle}" Height="40" Margin="5,5,5,5" Click="returnAllButton_Click" IsEnabled="false"/>
                     <!--<Button x:Name="returnOtherButton" Content="Return a book not listed here" HorizontalAlignment="Center" Style="{StaticResource ModernButtonStyle}" Height="40" Width="160" Margin="5,5,5,5" Click="returnOtherButton_Click"/> -->
                 </StackPanel>
             </Grid>

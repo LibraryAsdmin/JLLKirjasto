@@ -205,7 +205,7 @@
     <value>ISBN</value>
   </data>
   <data name="DisplaySearchBookTitle" xml:space="preserve">
-    <value>Teoksen Nimi</value>
+    <value>Teoksen nimi</value>
   </data>
   <data name="DisplaySearchBookYear" xml:space="preserve">
     <value>Julkaisuvuosi</value>
@@ -242,15 +242,6 @@
   </data>
   <data name="SignUpWrongCode" xml:space="preserve">
     <value>Syöttämäsi koodi oli virheellinen. Käyttäjän luonti epäonnistui.</value>
-  </data>
-  <data name="TextUnderAccountCreation" xml:space="preserve">
-    <value>Tässä teksti tunnuksenluontinappulan alla.</value>
-  </data>
-  <data name="TextUnderLogin" xml:space="preserve">
-    <value>Tässä teksti kirjautumisnappulan alla.</value>
-  </data>
-  <data name="TextUnderSearchBox" xml:space="preserve">
-    <value>Hae kirjoja tai kirjailijoita kirjastosta kirjoittamalla yläpuolella olevaan laatikkoon.</value>
   </data>
   <data name="UserDbAddButtonContent" xml:space="preserve">
     <value>Lisää käyttäjä</value>
@@ -322,7 +313,7 @@
     <value>Kyllä</value>
   </data>
   <data name="UserEditWindowTitle" xml:space="preserve">
-    <value>Muuta käytäjän tietoja</value>
+    <value>Muuta käyttäjän tietoja</value>
   </data>
   <data name="UserEditWilmaError" xml:space="preserve">
     <value>Huomio! Käyttäjätietokanta sisältää jo käyttäjän, jolla on sama Wilma osoite: {0}. Varmista että Wilma osoite on ainutlaatuinen.</value>
@@ -340,13 +331,13 @@
     <value>Varmista lainojen palautus</value>
   </data>
   <data name="DeleteBookConfirmationDialogContent" xml:space="preserve">
-    <value>Oletko varma että haluat poistaa valitun teoksen?</value>
+    <value>Oletko varma, että haluat poistaa valitun teoksen?</value>
   </data>
   <data name="DeleteBookConfirmationDialogTitle" xml:space="preserve">
     <value>Vahvistus</value>
   </data>
   <data name="DeleteUserConfirmationDialogContent" xml:space="preserve">
-    <value>Oletko varma että haluat poistaa valitun käyttäjän?</value>
+    <value>Oletko varma, että haluat poistaa valitun käyttäjän?</value>
   </data>
   <data name="DeleteUserConfirmationDialogTitle" xml:space="preserve">
     <value>Vahvistus</value>
@@ -368,5 +359,23 @@
   </data>
   <data name="UserAddWilmaError" xml:space="preserve">
     <value>Huomio! Wilma tunnus {0} on virheellinen. Tarkistta ettei siinä ole kirjoitusvirheitä.</value>
+  </data>
+  <data name="LogInToBorrowNotice" xml:space="preserve">
+    <value>Kirjaudu sisään lainataksesi tämän kirjan</value>
+  </data>
+  <data name="BorrowBookButtonContent" xml:space="preserve">
+    <value>Lainaa tämä kirja</value>
+  </data>
+  <data name="SelectBookForMoreInfo" xml:space="preserve">
+    <value>Valitse hakutulos nähdäksesi siitä lisää tietoa.</value>
+  </data>
+  <data name="LoginErrorAccountDoesntExist" xml:space="preserve">
+    <value>Huomio! Käyttäjätunnusta ei ole olemassa. Ole hyvä ja luo tunnus rekisteröitymistoiminnolla.</value>
+  </data>
+  <data name="LoginErrorIncorrectAddress" xml:space="preserve">
+    <value>Huomio! Käyttäjätunnus vaikuttaa virheelliseltä. Käytä Wilma-tunnustasi kirjautumiseen.</value>
+  </data>
+  <data name="SignUpErrorAccountAlreadyInUse" xml:space="preserve">
+    <value>Huomio! Tämä Wilma-tunnus on jo käytössä.</value>
   </data>
 </root>

@@ -42,16 +42,19 @@
         <Color x:Key="Button.Disabled.Border">#AFA2A2A2</Color>
         <Color x:Key="Button.Disabled.Foreground">#FF515151</Color>
 
-        <!-- TODO: Old. Should this be removed? -->
+        <!-- TODO: Old. Should this be removed? A: Not old, this is used in all the buttons-->
         <Style x:Key="ModernButtonStyle" TargetType="{x:Type Button}">
             <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
             <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
             <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
             <Setter Property="Foreground" Value="{DynamicResource Button.Static.Foreground}"/>
             <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="FontFamily" Value="Century Gothic"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="MinHeight" Value="40"/>
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Padding" Value="5,0,5,0"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
@@ -120,8 +123,9 @@
         <Style TargetType="TextBox" x:Key="ModernTextBoxStyle">
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Padding" Value="5"/>
-            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="FontSize" Value="22"/>
             <Setter Property="IsUndoEnabled" Value="False"/>
+            <Setter Property="FontFamily" Value="Century Gothic"/>
             <Setter Property="Background" Value="{StaticResource NormalTextBoxColour}"/>
             <Setter Property="BorderBrush" Value="{StaticResource NormalTextBoxColour}"/>
             <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>

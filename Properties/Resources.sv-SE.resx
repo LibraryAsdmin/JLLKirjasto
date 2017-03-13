@@ -236,22 +236,13 @@
     <value>Svenska här</value>
   </data>
   <data name="SignUpInstruction1" xml:space="preserve">
-    <value>Svenska här</value>
+    <value>Svenska här 1</value>
   </data>
   <data name="SignUpInstruction2" xml:space="preserve">
-    <value>Svenska här</value>
+    <value>Svenska här 2</value>
   </data>
   <data name="SignUpWrongCode" xml:space="preserve">
     <value>Svenska här</value>
-  </data>
-  <data name="TextUnderAccountCreation" xml:space="preserve">
-    <value>Svenska här</value>
-  </data>
-  <data name="TextUnderLogin" xml:space="preserve">
-    <value>Svenska här</value>
-  </data>
-  <data name="TextUnderSearchBox" xml:space="preserve">
-    <value>Söka böcker eller författare genom att skriva i lådan ovan.</value>
   </data>
   <data name="UserDbAddButtonContent" xml:space="preserve">
     <value>Svenska här</value>
@@ -366,5 +357,23 @@
   </data>
   <data name="UserAddWilmaError" xml:space="preserve">
     <value>Svenska här! Svenska här {0} svenska här. Svenska här.</value>
+  </data>
+  <data name="LogInToBorrowNotice" xml:space="preserve">
+    <value>Svenska här</value>
+  </data>
+  <data name="BorrowBookButtonContent" xml:space="preserve">
+    <value>Svenska här</value>
+  </data>
+  <data name="SelectBookForMoreInfo" xml:space="preserve">
+    <value>Svenska här</value>
+  </data>
+  <data name="LoginErrorAccountDoesntExist" xml:space="preserve">
+    <value>Svenska här</value>
+  </data>
+  <data name="LoginErrorIncorrectAddress" xml:space="preserve">
+    <value>Svenska här</value>
+  </data>
+  <data name="SignUpErrorAccountAlreadyInUse" xml:space="preserve">
+    <value>Svenska här</value>
   </data>
 </root>
