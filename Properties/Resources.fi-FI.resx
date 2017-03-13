@@ -235,7 +235,7 @@
     <value>Hupsista! Jotakin meni vikaan ohjelman luodessa uutta tunnusta. Varmista, että kirjoitit tunnuksesi oikein.</value>
   </data>
   <data name="SignUpInstruction1" xml:space="preserve">
-    <value>Luo tunnus kirjoittamalla Wilma sähköpostiosoitteesi alla olevaan laatikkoon.</value>
+    <value>Luo tunnus kirjoittamalla Wilma-tunnuksesi alla olevaan laatikkoon.</value>
   </data>
   <data name="SignUpInstruction2" xml:space="preserve">
     <value>Wilmatunnukseesi kuuluvaan sähköpostiosoitteeseen lähetettiin varmennuskoodi. Löydät linkin kirjautumissivulle alta. Kirjoita koodi alla olevaan laatikkoon valmistaaksesi käyttäjän luonnin. </value>
