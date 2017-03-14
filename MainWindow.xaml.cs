@@ -632,7 +632,21 @@ namespace JLLKirjasto
         // User database related handling (login / signing up)
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
-            if (UsernameField.Text == "admin" && PasswordField.Password == "kuulkala")
+            // fetch the correct Admin password from the database
+            List<String> adminColumns = new List<String>();
+            adminColumns.Add("ID");
+
+            // get the list of used Book IDs in the database
+            List<List<String>> adminResults = dbi.searchDatabaseRows(dbconnection, "password", "Admin", adminColumns);
+
+            if (adminResults.Count != 1)
+            {
+                throw new Exception("Error: Could not fetch the admin password for verification.");
+            }
+
+            String adminpass = adminResults[0][1];
+
+            if (UsernameField.Text == "admin" && PasswordField.Password == adminpass)
             {
                 adminwindow = new AdminControlsWindow();
                 adminwindow.Show();
