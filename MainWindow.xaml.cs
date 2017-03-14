@@ -323,6 +323,7 @@ namespace JLLKirjasto
             defaultSignUpOperation.reset();
             SignUpField.Text = Properties.Resources.ResourceManager.GetString("DefaultSignUpUsernameBoxContent", TranslationSource.Instance.CurrentCulture);
             SignUpConfirmationField.Text = "";
+            UsernameField.Text = Properties.Resources.ResourceManager.GetString("DefaultLoginUsernameBoxContent", TranslationSource.Instance.CurrentCulture);
             SignUpButton.Visibility = Visibility.Visible;
             SignUpField.Visibility = Visibility.Visible;
             SignUpInstruction.Text = Properties.Resources.ResourceManager.GetString("SignUpInstruction1", TranslationSource.Instance.CurrentCulture);
