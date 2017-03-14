@@ -376,4 +376,25 @@
   <data name="SignUpErrorAccountAlreadyInUse" xml:space="preserve">
     <value>Svenska här</value>
   </data>
+  <data name="ChangePasswordButtonText" xml:space="preserve">
+    <value>Svenska här</value>
+  </data>
+  <data name="ChangePasswordConfirmationDialogContent" xml:space="preserve">
+    <value>Svenska här</value>
+  </data>
+  <data name="ChangePasswordConfirmationDialogTitle" xml:space="preserve">
+    <value>Svenska här</value>
+  </data>
+  <data name="ConfirmPasswordLabel" xml:space="preserve">
+    <value>Svenska här:</value>
+  </data>
+  <data name="MasterPasswordLabel" xml:space="preserve">
+    <value>Svenska här:</value>
+  </data>
+  <data name="NewPasswordLabel" xml:space="preserve">
+    <value>Svenska här:</value>
+  </data>
+  <data name="PasswordTabHeader" xml:space="preserve">
+    <value>Svenska här</value>
+  </data>
 </root>

@@ -389,5 +389,58 @@ namespace JLLKirjasto
         {
             editUser();
         }
+
+        private void changePasswordButton_Click(object sender, RoutedEventArgs e)
+        {
+            // verify that all boxes contain text
+            if (MasterPasswordBox.Password.Length <= 0 || NewPasswordBox.Password.Length <= 0 || ConfirmPasswordBox.Password.Length <= 0)
+            {
+                MessageBox.Show("Error: None of the text boxes can be left empty. Please fill them according to their labels.");
+                return;
+            }
+
+            // get the master password from the database
+            List<String> masterColumns = new List<String>();
+            masterColumns.Add("ID");
+
+            // get the list of used Book IDs in the database
+            List<List<String>> masterResults = dbi.searchDatabaseRows(dbconnection, "password", "Master", masterColumns);
+
+            if (masterResults.Count != 1)
+            {
+                throw new Exception("Error: Could not fetch the master password for verification.");
+            }
+
+            String masterpass = masterResults[0][1];
+
+            // check if the entered master password is correct
+            if (MasterPasswordBox.Password != masterpass)
+            {
+                MessageBox.Show("Error: Invalid master password entered.");
+                return;
+            }
+
+            // verify that the new passwords are the same
+            if (NewPasswordBox.Password != ConfirmPasswordBox.Password)
+            {
+                MessageBox.Show("Error: The new passwords do not match. Please make sure that the passwords is written correctly.");
+                return;
+            }
+
+            MessageBoxResult confirmPasswordChange = System.Windows.MessageBox.Show(Properties.Resources.ResourceManager.GetString("ChangePasswordConfirmationDialogContent", TranslationSource.Instance.CurrentCulture), Properties.Resources.ResourceManager.GetString("ChangePasswordConfirmationDialogTitle", TranslationSource.Instance.CurrentCulture), System.Windows.MessageBoxButton.YesNo);
+            if (confirmPasswordChange == MessageBoxResult.Yes)
+            {
+                // change the admin password in the database
+                dbi.commitDbChanges(dbconnection, "password", ConfirmPasswordBox.Password, "Admin", "Password");
+
+                // reset password boxes
+                MasterPasswordBox.Password = "";
+                NewPasswordBox.Password = "";
+                ConfirmPasswordBox.Password = "";
+
+                // assure the user that nothing went wrong during the process.
+                MessageBox.Show("Password successfully changed.");
+            }
+        }
     }
 }

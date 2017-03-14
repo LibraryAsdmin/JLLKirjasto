@@ -247,6 +247,33 @@
 
                 </Grid>
             </TabItem>
+            
+            <!-- Change password tab-->
+            <TabItem Header="{local:Loc PasswordTabHeader}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Label Content="{local:Loc MasterPasswordLabel}"    Grid.Row="0" Grid.Column="0"/>
+                    <Label Content="{local:Loc NewPasswordLabel}"       Grid.Row="1" Grid.Column="0"/>
+                    <Label Content="{local:Loc ConfirmPasswordLabel}"   Grid.Row="2" Grid.Column="0"/>
+
+                    <PasswordBox x:Name="MasterPasswordBox"       Grid.Row="0" Grid.Column="1" Margin="5"/>
+                    <PasswordBox x:Name="NewPasswordBox"          Grid.Row="1" Grid.Column="1" Margin="5"/>
+                    <PasswordBox x:Name="ConfirmPasswordBox"      Grid.Row="2" Grid.Column="1" Margin="5"/>
+
+                    <Button x:Name="changePasswordButton" Content="{local:Loc ChangePasswordButtonText}" 
+                            HorizontalAlignment="Right" Margin="5" Width="Auto" Grid.Row="3" Grid.Column="1"  Click="changePasswordButton_Click"/>
+                </Grid>
+            </TabItem>
         </TabControl>
         
     </Grid>

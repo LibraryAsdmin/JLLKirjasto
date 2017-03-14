@@ -378,4 +378,25 @@
   <data name="SignUpErrorAccountAlreadyInUse" xml:space="preserve">
     <value>Error: This Wilma address is already in use.</value>
   </data>
+  <data name="ChangePasswordButtonText" xml:space="preserve">
+    <value>Change password</value>
+  </data>
+  <data name="ChangePasswordConfirmationDialogContent" xml:space="preserve">
+    <value>Are you sure you want to change the library administrator password?</value>
+  </data>
+  <data name="ChangePasswordConfirmationDialogTitle" xml:space="preserve">
+    <value>Confirm admin password change</value>
+  </data>
+  <data name="ConfirmPasswordLabel" xml:space="preserve">
+    <value>Retype new admin password:</value>
+  </data>
+  <data name="MasterPasswordLabel" xml:space="preserve">
+    <value>Master password:</value>
+  </data>
+  <data name="NewPasswordLabel" xml:space="preserve">
+    <value>New admin password:</value>
+  </data>
+  <data name="PasswordTabHeader" xml:space="preserve">
+    <value>Change admin password</value>
+  </data>
 </root>
