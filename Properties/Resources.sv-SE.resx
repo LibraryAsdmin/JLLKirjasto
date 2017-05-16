@@ -117,284 +117,286 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="UserEditWindowTitle" xml:space="preserve">
-    <value>Svenska här</value>
+  <data name="AdminControlsWindowTitle" xml:space="preserve">
+    <value>Databas kontrollpanel</value>
+  </data>
+  <data name="bookAvailable" xml:space="preserve">
+    <value>Tillgänglig</value>
   </data>
   <data name="BookDbAddButtonContent" xml:space="preserve">
-    <value>Svenska här</value>
+    <value>Lägga till boken</value>
   </data>
   <data name="BookDbAdvancedSearchContent" xml:space="preserve">
-    <value>Svenska här</value>
+    <value>Sök alternativ</value>
   </data>
   <data name="BookDbDelButtonContent" xml:space="preserve">
-    <value>Svenska här</value>
+    <value>Radera boken</value>
   </data>
   <data name="BookDbEditButtonContent" xml:space="preserve">
-    <value>Svenska här</value>
+    <value>Editera boken</value>
   </data>
   <data name="BookDbSearchButtonContent" xml:space="preserve">
     <value>Sök</value>
   </data>
+  <data name="BookDbSearchOptionAmount" xml:space="preserve">
+    <value>Totalantal</value>
+  </data>
   <data name="BookDbSearchOptionAuthor" xml:space="preserve">
-    <value>Svenska här</value>
+    <value>Författare</value>
   </data>
   <data name="BookDbSearchOptionAvailable" xml:space="preserve">
-    <value>Svenska här</value>
+    <value>Tillgänglig</value>
   </data>
   <data name="BookDbSearchOptionCategory" xml:space="preserve">
-    <value>Svenska här</value>
+    <value>Kategori</value>
   </data>
   <data name="BookDbSearchOptionID" xml:space="preserve">
-    <value>Svenska här</value>
+    <value>ID</value>
   </data>
   <data name="BookDbSearchOptionISBN" xml:space="preserve">
-    <value>Svenska här</value>
+    <value>ISBN</value>
   </data>
   <data name="BookDbSearchOptionLanguage" xml:space="preserve">
-    <value>Svenska här</value>
+    <value>Språk</value>
   </data>
   <data name="BookDbSearchOptionTitle" xml:space="preserve">
-    <value>Svenska här</value>
+    <value>Namn</value>
   </data>
   <data name="BookDbSearchOptionYear" xml:space="preserve">
-    <value>Svenska här</value>
+    <value>Utgivningsår</value>
   </data>
   <data name="BookDbWindowTitle" xml:space="preserve">
-    <value>Svenska här</value>
+    <value>Bokdatabas administration</value>
   </data>
   <data name="BookEditIDConflict" xml:space="preserve">
-    <value>Svenska här! Svenska här {0} Svenska här.</value>
-    <comment>{0} is replaced with book's ID in the displayed error message</comment>
+    <value>Varning! Bokdatabasen innehåller redan en bok med ID {0}. Se till at bokens ID inte finns i databasen.</value>
+  </data>
+  <data name="BookEditIDError" xml:space="preserve">
+    <value>Fel! ID {0} har ett felaktigt format. Se till att ID innehåller bara nummer och är 6 tecken lång.</value>
   </data>
   <data name="BookEditWindowAcceptButtonContent" xml:space="preserve">
-    <value>Svenska här</value>
+    <value>Acceptera</value>
   </data>
   <data name="BookEditWindowDeclineButtonContent" xml:space="preserve">
-    <value>Svenska här</value>
+    <value>Avböj</value>
   </data>
   <data name="BookEditWindowTitle" xml:space="preserve">
-    <value>Svenska här</value>
+    <value>Editera bok information</value>
+  </data>
+  <data name="bookNotAvailable" xml:space="preserve">
+    <value>Lånad</value>
+  </data>
+  <data name="booksAvailable" xml:space="preserve">
+    <value>{0} / {1} böcker är tillgängliga</value>
   </data>
   <data name="BooksTabHeader" xml:space="preserve">
-    <value>Svenska här</value>
+    <value>Böcker</value>
+  </data>
+  <data name="BorrowBookButtonContent" xml:space="preserve">
+    <value>Låna den här boken</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Annullera</value>
+  </data>
+  <data name="ChangePasswordButtonText" xml:space="preserve">
+    <value>Byt lösenord</value>
+  </data>
+  <data name="ChangePasswordConfirmationDialogContent" xml:space="preserve">
+    <value>Är du säker på att du vill byta bibliotekkontrollörens lösenord?</value>
+  </data>
+  <data name="ChangePasswordConfirmationDialogTitle" xml:space="preserve">
+    <value>Acceptera byte av lösenord</value>
+  </data>
+  <data name="ConfirmPasswordLabel" xml:space="preserve">
+    <value>Skriv lösenordet igen</value>
+  </data>
+  <data name="confirmReturnAll" xml:space="preserve">
+    <value>Är dut säker på att du vill lämna in alla dina lånade böcker?</value>
+  </data>
+  <data name="confirmReturnAllTitle" xml:space="preserve">
+    <value>Acceptera inlämning</value>
   </data>
   <data name="DefaultLoginButtonContent" xml:space="preserve">
-    <value>Svenskä här</value>
+    <value>Logga in</value>
   </data>
   <data name="DefaultLoginUsernameBoxContent" xml:space="preserve">
-    <value>Svenska här</value>
+    <value>Wilma-användarnamn</value>
   </data>
   <data name="DefaultSearchBoxContent" xml:space="preserve">
-    <value>Sök!</value>
+    <value>Sök</value>
   </data>
   <data name="DefaultSignUpUsernameBoxContent" xml:space="preserve">
-    <value>Svenska här</value>
+    <value>Skriv ner ditt Wilma-användarnamn</value>
+  </data>
+  <data name="DeleteBookConfirmationDialogContent" xml:space="preserve">
+    <value>Är du säker på att du bill radera den valda boken?</value>
+  </data>
+  <data name="DeleteBookConfirmationDialogTitle" xml:space="preserve">
+    <value>Accepterande</value>
+  </data>
+  <data name="DeleteUserConfirmationDialogContent" xml:space="preserve">
+    <value>Är du säker på att du vill ta bort den valda användaren?</value>
+  </data>
+  <data name="DeleteUserConfirmationDialogTitle" xml:space="preserve">
+    <value>Accepterande</value>
   </data>
   <data name="DisplaySearchBookAuthor" xml:space="preserve">
-    <value>Svenska här</value>
+    <value>Författare</value>
   </data>
   <data name="DisplaySearchBookAvailability" xml:space="preserve">
-    <value>Svenska här</value>
+    <value>Tillgänglig</value>
   </data>
   <data name="DisplaySearchBookCategory" xml:space="preserve">
-    <value>Svenska här</value>
+    <value>Kategori</value>
   </data>
   <data name="DisplaySearchBookID" xml:space="preserve">
-    <value>Svenska här</value>
+    <value>ID</value>
   </data>
   <data name="DisplaySearchBookISBN" xml:space="preserve">
-    <value>Svenska här</value>
+    <value>ISBN</value>
   </data>
   <data name="DisplaySearchBookTitle" xml:space="preserve">
-    <value>Svenska här</value>
+    <value>Titel</value>
   </data>
   <data name="DisplaySearchBookYear" xml:space="preserve">
-    <value>Svenska här</value>
+    <value>Utgivningsår</value>
   </data>
   <data name="Greeting" xml:space="preserve">
     <value>Hejsan!</value>
   </data>
   <data name="HomeButtonContent" xml:space="preserve">
-    <value>Svenska här</value>
+    <value>Hemsida</value>
+  </data>
+  <data name="HomeLoginButtonInstruction" xml:space="preserve">
+    <value>att låna böcker</value>
+  </data>
+  <data name="HomeLoginButtonTitle" xml:space="preserve">
+    <value>Logga in</value>
+  </data>
+  <data name="HomeSearchButtonInstruction" xml:space="preserve">
+    <value>verk och författare</value>
+  </data>
+  <data name="HomeSearchButtonTitle" xml:space="preserve">
+    <value>Sök</value>
+  </data>
+  <data name="HomeSignUpButtonInstruction" xml:space="preserve">
+    <value>för att använda biblioteket</value>
+  </data>
+  <data name="HomeSignUpButtonTitle" xml:space="preserve">
+    <value>Bli medlem</value>
   </data>
   <data name="loggedInUserGreeting" xml:space="preserve">
-    <value>Hejsan, {0}!</value>
+    <value>Hälsningar, {0}!</value>
   </data>
   <data name="loggedInUserInstruction" xml:space="preserve">
-    <value>Svenska här</value>
+    <value>Du kan låna flera böcker från boksökningen och lämna in dina böcker genom att välja dem från listan på vänster sida och klicka på knappen.</value>
+  </data>
+  <data name="LoginErrorAccountDoesntExist" xml:space="preserve">
+    <value>Fel! Användarnamnet finns inte. Vänligen gör ett användarnamn på Bli medlem –sidan.</value>
+  </data>
+  <data name="LoginErrorIncorrectAddress" xml:space="preserve">
+    <value>Fel! Det här användarnamnet verkar vara felaktigt. Vänligen använd ditt</value>
+  </data>
+  <data name="LogInToBorrowNotice" xml:space="preserve">
+    <value>Logga in för att låna den här boken.</value>
+  </data>
+  <data name="LogOutButtonContent" xml:space="preserve">
+    <value>Logga ut</value>
+  </data>
+  <data name="MasterPasswordLabel" xml:space="preserve">
+    <value>Huvudlösenord</value>
+  </data>
+  <data name="NewPasswordLabel" xml:space="preserve">
+    <value>Systemkontrollörens nya lösenord</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>Nej</value>
+  </data>
+  <data name="PasswordTabHeader" xml:space="preserve">
+    <value>Byt systemkontrollörens lösenord</value>
+  </data>
+  <data name="QuickReturnButtonContent" xml:space="preserve">
+    <value>Snabb retur</value>
+  </data>
+  <data name="QuickReturnInstruction" xml:space="preserve">
+    <value>Vänligen skriv bokens ID</value>
+  </data>
+  <data name="ReturnAllButtonContent" xml:space="preserve">
+    <value>Lämna in alla dina böcker</value>
+  </data>
+  <data name="ReturnButtonContent" xml:space="preserve">
+    <value>Lämna in</value>
+  </data>
+  <data name="ReturnSelectedButtonContent" xml:space="preserve">
+    <value>Lämna in den valda boken</value>
+  </data>
+  <data name="SelectBookForMoreInfo" xml:space="preserve">
+    <value>Välj en bok från sökresultatet för att se mer</value>
   </data>
   <data name="SignUpButtonContent" xml:space="preserve">
-    <value>Svenska här</value>
+    <value>Bli medlem</value>
   </data>
   <data name="SignUpConfirmationButtonContent" xml:space="preserve">
-    <value>Svenska här</value>
+    <value>Acceptera</value>
   </data>
   <data name="SignUpEmailTitle" xml:space="preserve">
-    <value>Verifierings kod</value>
+    <value>Verifieringskod</value>
+  </data>
+  <data name="SignUpErrorAccountAlreadyInUse" xml:space="preserve">
+    <value>Fel! Det här Wilma-användarnamnet är redan i användning</value>
   </data>
   <data name="SignUpErrorMessage" xml:space="preserve">
-    <value>Svenska här</value>
+    <value>Hoppsan! Något gick fel medan du skapade ett nytt användarnamn. Vänligen se till att du har skrivit rätt.</value>
   </data>
   <data name="SignUpInstruction1" xml:space="preserve">
-    <value>Svenska här 1</value>
+    <value>Skapa ett användarnamn genom att skriva ditt Wilma-användarnamn.</value>
   </data>
   <data name="SignUpInstruction2" xml:space="preserve">
-    <value>Svenska här 2</value>
+    <value>Ett mejl som innehåller en verifieringskod skickades till e-post associerad med ditt Wilma-användarnamn. Länken till Logga in –sidan finns nedan. Skriv koden till textlådan nedan för att avsluta att skapa ett användarnamn.</value>
   </data>
   <data name="SignUpWrongCode" xml:space="preserve">
-    <value>Svenska här</value>
+    <value>Den inmatade koden var felaktig. Att skapa ett användarnamn gick fel.</value>
+  </data>
+  <data name="UserAddWilmaError" xml:space="preserve">
+    <value>Fel! Wilma-användarnamnet {0} verkar vara felaktigt. Se till att Wilma-användarnamnet inte innehåller skrivfel.</value>
+  </data>
+  <data name="UserAddWindowTitle" xml:space="preserve">
+    <value>Tillägg användaren till databasen.</value>
   </data>
   <data name="UserDbAddButtonContent" xml:space="preserve">
-    <value>Svenska här</value>
+    <value>Tillägg användaren</value>
   </data>
   <data name="UserDbDelButtonContent" xml:space="preserve">
-    <value>Svenska här</value>
+    <value>Radera användaren</value>
   </data>
   <data name="UserDbEditButtonContent" xml:space="preserve">
-    <value>Svenska här</value>
+    <value>Editera användaren</value>
   </data>
   <data name="UserDbSearchOptionLoans" xml:space="preserve">
-    <value>Svenska här</value>
+    <value>Lån</value>
   </data>
   <data name="UserDbSearchOptionUserID" xml:space="preserve">
     <value>ID</value>
   </data>
   <data name="UserDbSearchOptionWilma" xml:space="preserve">
-    <value>Svenska här</value>
+    <value>Användarnamn</value>
   </data>
   <data name="UserDbWindowTitle" xml:space="preserve">
-    <value>Svenska här</value>
+    <value>Användardatabasens administration</value>
+  </data>
+  <data name="UserEditWilmaError" xml:space="preserve">
+    <value>Fel! Användardatabasen innehåller redan en användare med Wilma-användarnamnet: {0}. Vänligen se till att Wilma-användarnamnet inte finns i databasen.</value>
+  </data>
+  <data name="UserEditWindowTitle" xml:space="preserve">
+    <value>Editera användarinformation.</value>
   </data>
   <data name="UsersTabHeader" xml:space="preserve">
-    <value>Svenska här</value>
+    <value>Användare</value>
   </data>
   <data name="WindowTitle" xml:space="preserve">
     <value>Joensuun lyseon lukios bibliotek</value>
   </data>
-  <data name="bookAvailable" xml:space="preserve">
-    <value>Svenska här</value>
-  </data>
-  <data name="bookNotAvailable" xml:space="preserve">
-    <value>Svenska här</value>
-  </data>
-  <data name="HomeLoginButtonInstruction" xml:space="preserve">
-    <value>Svenska här</value>
-  </data>
-  <data name="HomeLoginButtonTitle" xml:space="preserve">
-    <value>Svenska här</value>
-  </data>
-  <data name="HomeSearchButtonInstruction" xml:space="preserve">
-    <value>Svenska här</value>
-  </data>
-  <data name="HomeSearchButtonTitle" xml:space="preserve">
-    <value>Svenska här</value>
-  </data>
-  <data name="HomeSignUpButtonInstruction" xml:space="preserve">
-    <value>Svenska här</value>
-  </data>
-  <data name="HomeSignUpButtonTitle" xml:space="preserve">
-    <value>Svenska här</value>
-  </data>
-  <data name="Cancel" xml:space="preserve">
-    <value>Svenska här</value>
-  </data>
-  <data name="No" xml:space="preserve">
-    <value>Nej</value>
-  </data>
-  <data name="QuickReturnButtonContent" xml:space="preserve">
-    <value>Svenska här</value>
-  </data>
-  <data name="QuickReturnInstruction" xml:space="preserve">
-    <value>Svenska här</value>
-  </data>
-  <data name="ReturnButtonContent" xml:space="preserve">
-    <value>Svenska här</value>
-  </data>
   <data name="Yes" xml:space="preserve">
     <value>Ja</value>
-  </data>
-  <data name="UserEditWilmaError" xml:space="preserve">
-    <value>Svenska här! Svenska här: {0}. Svenska här.</value>
-  </data>
-  <data name="booksAvailable" xml:space="preserve">
-    <value>{0}/{1} svenska här</value>
-  </data>
-  <data name="BookDbSearchOptionAmount" xml:space="preserve">
-    <value>Svenska här</value>
-  </data>
-  <data name="confirmReturnAll" xml:space="preserve">
-    <value>Svenska här</value>
-  </data>
-  <data name="confirmReturnAllTitle" xml:space="preserve">
-    <value>Svenska här</value>
-  </data>
-  <data name="DeleteBookConfirmationDialogContent" xml:space="preserve">
-    <value>Svenska här</value>
-  </data>
-  <data name="DeleteBookConfirmationDialogTitle" xml:space="preserve">
-    <value>Svenska här</value>
-  </data>
-  <data name="DeleteUserConfirmationDialogContent" xml:space="preserve">
-    <value>Svenska här</value>
-  </data>
-  <data name="DeleteUserConfirmationDialogTitle" xml:space="preserve">
-    <value>Svenska här</value>
-  </data>
-  <data name="LogOutButtonContent" xml:space="preserve">
-    <value>Svenska här</value>
-  </data>
-  <data name="ReturnAllButtonContent" xml:space="preserve">
-    <value>Svenska här</value>
-  </data>
-  <data name="ReturnSelectedButtonContent" xml:space="preserve">
-    <value>Svenska här</value>
-  </data>
-  <data name="BookEditIDError" xml:space="preserve">
-    <value>Svenska här: Svenska här {0} svenska här. Svenska här.</value>
-  </data>
-  <data name="UserAddWindowTitle" xml:space="preserve">
-    <value>Svenska här</value>
-  </data>
-  <data name="UserAddWilmaError" xml:space="preserve">
-    <value>Svenska här! Svenska här {0} svenska här. Svenska här.</value>
-  </data>
-  <data name="LogInToBorrowNotice" xml:space="preserve">
-    <value>Svenska här</value>
-  </data>
-  <data name="BorrowBookButtonContent" xml:space="preserve">
-    <value>Svenska här</value>
-  </data>
-  <data name="SelectBookForMoreInfo" xml:space="preserve">
-    <value>Svenska här</value>
-  </data>
-  <data name="LoginErrorAccountDoesntExist" xml:space="preserve">
-    <value>Svenska här</value>
-  </data>
-  <data name="LoginErrorIncorrectAddress" xml:space="preserve">
-    <value>Svenska här</value>
-  </data>
-  <data name="SignUpErrorAccountAlreadyInUse" xml:space="preserve">
-    <value>Svenska här</value>
-  </data>
-  <data name="ChangePasswordButtonText" xml:space="preserve">
-    <value>Svenska här</value>
-  </data>
-  <data name="ChangePasswordConfirmationDialogContent" xml:space="preserve">
-    <value>Svenska här</value>
-  </data>
-  <data name="ChangePasswordConfirmationDialogTitle" xml:space="preserve">
-    <value>Svenska här</value>
-  </data>
-  <data name="ConfirmPasswordLabel" xml:space="preserve">
-    <value>Svenska här:</value>
-  </data>
-  <data name="MasterPasswordLabel" xml:space="preserve">
-    <value>Svenska här:</value>
-  </data>
-  <data name="NewPasswordLabel" xml:space="preserve">
-    <value>Svenska här:</value>
-  </data>
-  <data name="PasswordTabHeader" xml:space="preserve">
-    <value>Svenska här</value>
   </data>
 </root>
